@@ -161,6 +161,8 @@ async function addProductoRelacionado(idProducto){
 function Mostrar_Producto(data) {
 
     const producto = data.producto[0][0]
+    console.log(data);
+    
 
     const label_nombre = document.getElementById('label-nombre')
     const label_precio = document.getElementById('label-precio')

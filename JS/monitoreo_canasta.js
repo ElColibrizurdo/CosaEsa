@@ -30,6 +30,7 @@ async function ModificarBase(cantidad, id) {
         }) 
 
         const data = await response.json()
+        COntrolarBotonPago()
 
     } catch (error) {
         console.log(error);
@@ -38,51 +39,122 @@ async function ModificarBase(cantidad, id) {
 
 async function BorrarProducto(boton) {
 
+    let ids = []
+
     const id = boton.getAttribute('elej')
+    console.log(id);
 
-    try {
+    
 
-        const response = await fetch('/auth/eliminar', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({id})
-        })
+    if (id == 'todo') {
 
-        if (response.ok) {
+         const siNo = confirm('se va a borrar')
 
-            ObtenerCantidadCanasta()
-            
-            var hijo = boton
-
-            for (let i = 0; i <= 3; i++) {
-                
-                hijo = hijo.parentNode
-                
-            }
-
-            console.log(hijo);
-            hijo.remove()
-        }
-        const data = response.json();
-        console.log(response);
-
-
+         if (siNo) {
+            const buttons = document.querySelectorAll('.btn_eliminar')
         
-    } catch (error) {
-        console.log(error);
+            buttons.forEach(element => {
+
+            ids.push(element.getAttribute('elej'))
+        })
+         }
+        
+        
+
+    } else {
+
+        ids.push(boton.getAttribute('elej'))
     }
+
+    console.log(ids);
+    
+
+    ids.forEach(async idd => {
+
+        try {
+
+            const response = await fetch('/auth/eliminar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({id: idd})
+            })
+    
+            if (response.ok) {
+    
+                ObtenerCantidadCanasta()
+                
+                var hijo = boton
+
+                if (id == 'todo') {
+                    
+                    const cartas = document.querySelectorAll('.carta_carrito')
+
+                    cartas.forEach(element => {
+
+                        element.remove()
+                    })
+                } else {
+
+                    for (let i = 0; i <= 3; i++) {
+                    
+                        hijo = hijo.parentNode
+                        console.log(hijo);
+                        
+                    }
+
+                    console.log(hijo);
+                    hijo.remove()
+                }
+
+                COntrolarBotonPago()
+            }
+            const data = response.json();
+            //console.log(response);
+    
+           
+            
+        } catch (error) {
+            console.log(error);
+        }
+    })
+
+    
+}
+
+function COntrolarBotonPago() {
+    
+    const cantidad = document.querySelectorAll('.num_productos_input')
+    const precios = document.querySelectorAll('.txt_carta_carrito_precio')
+
+    let acumulado = 0
+
+    precios.forEach((element, indice) => {
+
+        const precio = parseFloat(element.querySelector('a').textContent)
+        const can = parseFloat(cantidad[indice].value)
+
+
+        acumulado += precio * can
+    })
+
+    const btnPagar = document.querySelector('.btn_lista_carrito_1')
+    console.log(acumulado);
+    
+    btnPagar.innerHTML = `Pagar Pedido-Total: ${acumulado} MXN`
 }
 
 function RealizarCompra() {
     
     const cartas = document.querySelectorAll('.carta_carrito')
 
-    cartas.forEach(element => {
+    const status = confirm('Seguro que quieres comprar estos articulos')
 
-        
-    })
+    /*cartas.forEach(element => {
+
+
+    })*/
 }
 
 

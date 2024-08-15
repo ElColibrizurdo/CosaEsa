@@ -141,12 +141,14 @@ async function ObtenerCantidadCanasta() {
     const carrit0 = document.querySelector('.btn_carrito')
 
     console.log(data);
+    console.log(carrit0);
+    
     
 
-    if (data[0]) {
+    if (data[0] && carrit0 !== null) {
         
         carrit0.childNodes[2].textContent = data[0].cantidad
-    } else {
+    } else if (carrit0 !== null){
         carrit0.childNodes[2].textContent = '0'
     }
     

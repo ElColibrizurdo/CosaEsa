@@ -39,9 +39,11 @@ async function inicio() {
             data.rows.forEach(element => {
                 console.log(element);
                 Obtener_datos(element.id_producto, element.cantidad, element.id, columna, element.etiqueta, element.numero)
+                
             });
             console.log(data.rows);
             //Obtener_datos(data.rows[0].id_producto ,data.rows[0].cantidad)
+
 
         } catch (error) {
             console.log(error);
@@ -207,7 +209,7 @@ function Crear_card(producto, cantidad, idCanasta, columna, etiqueta, numero) {
    
    
 
-   
+    COntrolarBotonPago()
 }
 
 function parseJwt(token) {
@@ -219,7 +221,27 @@ function parseJwt(token) {
     return JSON.parse(jsonPayload);
 }
 
+function COntrolarBotonPago() {
+    
+    const cantidad = document.querySelectorAll('.num_productos_input')
+    const precios = document.querySelectorAll('.txt_carta_carrito_precio')
 
+    let acumulado = 0
+
+    precios.forEach((element, indice) => {
+
+        const precio = parseFloat(element.querySelector('a').textContent)
+        const can = parseFloat(cantidad[indice].value)
+
+
+        acumulado += precio * can
+        console.log(acumulado);
+        
+    })
+
+    const btnPagar = document.querySelector('.btn_lista_carrito_1')
+    btnPagar.innerHTML = `Pagar Pedido-Total: ${acumulado} MXN`
+}
 
     inicio()
 

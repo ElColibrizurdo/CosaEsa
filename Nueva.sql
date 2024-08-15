@@ -544,7 +544,8 @@ SELECT * FROM usuario u ;
 SELECT * FROM canasta c ;
 SELECT * FROM producto p ;
 SELECT * FROM sesion s ;
-SELECT * FROM productousuario p ;
+{ CALL ventaspeople.compraCanasta(:idSesion) }
+CALL ventaspeople.compraCanasta(75)
 SELECT * FROM medida m 
 SELECT * FROM cliente c;
 SELECT * FROM metodos_pago mp ;
@@ -552,6 +553,8 @@ SELECT * FROM venta v;
 SELECT * FROM ventadetalle v ;
 DELETE FROM cliente ;
 DELETE FROM metodos_pago WHERE id IN (1,2,3,4,5,6,7);
+DELETE FROM ventadetalle WHERE idVenta IN (15,16)
+DELETE FROM venta WHERE id IN (15,16);
 
 DELETE FROM metodos_pago WHERE id IN (9, 10, 11)
 

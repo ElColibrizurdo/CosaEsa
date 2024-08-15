@@ -361,4 +361,6 @@ const btn_ingresar = document.getElementById('btn-ingresar')
 document.querySelector('.atras').addEventListener('click', function () {
     
     history.back()
+    console.log('ya ta');
+    
 })

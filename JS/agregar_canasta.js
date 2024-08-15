@@ -4,9 +4,11 @@ document.addEventListener('codigoTerminado',  function() {
 
     btn_agregar.addEventListener('click', function () {
 
+        if (confirm('agregar a la cesta?')) {
+            
+            AgregarProducto()
+        }
         
-        
-        AgregarProducto()
     })
 
    

@@ -358,3 +358,7 @@ const btn_ingresar = document.getElementById('btn-ingresar')
 
 //btn_ingresar.innerText = traduccion.user.name
 
+document.querySelector('.atras').addEventListener('click', function () {
+    
+    history.back()
+})

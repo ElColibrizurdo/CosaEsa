@@ -32,6 +32,11 @@ async function log(inputEmail, inputPassword) {
     
         const data = await response.json();
         const idS = data.set.id
+        const params = new URLSearchParams(window.location.search)
+        console.log(params.size);
+        
+        console.log('idSesion ' + idS);
+        
     
         localStorage.setItem('sesion', idS)
         localStorage.setItem('name', data.name)
@@ -40,7 +45,33 @@ async function log(inputEmail, inputPassword) {
             
             console.log('Respuesta del servidor: ', data);
 
-            window.location.href = '/'
+            /*if (params.size) {
+
+                console.log('paso');
+
+
+                const like = await fetch('/auth/like', {
+                    method: post,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        number: params.size,
+                        sesion: idS,
+                        estado: 0
+                     })
+                }) 
+    
+                const data_like = await like.json()
+    
+                console.log(data_like);
+            }*/
+
+           
+            console.log(params.get('like'));
+            
+
+            window.location.href = '/?like=' +  params.get('like')
             fetch('/protected', {
                 method: 'GET',
                 headers: {

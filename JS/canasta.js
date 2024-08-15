@@ -192,8 +192,10 @@ function Mostrar_Producto(data) {
 
     if (producto.idTipo != 9) {
         
-        const divPersonalizar = document.querySelector('.contendor_descripcion_producto_pedido_scroll')
+        const divPersonalizar = document.querySelector('.contendor_descripcion_producto_pedido_talla')
+        const divPersonalizar2 = document.querySelector('.contenedor_descripcion_producto_pedido_personalizacion')
         divPersonalizar.remove()
+        divPersonalizar2.remove()
     }
 }
 
@@ -201,19 +203,23 @@ function Contador(boton) {
 
     console.log(boton.getAttribute('value'));
     
-    
-    if (boton.getAttribute('value') == '+') {
+    try {
+        if (boton.getAttribute('value') == '+') {
         
-        contador+=1
-        AgregarCollapse(contador)
-    } else if (boton.getAttribute('value') == '-' && contador != 1) {
+            contador+=1
+            AgregarCollapse(contador)
+        } else if (boton.getAttribute('value') == '-' && contador != 1) {
+            
+            contador-=1
+            QuitarCollapse(contador)
+        }
+    } catch (error) {
         
-        contador-=1
-        QuitarCollapse(contador)
     }
+    
     console.log(contador);
     
-    label_contador.setAttribute('value', contador)
+    label_contador.value = contador
 }
 
 function parseJwts (token) {

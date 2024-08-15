@@ -20,7 +20,12 @@ async function AgregarCanasta(boton) {
         })
     
         const data = response
-        ObtenerCantidadCanasta()
+
+        if (data.ok) {
+            console.log('si');
+            window.parent.ObtenerCantidadCanasta()
+            
+        }
         console.log(data);
     } catch (error) {
         console.log(error);

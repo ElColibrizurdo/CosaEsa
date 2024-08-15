@@ -79,8 +79,9 @@ function obtener_productis(tipos, equipos, stock) {
                 const chkbox_deseo = document.createElement('input')
                 chkbox_deseo.type = 'checkbox'
                 chkbox_deseo.setAttribute('number', element.id)
-                chkbox_deseo.setAttribute('onchange', 'DarLike(this)')
                 chkbox_deseo.classList.add('productos')
+                chkbox_deseo.setAttribute('onchange', 'DarLike(this)')
+                chkbox_deseo.setAttribute('onclick', 'validaSesion(this)')
 
                 const svgContent = `
                     <svg id="Layer_1" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

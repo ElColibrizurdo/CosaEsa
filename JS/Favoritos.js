@@ -147,7 +147,7 @@ function  CrearCards(element) {
     btn_agregar.innerHTML += img_btn
     btn_agregar.setAttribute('el', element.id)
     btn_agregar.setAttribute('precio', element.precio)
-    btn_agregar.setAttribute('onclick', 'AgregarCanasta(this)')
+    btn_agregar.setAttribute('onclick', 'AgregarCanasta(this);')
 
     contenedor_btn_agregar.appendChild(btn_agregar)
 

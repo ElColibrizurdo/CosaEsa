@@ -550,11 +550,17 @@ SELECT * FROM cliente c;
 SELECT * FROM metodos_pago mp ;
 SELECT * FROM venta v;
 SELECT * FROM ventadetalle v ;
-DROP TABLE cliente ;
+DELETE FROM cliente ;
+DELETE FROM metodos_pago WHERE id IN (1,2,3,4,5,6,7);
+
+DELETE FROM metodos_pago WHERE id IN (9, 10, 11)
+
+INSERT INTO metodos_pago (idUsuario, cardNumber, fechaExpiracion) VALUES (14, 6666666666666666, 2026-01-01)
 
 SELECT COUNT(id) AS total FROM usuario WHERE fechaAlta >= CURDATE() - INTERVAL 0 DAY
 
 DELETE FROM canasta_productos;
+SELECT id FROM canasta WHERE usuario_id = 58;
 
 CREATE TABLE `playera_personalizada` (
 	
@@ -610,6 +616,59 @@ CREATE TABLE `metodos_pago` (
 );
 
 ALTER TABLE usuario ADD COLUMN role VARCHAR(100) NOT NULL DEFAULT 'cliente';
+
+
+CREATE PROCEDURE actualizarCliente (
+ 	IN p_idUsuario int(11),
+	IN p_nombre varchar(50),
+	IN p_primerApellido varchar(50),
+	IN p_segundoApellido varchar(50),
+	IN p_calle varchar(100),
+	IN p_numeroExterior varchar(50),
+	IN p_numeroInterior varchar(50),
+	IN p_colonia varchar(100),
+	IN p_codigoPostal varchar(6),
+	IN p_municipio varchar(100),
+	IN p_entidadFederativa varchar(50),
+	IN p_pais varchar(50) 
+	)
+	BEGIN
+		IF EXISTS (SELECT 1 FROM cliente WHERE idUsuario = p_idUsuario ) THEN
+		
+			DELETE  FROM cliente WHERE idUsuario = p_idUsuario;
+			
+		END IF; 
+		
+			INSERT INTO cliente (
+				idUsuario, nombre, primerApellido, segundoApellido, 
+				calle, numeroExterior, numeroInterior, colonia, codigoPostal, municipio, 
+				entidadFederativa, pais
+			) VALUES (
+				p_idUsuario, p_nombre, p_primerApellido, p_segundoApellido,
+				p_calle, p_numeroExterior, p_numeroInterior, p_colonia, p_codigoPostal, 
+				p_municipio, p_entidadFederativa, p_pais
+			);
+	END
+
+	CALL actualizarCliente (
+
+		14,
+		"Luis",
+		"Gonzales",
+		"Rodriguez",
+		"Ǹorte",
+		50,
+		60,
+		"Inter",
+		80000,
+		"Naucalpan",
+		"CDMX",
+		"Mexico"
+	);
+	
+SELECT * FROM cliente;
+
+SELECT idUsuario FROM sesion WHERE id = 58;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

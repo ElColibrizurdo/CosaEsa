@@ -23,6 +23,22 @@
             }
         }
 
+        function validaSesion(c) {
+            var sesion = localStorage.getItem('sesion');
+            alert('pedro')
+            if (sesion==null) {
+              alert(sesion);
+              c.checked = false
+              return false;
+            }else{
+              return true;
+      
+            }
+          
+          }
+
+        
+
     </script>
 </head>
 <body style="width: 100%; height: 100%; border: none; overflow: hidden;">
@@ -31,7 +47,7 @@
         <img src="../IMAGES/prueba_header.png" class="union_header"alt="alt"/>
         <div class="nav_top_links">
            <div class="nav_top_1">
-               <a onclick="CambiarFrame(this)" jual="0">TIENDA</a>
+               <a onclick="CambiarFrame(this); " jual="0">TIENDA</a>
            </div>
            <d class="nav_top_2">
             <div class="container-buscador">
@@ -57,7 +73,7 @@
 
             </div>
             
-               <a class="btn_carrito" id="btn_carrito" >
+               <a class="btn_carrito" id="btn_carrito" onclick="validaSesion(this);">
                    <svg class="svg_carrito" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" >
                        <path d="M6.9999 22.0897C6.44991 22.0897 5.97907 21.8938 5.58741 21.5022C5.19574 21.1105 4.99991 20.6397 4.99991 20.0897C4.99991 19.5397 5.19574 19.0688 
                              5.58741 18.6772C5.97907 18.2855 6.44991 18.0897 6.9999 18.0897C7.5499 18.0897 8.02074 18.2855 8.41241 18.6772C8.80407 19.0688 8.99991 19.5397 8.99991 

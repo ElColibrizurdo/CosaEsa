@@ -55,34 +55,9 @@ function CerrarSesion() {
 
 async function CerrarSesion() {
 
-    const token  = localStorage.getItem('name')
-    console.log(token);
-    
-    /*try {
-
-        const response = await fetch('/auth/cerrar', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({token})
-        })
-        
-        const data = response.json()
-
-        if (response.ok) {
-            console.log(data);
-            localStorage.removeItem('authToken')
-            window.location.reload()
-        }
-
-    } catch (error) {
-        console.log(error);
-    }*/
-        localStorage.removeItem('name')
-        window.location.reload()
-        localStorage.removeItem('sesion')
-        window.location.reload()
+    localStorage.removeItem('name')
+    localStorage.removeItem('sesion')
+    location.reload()
 }
 
 console.log(new Date().getFullYear() + '-' + new Date().getUTCMonth() + '-' + new Date().getDay());
@@ -107,7 +82,7 @@ if (localStorage.getItem('name')) {
                 <li><a class="dropdown-item" onclick="CambiarFrame(this)" jual="2">Mis Favoritos</a></li>
                 <li><a class="dropdown-item" onclick="CambiarFrame(this)" jual="3">Mis Datos</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#" onClick="CerrarSesion(this)">Cerrar Sesion</a></li>
+                <li><a class="dropdown-item" href="#" onClick="CerrarSesion(this); CambiarFrame(this)" jual="0">Cerrar Sesion</a></li>
             </ul>
         
     `;
@@ -124,7 +99,38 @@ if (localStorage.getItem('name')) {
     
 }
 
+if (localStorage.getItem('sesion')) {
+
+    DarLikePrevio()
+}
+
+
+async function DarLikePrevio() {
+    
+    const params = new URLSearchParams(window.location.search)
+    
+    const like = await fetch('/auth/like', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+            number: params.get('like'),
+            sesion: localStorage.getItem('sesion'),
+            estado: 0
+         })
+    }) 
+
+    const data = await like.json()
+
+    console.log(data);
+    
+}
+
 async function ObtenerCantidadCanasta() {
+
+    console.log('modificar');
+    
     
     //Poner el numero de productos en la cesta
     const sesion = localStorage.getItem('sesion')
@@ -134,9 +140,12 @@ async function ObtenerCantidadCanasta() {
     
     const carrit0 = document.querySelector('.btn_carrito')
 
-    if (data.row) {
+    console.log(data);
+    
+
+    if (data[0]) {
         
-        carrit0.childNodes[2].textContent = data.row[0].cantidad
+        carrit0.childNodes[2].textContent = data[0].cantidad
     } else {
         carrit0.childNodes[2].textContent = '0'
     }

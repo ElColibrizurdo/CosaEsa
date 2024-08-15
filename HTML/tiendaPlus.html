@@ -21,11 +21,30 @@
             setTimeout(() => {
                 div.classList.add("active");
                 
-            }, 100);
-            
-            
-             
+            }, 100);    
         }
+    }
+
+    function validaSesion(c) {
+      var sesion = localStorage.getItem('sesion');
+      if (sesion==null) {
+        const status = confirm('Para dar like se necesita ingresar');
+        console.log(c)
+        
+        if (status) {
+
+          window.parent.location.href = '/login?like=' + c.getAttribute('number')
+          sessionStorage.setItem('like', c.getAttribute('number'))
+          
+        }
+
+        c.checked = false
+        return false;
+      }else{
+        return true;
+
+      }
+    
     }
     </script>
     <title>Document</title>

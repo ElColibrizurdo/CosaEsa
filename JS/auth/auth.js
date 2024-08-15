@@ -93,9 +93,12 @@ const ingresar_producto_canasta = async (req, res) => {
     console.log('idProducto: ' + id_producto);
     
     
+    console.log('Agregar_Canasta');
     
 
     const total = parseFloat(precio) - parseFloat((precio / 1.16))
+ 
+    
     let message = ''
 
     try {
@@ -103,6 +106,8 @@ const ingresar_producto_canasta = async (req, res) => {
         numero.forEach(async (element, indice) => {
 
             console.log(element);
+            console.log(indice);
+            
             console.log(nombre[indice]);
             console.log(talla[indice]);
 
@@ -119,16 +124,22 @@ const ingresar_producto_canasta = async (req, res) => {
                 console.log(row.affectedRows);
                 if (row.affectedRows == 1) {
                     message = 'ok'
+                    console.log(message);
+                    
                 } 
 
-            /*if (element.length > 0 && nombre.length > 0) {   
+            if (indice <= 1) {
                 
-                const personalizda = await db.query('INSERT INTO playera_personalizada (numero, nombre, canastapid) VALUES (?,?,?)', [element, nombre[indice], row.insertId])
-            }*/
+                res.status(200).json({message: message})
+            }
+
+            console.log('numero' + numero[0]);
+            console.log('indice' + indice);
+            
         })
 
-       
-        res.status(200).json({message: message})
+        console.log('Siguiente');
+        
         
     } catch (error) {
         res.status(500).json({message: error.message})
@@ -204,8 +215,8 @@ const obtener_producto = async (req, res) => {
                     
                 })
 
-                //const [medidas] = await db.query('SELECT * FROM medida WHERE id IN (?)', [idMedidas])
-                res.status(200).json({producto})
+                const [medidas] = await db.query('SELECT * FROM medida WHERE id IN (?)', [idMedidas])
+                res.status(200).json({producto, medidas})
                 break;
         
             default:
@@ -278,17 +289,22 @@ const obtener_nombre = async (req, res) => {
 const dar_like = async (req, res) => {
 
     const { number, sesion, estado } = req.body
+    let [row] = ''
+
+    console.log('sesion ' + sesion);
+    
 
     try {
 
         const [idUsuario] = await db.query('SELECT idUsuario FROM sesion WHERE id = ?', [sesion])
+        console.log('idUsuario ' + idUsuario);
         
 
         if (estado == 0) {
-            const [row] = await db.query('INSERT INTO productousuario (idProducto, idUsuario) VALUES (?,?)', [number, idUsuario[0].idUsuario])
+             [row] = await db.query('INSERT INTO productousuario (idProducto, idUsuario) VALUES (?,?)', [number, idUsuario[0].idUsuario])
             console.log(row);
         } else {
-            const [row] = await db.query('DELETE FROM productousuario WHERE idUsuario = ? AND idProducto = ?', [idUsuario[0].idUsuario, number])
+             [row] = await db.query('DELETE FROM productousuario WHERE idUsuario = ? AND idProducto = ?', [idUsuario[0].idUsuario, number])
             console.log(row);
         }
         res.status(500).json({row})

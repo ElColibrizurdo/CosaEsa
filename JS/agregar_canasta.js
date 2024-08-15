@@ -25,12 +25,13 @@ async function AgregarProducto() {
 
     const cantidad_perso = DeterminarPersonalizados()
 
-    console.log(cantidad_perso);
-
     cantidad_perso.forEach(element => {
 
         talla.push(DeterminarTallas(element, label_contador.value))
         console.log(element.querySelector('#numero'));
+
+        console.log(element.querySelector('[type="number"]'));
+        
 
         if (element.querySelector('[type="number"]')) {
             
@@ -72,10 +73,9 @@ async function AgregarProducto() {
 
                 console.log(data.message);
                 
+                
                 if (data.message === 'ok') {
-                    
-                    location.reload()
-                    window.location.href = '/tienda'
+                    window.parent.location.reload()
                 } else {
                     console.log(data.message);   
                 }
@@ -84,6 +84,8 @@ async function AgregarProducto() {
                 console.log(error);   
             }
 }
+
+
 
 function parseJwt(token) {
     const base64Url = token.split('.')[1];
@@ -116,6 +118,17 @@ function DeterminarTallas(element, contador) {
 function DeterminarPersonalizados() {
     
     const contenedores_personalizadas = document.querySelectorAll('.contenedor_descripcion_producto_pedido_personalizacion')
-    console.log();
-    return contenedores_personalizadas
+    console.log(contenedores_personalizadas.length);
+
+    if (contenedores_personalizadas.length == 0) {
+        
+        const valores = document.querySelectorAll('.contendor_descripcion_producto_pedido_cantidad')
+        console.log(valores);
+        return valores
+
+    } else {
+        return contenedores_personalizadas
+    }
+    
+   
 }

@@ -75,17 +75,14 @@ async function BorrarProducto(boton) {
     }
 }
 
-async function ObtenerCantidadCanasta() {
+function RealizarCompra() {
     
-    //Poner el numero de productos en la cesta
-    const sesion = localStorage.getItem('sesion')
-    const response = await fetch(`/auth/cantidad?sesion=${sesion}`)
-    
-    const data = await response.json()
-    
-    const carrit0 = document.querySelector('.btn_carrito')
-    carrit0.childNodes[2].textContent = data.row[0].cantidad
-    
-    console.log(carrit0.childNodes[2]);
-    
+    const cartas = document.querySelectorAll('.carta_carrito')
+
+    cartas.forEach(element => {
+
+        
+    })
 }
+
+

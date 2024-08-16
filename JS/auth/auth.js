@@ -510,11 +510,20 @@ const RealizarVenta = async (req, res) => {
 
     try {
         
-        const [row] = await db.query('CALL ventaspeople.compraCanasta(?)', [idSesion])
+        const [existe] = await db.query('SELECT EXISTS (SELECT s.idUsuario FROM sesion s JOIN cliente c ON s.idUSuario = c.idUsuario WHERE s.id = ?) AS existe', [idSesion])
+        console.log(existe);
+        
+        if (existe[0].existe == 1) {
+            
+            const [row] = await db.query('CALL ventaspeople.compraCanasta(?)', [idSesion])
 
-        console.log(row);
+            console.log(row);
+    
+            res.status(500).json({existe, row})
+        } else{
 
-        res.status(500).json(row)
+            res.status(200).json({existe})
+        }
 
     } catch (error) {
         

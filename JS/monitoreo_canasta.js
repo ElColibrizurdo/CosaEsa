@@ -42,24 +42,30 @@ async function BorrarProducto(boton) {
     let ids = []
 
     const id = boton.getAttribute('elej')
-    console.log(id);
-
-    
 
     if (id == 'todo') {
 
-         const siNo = confirm('se va a borrar')
+        if (boton.classList.value == 'btn_lista_carrito_2') {
+            
+            const siNo = confirm('se va a borrar')
 
-         if (siNo) {
+            if (siNo) {
+                const buttons = document.querySelectorAll('.btn_eliminar')
+            
+                buttons.forEach(element => {
+    
+                ids.push(element.getAttribute('elej'))
+                })
+             }
+        } else {
             const buttons = document.querySelectorAll('.btn_eliminar')
-        
+            
             buttons.forEach(element => {
 
-            ids.push(element.getAttribute('elej'))
-        })
-         }
-        
-        
+                ids.push(element.getAttribute('elej'))
+            })
+        }
+
 
     } else {
 
@@ -146,11 +152,9 @@ function COntrolarBotonPago() {
 }
 
 async function RealizarCompra(boton) {
-
-    console.log(document.querySelectorAll('.carta_carrito'));
     
 
-    if (document.querySelectorAll('.carta_carrito').length > 0) {
+    if (document.querySelectorAll('.carta_carrito').length > 0 && localStorage.getItem('sesion')) {
         if (confirm('Seguro que quieres realizar esta compra?')) {
             try {
             
@@ -165,12 +169,14 @@ async function RealizarCompra(boton) {
                 })
             
                 const data = await response.json()
-            
-                if (data.affectedRows >= 1) {
-                     BorrarProducto(boton)
-                }
-                
-        
+                console.log(data.existe[0].existe);
+                console.log(data.row.affectedRows);
+
+                if (data.existe[0].existe == 0) {
+                    alert('Tu no tienes tus datos de cliente')
+                } else  if (data.existe[0].existe == 1 && data.row.affectedRows >= 1) {
+                    BorrarProducto(boton)
+               }
                 
             } catch (error) {
                 

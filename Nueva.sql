@@ -545,7 +545,8 @@ SELECT * FROM canasta c ;
 SELECT * FROM producto p ;
 SELECT * FROM sesion s ;
 { CALL ventaspeople.compraCanasta(:idSesion) }
-CALL ventaspeople.compraCanasta(75)
+CALL ventaspeople.compraCanasta(74)
+{ CALL ventaspeople.compraCanasta(70) }
 SELECT * FROM medida m 
 SELECT * FROM cliente c;
 SELECT * FROM metodos_pago mp ;

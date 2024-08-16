@@ -502,5 +502,32 @@ const verificarContra = async (req, res) => {
     }
 }
 
+const RealizarVenta = async (req, res) => {
 
-module.exports = { verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };
+    const { idSesion } = req.body
+
+    console.log(idSesion);
+
+    try {
+        
+        const [row] = await db.query('CALL ventaspeople.compraCanasta(?)', [idSesion])
+
+        console.log(row);
+
+        res.status(500).json(row)
+
+    } catch (error) {
+        
+        console.log(error);
+        
+    }
+    
+
+    
+
+    
+    
+}
+
+
+module.exports = { RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };

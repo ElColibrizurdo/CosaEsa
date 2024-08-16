@@ -145,16 +145,40 @@ function COntrolarBotonPago() {
     btnPagar.innerHTML = `Pagar Pedido-Total: ${acumulado} MXN`
 }
 
-function RealizarCompra() {
+async function RealizarCompra(boton) {
+
+    console.log(document.querySelectorAll('.carta_carrito'));
     
-    const cartas = document.querySelectorAll('.carta_carrito')
 
-    const status = confirm('Seguro que quieres comprar estos articulos')
+    if (document.querySelectorAll('.carta_carrito').length > 0) {
+        if (confirm('Seguro que quieres realizar esta compra?')) {
+            try {
+            
+                const response = await fetch('/auth/venta', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        idSesion: localStorage.getItem('sesion')
+                    })
+                })
+            
+                const data = await response.json()
+            
+                if (data.affectedRows >= 1) {
+                     BorrarProducto(boton)
+                }
+                
+        
+                
+            } catch (error) {
+                
+            }
+        } 
+    }
 
-    /*cartas.forEach(element => {
-
-
-    })*/
+    
 }
 
 

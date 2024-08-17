@@ -55,9 +55,35 @@ function CerrarSesion() {
 
 async function CerrarSesion() {
 
-    localStorage.removeItem('name')
-    localStorage.removeItem('sesion')
-    location.reload()
+    console.log('Vamos a cerrar sesion');
+    
+
+    try {
+        const response = await fetch('/auth/cerrar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                token: localStorage.getItem('token')
+            })
+        })
+    
+        const data = await response.json()
+    
+        console.log(data);
+        
+    
+        localStorage.removeItem('name')
+        localStorage.removeItem('sesion')
+        localStorage.removeItem('token')
+        location.reload()
+    } catch (error) {
+        console.log(error);
+        
+    }
+
+    
 }
 
 console.log(new Date().getFullYear() + '-' + new Date().getUTCMonth() + '-' + new Date().getDay());
@@ -134,7 +160,7 @@ async function ObtenerCantidadCanasta() {
     
     //Poner el numero de productos en la cesta
     const sesion = localStorage.getItem('sesion')
-    const response = await fetch(`/auth/cantidad?sesion=${sesion}`)
+    const response = await fetch(`/auth/cantidad?sesion=${sesion}&token=${localStorage.getItem('token')}`)
     
     const data = await response.json()
     

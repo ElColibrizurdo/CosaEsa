@@ -236,11 +236,11 @@ BEGIN
 
    INSERT INTO venta (idCliente, fechaPAgo, FormaPAgo, subtotal, iva, total)
 
-	SELECT (SELECT id FROM cliente WHERE idUSuario = usuario_id), CURRENT_DATE(), 'API-pago', subtotal, iva, total 
-	FROM   canasta 
-	WHERE  usuario_id = (Select idUsuario FROM sesion WHERE id = idSesion);
-	
-
+	INSERT INTO venta (idCliente, fechaPAgo, FormaPAgo, subtotal, iva, total)
+	SELECT c.id, CURRENT_DATE(), 'API-pago', ca.subtotal, ca.iva, ca.total
+	FROM canasta ca
+	JOIN cliente c ON c.idUsuario = ca.usuario_id
+	WHERE ca.usuario_id = (SELECT idUsuario FROM sesion WHERE id = idSesion);
 
    INSERT INTO ventadetalle (idVenta, idProducto, cantidad, numero, etiqueta, precio, iva, total, fechaAlta, idMedida)
 

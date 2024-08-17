@@ -112,33 +112,6 @@ app.post('/data', async (req, res) => {
             query += queryEquipo + queryTipo + queryWhere
         }
 
-       /* if (equipos.length > 0 ) {
-            //const fEquipos = equipos.map((equipo, index) => index === 0 ? `${equipo}` : `,${equipo}`)
-            let queryEqzuipo = ` JOIN equipo e ON p.idEquipo = e.id`
-            queryWhere += ` WHERE e.id IN (${equipos})`
-
-            if (tipos.length > 0) {
-                //const fTipos = tipos.map((tipo, index) => index === 0 ? `${tipo}` : `,${tipo}`) 
-                let queryTipos = ' JOIN tipoproducto t ON p.idTipo = t.id'
-                queryWhere += ` AND t.id IN (${tipos})`
-                query += queryEquipo + queryTipos + queryWhere
-            } else {
-                query += queryEquipo + queryWhere
-
-            }
-
-
-        } else if (tipos.length > 0 && equipos.length == 0) {
-            //const fTipos = tipos.map((tipo, index) => index === 0 ? `${tipo}` : `,${tipo}`) 
-            let queryTipos = ' JOIN tipoproducto t ON p.idTipo = t.id'
-
-            queryWhere += ` WHERE t.id IN (${tipos})`
-
-            query += queryTipos + queryWhere
-             
-        } */
-
-
         const [rows] = await db.query(query, values);
         
         res.json(rows);

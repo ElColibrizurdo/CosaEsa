@@ -60,19 +60,17 @@ const login = async (req, res) => {
         }
 
         const name = user.name
-        const token = jwt.sign(payload, 'mysecretkey', {expiresIn: '1h'});
+        const token = jwt.sign(payload, 'mysecretkey', {expiresIn: '5h'});
     
-     
+        
 
         await db.query('INSERT INTO sesion (idUsuario, navegador) VALUES (?,?)', [user.id,userAgent])
         const [sesion] = await db.query('SELECT id FROM sesion WHERE idUsuario = ? ORDER BY horaInicio DESC LIMIT 1', [user.id])
         const set = sesion[0]
-        console.log(set.id);
-        const [tokens] = await db.query('INSERT INTO tokens (token, sesionid) VALUES (?,?)', [token, set.id] )
        
         
         const decode = jwt.decode(token)
-        res.status(200).json({ set, name });
+        res.status(200).json({ set, name, token });
     } catch (error) {
         
         console.log(error);
@@ -82,19 +80,7 @@ const login = async (req, res) => {
 
 const ingresar_producto_canasta = async (req, res) => {
 
-    const { cantidad, id, id_producto, numero, nombre, precio, talla } = req.body;
-
-    console.log('numero: ' + numero);
-    console.log('nombre: ' + nombre);
-    console.log('talla: ' + talla);
-    console.log('cantidad: ' + cantidad);
-    console.log('idSesion: ' + id);
-    console.log('precio: ' + precio);
-    console.log('idProducto: ' + id_producto);
-    
-    
-    console.log('Agregar_Canasta');
-    
+    const { cantidad, id, id_producto, numero, nombre, precio, talla } = req.body;    
 
     const total = parseFloat(precio) - parseFloat((precio / 1.16))
  
@@ -105,12 +91,6 @@ const ingresar_producto_canasta = async (req, res) => {
 
         numero.forEach(async (element, indice) => {
 
-            console.log(element);
-            console.log(indice);
-            
-            console.log(nombre[indice]);
-            console.log(talla[indice]);
-
             const [sesion] = await db.query('SELECT idUsuario FROM sesion WHERE id = ?', [id])
 
             const [canasta] = await db.query('SELECT id FROM canasta WHERE usuario_id = ?', [sesion[0].idUsuario])
@@ -120,29 +100,22 @@ const ingresar_producto_canasta = async (req, res) => {
             const [row] = await db.query('INSERT INTO canasta_productos (cantidad, id_producto, id_canasta, precio, total, iva, id_medida, numero, etiqueta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
                 [cantidad / numero.length, id_producto, id_canasta, precio / 1.16, precio ,  total, talla[indice], element, nombre[indice]] )
             
-                console.log(row);
-                console.log(row.affectedRows);
                 if (row.affectedRows == 1) {
                     message = 'ok'
-                    console.log(message);
                     
                 } 
 
-            if (indice <= 1) {
+                if (indice == 0) {
                 
-                res.status(200).json({message: message})
-            }
-
-            console.log('numero' + numero[0]);
-            console.log('indice' + indice);
-            
+                    res.status(200).json({message: message})
+                }
         })
 
+        res.status(20).json({message: message})
         console.log('Siguiente');
         
         
     } catch (error) {
-        res.status(500).json({message: error.message})
     }
 }
 
@@ -260,24 +233,7 @@ const eliminar_producto_canasta = async (req, res) => {
     }
 }
 
-const cerrar_sesion = async (req, res) => {
 
-    const { token } = req.body
-
-    jwt.verify(token, 'mysecretkey', (err, decode) => {
-        if (err) {
-            if (err.name === 'TokenExpiredError') {
-                // Token ha expirado
-                return res.status(401).json({ message: 'Token expirado' });
-            }
-            // Otros errores de token
-            return res.status(401).json({ message: 'Token inválido' });
-        }
-        req.user = decode
-    })
-
-    res.status(500).json({message: 'Se cerro'})
-}
 
 const obtener_nombre = async (req, res) => {
 
@@ -302,14 +258,13 @@ const dar_like = async (req, res) => {
 
         if (estado == 0) {
              [row] = await db.query('INSERT INTO productousuario (idProducto, idUsuario) VALUES (?,?)', [number, idUsuario[0].idUsuario])
-            console.log(row);
+            
         } else {
              [row] = await db.query('DELETE FROM productousuario WHERE idUsuario = ? AND idProducto = ?', [idUsuario[0].idUsuario, number])
-            console.log(row);
+            
         }
         res.status(500).json({row})
     } catch (error) {
-        console.log(error);
     }
 
 }
@@ -324,7 +279,6 @@ const demostrar_like = async (req, res) => {
         const [row] = await db.query('SELECT * FROM productousuario WHERE idUsuario = ? AND idProducto = ?', [idUsuario[0].idUsuario, number])
         
         if (row.length > 0) {
-            console.log(row);
             res.status(500).json({row})
         } else {
             res.status(500).json({})
@@ -413,17 +367,34 @@ const guardar_metodos = async (req, res) => {
 
 const cantidad_cesta = async (req, res) => {
 
-    const  sesion  = req.query.sesion
-    console.log(sesion);
+    const token = req.query.token
+    
     
 
     try {
-        
-        const idUsuario = await db.query('SELECT idUsuario FROM sesion WHERE id = ?', [sesion])
-        const idCanasta = await db.query('SELECT id FROM canasta WHERE usuario_id = ?', [idUsuario[0][0].idUsuario])
-        const [row] = await db.query('SELECT COUNT(*) AS cantidad FROM canasta_productos WHERE id_canasta = ?', [idCanasta[0][0].id])
+
+        fetch('http://localhost:3000/protected', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token 
+            }
+        })
+        .then(response => response.json())
+        .then(async data => {
+            console.log('cantidad');
+            console.log(data);
+            
+            const [row] = await db.query('SELECT COUNT(*) AS cantidad FROM canasta_productos WHERE id_canasta = ?', [data.canasta])
         
         res.json(row)
+            
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        
+        
+        
 
     } catch (error) {
         console.log(error);
@@ -433,32 +404,39 @@ const cantidad_cesta = async (req, res) => {
 
 const cliente_existe = async (req, res) => {
 
-    const sesion = req.query.sesion
+    const token = req.query.token
+    console.log(token);
+    
 
     try {
-        const idUsuario = await db.query('SELECT idUsuario FROM sesion WHERE id = ?', [sesion])
-        const [row] = await db.query('SELECT EXISTS ( SELECT 1 FROM cliente WHERE idUsuario = ?) AS EXISTE', [idUsuario[0][0].idUsuario])
 
-        console.log(sesion);
-        console.log(idUsuario);
-
-        if (row[0].EXISTE == 1) {
-            
-            const [cliente] = await db.query('SELECT * FROM cliente WHERE idUsuario = ?', [idUsuario[0][0].idUsuario])
-            const [metodo] = await db.query('SELECT * FROM metodos_pago WHERE idUsuario = ?', [idUsuario[0][0].idUsuario])
-            console.log(cliente);
-            console.log(typeof(metodo[0].cardNumber));
-            const procesado = {
-                card: metodo[0].cardNumber.slice(0, 4),
-                fecha: metodo[0].fechaExpiracion
+        fetch('http://localhost:3000/protected', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
             }
-            res.json({row, cliente, procesado})
-        } else {
+        })
+        .then(response => response.json())
+        .then(async data => {
 
-            res.json(row)
-        }
-        
+            console.log(data);
+            
 
+            const [row] = await db.query('SELECT EXISTS ( SELECT 1 FROM cliente WHERE idUsuario = ?) AS EXISTE', [data.id])
+
+            if (row[0].EXISTE == 1) {
+            
+                const [cliente] = await db.query('SELECT * FROM cliente WHERE idUsuario = ?', [data.id])
+                const [metodo] = await db.query('SELECT * FROM metodos_pago WHERE idUsuario = ?', [data.id])
+                console.log(cliente);
+                console.log(metodo);
+                
+                res.json({row, cliente})
+            } else {
+    
+                res.json(row)
+            }
+        })
     } catch (error) {
         console.log(error);
         
@@ -469,32 +447,40 @@ const cliente_existe = async (req, res) => {
 const verificarContra = async (req, res) => {
 
     const contra = req.query.pass
-    const sesion = req.query.sesion
-    console.log(sesion);
+    const token = req.query.sesion
+
+    console.log(token);
     
 
     try {
-        const [idUsuario] = await db.query('SELECT idUsuario FROM sesion WHERE id = ?', [sesion])
-        console.log(idUsuario);
-        
-        const [row] = await db.query('SELECT password FROM usuario WHERE id = ?', [idUsuario[0].idUsuario])
 
-        console.log(contra);
-        console.log(row[0].password);
-
-        bcrypt.compare(contra, row[0].password, function (err, result) {
-            
-            if (err) {
-
-            } else if (result) {
-                console.log('contraseña correcta');
-                res.json(true)
-                
-            } else {
-                res.json(false)
+        fetch('http://localhost:3000/protected', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
             }
         })
+        .then(response => response.json())
+        .then(async data => {
+            console.log(data);
+            
+            const [row] = await db.query('SELECT password FROM usuario WHERE id = ?', [data.id])
 
+            console.log(row);
+            
+            bcrypt.compare(contra, row[0].password, function (err, result) {
+            
+                if (err) {
+    
+                } else if (result) {
+                    console.log('contraseña correcta');
+                    res.json(true)
+                    
+                } else {
+                    res.json(false)
+                }
+            })
+        })
         
     } catch (error) {
         console.log(error);
@@ -504,38 +490,91 @@ const verificarContra = async (req, res) => {
 
 const RealizarVenta = async (req, res) => {
 
-    const { idSesion } = req.body
+    const { token } = req.body
 
     console.log(idSesion);
 
     try {
+
+        fetch('http://localhost:3000/protected', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(response => response.json)
+        .then(async data => {
+
+            const [existe] = await db.query('SELECT EXISTS (SELECT s.idUsuario FROM sesion s JOIN cliente c ON s.idUSuario = c.idUsuario WHERE s.id = ?) AS existe', [data.id])
         
-        const [existe] = await db.query('SELECT EXISTS (SELECT s.idUsuario FROM sesion s JOIN cliente c ON s.idUSuario = c.idUsuario WHERE s.id = ?) AS existe', [idSesion])
-        console.log(existe);
-        
-        if (existe[0].existe == 1) {
+            if (existe[0].existe == 1) {
             
-            const [row] = await db.query('CALL ventaspeople.compraCanasta(?)', [idSesion])
-
-            console.log(row);
+                const [row] = await db.query('CALL ventaspeople.compraCanasta(?)', [idSesion])
     
-            res.status(500).json({existe, row})
-        } else{
-
-            res.status(200).json({existe})
-        }
+                console.log(row);
+        
+                res.status(500).json({existe, row})
+            } else{
+    
+                res.status(200).json({existe})
+            }
+        })
 
     } catch (error) {
         
         console.log(error);
         
     }
+}
+
+const cerrar_sesion = async (req, res) => {
+
+    const { token } = req.body
+
+    console.log(token);
     
 
-    
+    try {
 
-    
-    
+        fetch('http://localhost:3000/protected', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(response => response.json())
+        .then(async data => {
+
+            console.log(data);
+            console.log(data.id);
+            
+
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Los meses empiezan en 0
+            const day = now.getDate().toString().padStart(2, '0');
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            const dateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+            console.log(dateTime);
+            
+
+            const [row] = await db.query('UPDATE sesion SET horaTermino = ? WHERE idUsuario = ? ORDER BY horaInicio DESC LIMIT 1', [dateTime, data.id])
+
+            console.log("cerrar sesion " + row)
+            
+            res.status(200).json(row)
+            
+        })
+        
+
+    } catch (error) {
+        console.log(error);
+        
+    }
 }
 
 

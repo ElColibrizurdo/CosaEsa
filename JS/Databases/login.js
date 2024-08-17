@@ -32,6 +32,8 @@ async function log(inputEmail, inputPassword) {
     
         const data = await response.json();
         const idS = data.set.id
+        console.log(data.token);
+        
         const params = new URLSearchParams(window.location.search)
         console.log(params.size);
         
@@ -40,34 +42,12 @@ async function log(inputEmail, inputPassword) {
     
         localStorage.setItem('sesion', idS)
         localStorage.setItem('name', data.name)
+        localStorage.setItem('token', data.token)
     
         if (response.ok) {
             
             console.log('Respuesta del servidor: ', data);
 
-            /*if (params.size) {
-
-                console.log('paso');
-
-
-                const like = await fetch('/auth/like', {
-                    method: post,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ 
-                        number: params.size,
-                        sesion: idS,
-                        estado: 0
-                     })
-                }) 
-    
-                const data_like = await like.json()
-    
-                console.log(data_like);
-            }*/
-
-           
             console.log(params.get('like'));
             
 
@@ -75,17 +55,20 @@ async function log(inputEmail, inputPassword) {
             fetch('/protected', {
                 method: 'GET',
                 headers: {
-                    'Authorization': 'Bearer ' + token 
+                    'Authorization': 'Bearer ' + data.token 
                 }
             })
             .then(response => response.text())
             .then(data => {
                 console.log(data);
+                console.log('Hola');
+                
             })
             .catch(error => {
                 console.log(error);
             })
 
+            console.log('hwllow');
             console.log(res);
         }else {
 

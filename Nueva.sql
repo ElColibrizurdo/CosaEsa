@@ -543,19 +543,29 @@ SELECT * FROM playera_personalizada pp ;
 SELECT * FROM usuario u ;
 SELECT * FROM canasta c ;
 SELECT * FROM producto p ;
-SELECT * FROM sesion s ;
+SELECT * FROM sesion s  where s.idUsuario = 12  ORDER BY  horaInicio DESC LIMIT 1;
 { CALL ventaspeople.compraCanasta(:idSesion) }
 CALL ventaspeople.compraCanasta(74)
-{ CALL ventaspeople.compraCanasta(70) }
+{ CALL ventaspeople.compraCanasta(72) }
 SELECT * FROM medida m 
 SELECT * FROM cliente c;
 SELECT * FROM metodos_pago mp ;
 SELECT * FROM venta v;
+SELECT COUNT(*) FROM venta WHERE idCliente = 18;
 SELECT * FROM ventadetalle v ;
-DELETE FROM cliente ;
+DELETE FROM venta ;
 DELETE FROM metodos_pago WHERE id IN (1,2,3,4,5,6,7);
 DELETE FROM ventadetalle WHERE idVenta IN (15,16)
 DELETE FROM venta WHERE id IN (15,16);
+DELETE FROM sesion;
+SELECT * FROM tokens;
+DROP TABLE tokens;
+{ CALL ventaspeople.compraCanasta(:idSesion) }
+SELECT EXISTS (SELECT s.idUsuario 
+FROM sesion s 
+JOIN cliente c 
+ON s.idUSuario = c.idUsuario 
+WHERE s.id = 116)
 
 DELETE FROM metodos_pago WHERE id IN (9, 10, 11)
 
@@ -673,6 +683,38 @@ CREATE PROCEDURE actualizarCliente (
 SELECT * FROM cliente;
 
 SELECT idUsuario FROM sesion WHERE id = 58;
+
+
+CREATE PROCEDURE `compraCanasta`(
+	IN `idSesion` INT
+)
+    DETERMINISTIC
+BEGIN
+
+	INSERT INTO venta (idCliente, fechaPAgo, FormaPAgo, subtotal, iva, total)
+	SELECT c.id, CURRENT_DATE(), 'API-pago', ca.subtotal, ca.iva, ca.total
+	FROM canasta ca
+	JOIN cliente c ON c.idUsuario = ca.usuario_id
+	WHERE ca.usuario_id = (SELECT idUsuario FROM sesion WHERE id = idSesion);
+	
+
+
+   INSERT INTO ventadetalle (idVenta, idProducto, cantidad, numero, etiqueta, precio, iva, total, fechaAlta, idMedida)
+
+	SELECT LAST_INSERT_ID(), id_producto, cantidad, numero, etiqueta, precio, iva, total, fechaAlta, id_medida
+	FROM   canasta_productos 
+	WHERE  id_canasta = (Select id FROM canasta WHERE usuario_id = (Select idUsuario FROM sesion WHERE id = idSesion));
+	
+
+	DELETE 	
+	FROM   canasta_productos 
+	WHERE  id_canasta = (Select id FROM canasta WHERE usuario_id = (Select idUsuario FROM sesion WHERE id = idSesion));
+
+
+
+END
+
+{ CALL ventaspeople.compraCanasta(:idSesion) }
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

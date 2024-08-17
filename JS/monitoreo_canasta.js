@@ -164,7 +164,8 @@ async function RealizarCompra(boton) {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        idSesion: localStorage.getItem('sesion')
+                        idSesion: localStorage.getItem('sesion'),
+                        token: localStorage.getItem('token')
                     })
                 })
             

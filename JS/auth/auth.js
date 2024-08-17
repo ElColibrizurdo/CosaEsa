@@ -490,9 +490,8 @@ const verificarContra = async (req, res) => {
 
 const RealizarVenta = async (req, res) => {
 
-    const { token } = req.body
+    const { idSesion, token } = req.body
 
-    console.log(idSesion);
 
     try {
 
@@ -505,7 +504,7 @@ const RealizarVenta = async (req, res) => {
         .then(response => response.json)
         .then(async data => {
 
-            const [existe] = await db.query('SELECT EXISTS (SELECT s.idUsuario FROM sesion s JOIN cliente c ON s.idUSuario = c.idUsuario WHERE s.id = ?) AS existe', [data.id])
+            const [existe] = await db.query('SELECT EXISTS (SELECT s.idUsuario FROM sesion s JOIN cliente c ON s.idUSuario = c.idUsuario WHERE s.id = ?) AS existe', [idSesion])
         
             if (existe[0].existe == 1) {
             

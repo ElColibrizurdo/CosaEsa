@@ -4,7 +4,10 @@ document.addEventListener('codigoTerminado',  function() {
 
     btn_agregar.addEventListener('click', function () {
 
-        if (confirm('agregar a la cesta?')) {
+        console.log(localStorage.getItem('sesion'));
+        
+
+        if (localStorage.getItem('sesion') !== null && confirm('agregar a la cesta?') ) {
             
             AgregarProducto()
         }
@@ -13,6 +16,29 @@ document.addEventListener('codigoTerminado',  function() {
 
    
 });
+
+function validaSesion(c) {
+    var sesion = localStorage.getItem('sesion');
+    if (sesion==null) {
+      const status = confirm('Para dar like se necesita ingresar');
+      console.log(c)
+      
+      if (status) {
+        const params = new URLSearchParams(window.location.search)
+
+        window.parent.location.href = '/login?canasta=' + params.get('id')
+        sessionStorage.setItem('like', c.getAttribute('number'))
+        
+      }
+
+      c.checked = false
+      return false;
+    }else{
+      return true;
+
+    }
+  
+  }
 
 async function AgregarProducto() {
     

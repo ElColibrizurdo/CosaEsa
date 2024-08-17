@@ -155,7 +155,7 @@ async function RealizarCompra(boton) {
     
 
     if (document.querySelectorAll('.carta_carrito').length > 0 && localStorage.getItem('sesion')) {
-        if (confirm('Seguro que quieres realizar esta compra?')) {
+        if (confirm('Seguro que quieres realizar esta compra? DATOS CLIENTE')) {
             try {
             
                 const response = await fetch('/auth/venta', {

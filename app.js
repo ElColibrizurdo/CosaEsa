@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname)));
 
 // Servir el archivo index.html en la ruta raíz
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'HTML', 'NavBar.html'));
+    res.sendFile(path.join(__dirname, 'HTML', 'Home.html'));
 });
 
 app.get('/tienda', (req, res) => {

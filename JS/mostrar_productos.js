@@ -284,5 +284,6 @@ arrayEquipo = []
 arrayStock = []
 
 window.addEventListener('DOMContentLoaded', (event) => {
+    sessionStorage.setItem('pag', '/tienda')
     obtener_productis(arrayTipo, arrayEquipo, arrayStock)
 })

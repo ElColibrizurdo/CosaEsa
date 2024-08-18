@@ -69,9 +69,10 @@ async function AgregarProducto() {
             numero.push('')
         }
     
-        if (element.querySelector('[type="text"]')) {
+        if (element.querySelector('[name="nombre"]')) {
             
             nombre.push(element.querySelector('[type="text"]').value)
+            
         } else {
     
             nombre.push('')
@@ -161,3 +162,4 @@ function DeterminarPersonalizados() {
     
    
 }
+

@@ -247,17 +247,6 @@ function Mostrar_Medidas(medidas) {
                 <label for="btnradio${element.id}" class="radio-tile-label">${element.nombre}</label>
             </div>
         </div> `
-
-        /*const btn = document.createElement('input')
-        btn.type = 'radio'
-        btn.name = 'tallas'
-        btn.id = 'btnradio' + element.id
-        btn.classList.add('btn-check')
-
-        const lbl = document.createElement('label')
-        lbl.innerText = element.nombre
-        lbl.setAttribute('for', 'btnradio' + element.id)
-        lbl.classList.add('btn', 'btn-outline-primary')*/
         
         contenedor_tallas.innerHTML += talla
     })
@@ -363,4 +352,9 @@ document.querySelector('.atras').addEventListener('click', function () {
     history.back()
     console.log('ya ta');
     
+})
+
+document.querySelector('.atras').addEventListener('click', function () {
+    
+    history.back()
 })

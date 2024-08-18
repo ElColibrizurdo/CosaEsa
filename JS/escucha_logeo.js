@@ -32,27 +32,6 @@ function parseJwts (token) {
     return JSON.parse(jsonPayload);
 }
 
-function CerrarSesion() {
-    
-    try {
-
-        fetch('/auth/cerrar', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(localStorage.getItem('authToken'))
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-    } catch (error) {
-        console.log(error);
-    }
-    
-}
-
 async function CerrarSesion() {
 
     console.log('Vamos a cerrar sesion');

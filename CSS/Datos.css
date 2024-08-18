@@ -1,6 +1,5 @@
 body{
     margin: 0; 
-    height: 100vh; 
     background-color:black; 
     background-image:url("../IMAGES/fondo_singup.png");
     background-size: cover; 
@@ -10,6 +9,7 @@ body{
     justify-content: center;
     align-items: center;
     overflow-y: scroll;
+    
 }
  
  @font-face{
@@ -22,7 +22,7 @@ body{
 }   
 .contenedor{
      border-radius: 12px;
-    height: 1150px;
+    height: 900px;
     width: 600px;
     background-color: #FFFFFF ;
     display: flex;
@@ -205,9 +205,4 @@ body{
                    border: 2px solid #f15d2a;
                    padding: 5px;
               }
-              .div_scroll{
-                  height: 100%;
-                  padding: 40px 0px;
-                
-                  height: 100%;
-              }
+              

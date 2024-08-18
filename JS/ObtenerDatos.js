@@ -1,6 +1,8 @@
-async function ObtenerDatos(params) {
+async function ObtenerDatos(event) {
 
-
+    
+    console.log('empecemos');
+    
     try {
         
         const response = await fetch('/auth/regcliente', {
@@ -25,6 +27,30 @@ async function ObtenerDatos(params) {
         })
 
         const data = await response.json()
+
+        console.log(data);
+        
+
+        if (new URLSearchParams(window.location.search).get('comprar') == 1 && confirm('¿Quieres realziar la compra o prefieres gacerlo despues?')) {
+
+            console.log('Hola como andan');
+            
+            
+            const response = await fetch('/auth/venta', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    idSesion: localStorage.getItem('sesion'),
+                    token: localStorage.getItem('token')
+                })
+            })
+
+            const data = await response.json()
+            console.log(data.existe[0].existe);
+        }
+
         console.log(data);
     } catch (error) {
         console.log(error);
@@ -44,9 +70,6 @@ async function DeterminarExistenciaCliente() {
         const data = await response.json()
         console.log(data);
         
-        console.log(data.cliente);
-        console.log(data.row[0].EXISTE);
-        console.log(data.procesado);
 
         if (data.row[0].EXISTE == 1) {
 
@@ -164,5 +187,14 @@ async function ActivarDesactivar(boton) {
     
 }
 
+const paramas = new URLSearchParams(window.location.search)
+
+console.log(paramas.get('comprar'));
+console.log(new URLSearchParams(window.location.search).get('comprar'));
+
+document.querySelector('.atras').addEventListener('click', function () {
+    
+    history.back()
+})
 
 DeterminarExistenciaCliente()

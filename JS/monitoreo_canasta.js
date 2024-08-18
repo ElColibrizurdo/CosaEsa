@@ -155,7 +155,7 @@ async function RealizarCompra(boton) {
     
 
     if (document.querySelectorAll('.carta_carrito').length > 0 && localStorage.getItem('sesion')) {
-        if (confirm('Seguro que quieres realizar esta compra? DATOS CLIENTE')) {
+        if (confirm('Seguro que quieres realizar esta compra?')) {
             try {
             
                 const response = await fetch('/auth/venta', {
@@ -171,10 +171,16 @@ async function RealizarCompra(boton) {
             
                 const data = await response.json()
                 console.log(data.existe[0].existe);
-                console.log(data.row.affectedRows);
 
                 if (data.existe[0].existe == 0) {
-                    alert('Tu no tienes tus datos de cliente')
+                    
+                    if(confirm('Tu no tienes tus datos de cliente,\n¿Quieres registrar tus datos de cliente?')) {
+
+                        const comprar = 1
+                        const frame = document.querySelector('iframe')
+                        localStorage.setItem('pag', '/datos')
+                        frame.src = `/datos?comprar=${comprar}`
+                    }
                 } else  if (data.existe[0].existe == 1 && data.row.affectedRows >= 1) {
                     BorrarProducto(boton)
                }

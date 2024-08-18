@@ -38,6 +38,7 @@ async function inicio() {
             const data = await response.json()
             data.rows.forEach(element => {
                 console.log(element);
+                
                 Obtener_datos(element.id_producto, element.cantidad, element.id, columna, element.etiqueta, element.numero)
                 
             });
@@ -54,6 +55,13 @@ async function inicio() {
 }
 
 async function Obtener_datos(id, cantidad, idCanasta, columna, etiqueta, numero) {
+
+    if (numero == 0 ) {
+        numero = ''
+        console.log('Nuevo numero: ' + numero);
+        console.log('Nuevo numero: ' + etiqueta);
+        
+    }
     
 
     try {
@@ -68,7 +76,8 @@ async function Obtener_datos(id, cantidad, idCanasta, columna, etiqueta, numero)
         })
 
         const data = await response.json();
-        console.log(data.producto[0][0]);
+        console.log(numero);
+        
         Crear_card(data.producto, cantidad, idCanasta, columna, etiqueta, numero)
 
     } catch (error) {
@@ -102,7 +111,7 @@ function Crear_card(producto, cantidad, idCanasta, columna, etiqueta, numero) {
     div_titulo.classList.add('txt_carta_carrito_titulo')
 
     const titulo = document.createElement('a')
-    titulo.innerText = producto[0][0].descripcion
+    titulo.innerText = producto[0][0].descripcion + ' ' + etiqueta + ' ' + numero
 
     div_titulo.appendChild(titulo)
 
@@ -177,21 +186,6 @@ function Crear_card(producto, cantidad, idCanasta, columna, etiqueta, numero) {
 
     carta_carrito.appendChild(img_carrito_cart)
     carta_carrito.appendChild(txt_carta)
-
-    const btn_desplegar = `
-    <p class="d-inline-flex gap-1">
-        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample${idCanasta}" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Link with href
-        </a>
-    </p>
-    <div class="collapse" id="collapseExample${idCanasta}">
-        <div class="card card-body">
-            <h6>Nombre: ${etiqueta}</h6>
-            <h6>Numero: ${numero}</h6>
-        </div>
-    </div>`
-
-    txt_carta.innerHTML += btn_desplegar
 
     columna.appendChild(carta_carrito)
 

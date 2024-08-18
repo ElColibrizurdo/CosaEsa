@@ -52,15 +52,28 @@ const login = async (req, res) => {
         const [row] = await db.query('SELECT id FROM canasta WHERE usuario_id = ?', [user.id])
         const canasta = row[0]
 
+        console.log(user.id);
+        
+
+        const [idCliente] = await db.query('SELECT id FROM cliente WHERE idUsuario = ?', [user.id])
+        console.log(idCliente);
+
+        if (!idCliente[0]) {
+            
+            idCliente[0] = { id: 0}
+        }
+        
+
         const payload = {
             userId: user.id,
             userName: user.name,
             canastaId: canasta.id,
+            clienteid: idCliente[0].id,
             pepe: 'pepe'
         }
 
         const name = user.name
-        const token = jwt.sign(payload, 'mysecretkey', {expiresIn: '5h'});
+        const token = jwt.sign(payload, 'mysecretkey', {expiresIn: '7d'});
     
         
 
@@ -84,6 +97,8 @@ const ingresar_producto_canasta = async (req, res) => {
 
     const total = parseFloat(precio) - parseFloat((precio / 1.16))
  
+    console.log('Nombre personalizado: ' + nombre);
+    
     
     let message = ''
 

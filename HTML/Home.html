@@ -1074,7 +1074,7 @@
                         </div>
                     </div>
                     <div class="contenedor_cartas_recomendaciones">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="48" viewBox="0 0 40 48" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="48" viewBox="0 0 40 48" fill="none" onclick="Clasificaciones('-')">
                             <g opacity="0.9">
                               <mask id="mask0_1411_22983" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-8" y="0" width="48" height="48">
                                 <rect x="-8" width="48" height="48" fill="#D9D9D9"/>
@@ -1082,7 +1082,7 @@
                                 <path d="M20.2749 34.6568L9.61743 23.9993L20.2749 13.3418V34.6568Z" fill="#A4A3A3"/>
                             </g>
                         </svg>
-                        <div class="grupo_cartas_recomendaciones">
+                        <div class="grupo_cartas_recomendaciones" p="0" v="0" pr="0">
                              <!-- carta 2 -->
                                 <div class="carta" >
                                     <div class="carta_estado">
@@ -1189,7 +1189,7 @@
                                 </div>
                                 <!-- carta 2 -->
                         </div>
-                         <svg xmlns="http://www.w3.org/2000/svg" width="39" height="48" viewBox="0 0 39 48" fill="none">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="39" height="48" viewBox="0 0 39 48" fill="none" onclick="Clasificaciones('+')">
                             <g opacity="0.9">
                               <mask id="mask0_1411_22984" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48">
                                 <rect width="48" height="48" transform="matrix(-1 0 0 1 48 0)" fill="#D9D9D9"/>
@@ -1198,7 +1198,7 @@
                             </g>
                         </svg>
                     </div>
-                    <h1>Ver más</h1>
+                    <h1><a href="/tienda">Ver más</a></h1>
                     
                 </div>
                 
@@ -1363,6 +1363,7 @@
                 </div>
             </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="../JS/Home.js"></script>
     </body>
     <script>
          const perfil = document.getElementById('perfil');

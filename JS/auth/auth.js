@@ -591,5 +591,36 @@ const cerrar_sesion = async (req, res) => {
     }
 }
 
+const FiltrosHome = async (req, res) => {
 
-module.exports = { RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };
+    const saltos = req.query.saltos
+    const producto = req.query.producto
+
+    try {
+        console.log(producto);
+        
+        console.log(req.query);
+        
+        console.log(saltos);
+        
+        
+        
+        const [productos] = await db.query('SELECT * FROM producto WHERE descripcion LIKE ? LIMIT 5 OFFSET ?', [producto, parseInt(saltos[0])])
+        const [masVendidos] = await db.query('SELECT p.* FROM producto p JOIN ventadetalle v on v.idProducto = p.id GROUP BY v.idProducto  HAVING COUNT(*) >= 3 LIMIT 5 OFFSET ?', [parseInt(saltos[2])])
+        const [preventa] = await db.query('SELECT * FROM producto WHERE estado = 0 LIMIT 5 OFFSET ?', [parseInt(saltos[4])])
+
+        console.log('Filtrados:');
+
+        console.log(productos);
+        console.log(masVendidos);
+        console.log(preventa);
+
+        res.json({productos, masVendidos, preventa})
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
+module.exports = { FiltrosHome, RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };

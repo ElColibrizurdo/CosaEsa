@@ -38,8 +38,39 @@ function Buscar(params) {
 function LlamarFuncion(params) {
     
     const frame = document.querySelector('iframe')
-7
+    console.log(frame.src);
+    
+
+    if (frame.src == 'http://localhost:3000/home') {
+        
+        console.log(frame.src);
+        
+        const barra = document.querySelector('.buscador')
+
+        console.log(barra);
+        
+
+        barra.addEventListener('keydown', function (event) {
+
+            console.log(event);
+            
+            if (event.key === 'Enter' || event.keyCode === 13) {
+                
+
+                frame.src = '/tienda'
+                console.log(frame.src);
+
+                frame.contentWindow.Buscar(params)
+                
+            }
+        })
+    }
+
     console.log(params);
     
-    frame.contentWindow.Buscar(params)
+   
+        
+        frame.contentWindow.Buscar(params)
+    
+    
 }

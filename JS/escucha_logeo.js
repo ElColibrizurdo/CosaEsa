@@ -166,6 +166,9 @@ function CambiarFrame(link) {
     const frame = document.querySelector('iframe')
 
     console.log(frame);
+
+    const barra = document.querySelector('.buscador')
+    barra.value = ''
     
     if (link.getAttribute('jual') == 1) {
         sessionStorage.setItem('pag', '/compras')

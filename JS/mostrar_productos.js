@@ -1,7 +1,18 @@
 
 
 let arrayPrincipal = []
-function obtener_productis(tipos, equipos, stock, buscar) {
+function obtener_productis(tipos, equipos, stock, ) {
+
+    const barra = window.parent.document.querySelector('.buscador')
+    let buscar
+
+    if (barra.value.length > 0) {
+        
+        buscar = "%" + barra.value + "%"
+    } else {
+
+        buscar = '%'
+    }
 
     arrayPrincipal = []
 
@@ -253,21 +264,11 @@ function FiltrarDatos(buton) {
         }
     })
 
-    const barra = window.parent.document.querySelector('.buscador')
-    let buscar
-
-    if (barra.value.length > 0) {
-        
-        buscar = "%" + barra.value + "%"
-    } else {
-
-        buscar = '%'
-    }
-
-    console.log(buscar);
     
 
-    obtener_productis(arrayTipos, arrayEquipos, arrayStocks, buscar)
+    
+
+    obtener_productis(arrayTipos, arrayEquipos, arrayStocks)
 
 }
 
@@ -327,7 +328,7 @@ arrayStock = []
 
 window.addEventListener('DOMContentLoaded', (event) => {
     sessionStorage.setItem('pag', '/tienda')
-    obtener_productis(arrayTipo, arrayEquipo, arrayStock, '%')
+    obtener_productis(arrayTipo, arrayEquipo, arrayStock)
 
 
 })

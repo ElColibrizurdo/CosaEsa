@@ -41,7 +41,8 @@ function ImprimirProductos(compras) {
             
             element.estadoEnvio = 'En camino'
         }
-
+        console.log(element);
+        
         
 
         const carta = `
@@ -52,7 +53,7 @@ function ImprimirProductos(compras) {
                                 <div class="carta_txt">
                                     <div class="carta_txt_1 espaciado">
                                         <div class="carta_txt_2">
-                                            <a class="carta_txt_1_a">N° Pedido:&nbsp;</a><h2>${element.noPedido}</h2>
+                                            <a class="carta_txt_1_a">N° Pedido:;</a><h2>${element.id}   </h2>
                                         </div> 
                                         <div class="carta_txt_2">
                                             <a class="carta_txt_1_a">Fecha de compra:&nbsp;</a><h2>${element.fechaAlta}</h2>
@@ -97,8 +98,11 @@ async function consultaCompra(idSesion) {
         const content_cartas = document.getElementById('grupo_cartas_compras')
         // content_cartas.innerHTML = ""
 
+        console.log(data);
+        
+
         data.compraProducto.forEach(element=>{
-            console.log(element.descripcion)
+            console.log(element)
 
             content_cartas.innerHTML += `<div class="carta" >
                         <div class="carta_img">
@@ -107,7 +111,7 @@ async function consultaCompra(idSesion) {
                         <div class="carta_txt">
                             <div class="carta_txt_1 espaciado">
                                 <div class="carta_txt_2">
-                                    <a class="carta_txt_1_a">N° Pedido:&nbsp;</a><h2>001234566</h2>
+                                    <a class="carta_txt_1_a">N° Pedido:;</a><h2>001234566</h2>
                                 </div> 
                                 <div class="carta_txt_2">
                                     <a class="carta_txt_1_a">Fecha de compra:&nbsp;</a><h2>18/Jun/24</h2>

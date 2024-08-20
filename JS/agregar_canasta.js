@@ -82,7 +82,7 @@ async function AgregarProducto() {
     console.log(numero);
     console.log(nombre);
 
-    if (localStorage.getItem('sesion') === null && confirm('Para agregar a la canasta se necesita ingresar\n Quieres logearte?')) {
+    if (localStorage.getItem('sesion') == null && confirm('Para agregar a la canasta se necesita ingresar\n Quieres logearte?')) {
 
         const nombres = JSON.stringify(nombre)
         const numeros = JSON.stringify(numero)

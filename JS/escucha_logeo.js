@@ -57,7 +57,6 @@ async function CerrarSesion() {
         localStorage.removeItem('name')
         localStorage.removeItem('sesion')
         localStorage.removeItem('token')
-        frame.reload()
     } catch (error) {
         console.log(error);
         

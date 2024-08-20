@@ -312,12 +312,12 @@ function Buscar(params) {
     
     barra.addEventListener('keydown', async function(event) {
         
-        if (event.key === 'Enter' || event.keyCode === 13) {
+        //if (event.key === 'Enter' || event.keyCode === 13) {
             
             console.log(barra.value);
             
             FiltrarDatos(barra)
-        }
+        //}
     })
     console.log(params.value);
 }

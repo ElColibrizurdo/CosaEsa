@@ -49,7 +49,7 @@ async function addProductoRelacionado(idProducto){
         })
 
         const data = await response.json()
-        console.log(data.tipoProducto);
+        console.log(data);
 
         const cont_prodRelacionados = document.querySelector('.contenedor_recomendados')
         cont_prodRelacionados.innerHTML = ""

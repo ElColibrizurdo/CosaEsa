@@ -713,12 +713,16 @@ BEGIN
 
 
 
-END
+ENDSELECT descripcion FROM producto WHERE descripcion LIKE "%Camiseta%" LIMIT 5 OFFSET 5;
 
 { CALL ventaspeople.compraCanasta(:idSesion) }
 
+SELECT * FROM producto WHERE descripcion LIKE "%Camiseta%" LIMIT 5 OFFSET 11;
+SELECT idProducto, COUNT(*) AS cantidad_compras FROM ventadetalle GROUP BY idProducto HAVING COUNT(*) >= 3 LIMIT 5 OFFSET 5;  
+SELECT p.* FROM producto p JOIN ventadetalle v on v.idProducto = p.id GROUP BY v.idProducto  HAVING COUNT(*) >= 3 LIMIT 5 OFFSET 5
+SELECT * FROM producto WHERE estado = 0
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;•••••••••••••••••••••••  
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

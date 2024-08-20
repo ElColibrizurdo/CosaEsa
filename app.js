@@ -30,6 +30,10 @@ app.get('/tienda', (req, res) => {
     res.sendFile(path.join(__dirname, 'HTML', 'tiendaPlus.html'))
 })
 
+app.get('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, 'HTML', 'Home.html'))
+})
+
 app.get('/bienvenido', (req, res) => {
     res.sendFile(path.join(__dirname, 'Admministrador', 'HTML', 'Bienvenido.html'))
 })
@@ -71,7 +75,7 @@ app.get('/datos', (req, res) => {
 
 app.post('/data', async (req, res) => {
 
-    const { tipos, equipos, stock } = req.body;
+    const { tipos, equipos, stock, buscar } = req.body;
 
     if (!Array.isArray(tipos) || !Array.isArray(equipos)) {
         return res.status(400).json({ error: 'Tipos y equipos deben ser arrays' });
@@ -82,15 +86,20 @@ app.post('/data', async (req, res) => {
     let tiposCondition = '';
     let queryWhere = ''
 
+    console.log(buscar);
+    
+
     try {
+        let queryEquipo = ''
+            let queryTipo = ''
         let query = "SELECT p.id, p.idTipo, p.descripcion, p.idEquipo, p.precio, p.numeroLikes, p.estado FROM producto p ";
+        queryWhere +=  ` WHERE p.descripcion LIKE "${buscar}"`
 
         if (equipos.length > 0 || tipos.length > 0 || stock.length > 0) {
 
-            let queryEquipo = ''
-            let queryTipo = ''
             
-            queryWhere += ' WHERE p.id LIKE "%"' 
+            
+            queryWhere += ` AND p.id LIKE "%"` 
 
             if (equipos.length > 0) {
                 
@@ -109,10 +118,14 @@ app.post('/data', async (req, res) => {
                 queryWhere += ` AND p.estado IN (${stock})`
             }
 
-            query += queryEquipo + queryTipo + queryWhere
+            
         }
 
+        query += queryEquipo + queryTipo + queryWhere
+
         const [rows] = await db.query(query, values);
+        console.log(query);
+        
         
         res.json(rows);
     } catch (err) {

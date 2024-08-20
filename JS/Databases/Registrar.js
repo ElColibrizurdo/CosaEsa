@@ -80,3 +80,8 @@ function SepararNombrePila(nombre) {
     console.log(caracteres);
     return caracteres
 }
+
+document.querySelector('.atras').addEventListener('click', function () {
+    
+    window.parent.location.href = '/'
+})

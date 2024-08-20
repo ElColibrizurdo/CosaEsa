@@ -1,3 +1,4 @@
+console.log(new URLSearchParams(window.location.search).get('nombre'));
 
 
 function seleccion(event) {
@@ -45,13 +46,64 @@ async function log(inputEmail, inputPassword) {
         localStorage.setItem('token', data.token)
     
         if (response.ok) {
+
+            if (params.get('id_producto')) {
+
+                console.log('Vamos a agregar a la canasta');
+                
+
+                const params = new URLSearchParams(window.location.search)
+                const cantidad = params.get('cantidad')
+                
+                const numeros = params.get('numero')
+                const nombres = params.get('nombre')
+                const tallas = params.get('talla')
+
+                const numero = numeros.split(',')
+                const nombre = nombres.split(',')
+                const talla = tallas.split(',')
+                const precio = params.get('precio')
+                
+
+                try {
+                    const response = await fetch('/auth/agregar', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify( {
+                            cantidad: cantidad,
+                            id: localStorage.getItem('sesion'),
+                            id_producto: params.get('id_producto'),
+                            numero: numero,
+                            nombre: nombre,
+                            precio: precio,
+                            talla: talla
+                        })
+                    })
+            
+                    const data = await response.json();
+                    console.log(data);
+                    
+                    console.log(data.message);
+                    
+                    
+                } catch (error) {
+                    
+                    console.log(error);   
+                }
+            }
             
             console.log('Respuesta del servidor: ', data);
 
             console.log(params.get('like'));
             
+            
+            if (params.get('like')) {
+                
+                window.location.href = '/?like=' +  params.get('like')
+            } 
 
-            window.location.href = '/?like=' +  params.get('like')
             fetch('/protected', {
                 method: 'GET',
                 headers: {
@@ -62,6 +114,7 @@ async function log(inputEmail, inputPassword) {
             .then(data => {
                 console.log(data);
                 console.log('Hola');
+                window.parent.location.href = '/'
                 
             })
             .catch(error => {
@@ -84,6 +137,10 @@ async function log(inputEmail, inputPassword) {
         
 }
 
+document.querySelector('.atras').addEventListener('click', function () {
+    
+    window.parent.location.href = '/'
+})
 
 
 function Validar_Email (email) {

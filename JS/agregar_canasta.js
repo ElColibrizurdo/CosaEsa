@@ -7,7 +7,7 @@ document.addEventListener('codigoTerminado',  function() {
         console.log(localStorage.getItem('sesion'));
         
 
-        if (localStorage.getItem('sesion') !== null && confirm('agregar a la cesta?') ) {
+        if (confirm('agregar a la cesta?') ) {
             
             AgregarProducto()
         }
@@ -18,15 +18,15 @@ document.addEventListener('codigoTerminado',  function() {
 });
 
 function validaSesion(c) {
-    var sesion = localStorage.getItem('sesion');
     if (sesion==null) {
-      const status = confirm('Para dar like se necesita ingresar');
+      const status = confirm('Para agregar a la canasta se necesita ingresar');
       console.log(c)
       
       if (status) {
         const params = new URLSearchParams(window.location.search)
 
-        window.parent.location.href = '/login?canasta=' + params.get('id')
+        window.parent.location.href = '/login?canasta=' + params.get('id') + '&cantidad=' + document.querySelector('.label-cantidad').value +
+            '&numero=' +  
         sessionStorage.setItem('like', c.getAttribute('number'))
         
       }
@@ -81,38 +81,49 @@ async function AgregarProducto() {
    
     console.log(numero);
     console.log(nombre);
-            try {
-                const response = await fetch('/auth/agregar', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify( {
-                        cantidad: label_contador.value,
-                        id: sesion,
-                        id_producto: id,
-                        numero: numero,
-                        nombre: nombre,
-                        precio: precio,
-                        talla: talla
-                    })
-                })
+
+    if (localStorage.getItem('sesion') === null && confirm('Para agregar a la canasta se necesita ingresar\n Quieres logearte?')) {
+
+        const nombres = JSON.stringify(nombre)
+        const numeros = JSON.stringify(numero)
+        const tallas = JSON.stringify(talla)
+        window.parent.location.href = `/login?id_producto=${id}&cantidad=${label_contador.value}&numero=${numero}&nombre=${nombre}&precio=${precio}&talla=${talla}`
         
-                const data = await response.json();
-                console.log(data);
-                
-                console.log(data.message);
-                
-                
-                if (data.message === 'ok') {
-                    window.parent.location.reload()
-                } else {
-                    console.log(data.message);   
-                }
-            } catch (error) {
-                
-                console.log(error);   
+    } else if (localStorage.getItem('sesion') !== null) {
+        
+        try {
+            const response = await fetch('/auth/agregar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify( {
+                    cantidad: label_contador.value,
+                    id: sesion,
+                    id_producto: id,
+                    numero: numero,
+                    nombre: nombre,
+                    precio: precio,
+                    talla: talla
+                })
+            })
+    
+            const data = await response.json();
+            console.log(data);
+            
+            console.log(data.message);
+            
+            
+            if (data.message === 'ok') {
+                window.parent.location.reload()
+            } else {
+                console.log(data.message);   
             }
+        } catch (error) {
+            
+            console.log(error);   
+        }
+    }   
 }
 
 

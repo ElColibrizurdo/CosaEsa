@@ -605,7 +605,7 @@ const FiltrosHome = async (req, res) => {
         
         
         
-        const [productos] = await db.query('SELECT * FROM producto WHERE descripcion LIKE ? LIMIT 5 OFFSET ?', [producto, parseInt(saltos[0])])
+        const [productos] = await db.query('SELECT * FROM producto WHERE descripcion LIKE ? LIMIT 5 OFFSET ?', [producto, parseInt(saltos[0])*5])
         const [masVendidos] = await db.query('SELECT p.* FROM producto p JOIN ventadetalle v on v.idProducto = p.id GROUP BY v.idProducto  HAVING COUNT(*) >= 3 LIMIT 5 OFFSET ?', [parseInt(saltos[2])])
         const [preventa] = await db.query('SELECT * FROM producto WHERE estado = 0 LIMIT 5 OFFSET ?', [parseInt(saltos[4])])
 
@@ -622,5 +622,25 @@ const FiltrosHome = async (req, res) => {
     }
 }
 
+const barra_buscar = async (req, res) => {
 
-module.exports = { FiltrosHome, RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };
+    const { elemento } = req.body
+
+    console.log(elemento);
+    
+
+    try {
+        
+        const [row] = await db.query('SELECT * FROM producto WHERE descripcion LIKE ?', [elemento])
+        console.log(row);
+        
+
+        res.status(200).json(row)
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
+module.exports = { barra_buscar, FiltrosHome, RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };

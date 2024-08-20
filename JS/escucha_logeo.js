@@ -52,11 +52,12 @@ async function CerrarSesion() {
     
         console.log(data);
         
+        const frame = document.querySelector('iframe')
     
         localStorage.removeItem('name')
         localStorage.removeItem('sesion')
         localStorage.removeItem('token')
-        location.reload()
+        frame.reload()
     } catch (error) {
         console.log(error);
         
@@ -132,6 +133,7 @@ async function DarLikePrevio() {
     
 }
 
+
 async function ObtenerCantidadCanasta() {
 
     console.log('modificar');
@@ -177,6 +179,9 @@ function CambiarFrame(link) {
     } else if (link.getAttribute('jual') == 3) {
         sessionStorage.setItem('pag', '/datos')
         frame.src = '/datos'
+    } else if (link.getAttribute('jual') == 4) {
+        sessionStorage.setItem('pag', '/home')
+        frame.src = '/home'
     }
 }
 

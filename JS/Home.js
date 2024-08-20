@@ -48,6 +48,8 @@ async function Clasificaciones(signo) {
                     })
 
                     pRecomendados+=1
+                    console.log(pRecomendados);
+                    
                     contenedor_recomendados.setAttribute('p', pRecomendados)
                     break;
                 case 1:
@@ -77,8 +79,19 @@ async function Clasificaciones(signo) {
                     break;
             }
             saltos.push(pRecomendados, vRecomendados, prRecomendados)
+            EjecutarScripts()
         })
     })
+}
+
+async function EjecutarScripts() {
+    
+    await Poner_Likes('../JS/Poner_Likes.js')
+}
+
+function saltos() {
+    
+    
 }
 
 function CrearCards(element, contenedor) {
@@ -141,7 +154,7 @@ function CrearCards(element, contenedor) {
     chkbox_deseo.setAttribute('number', element.id)
     chkbox_deseo.classList.add('productos')
     chkbox_deseo.setAttribute('onchange', 'DarLike(this)')
-    chkbox_deseo.setAttribute('onclick', 'validaSesion(this)')
+    chkbox_deseo.setAttribute('onclick', 'validarSesion(this)')
 
     const svgContent = `
         <svg id="Layer_1" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -167,6 +180,40 @@ function CrearCards(element, contenedor) {
     console.log(card);
     
     contenedor.appendChild(card)
+}
+
+async function DarLike(boton) {
+    
+    const number =  boton.getAttribute('number')
+    const sesion = localStorage.getItem('sesion')
+    let estado 
+    
+
+    if (boton.checked) {
+        estado = 0
+    } else {
+        estado = 1
+    }
+
+    try {
+        
+        const response = await fetch('/auth/like', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ number,  sesion, estado})
+        })
+
+        const data = await response.json()
+        
+        if (data.ok) {
+            console.log('To salio bien');
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 Clasificaciones()

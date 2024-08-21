@@ -55,6 +55,7 @@ async function ComprarProductos () {
             })
 
             const data = await response.json()
+            parent.ObtenerCantidadCanasta()
             window.location.reload()
             console.log(data.existe[0].existe);
 }

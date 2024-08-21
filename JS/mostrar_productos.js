@@ -68,7 +68,7 @@ function CrearCard(data) {
              linea.innerText = 'En Stock'
         } else {
 
-             linea.innerText = 'Agotdo'
+             linea.innerText = 'Agotado'
         }
 
         div_estado.appendChild(linea)

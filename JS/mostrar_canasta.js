@@ -39,7 +39,7 @@ async function inicio() {
             data.rows.forEach(element => {
                 console.log(element);
                 
-                Obtener_datos(element.id_producto, element.cantidad, element.id, columna, element.etiqueta, element.numero)
+                Obtener_datos(element.id_producto, element.total, element.cantidad, element.id, columna, element.etiqueta, element.numero)
                 
             });
             console.log(data.rows);
@@ -54,7 +54,7 @@ async function inicio() {
     
 }
 
-async function Obtener_datos(id, cantidad, idCanasta, columna, etiqueta, numero) {
+async function Obtener_datos(id, total, cantidad, idCanasta, columna, etiqueta, numero) {
 
     if (numero == 0 ) {
         numero = ''
@@ -78,14 +78,14 @@ async function Obtener_datos(id, cantidad, idCanasta, columna, etiqueta, numero)
         const data = await response.json();
         console.log(numero);
         
-        Crear_card(data.producto, cantidad, idCanasta, columna, etiqueta, numero)
+        Crear_card(data.producto, total, cantidad, idCanasta, columna, etiqueta, numero)
 
     } catch (error) {
         console.log(error);
     }
 }
 
-function Crear_card(producto, cantidad, idCanasta, columna, etiqueta, numero) {
+function Crear_card(producto, total, cantidad, idCanasta, columna, etiqueta, numero) {
 
 
     
@@ -119,8 +119,10 @@ function Crear_card(producto, cantidad, idCanasta, columna, etiqueta, numero) {
     const div_precio = document.createElement('div')
     div_precio.classList.add('txt_carta_carrito_precio')
 
+    const recorte = total.split(/(?<=\.00)/)
+    
     const precio = document.createElement('a')
-    precio.innerText = producto[0][0].precio
+    precio.innerText = recorte[0]
 
     //div eliminar producto
     const div_btn_precio = document.createElement('div')

@@ -5,13 +5,8 @@ document.addEventListener('codigoTerminado',  function() {
     btn_agregar.addEventListener('click', function () {
 
         console.log(localStorage.getItem('sesion'));
-        
-
-        if (confirm('agregar a la cesta?') ) {
             
-            AgregarProducto()
-        }
-        
+        AgregarProducto()
     })
 
    
@@ -49,16 +44,21 @@ async function AgregarProducto() {
     let numero = []
     let nombre = []
     const talla = []
-    const precio = document.getElementById('label-precio').getAttribute('precio')
+    const precio = []
 
     const cantidad_perso = DeterminarPersonalizados()
 
     cantidad_perso.forEach(element => {
 
         talla.push(DeterminarTallas(element, label_contador.value))
-        console.log(element.querySelector('#numero'));
 
-        console.log(element.querySelector('[type="number"]'));
+        if (element.querySelector('[type="number"]').value.length > 0 || element.querySelector('[name="nombre"]').value) {
+           
+            precio.push(parseFloat(document.getElementById('label-precio').getAttribute('precio')) + 250)
+        } else {
+           
+            precio.push(document.getElementById('label-precio').getAttribute('precio'))
+        }
         
 
         if (element.querySelector('[type="number"]')) {

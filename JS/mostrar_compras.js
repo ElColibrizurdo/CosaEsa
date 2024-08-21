@@ -42,6 +42,8 @@ function ImprimirProductos(compras) {
             element.estadoEnvio = 'En camino'
         }
         console.log(element);
+        const cortados = element.total.split(/(?<=\.00)/)
+        console.log(cortados);
         
         
 
@@ -60,7 +62,7 @@ function ImprimirProductos(compras) {
                                         </div>
                                     </div> 
                                     <div class="carta_txt_1"><h2>${element.descripcion}</h2></div>
-                                    <div class="carta_txt_1"><a class="carta_txt_1_a">Total:&nbsp;</a><h2>$${element.total} MXN</h2></div>
+                                    <div class="carta_txt_1"><a class="carta_txt_1_a">Total:&nbsp;</a><h2>$${cortados[0]} MXN</h2></div>
 
                                 </div>
                                 <div class="carta_btn">

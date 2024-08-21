@@ -549,6 +549,7 @@ CALL ventaspeople.compraCanasta(74)
 { CALL ventaspeople.compraCanasta(72) }
 SELECT * FROM medida m 
 SELECT * FROM cliente c;
+DELETE FROM cliente;
 SELECT id FROM cliente WHERE idUsuario = 12
 SELECT * FROM metodos_pago mp ;
 SELECT * FROM venta v;

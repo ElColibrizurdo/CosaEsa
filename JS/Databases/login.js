@@ -32,6 +32,11 @@ async function log(inputEmail, inputPassword) {
         });
     
         const data = await response.json();
+
+        if (data.message) {
+            alert(data.message)
+        }
+        
         const idS = data.set.id
         console.log(data.token);
         

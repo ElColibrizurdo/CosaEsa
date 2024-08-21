@@ -47,7 +47,11 @@ const login = async (req, res) => {
 
         const user = rows[0]
         const isMatch = await bcrypt.compare(password, user.password);
+        console.log(isMatch);
+        
         if (!isMatch) {
+            console.log('Crednciales invalidas');
+            
             return res.status(400).json({ message: 'Crendenciales invalidas'});
         } 
 
@@ -97,7 +101,7 @@ const ingresar_producto_canasta = async (req, res) => {
 
     const { cantidad, id, id_producto, numero, nombre, precio, talla } = req.body;    
 
-    const total = parseFloat(precio) - parseFloat((precio / 1.16))
+    
  
     console.log('Nombre personalizado: ' + nombre);
     
@@ -108,6 +112,8 @@ const ingresar_producto_canasta = async (req, res) => {
 
         numero.forEach(async (element, indice) => {
 
+            const total = parseFloat(precio[indice]) - parseFloat((precio[indice] / 1.16))
+
             const [sesion] = await db.query('SELECT idUsuario FROM sesion WHERE id = ?', [id])
 
             const [canasta] = await db.query('SELECT id FROM canasta WHERE usuario_id = ?', [sesion[0].idUsuario])
@@ -115,7 +121,7 @@ const ingresar_producto_canasta = async (req, res) => {
             
             const id_canasta = canasta[0].id
             const [row] = await db.query('INSERT INTO canasta_productos (cantidad, id_producto, id_canasta, precio, total, iva, id_medida, numero, etiqueta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-                [cantidad / numero.length, id_producto, id_canasta, precio / 1.16, precio ,  total, talla[indice], element, nombre[indice]] )
+                [cantidad / numero.length, id_producto, id_canasta, precio[indice] / 1.16, precio[indice] ,  total, talla[indice], element, nombre[indice]] )
             
                 if (row.affectedRows == 1) {
                     message = 'ok'

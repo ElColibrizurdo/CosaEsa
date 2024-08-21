@@ -19,7 +19,7 @@ function RegistrarUsuarios(event) {
     console.log(nombreSeparado[1]);
     console.log(nombreSeparado[2]);
     
-    if(ValidarContrasenia(password, password2)) {
+    if(ValidarContrasenia(password, password2) && Apodo.length > 0 && email.length > 0 && nombreApellido.length > 0) {
         
         reg(Apodo, nombreSeparado[0], nombreSeparado[1], nombreSeparado[2], email, password, fechaNa)
     }
@@ -51,13 +51,15 @@ async function reg(apodo, nombre, apellidoP, apellidoM, email, password, fechaNa
                 } 
 
                 if (params.get('id_producto')) {
-                    
+                    console.log(window.location.href);
+                    console.log(window.location.search.substring(1));
                     window.parent.location.href = '/login?' + window.location.search.substring(1)
                 }
+
                 window.parent.location.href = '/login'
 
             } else {
-                
+                alert(data.message)
                 console.log('Error', data.message);
             }
         } catch (error) {

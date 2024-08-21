@@ -60,7 +60,6 @@ async function reg(apodo, nombre, apellidoP, apellidoM, email, password, fechaNa
                 
                 console.log('Error', data.message);
             }
-            window.parent.location.href = '/login'
         } catch (error) {
             console.error('Error al registrar ususarios: ', error.message);
         }
@@ -86,6 +85,7 @@ function FormatoFech(fecha) {
 
 function SepararNombrePila(nombre) {
     
+    nombre = nombre += ' ' + ' '
     const caracteres = nombre.split(' ')
     console.log(caracteres);
     return caracteres

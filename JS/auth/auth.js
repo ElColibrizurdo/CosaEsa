@@ -7,7 +7,9 @@ const { response } = require('express');
 const register = async (req, res) => {
     const { apodo, nombre, apellidoP, apellidoM, email, password, fechaNa} = req.body;
 
-
+    console.log(apellidoP);
+    console.log(apellidoM);
+    
     try {
         const [rows] = await db.query('SELECT email FROM usuario WHERE email = ?', [email]);
 

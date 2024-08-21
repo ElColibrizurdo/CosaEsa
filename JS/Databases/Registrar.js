@@ -16,16 +16,17 @@ function RegistrarUsuarios(event) {
     console.log(fechaNa);
     
     const nombreSeparado = SepararNombrePila(nombreApellido)
-
+    console.log(nombreSeparado[1]);
+    console.log(nombreSeparado[2]);
+    
     if(ValidarContrasenia(password, password2)) {
-
+        
         reg(Apodo, nombreSeparado[0], nombreSeparado[1], nombreSeparado[2], email, password, fechaNa)
     }
 
 }
 
 async function reg(apodo, nombre, apellidoP, apellidoM, email, password, fechaNa ) {
-
 
         try {
         
@@ -39,27 +40,27 @@ async function reg(apodo, nombre, apellidoP, apellidoM, email, password, fechaNa
             });
     
             const data = await response.json();
-
+            const params = new URLSearchParams(window.parent.location.search)
             console.log(response);
     
             if (response.ok) {
-                
+
                 console.log('Respuesta del servidor: ', data);
                 if (params.get('like')) {
-                
-                    window.location.href = '/login?like=' +  params.get('like')
+                    window.parent.location.href = '/login?like=' +  params.get('like')
                 } 
 
                 if (params.get('id_producto')) {
                     
-                    window.location.href = '/login?' + window.location.search.substring(1)
+                    window.parent.location.href = '/login?' + window.location.search.substring(1)
                 }
-                window.location.href = '/login'
+                window.parent.location.href = '/login'
 
             } else {
                 
                 console.log('Error', data.message);
             }
+            window.parent.location.href = '/login'
         } catch (error) {
             console.error('Error al registrar ususarios: ', error.message);
         }

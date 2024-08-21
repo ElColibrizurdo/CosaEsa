@@ -8,9 +8,11 @@ function Poner_Likes() {
         if (localStorage.getItem('sesion')) {
 
             const sesion = localStorage.getItem('sesion')
-            
+            const carta = document.querySelectorAll('.carta')
             const chk = document.querySelectorAll('.productos')
 
+            console.log(carta);
+            
             console.log(chk);
         
             chk.forEach(async element => {

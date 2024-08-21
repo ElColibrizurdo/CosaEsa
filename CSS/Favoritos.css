@@ -85,12 +85,12 @@
                         gap: 12px;
                         grid-template-columns: repeat(4,1fr);
                     }
-                     .carta{
+                    .carta{
                         border-radius: 10px;
                         overflow: hidden;
                         display: grid;
                         position: relative;
-                        grid-template-rows: 321px 146px;
+                        grid-template-rows: 298px 96px;
                         grid-template-areas:"img_carta"
                                             "txt_carta";
                     }   
@@ -107,7 +107,7 @@
                             align-items: center;
                             color:  #004789;
                             opacity: 1;/*para ocultar el estado en cundo no sea deseado poner en 0 */
-        
+                            
                         }
                         .carta_estado a{
                             font-size: 14px;
@@ -119,17 +119,17 @@
                             grid-area: img_carta;
                              object-fit: cover;
                              width: 100%;
-                            height: 100%;
-        
+                             height: 100%;
+                             
                         }
                         .txt_carta{
                             grid-area: txt_carta;
-                            background-color: #FCFCFC;
+                            background-color: #f15d2a;
                             padding: 10px 16px;
                         }
                             .txt_carta_1{
                                 overflow: hidden;
-                                color:  #004789;
+                                color:  #FFFFFF;
                                 text-overflow: ellipsis;
                                 display: -webkit-box;
                                 -webkit-line-clamp: 2;
@@ -144,10 +144,10 @@
                             .txt_carta_2{
                                 display: flex;
                                 justify-content: space-between;
-                                color: #1C1C1C;
+                                color: #FFFFFF;
                             }
                                 .txt_carta_2 a{
-        
+                                    
                                     text-align: center;
                                     font-size: 16px;
                                     font-style: normal;
@@ -162,7 +162,7 @@
                                     height: 0;
                                     width: 0;
                                   }
-        
+
                                   .container_corazon {
                                     display: block;
                                     position: relative;
@@ -170,7 +170,7 @@
                                     user-select: none;
                                     width:30px;
                                   }
-        
+
                                   .container_corazon svg {
                                     position: relative;
                                     top: 0;
@@ -178,15 +178,16 @@
                                     height: 30px;
                                     width: 30px;
                                     transition: all 0.3s;
-                                    fill: #f5865f;
+                                    fill: #ffffff;
                                   }
-        
+
                                   .container_corazon svg:hover {
                                     transform: scale(1.1);
                                   }
-        
+
                                   .container_corazon input:checked ~ svg {
-                                    fill: #ffffff;
+                                    
+                                    fill: #f5865f;
                                   }
                             /*corazon*/
                             .contendror_btn_carta{

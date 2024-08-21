@@ -45,6 +45,15 @@ async function reg(apodo, nombre, apellidoP, apellidoM, email, password, fechaNa
             if (response.ok) {
                 
                 console.log('Respuesta del servidor: ', data);
+                if (params.get('like')) {
+                
+                    window.location.href = '/login?like=' +  params.get('like')
+                } 
+
+                if (params.get('id_producto')) {
+                    
+                    window.location.href = '/login?' + window.location.search.substring(1)
+                }
                 window.location.href = '/login'
 
             } else {

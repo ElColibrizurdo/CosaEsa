@@ -216,3 +216,8 @@ transform: scale(1.2);
      border: 2px solid #f15d2a;
      padding: 5px;
 }
+.contenedor_regresar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+   }

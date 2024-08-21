@@ -148,3 +148,29 @@ function Validar_Email (email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
+
+function Inicio() {
+    
+    const params = new URLSearchParams(window.location.search)
+
+    console.log(params.get('like'));
+    
+    if (params.get('like')) {
+        
+        const btn_registro = document.querySelector('.link_registrarse')
+        btn_registro.href = '/registro?link=' + params.get('like')
+    }
+
+    if (params.get('id_producto')) {
+        
+        const btn_registro = document.querySelector('.link_registrarse')
+        console.log(window.location.search.substring(1));
+        btn_registro.href = '/registro?' + window.location.search.substring(1)
+         
+    }
+    
+
+
+}
+
+Inicio()

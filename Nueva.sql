@@ -535,8 +535,8 @@ SET SQL_MODE=@OLDTMP_SQL_MODE;
 
 SELECT * FROM tipoproducto t ;
 SELECT * FROM productomedidas p ;
-SELECT * FROM medida m ;
-SELECT * FROM productousuario p ;
+	SELECT * FROM medida m ;
+	SELECT * FROM productousuario p ;
 SELECT * FROM producto p ;
 SELECT * FROM canasta_productos cp ;
 SELECT * FROM playera_personalizada pp ;
@@ -559,6 +559,7 @@ DELETE FROM metodos_pago WHERE id IN (1,2,3,4,5,6,7);
 DELETE FROM ventadetalle WHERE idVenta IN (15,16)
 DELETE FROM venta WHERE id IN (15,16);
 DELETE FROM sesion;
+DELETE FROM canasta_productos ;
 SELECT * FROM tokens;
 DROP TABLE tokens;
 { CALL ventaspeople.compraCanasta(:idSesion) }
@@ -567,7 +568,7 @@ FROM sesion s
 JOIN cliente c 
 ON s.idUSuario = c.idUsuario 
 WHERE s.id = 116)
-
+DELETE FROM canasta_productos cp ;
 DELETE FROM metodos_pago WHERE id IN (9, 10, 11)
 
 INSERT INTO metodos_pago (idUsuario, cardNumber, fechaExpiracion) VALUES (14, 6666666666666666, 2026-01-01)
@@ -717,6 +718,7 @@ ENDSELECT descripcion FROM producto WHERE descripcion LIKE "%Camiseta%" LIMIT 5 
 
 { CALL ventaspeople.compraCanasta(:idSesion) }
 
+SELECT p.id, p.idTipo, p.descripcion, p.idEquipo, p.precio, p.numeroLikes, p.estado FROM producto p  WHERE p.descripcion LIKE "%Camisetas%"
 SELECT * FROM producto WHERE descripcion LIKE "%Camiseta%" LIMIT 5 OFFSET 11;
 SELECT idProducto, COUNT(*) AS cantidad_compras FROM ventadetalle GROUP BY idProducto HAVING COUNT(*) >= 3 LIMIT 5 OFFSET 5;  
 SELECT p.* FROM producto p JOIN ventadetalle v on v.idProducto = p.id GROUP BY v.idProducto  HAVING COUNT(*) >= 3 LIMIT 5 OFFSET 5

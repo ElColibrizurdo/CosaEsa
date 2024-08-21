@@ -29,11 +29,18 @@ async function ObtenerDatos(event) {
         const data = await response.json()
 
         console.log(data);
-        
 
-        if (new URLSearchParams(window.location.search).get('comprar') == 1 && confirm('¿Quieres realziar la compra o prefieres gacerlo despues?')) {
+        console.log(data);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-            console.log('Hola como andan');
+async function ComprarProductos () {
+    console.log('Vamos a registrar');
+    
+    ObtenerDatos()
+            console.log('Vamos a comprar');
             
             
             const response = await fetch('/auth/venta', {
@@ -48,15 +55,9 @@ async function ObtenerDatos(event) {
             })
 
             const data = await response.json()
+            window.location.reload()
             console.log(data.existe[0].existe);
-        }
-
-        console.log(data);
-    } catch (error) {
-        console.log(error);
-    }
 }
-
 
 
 async function DeterminarExistenciaCliente() {

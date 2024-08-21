@@ -14,6 +14,9 @@ function obtener_productis(tipos, equipos, stock, ) {
         buscar = '%'
     }
 
+    console.log(barra.value);
+    
+
     arrayPrincipal = []
 
     console.log(buscar);
@@ -46,7 +49,6 @@ function CrearCard(data) {
     data.forEach(async (element, indice) => {
 
         contador += 1
-        console.log(element);
 
         //Carta para mostrar los productos
         const card = document.createElement('div')
@@ -194,14 +196,10 @@ async function EjecutarScripts() {
 
 function CambiarPagina(boton) {
     
-    console.log(boton.childNodes);
     const paginas = document.querySelectorAll('.pag_num')
     const paginasArray = Array.from(paginas)
-    console.log(paginas);
-    console.log(paginasArray);
     
     const pagina = document.querySelector('.selected')
-    console.log(pagina);
     
     const indi = paginasArray.indexOf(pagina)
     
@@ -310,7 +308,7 @@ function Buscar(params) {
     
     const barra = window.parent.document.querySelector('.buscador')
     
-    barra.addEventListener('keydown', async function(event) {
+    barra.addEventListener('keyup', async function(event) {
         
         //if (event.key === 'Enter' || event.keyCode === 13) {
             

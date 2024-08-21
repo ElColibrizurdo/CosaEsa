@@ -52,7 +52,9 @@ async function AgregarProducto() {
 
         talla.push(DeterminarTallas(element, label_contador.value))
 
-        if (element.querySelector('[type="number"]').value.length > 0 || element.querySelector('[name="nombre"]').value) {
+        
+
+        if ((element.querySelector('[type="number"]') && element.querySelector('[name="nombre"]')) && (element.querySelector('[type="number"]').value.length > 0 || element.querySelector('[name="nombre"]').value)) {
            
             precio.push(parseFloat(document.getElementById('label-precio').getAttribute('precio')) + 250)
         } else {

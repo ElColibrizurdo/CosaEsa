@@ -1,87 +1,22 @@
-async function Clasificaciones(signo) {
-
-    let saltos = []
-    let cual = 0
-
-    const contenedor_recomendados = document.querySelector('.grupo_cartas_recomendaciones')
-    
-    if (signo) {
-        
-        const btnRadio = document.querySelector('[name="radio"]:checked')
-
-        if (signo == '+') {
+const saltos = [0,0,0]
+const contador = 5
 
 
-            
-        } else if (signo == '-') {
-            
-        }
-    }
+async function Clasificaciones(btn) {
 
-    let pRecomendados = parseInt(contenedor_recomendados.getAttribute('p'))
-    let vRecomendados = parseInt(contenedor_recomendados.getAttribute('v'))
-    let prRecomendados = parseInt(contenedor_recomendados.getAttribute('pr'))
-
-    saltos.push(pRecomendados, vRecomendados, prRecomendados)
-
-    console.log(saltos);
-    
+   console.log(btn);
+   console.log(saltos);
+   
 
     const response = await fetch(`/auth/filtros?producto=%camiseta%&saltos=${saltos}`)
     const data = await response.json()
 
     console.log(data);
     
-    document.querySelectorAll('.radio-button').forEach(function(element, indice) {
-        saltos = []
-        element.addEventListener('click', function(event) {
-            contenedor_recomendados.innerHTML = ' '
-            console.log(event);
-            console.log(element);
-            console.log(indice);
-            
-            switch (indice) {
-                case 0:
-                    data.productos.forEach(element => {
-
-                        CrearCards(element, contenedor_recomendados)
-                    })
-
-                    pRecomendados+=1
-                    console.log(pRecomendados);
-                    
-                    contenedor_recomendados.setAttribute('p', pRecomendados)
-                    break;
-                case 1:
-                    data.masVendidos.forEach(element => {
-
-                        CrearCards(element, contenedor_recomendados)
-                    })
-                    vRecomendados+=1
-                    contenedor_recomendados.setAttribute('v', pRecomendados)
-                    break;
-                case 2:
-                    data.preventa.forEach(element => {
-
-                        CrearCards(element, contenedor_recomendados)
-                    })
-                    prRecomendados+=1
-                    contenedor_recomendados.setAttribute('pr', pRecomendados)
-                    break;
-            
-                default:
-                    data.productos.forEach(element => {
-
-                        CrearCards(element, contenedor_recomendados)
-                    })
-                    pRecomendados+=1
-                    contenedor_recomendados.setAttribute('p', pRecomendados)
-                    break;
-            }
-            saltos.push(pRecomendados, vRecomendados, prRecomendados)
-            EjecutarScripts()
-        })
-    })
+    
+    MostrarProductos(btn, data)
+    
+    
 }
 
 async function EjecutarScripts() {
@@ -89,13 +24,98 @@ async function EjecutarScripts() {
     await Poner_Likes('../JS/Poner_Likes.js')
 }
 
-function saltos() {
+function Salto(params) {
+ 
+    console.log(params);
+    const botones = document.querySelectorAll('.radio-button')
+
+    botones.forEach((element, indice) => {
+
+        if (element.checked) {
+            
+            if (params == '-') {
+                console.log('atras');
+                
+                if (saltos[indice] == 0) {
+                    
+                    saltos[indice] = 2
+                    Clasificaciones(element)
+                } else {
+
+                    saltos[indice] -= 1
+                    Clasificaciones(element)
+                }
+            } else {
+                console.log('adelante   ');
+
+                if (saltos[indice] == 2) {
+                    
+                    saltos[indice] = 0
+                    Clasificaciones(element)
+                } else {
+
+                    saltos[indice] += 1
+                    Clasificaciones(element)
+                }
+            }
+        }
+    })
+}
+
+function MostrarProductos(params, data) {
+
+    console.log(params);
     
+
+    const contenedor_recomendados = document.querySelector('.grupo_cartas_recomendaciones')
+    contenedor_recomendados.innerHTML = ' '
+    console.log(params.classList[1]);
+    
+
+    switch (params.classList[1]) {
+        case "0":
+            console.log('productos');
+            
+            data.productos.forEach(element => {
+
+                CrearCards(element, contenedor_recomendados)
+            })
+
+            
+            //contenedor_recomendados.setAttribute('p', pRecomendados)
+            break;
+        case "1":
+            console.log('mas vendidos');
+            data.masVendidos.forEach(element => {
+
+                CrearCards(element, contenedor_recomendados)
+            })
+            //contenedor_recomendados.setAttribute('v', pRecomendados)
+            break;
+        case "2":
+            console.log('preventa');
+            data.preventa.forEach(element => {
+
+                CrearCards(element, contenedor_recomendados)
+            })
+            //contenedor_recomendados.setAttribute('pr', pRecomendados)
+            break;
+    
+        default:
+            console.log('productos');
+            data.productos.forEach(element => {
+
+                CrearCards(element, contenedor_recomendados)
+            })
+            //contenedor_recomendados.setAttribute('p', pRecomendados)
+            break;
+    }
     
 }
 
 function CrearCards(element, contenedor) {
     
+
     //Carta para mostrar los productos
     const card = document.createElement('div')
     card.href = '/canasta?id=' + element.id 
@@ -216,4 +236,5 @@ async function DarLike(boton) {
     }
 }
 
-Clasificaciones()
+const boton = document.querySelector('.radio-button')
+Clasificaciones(boton)

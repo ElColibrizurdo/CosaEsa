@@ -541,8 +541,10 @@ SELECT * FROM producto p ;
 SELECT * FROM canasta_productos cp ;
 SELECT * FROM playera_personalizada pp ;
 SELECT * FROM usuario u ;
+DELETE FROM usuario
 SELECT * FROM canasta c ;
 SELECT * FROM producto p ;
+SELECT * FROM medida m 
 SELECT * FROM sesion s  where s.idUsuario = 12  ORDER BY  horaInicio DESC LIMIT 1;
 { CALL ventaspeople.compraCanasta(:idSesion) }
 CALL ventaspeople.compraCanasta(74)
@@ -578,6 +580,13 @@ SELECT COUNT(id) AS total FROM usuario WHERE fechaAlta >= CURDATE() - INTERVAL 0
 
 DELETE FROM canasta_productos;
 SELECT id FROM canasta WHERE usuario_id = 58;
+
+INSERT INTO productomedidas (idProducto, idMedida) VALUES 
+(539,1),
+(539,2),
+(539,3),
+(539,4),
+(539,5)
 
 CREATE TABLE `playera_personalizada` (
 	

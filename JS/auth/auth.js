@@ -619,9 +619,6 @@ const FiltrosHome = async (req, res) => {
 
         console.log('Filtrados:');
 
-        console.log(productos);
-        console.log(masVendidos);
-        console.log(preventa);
 
         res.json({productos, masVendidos, preventa})
     } catch (error) {
@@ -629,6 +626,8 @@ const FiltrosHome = async (req, res) => {
         
     }
 }
+
+
 
 const barra_buscar = async (req, res) => {
 

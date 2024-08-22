@@ -23,6 +23,39 @@
             }
         }
 
+        function abrir_perfil() {
+            var div = document.getElementById("modal_perfil");
+            if (div.classList.contains("abrir_modal")) {
+                div.classList.remove("abrir_modal");
+                div.style.display = "none"
+                 document.body.style.overflowY = 'hidden';
+                
+            } else {
+                div.classList.add("abrir_modal");
+                  document.body.style.overflowY = 'auto';
+                  div.style.display = "grid"
+            }
+        }
+
+        function cambiarClaseFlitro() {
+            var div = document.getElementById("carcasa");
+            var filtro = document.getElementById("flitros");
+            if (div.classList.contains("active")) {
+                div.classList.remove("active");
+                setTimeout(() => {
+                    filtro.classList.remove("active");
+                }, 200);
+                
+            } else {
+                    filtro.classList.add("active"); 
+                setTimeout(() => {
+                    div.classList.add("active");
+                    
+                }, 100);
+                
+            }
+        }
+
         function validaSesion(c) {
             var sesion = localStorage.getItem('sesion');
             alert('pedro')
@@ -139,4 +172,39 @@
       <script src="../JS/monitoreo_canasta.js"></script>
       <script src="../JS/BarraBusqueda.js"></script>
 </body>
+<script>
+    const perfil = document.getElementById('perfil');
+                const modal_perfil = document.getElementById('modal_perfil');
+                let hideTimeout;
+                
+                perfil.addEventListener('click', () => {
+                    clearTimeout(hideTimeout);  // Limpiar cualquier timeout anterior
+                    modal_perfil.classList.remove("abrir_modal");
+                    setHideTimeout();
+                });
+                
+                modal_perfil.addEventListener('click', () => {
+                    clearTimeout(hideTimeout);  // Limpiar cualquier timeout anterior
+                    setHideTimeout();
+                });
+                 modal_perfil.addEventListener('mouseover', () => {
+                    clearTimeout(hideTimeout);  // Limpiar cualquier timeout anterior
+                });
+
+                modal_perfil.addEventListener('mouseleave', () => {
+                    setHideTimeout();
+                });
+                document.addEventListener('click', (event) => {
+                    if (!modal_perfil.contains(event.target) && event.target !== perfil) {
+                        setHideTimeout();
+                    }
+                });
+
+                function setHideTimeout() {
+                    clearTimeout(hideTimeout);  // Limpiar cualquier timeout anterior
+                    hideTimeout = setTimeout(() => {
+                        modal_perfil.classList.add("abrir_modal");
+                    }, 1000);  // El div se ocultará después de 3 segundos
+                }
+</script>
 </html>

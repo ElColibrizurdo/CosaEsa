@@ -158,6 +158,74 @@
                       .btn_carrito:hover::before {
                         width: 100%;
                        }
+                       .modal_perfil{
+                        width: 270px;
+                        height: 320px;
+                        position: absolute;
+                        top: 76px;
+                        right: 170px;
+                        display: grid;
+                        grid-template-rows: 64px  auto;
+                        color: #6F6D6D;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        border: 2px solid #F15D2A;
+                        opacity: 1;
+                        z-index: 5;
+                        transition: .2s ease-in-out;
+                    }
+                    .modal_perfil.abrir_modal{
+                        opacity: 0;
+                        z-index: 5;
+                    }
+                        .titulo_modal_perfil{
+                            color: #ffffff;
+                            font-size: 20px;
+                            font-weight: 900;
+                            background: #F15D2A;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                        .cuerpo_modal_perfil{
+                            background-image: url("../img/img_fondo_perfil_modal.png");
+                            background-size: cover; 
+                            background-repeat: no-repeat; 
+                            padding-top: 24px;
+                            padding-left: 38px;
+                            padding-right: 38px;
+                        }
+                        .subcuerpo_modal_perfil{
+                            display:flex;
+                            flex-direction: column;
+                            align-items: start;
+                            gap: 24px;
+                            margin-bottom: 36px;
+                        }
+                        .modal_perfil a{
+                            font-size: 18px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: normal;
+                            text-decoration: none;
+                            text-align: center;
+                            display: flex;
+                            align-items: center;
+                            gap: 16px;
+                            cursor: pointer;
+                        }
+                        .modal_perfil svg{
+                            margin-top: 2px;
+                        }
+                        .cerrar_sesion{
+                            border-top: 2px solid #f9d4c7;
+                            padding: 17px 0px;
+                            color: #6F6D6D;
+                            font-size: 18px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: normal;
+                        }
                        
     .lista_carrito {
         width: 500px;

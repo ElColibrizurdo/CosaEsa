@@ -99,11 +99,12 @@ const login = async (req, res) => {
 
 const ingresar_producto_canasta = async (req, res) => {
 
-    const { cantidad, id, id_producto, numero, nombre, precio, talla } = req.body;    
+    const { cantidad, id, id_producto, numero, nombre, precio, talla, color } = req.body;    
 
     
  
     console.log('Nombre personalizado: ' + nombre);
+    console.log('Color: ' + color);
     
     
     let message = ''
@@ -120,8 +121,8 @@ const ingresar_producto_canasta = async (req, res) => {
             console.log('id canasta: ' + canasta[0].id);
             
             const id_canasta = canasta[0].id
-            const [row] = await db.query('INSERT INTO canasta_productos (cantidad, id_producto, id_canasta, precio, total, iva, id_medida, numero, etiqueta) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-                [cantidad / numero.length, id_producto, id_canasta, precio[indice] / 1.16, precio[indice] ,  total, talla[indice], element, nombre[indice]] )
+            const [row] = await db.query('INSERT INTO canasta_productos (cantidad, id_producto, id_canasta, precio, total, iva, id_medida, numero, etiqueta, color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+                [cantidad / numero.length, id_producto, id_canasta, precio[indice] / 1.16, precio[indice] ,  total, talla[indice], element, nombre[indice], color[indice]] )
             
                 if (row.affectedRows == 1) {
                     message = 'ok'
@@ -192,7 +193,14 @@ const obtener_producto = async (req, res) => {
     try {
         
         const producto = await db.query('SELECT * FROM producto WHERE id = ?', [id] )
+        const color = await db.query('SELECT c.color, c.id FROM colores_producto cp INNER JOIN colores c ON cp.idColor = c.id WHERE cp.idProducto = ?', [id])
         console.log(producto[0][0].idTipo);
+        console.log('colores: ');
+        console.log(color);
+        console.log(id);
+        
+        
+        
 
         switch (producto[0][0].idTipo) {
             case 1:
@@ -212,12 +220,12 @@ const obtener_producto = async (req, res) => {
                 })
 
                 const [medidas] = await db.query('SELECT * FROM medida WHERE id IN (?)', [idMedidas])
-                res.status(200).json({producto, medidas})
+                res.status(200).json({producto, medidas, color})
                 break;
         
             default:
 
-                res.status(200).json({producto})
+                res.status(200).json({producto, color})
 
                 break;
         }
@@ -649,5 +657,22 @@ const barra_buscar = async (req, res) => {
     }
 }
 
+const recuperar_colores_producto = async (req, res) => {
 
-module.exports = { barra_buscar, FiltrosHome, RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };
+    const { idProducto } = req.query.id
+
+    try {
+        const [row] = db.query('SELECT c.color FROM colores_producto cp INNER JOIN colores c ON cp.idColor = c.id WHERE cp.idProducto = ?', [idProducto])
+
+        console.log(row);
+
+        res.status(200).json(row)
+    } catch (error) {
+        console.log(error);
+        
+    }
+    
+}
+
+
+module.exports = { recuperar_colores_producto, barra_buscar, FiltrosHome, RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };

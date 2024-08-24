@@ -166,6 +166,15 @@
                             padding-bottom: 4px; 
                             text-decoration:underline;
                         }
+                    .contenedor_descripcion_producto_color {
+                        color: #1C1C1C;
+                    }
+                    .contenedor_descripcion_producto_color h2{
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                    }
                 .contenedor_descripcion_producto_pedido_personalizacion{
                     color: #1C1C1C;
                 }
@@ -590,6 +599,18 @@
   cursor: pointer;
 }
 
+.radio-tile-group .input-container .radio-color {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
 .radio-tile-group .input-container .radio-tile {
   display: flex;
   flex-direction: column;
@@ -602,7 +623,18 @@
   padding: 1rem;
   transition: transform 300ms ease;
 }
-
+.radio-tile-group .input-container .radio-tiles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+  border: 2px solid #A4A3A3;
+  border-radius: 8px;
+  transition: transform 300ms ease;
+  border-radius: 50%;
+}
 
 .radio-tile-group .input-container .radio-tile-label {
     text-align: center;
@@ -617,7 +649,6 @@
   
   border: 2px solid #f15d2a;
   color: white;
-  
 }
 
 
@@ -625,6 +656,27 @@
   color: #f15d2a;
  
 }
+
+.radio-tile-group .input-container .radio-color:checked + .radio-tiles {
+  
+  border: 2px solid #f15d2a;
+  color: white;
+  
+}
+
+
+.radio-tile-group .input-container .radio-color:checked + .radio-tiles .radio-tile-label {
+  color: #f15d2a;
+ 
+}
+
+.radio-tiles-color {
+
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+}
+
 .contenedor_regresar {
     width: 100%;
     display: flex;

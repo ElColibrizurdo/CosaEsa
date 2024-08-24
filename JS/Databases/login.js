@@ -68,6 +68,7 @@ async function log(inputEmail, inputPassword) {
                 const nombre = nombres.split(',')
                 const talla = tallas.split(',')
                 const precio = params.get('precio')
+                const color = params.get('color')
                 
 
                 try {
@@ -83,7 +84,8 @@ async function log(inputEmail, inputPassword) {
                             numero: numero,
                             nombre: nombre,
                             precio: precio,
-                            talla: talla
+                            talla: talla,
+                            color: color
                         })
                     })
             

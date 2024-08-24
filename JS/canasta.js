@@ -27,7 +27,14 @@ async function Obtener_producto() {
         const data = await response.json();
 
         console.log(data);
-        console.log(data.medidas);
+        
+
+        if (data.color) {
+            
+            console.log(data);
+            console.log(data.medidas);
+        }
+
         Mostrar_Producto(data)
         document.dispatchEvent(new Event('codigoTerminado'));
 
@@ -190,6 +197,13 @@ function Mostrar_Producto(data) {
         Mostrar_Medidas(data.medidas)
     }
 
+    if (data.color) {
+        
+        console.log(data.color);
+        MostrarColores(data.color[0])
+        
+    }
+
     if (producto.idTipo != 9) {
         
         const divPersonalizar = document.querySelector('.contendor_descripcion_producto_pedido_talla')
@@ -197,6 +211,29 @@ function Mostrar_Producto(data) {
         divPersonalizar.remove()
         divPersonalizar2.remove()
     }
+}
+
+function MostrarColores(colores) {
+    
+    const contenedor_colores = document.querySelector('.contenedor_descripcion_producto_color')
+    const subcontenedor = contenedor_colores.querySelector('.radio-tile-group')
+
+    colores.forEach(element => {
+
+        console.log(element);
+        
+
+        const talla = `
+        <div class="input-container">
+            <input id="${element.id}" class="radio-color" type="radio" name="radioColor${contador}" checked>
+            <div class="radio-tiles">
+               <div class="radio-tiles-color" style="background-color:${element.color}">
+               </div>
+            </div>
+        </div> `
+        
+        subcontenedor.innerHTML += talla
+    })
 }
 
 function Contador(boton) {
@@ -211,6 +248,8 @@ function Contador(boton) {
         } else if (boton.getAttribute('value') == '-' && contador != 1) {
             
             contador-=1
+            console.log('Hola');
+            
             QuitarCollapse(contador)
         }
     } catch (error) {
@@ -242,7 +281,7 @@ function Mostrar_Medidas(medidas) {
 
         const talla = `
         <div class="input-container">
-            <input id="${element.id}" class="radio-button" type="radio" name="radio${contador}">
+            <input id="${element.id}" class="radio-button" type="radio" name="radio${contador}" checked>
             <div class="radio-tile">
                 <label for="btnradio${element.id}" class="radio-tile-label">${element.nombre}</label>
             </div>
@@ -258,10 +297,14 @@ function AgregarCollapse(contador) {
     if (contador != 1) {
         
         const secTallas = document.querySelector('.contendor_descripcion_producto_pedido_talla')
+        const secColores = document.querySelector('.contenedor_descripcion_producto_color')
         const seccion = document.querySelector('.contenedor_descripcion_producto_pedido_personalizacion')
-        const conte = document.querySelector('.contendor_descripcion_producto_pedido_scroll')
-        const nuevoTallas = secTallas.cloneNode(true)
+        const conte = document.querySelector('#contenedor_personalizar')
+        //const nuevoTallas = secTallas.cloneNode(true)
+        //const nuevoColores = secColores.cloneNode(true)
         const nuevo = seccion.cloneNode(true)
+        const nuevoTallas = nuevo.querySelector('.contendor_descripcion_producto_pedido_talla')
+        const nuevoColores = nuevo.querySelector('.contenedor_descripcion_producto_color')
 
         const a = nuevo.querySelector('.btn_personalizacion')
         a.setAttribute('data-bs-target' , '#contenedor_personalizacion' + contador)
@@ -276,22 +319,36 @@ function AgregarCollapse(contador) {
             element.name = 'radio' + contador
         })
 
-        
+        const inputColores = nuevoColores.querySelectorAll('input')
 
-        conte.appendChild(nuevoTallas)
+        inputColores.forEach(element => {
+
+            element.name = 'radioColor' + contador
+        })
+
         conte.appendChild(nuevo)
     }
 }
 
 function QuitarCollapse(contador) {
+    console.log('Hola');
+    
     
     const contendor = document.getElementById('contenedor_personalizar')
-
-    const hijos = contendor.childNodes
-
-    const ultimo_hijo = hijos[hijos.length - 1]
+    console.log(contador);
     
-    ultimo_hijo.remove()
+    const hijos = contendor.childNodes
+    console.log(hijos);
+    
+    //for (let i = 1; i < 4; i++) {
+        
+    
+        const ultimo_hijo = hijos[hijos.length - 1]
+        console.log(ultimo_hijo);
+        
+        ultimo_hijo.remove()
+        
+    //}
 }
 
 async function DarLike(boton) {

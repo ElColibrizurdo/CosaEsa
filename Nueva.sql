@@ -610,6 +610,7 @@ SELECT * FROM producto p  WHERE p.id LIKE "%"
 JOIN tipoproducto t ON p.idTipo = t.id
 AND t.id IN (1)
 
+SELECT * FROM producto WHERE descripcion LIKE ("%Camiseta%") LIMIT 5 OFFSET 10
 SELECT p.id, p.idTipo, p.descripcion, p.idEquipo, p.precio, p.numeroLikes, p.estado FROM producto p  WHERE p.id LIKE "%" AND p.estado IN (0)
 
 DELETE FROM productousuario WHERE idUsuario = 12 AND idProducto = 6
@@ -733,6 +734,82 @@ SELECT * FROM producto WHERE descripcion LIKE "%Camiseta%" LIMIT 5 OFFSET 11;
 SELECT idProducto, COUNT(*) AS cantidad_compras FROM ventadetalle GROUP BY idProducto HAVING COUNT(*) >= 3 LIMIT 5 OFFSET 5;  
 SELECT p.* FROM producto p JOIN ventadetalle v on v.idProducto = p.id GROUP BY v.idProducto  HAVING COUNT(*) >= 3 LIMIT 5 OFFSET 5
 SELECT * FROM producto WHERE estado = 0
+
+CREATE TABLE colores (
+	id INT NOT NULL AUTO_INCREMENT,
+	color VARCHAR(150) NOT NULL,
+	PRIMARY KEY (id)
+)
+
+INSERT INTO colores (color) VALUES
+('Rojo'),
+('Azul'),
+('Verde'),
+('Amarillo'),
+('Naranja'),
+('Morado'),
+('Rosa'),
+('Marrón'),
+('Negro'),
+('Blanco');
+
+
+CREATE TABLE colores_producto (
+	id INT NOT NULL AUTO_INCREMENT,
+	idProducto INT NOT NULL,
+	idColor INT NOT NULL,
+	PRIMARY KEY (id),
+	KEY fk_colores_producto_producto (idProducto),
+	KEY fk_colores_producto_color (idColor),
+	CONSTRAINT fk_colores_producto_producto FOREIGN KEY (idProducto) REFERENCES producto (id) ON DELETE CASCADE,
+	CONSTRAINT fk_colores_producto_color FOREIGN KEY (idColor) REFERENCES colores (id)
+	
+);
+
+INSERT INTO colores_producto (idProducto, idColor) VALUES
+(2, 1),  -- Rojo
+(2, 2),  -- Azul
+(2, 3),  -- Verde
+(2, 4),  -- Amarillo
+
+(4, 5),  -- Naranja
+(4, 6),  -- Morado
+(4, 7),  -- Rosa
+(4, 8),  -- Marrón
+
+(6, 9),  -- Negro
+(6, 10), -- Blanco
+(6, 1),  -- Rojo
+(6, 2),  -- Azul
+
+(8, 3),  -- Verde
+(8, 4),  -- Amarillo
+(8, 5),  -- Naranja
+(8, 6),  -- Morado
+
+(10, 7), -- Rosa
+(10, 8), -- Marrón
+(10, 9), -- Negro
+(10, 10),-- Blanco
+
+(12, 1), -- Rojo
+(12, 2), -- Azul
+(12, 3), -- Verde
+(12, 4), -- Amarillo
+
+(14, 5), -- Naranja
+(14, 6), -- Morado
+(14, 7), -- Rosa
+(14, 8); -- Marrón
+
+
+SELECT c.color
+FROM colores_producto cp
+INNER JOIN colores c ON cp.idColor = c.id
+WHERE cp.idProducto = 2;
+
+SELECT * FROM colores c ;
+
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;•••••••••••••••••••••••  
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

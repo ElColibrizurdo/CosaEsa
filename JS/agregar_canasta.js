@@ -45,13 +45,14 @@ async function AgregarProducto() {
     let nombre = []
     const talla = []
     const precio = []
+    const color = []
 
     const cantidad_perso = DeterminarPersonalizados()
 
     cantidad_perso.forEach(element => {
 
         talla.push(DeterminarTallas(element, label_contador.value))
-
+        color.push(ObtenerColor(element, label_contador.value))
         
 
         if ((element.querySelector('[type="number"]') && element.querySelector('[name="nombre"]')) && (element.querySelector('[type="number"]').value.length > 0 || element.querySelector('[name="nombre"]').value)) {
@@ -89,7 +90,7 @@ async function AgregarProducto() {
         const nombres = JSON.stringify(nombre)
         const numeros = JSON.stringify(numero)
         const tallas = JSON.stringify(talla)
-        window.parent.location.href = `/login?id_producto=${id}&cantidad=${label_contador.value}&numero=${numero}&nombre=${nombre}&precio=${precio}&talla=${talla}`
+        window.parent.location.href = `/login?id_producto=${id}&cantidad=${label_contador.value}&numero=${numero}&nombre=${nombre}&precio=${precio}&talla=${talla}&color=${color}`
         
     } else if (localStorage.getItem('sesion') !== null) {
         
@@ -106,7 +107,8 @@ async function AgregarProducto() {
                     numero: numero,
                     nombre: nombre,
                     precio: precio,
-                    talla: talla
+                    talla: talla,
+                    color:color
                 })
             })
     
@@ -117,7 +119,7 @@ async function AgregarProducto() {
             
             
             if (data.message === 'ok') {
-                window.parent.location.reload()
+                //window.parent.location.reload()
             } else {
                 console.log(data.message);   
             }
@@ -151,6 +153,29 @@ function DeterminarTallas(element, contador) {
 
         for (const element of radiorray) {
             if (element.checked) {
+                return element.id.charAt(element.id.length - 1)
+            }
+        }
+ 
+        return 1
+}
+
+function ObtenerColor(element, contador) {
+    
+    console.log(element);
+    
+    const radio = element.querySelectorAll('[name="radioColor' + contador + '"]')
+    console.log(contador);
+    
+    console.log(radio);
+
+    const radiorray = Array.from(radio)
+
+
+        for (const element of radiorray) {
+            if (element.checked) {
+                console.log(element);
+                
                 return element.id.charAt(element.id.length - 1)
             }
         }

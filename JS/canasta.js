@@ -207,7 +207,7 @@ function Mostrar_Producto(data) {
     if (producto.idTipo != 9) {
         
         const divPersonalizar = document.querySelector('.contendor_descripcion_producto_pedido_talla')
-        const divPersonalizar2 = document.querySelector('.contenedor_descripcion_producto_pedido_personalizacion')
+        const divPersonalizar2 = document.querySelector('.contenedor_descripcion_producto_pedido_personalizacion_nombre')
         divPersonalizar.remove()
         divPersonalizar2.remove()
     }
@@ -217,7 +217,8 @@ function MostrarColores(colores) {
     
     const contenedor_colores = document.querySelector('.contenedor_descripcion_producto_color')
     const subcontenedor = contenedor_colores.querySelector('.radio-tile-group')
-
+    console.log(contenedor_colores);
+    
     colores.forEach(element => {
 
         console.log(element);

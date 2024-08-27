@@ -21,6 +21,8 @@ app.use('/admin', adminRoutes)
 // Servir archivos estáticos desde la carpeta "public"
 app.use(express.static(path.join(__dirname)));
 
+
+
 // Servir el archivo index.html en la ruta raíz
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'HTML', 'NavBar.html'));
@@ -134,9 +136,42 @@ app.post('/data', async (req, res) => {
     }
 });
 
+app.get('/verify-email', async (req, res) => {
+
+    const token = req.query.token
+
+    console.log(token);
+    
+
+    try {
+        
+        const [row] = await db.query('SELECT * FROM usuario WHERE token = ?', [token])
+
+       console.log(row);
+       
+        
+
+        if (row.length !== 0) {
+            
+            const [updateQuery] = await db.query('UPDATE usuario SET verificado = TRUE, token = NULL WHERE token = ?', [token])
+            
+            console.log(updateQuery);
+            
+        } else {
+            
+        }
+        
+
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+})
+
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(500).sendFile(path.join(__dirname, 'HTML', 'Errores', 'Error500.html'));
 });
 
 app.get('/check-db', (req, res) => {
@@ -149,6 +184,18 @@ app.get('/check-db', (req, res) => {
         }
     });
 });
+
+app.use((req, res, next) => {
+    res.status(404).sendFile(path.join(__dirname, 'HTML', 'Errores', 'Error404.html'))
+})
+
+app.use((req, res, next) => {
+    res.status(404).sendFile(path.join(__dirname, 'HTML', 'Errores', 'Error400.html'))
+})
+
+app.use((req, res, next) => {
+    res.status(404).sendFile(path.join(__dirname, 'HTML', 'Errores', 'Error503.html'))
+})
 
 
 const PORT = process.env.PORT || 3000;

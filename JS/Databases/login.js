@@ -1,4 +1,4 @@
-console.log(new URLSearchParams(window.location.search).get('nombre'));
+
 
 
 function seleccion(event) {
@@ -175,9 +175,42 @@ function Inicio() {
         btn_registro.href = '/registro?' + window.location.search.substring(1)
          
     }
+}
+
+async function CambiarContra() {
+
+    const email = prompt('Introduce el correo electronico')
+    console.log(email);
     
+    try {
+        
+        const response = await fetch('/auth/correo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email})
+        })
 
+        const data = await response.json()
 
+        console.log(data);
+        
+    } catch (error) {
+        
+        console.log(error);
+        
+    }
+
+}
+
+function CambiarPass() {
+    
+    const input = document.getElementById('validationCustom02')
+    const pass = input.type === 'password'
+
+    input.type = pass ? 'text' : 'password'
+    
 }
 
 Inicio()

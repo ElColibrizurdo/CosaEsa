@@ -1,18 +1,54 @@
 
 const bcrypt = require('bcryptjs');
+const crypto =require('crypto')
 const jwt = require('jsonwebtoken');
 const db = require('../Databases/db');
 const { response } = require('express');
+const nodemailer = require('nodemailer');
+const { text } = require('body-parser');
+const { log } = require('console');
+require('dotenv').config()
+
+function GenerarVerificacion() {
+    
+    return crypto.randomBytes(20).toString('hex');
+}
+
+function MandarVerificacion(email, token) {
+    
+    const verificationUrl = `http://localhost:3000/verify-email?token=${token}`;
+
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+        },
+    })
+
+    let mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: 'Asunto',
+        text: 'Prueba de correo',
+        html: `Por favor verifica tu cuenta haciendo clic en el siguiente enlace: ${verificationUrl}`,
+    }
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return error
+            
+        }
+        return info
+    })
+}
 
 const register = async (req, res) => {
     const { apodo, nombre, apellidoP, apellidoM, email, password, fechaNa} = req.body;
-
-    console.log(apellidoP);
-    console.log(apellidoM);
     
     try {
         const [rows] = await db.query('SELECT email FROM usuario WHERE email = ?', [email]);
-
+        const token = GenerarVerificacion()
        
         if (rows.length > 0) {
             return res.status(400).json({ message: 'EL usuario ya existe'});
@@ -22,8 +58,9 @@ const register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
         console.log(salt);
         console.log(hashedPassword);
-        await db.query('INSERT INTO usuario (name, email, password, Activo, Nombres, ApellidoPrimero, ApellidoSegundo, fechaNacimiento) VALUES (?,?,?,?,?,?,?,?)', [apodo, email, hashedPassword, 1, nombre, apellidoP, apellidoM, fechaNa]);
+        await db.query('INSERT INTO usuario (name, email, password, Activo, Nombres, ApellidoPrimero, ApellidoSegundo, fechaNacimiento, token) VALUES (?,?,?,?,?,?,?,?,?)', [apodo, email, hashedPassword, 1, nombre, apellidoP, apellidoM, fechaNa, token]);
         
+        MandarVerificacion(email, token)
         res.status(201).json({ message: 'Usuario registrado'});
 
     } catch (error) {
@@ -44,6 +81,12 @@ const login = async (req, res) => {
         if (rows.length === 0) {
             return res.status(400).json({message: 'Credenciales invalidas'})
         } 
+
+        if (rows[0].verificado != 1) {
+            console.log(rows[0].verificado);
+            
+            return res.status(400).json({message: 'Falta verificado'})
+        }
 
         const user = rows[0]
         const isMatch = await bcrypt.compare(password, user.password);
@@ -94,6 +137,52 @@ const login = async (req, res) => {
         
         console.log(error);
         res.status(500).json({ message: error.message});
+    }
+}
+
+const recuperar_contra = async (req, res) => {
+
+    const { email, pass } = req.body
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(pass, salt);
+
+    const token = GenerarVerificacion()
+
+    try {
+        
+        const [comparar] = await db.query('SELECT password FROM usuario WHERE email = ?', [email])
+        const isMatch = await bcrypt.compare(pass, comparar[0].password)
+        console.log('isMatch ' + isMatch);
+        console.log(pass);
+        
+        console.log(comparar[0].password);
+        
+        
+        if (isMatch) {
+            
+            res.status(500).json({message: 'No se puede usar la contraseña anterior'})
+            
+        } else {
+
+            const [row] = await db.query('UPDATE usuario SET password = ?, verificado = FALSE, token = ? WHERE email = ?', [hashedPassword, token, email])
+    
+            console.log(row);
+
+            if (row.changedRows == 1) {
+            
+                const respuesta = MandarVerificacion(email, token)
+                console.log(respuesta);
+                
+                res.status(200).json({message: 'ok'})
+            } 
+        }
+
+        
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: error})
     }
 }
 
@@ -675,4 +764,4 @@ const recuperar_colores_producto = async (req, res) => {
 }
 
 
-module.exports = { recuperar_colores_producto, barra_buscar, FiltrosHome, RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };
+module.exports = { recuperar_contra, recuperar_colores_producto, barra_buscar, FiltrosHome, RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };

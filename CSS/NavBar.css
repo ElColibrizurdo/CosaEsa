@@ -162,6 +162,7 @@
                         width: 270px;
                         height: 320px;
                         position: absolute;
+                        background-color: white;
                         top: 76px;
                         right: 170px;
                         display: grid;

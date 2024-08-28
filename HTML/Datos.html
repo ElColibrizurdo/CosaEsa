@@ -60,6 +60,40 @@
                   </div>
                 </div>
                 <div>
+                  <label for="validationCustom01" class="form-label">Pais</label>
+                  <select name="pais" id="paises" class="form-control input_naranja" oninput="DeterminarUbicacion()">
+                  
+                  </select>
+                </div>
+                <div>
+                  <label for="validationCustom01" class="form-label">Codigo postal</label>
+                  <input type="text" class="form-control input_naranja" id="cod" name="codigo" oninput="DeterminarUbicacion()" required>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <div class="invalid-feedback">
+                      Introduce tu codigo postal
+                  </div>
+                </div>
+                <div>
+                  <label for="validationCustom01" class="form-label">entidad federativa</label>
+                  <select name="entidad" id="entidad" class="form-control input_naranja">
+                    
+                  </select>
+                </div>
+                <div>
+                  <label for="validationCustom01" class="form-label">Colonia</label>
+                  <select class="form-control input_naranja" id="colonias" name="colonia" required>
+                    
+                  </select>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <div class="invalid-feedback">
+                      Introduce tu colonia
+                  </div>
+                </div>
+                <div>
                   <label for="validationCustom01" class="form-label">Calle</label>
                   <input type="text" class="form-control input_naranja" id="validationCustom03" name="calle" required>
                   <div class="valid-feedback">
@@ -84,43 +118,7 @@
                   <input type="text" class="form-control input_naranja" id="validationCustom03" name="numInterior" >
                   
                 </div>
-                <div>
-                  <label for="validationCustom01" class="form-label">Colonia</label>
-                  <input type="text" class="form-control input_naranja" id="validationCustom03" name="colonia" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                  <div class="invalid-feedback">
-                      Introduce tu colonia
-                  </div>
-                </div>
-                <div>
-                  <label for="validationCustom01" class="form-label">Codigo postal</label>
-                  <input type="text" class="form-control input_naranja" id="validationCustom03" name="codigo" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                  <div class="invalid-feedback">
-                      Introduce tu codigo postal
-                  </div>
-                </div>
-                <div>
-                  <label for="validationCustom01" class="form-label">entidad federativa</label>
-                  <select name="entidad" id="cars" >
-                    <option value="CDMX">CDMX</option>
-                    <option value="Jalisco">Jalisco</option>
-                    <option value="Chihuahua">Chihuahua</option>
-                  </select>
-                  
                
-                  <label for="validationCustom01" class="form-label">pais</label>
-                  <select name="pais" id="cars">
-                    <option value="Mexico">Mexico</option>
-                    <option value="Chile">Chile</option>
-                    <option value="Argentina">Argentina</option>
-                  </select>
-                  
-                </div>
                 
 
                 <div class="col align-self-center btn_logIn">
@@ -137,6 +135,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="../JS/DeterminarUbicacion.js"></script>
     <script src="../JS/Agregar_Pago.js"></script>
     <script src="../JS/ObtenerDatos.js"></script>
     <script src="../JS/monitoreo_datos.js""></script>

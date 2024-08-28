@@ -108,6 +108,7 @@
                     font-style: normal;
                     font-weight: 600;
                     line-height: 1.2;
+                    flex-grow: 2;
                 }
                 .contendor_descripcion_producto_precio{
                     grid-area: contendor_descripcion_producto_precio;
@@ -678,7 +679,8 @@
 }
 
 .contenedor_regresar {
-    width: 100%;
+    width: auto;
     display: flex;
     justify-content: flex-end;
+    flex-grow: 1;
    }

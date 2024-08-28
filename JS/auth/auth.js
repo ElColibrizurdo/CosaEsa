@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const db = require('../Databases/db');
 const { response } = require('express');
 const nodemailer = require('nodemailer');
-const { text } = require('body-parser');
+const { text, json } = require('body-parser');
 const { log } = require('console');
 require('dotenv').config()
 
@@ -81,7 +81,7 @@ const login = async (req, res) => {
         if (rows.length === 0) {
             return res.status(400).json({message: 'Credenciales invalidas'})
         } 
-
+        
         if (rows[0].verificado != 1) {
             console.log(rows[0].verificado);
             
@@ -763,5 +763,54 @@ const recuperar_colores_producto = async (req, res) => {
     
 }
 
+const mostrar_filtros = async (req, res) => {
 
-module.exports = { recuperar_contra, recuperar_colores_producto, barra_buscar, FiltrosHome, RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };
+    try {
+        
+        const [tipos] = await db.query('SELECT id, nombre FROM tipoproducto WHERE activo = 1 ORDER BY id')
+        const [equipos] = await db.query('SELECT id, nombre FROM equipo WHERE activo = 1 ORDER BY id')
+        
+        res.json({tipos, equipos})
+
+    } catch (error) {
+        console.log(error);
+        res.status(500),json(error)
+    }
+}
+
+const determinar_ubicacion = async (req, res) => {
+
+    const pais = req.query.pais
+    const cod = req.query.cod
+
+    try {
+
+        console.log(pais);
+        console.log(cod);
+        
+        const [row] = await db.query('SELECT DISTINCT c.d_asenta, e.Nombre, c.d_codigo, c.idPais FROM colonia c INNER JOIN estado e ON e.id = c.idEstado WHERE c.d_codigo = ? AND c.idPais = (SELECT id FROM pais WHERE Nombre = ?)', [cod, pais])
+        
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const mostrar_paises = async (req, res) => {
+
+    try {
+        
+        const [row] = await db.query('SELECT id, Nombre FROM pais')
+
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error)
+        
+    }
+}
+
+module.exports = { determinar_ubicacion, mostrar_paises, mostrar_filtros, recuperar_contra, recuperar_colores_producto, barra_buscar, FiltrosHome, RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };

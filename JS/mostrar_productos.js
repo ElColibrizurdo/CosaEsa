@@ -89,6 +89,7 @@ function CrearCard(data) {
         const label_name = document.createElement('a')
         label_name.href = '/canasta?id=' + element.id
         label_name.innerText = element.descripcion
+        label_name.title = element.descripcion
 
         contenedor_nombre.appendChild(label_name)
 
@@ -122,7 +123,7 @@ function CrearCard(data) {
         card_footer.appendChild(label_costo)
         card_footer.appendChild(lbl)
 
-        card_body.appendChild(label_name)
+        card_body.appendChild(contenedor_nombre)
         card_body.appendChild(card_footer)
 
         card.appendChild(div_estado)

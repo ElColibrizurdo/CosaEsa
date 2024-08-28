@@ -118,6 +118,11 @@
             opacity: 0;
         }
             .flitros{
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 grid-area: flitros;
                 background-color: #FFFFFF;
                 text-align: right;
@@ -143,6 +148,9 @@
                         cursor: pointer;
                         color: #f15d2a;
                         border-bottom: 2px solid #f15d2a;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        
                     }
                     /*.flitros_extended.show + .flecha_flitro {
                              transform: rotate(270deg)  /* Cambiar el color del botón 
@@ -188,6 +196,13 @@
                           display: flex;
                           justify-content:  flex-end;
                           align-items:  center;
+                      }
+                      .opciones{
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                       }
                     
             .contenedor_cartas{
@@ -246,13 +261,15 @@
                             grid-area: txt_carta;
                             background-color: #f15d2a;
                             padding: 10px 16px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
                         }
                             .txt_carta_1{
                                 overflow: hidden;
                                 color:  #FFFFFF;
                                 text-overflow: ellipsis;
                                 display: -webkit-box;
-                                -webkit-line-clamp: 2;
+                                -webkit-line-clamp: 1;
                                 -webkit-box-orient: vertical;
                             }
                                 .txt_carta_1 a{

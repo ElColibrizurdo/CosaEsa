@@ -97,3 +97,4 @@ document.querySelector('.atras').addEventListener('click', function () {
     
     window.parent.location.href = '/'
 })
+

@@ -119,7 +119,7 @@ async function AgregarProducto() {
             
             
             if (data.message === 'ok') {
-                //window.parent.location.reload()
+                window.parent.location.reload()
             } else {
                 console.log(data.message);   
             }

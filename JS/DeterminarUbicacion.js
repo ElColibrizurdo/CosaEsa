@@ -67,6 +67,8 @@ async function MostrarPaises(params) {
         
         selectPaises.innerHTML += option
     });
+
+    selectPaises.value = 'México'
     
 }
 

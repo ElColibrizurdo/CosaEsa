@@ -61,13 +61,13 @@
                 </div>
                 <div>
                   <label for="validationCustom01" class="form-label">Pais</label>
-                  <select name="pais" id="paises" class="form-control input_naranja" oninput="DeterminarUbicacion()">
+                  <select name="pais" id="paises" class="form-control input_naranja" oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()">
                   
                   </select>
                 </div>
                 <div>
                   <label for="validationCustom01" class="form-label">Codigo postal</label>
-                  <input type="text" class="form-control input_naranja" id="cod" name="codigo" oninput="DeterminarUbicacion()" required>
+                  <input type="text" class="form-control input_naranja" id="cod" name="codigo" oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()" required>
                   <div class="valid-feedback">
                     Looks good!
                   </div>

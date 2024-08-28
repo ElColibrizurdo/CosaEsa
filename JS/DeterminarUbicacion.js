@@ -1,7 +1,7 @@
 
 
 
-async function DeterminarUbicacion(params) {
+async function DeterminarUbicacion() {
     
     const pais = document.getElementById('paises')
     const codigoPostal = document.getElementById('cod')
@@ -18,7 +18,7 @@ async function DeterminarUbicacion(params) {
     }
 }
 
-function MostrarEstadosColonias(colonias) {
+ function MostrarEstadosColonias(colonias) {
     
     const contenedor = document.getElementById('colonias')
     const entidad = document.getElementById('entidad')

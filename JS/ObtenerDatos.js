@@ -92,7 +92,7 @@ async function DeterminarExistenciaCliente() {
     
 }
 
-function ClienteEncontrado(data) {
+async function ClienteEncontrado(data) {
 
     
     
@@ -107,7 +107,11 @@ function ClienteEncontrado(data) {
     const form = document.querySelector('.form')
 
     form.appendChild(mod)
-    
+
+    document.getElementsByName('pais')[0].value = data.cliente[0].pais
+    document.getElementsByName('codigo')[0].value = data.cliente[0].codigoPostal
+    await DeterminarUbicacion()
+    document.getElementsByName('entidad')[0].value = data.cliente[0].entidadFederativa
     document.getElementsByName('nombre')[0].value = data.cliente[0].nombre
     document.getElementsByName('apePaterno')[0].value = data.cliente[0].primerApellido
     document.getElementsByName('apeMaterno')[0].value = data.cliente[0].segundoApellido
@@ -115,10 +119,8 @@ function ClienteEncontrado(data) {
     document.getElementsByName('numExterior')[0].value = data.cliente[0].numeroExterior
     document.getElementsByName('numInterior')[0].value = data.cliente[0].numeroInterior
     document.getElementsByName('colonia')[0].value = data.cliente[0].colonia
-    document.getElementsByName('codigo')[0].value = data.cliente[0].codigoPostal
-    document.getElementsByName('municipio')[0].value = data.cliente[0].municipio
-    document.getElementsByName('entidad')[0].value = data.cliente[0].entidadFederativa
-    document.getElementsByName('pais')[0].value = data.cliente[0].pais
+    console.log( document.getElementsByName('colonia')[0] );
+    
     
     document.getElementsByName('nombre')[0].disabled = true
     document.getElementsByName('apePaterno')[0].disabled = true
@@ -128,7 +130,6 @@ function ClienteEncontrado(data) {
     document.getElementsByName('numInterior')[0].disabled = true
     document.getElementsByName('colonia')[0].disabled = true
     document.getElementsByName('codigo')[0].disabled = true
-    document.getElementsByName('municipio')[0].disabled = true
     document.getElementsByName('entidad')[0].disabled = true
     document.getElementsByName('pais')[0].disabled = true
 }

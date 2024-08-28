@@ -23,6 +23,9 @@ function MostrarEstadosColonias(colonias) {
     const contenedor = document.getElementById('colonias')
     const entidad = document.getElementById('entidad')
 
+    entidad.innerHTML = ''
+    contenedor.innerHTML = ''
+
     colonias.forEach((element, indice) => {
 
         const option = `

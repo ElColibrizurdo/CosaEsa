@@ -533,6 +533,18 @@ END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
+
+SELECT * FROM colonia WHERE d_codigo = 52985
+SELECT * FROM estado WHERE idPais = 151
+
+SELECT  c.d_asenta, e.Nombre, e.Clave, c.d_codigo, c.idPais FROM colonia c 
+INNER JOIN estado e ON e.id = c.idEstado 
+WHERE c.d_codigo = 52985
+
+
+SELECT * FROM estado e 
+SELECT * FROM pais p 
+SELECT * FROM colonia c 
 SELECT * FROM tipoproducto t ;
 SELECT * FROM productomedidas p ;
 	SELECT * FROM medida m ;

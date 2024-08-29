@@ -209,58 +209,6 @@
                     }, 1000);  // El div se ocultará después de 3 segundos
                 }
 
-        // Escuchando el evento del click del botón de pago dapp
-document.getElementById('dapp-btn').addEventListener('click', function()
-{
-DappPayButton({
-production: false,
-client: {
-key: 'tiendapeople01' //apiKey
-},
-transaction: {
-amount: {
-total: 7432.00,// total a pagar en MXN
-},
-reference: 'angeltorralva@hotmil.com', // referencia del pago
-description: 'Compra Num.3', //descripcion del pago
-},
-onSuccess: function(transaction) {
-/*
-Si el pago es satisfactorio este callback maneja la respuesta.
-Se devuelve un objeto con la siguiente estructura:
-{
-"id": "28e62e93-c26b-4c26-a25b-7aea2bbbfbad",
-"amount": 10,
-"tip": 0,
-"currency": "MXN",
-"reference": "Texto de referencia",
-"description": "Descripción del pago",
-"client": {
-"name": "Javier Torres"
-},
-"date": "2018-03-28T06:24:49.167657+00:00",
-"code": "XM5BOqZ6"
-}
-*/
-//Este es un ejemplo para mostrar algunos de los valores devuelto
-s
-console.log("Transaccion: " + transaction.id);
-console.log("Monto: " + transaction.amount);
-},
-onFailure: function(error) {
-/*
-Si el pago no es exitoso este callback maneja la respuesta.
-Se devuelve un objeto con la siguiente estructura:
-{
-rc: -10,
-msg: "El usuario cerro la ventana antes de completar el pago"
-}
-*/
-//Este es un ejemplo para mostrar algunos de los valores devuelto
-s
-console.log(error.msg);
-}
-}).render();
-});
+        
 </script>
 </html>

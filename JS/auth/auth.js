@@ -629,7 +629,9 @@ const RealizarVenta = async (req, res) => {
             if (existe[0].existe == 1) {
             
                 const [row] = await db.query('CALL ventaspeople.compraCanasta(?)', [idSesion])
-    
+
+
+                console.log('Se realizo la venta');
                 console.log(row);
         
                 res.status(500).json({existe, row})

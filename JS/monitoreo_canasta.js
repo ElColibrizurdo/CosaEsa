@@ -129,7 +129,7 @@ async function BorrarProducto(boton) {
     
 }
 
-function COntrolarBotonPago() {
+function ObtenerTotalPagar() {
     
     const cantidad = document.querySelectorAll('.num_productos_input')
     const precios = document.querySelectorAll('.txt_carta_carrito_precio')
@@ -144,6 +144,13 @@ function COntrolarBotonPago() {
 
         acumulado += precio * can
     })
+
+    return acumulado
+}
+
+function COntrolarBotonPago() {
+    
+    const acumulado = ObtenerTotalPagar()
 
     const btnPagar = document.querySelector('.btn_lista_carrito_1')
     console.log(acumulado);
@@ -165,11 +172,13 @@ async function RealizarCompra(boton) {
                     },
                     body: JSON.stringify({
                         idSesion: localStorage.getItem('sesion'),
-                        token: localStorage.getItem('token')
+                        token: localStorage.getItem('token')    
                     })
                 })
             
                 const data = await response.json()
+                console.log(data);
+                
                 console.log(data.existe[0].existe);
 
                 if (data.existe[0].existe == 0) {
@@ -181,7 +190,7 @@ async function RealizarCompra(boton) {
                         localStorage.setItem('pag', '/datos')
                         frame.src = `/datos?comprar=${comprar}`
                     }
-                } else  if (data.existe[0].existe == 1 && data.row.affectedRows >= 1) {
+                } else  if (data.existe[0].existe == 1 && data.row[2].affectedRows >= 1) {
                     BorrarProducto(boton)
                }
                 
@@ -189,9 +198,96 @@ async function RealizarCompra(boton) {
                 
             }
         } 
+    }   
+}
+
+// Escuchando el evento del click del botón de pago dapp
+document.getElementById('dapp-btn').addEventListener('click', async function()
+{
+
+    const total = ObtenerTotalPagar()
+    let email
+    let folio
+    
+    try {
+        
+        const response = await fetch('/auth/venta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                idSesion: localStorage.getItem('sesion'),
+                token: localStorage.getItem('token')    
+            })
+        })
+
+        const data = await response.json()
+
+        console.log(data.row[1][0]);
+
+        const fecha = new Date()
+        console.log(fecha);
+        
+        
+
+        email = data.row[0][0]
+        folio = data.row[1][0].id
+        
+
+    } catch (error) {
+        
     }
 
-    
-}
+    DappPayButton({
+        production: false,
+        client: {
+            key: 'tiendapeople01' //apiKey
+        },
+        transaction: {
+            amount: {
+            total: total,// total a pagar en MXN
+            },
+            reference: email, // referencia del pago
+            description: folio, //descripcion del pago
+        },
+        onSuccess: function(transaction) {
+            /*
+            Si el pago es satisfactorio este callback maneja la respuesta.
+            Se devuelve un objeto con la siguiente estructura:
+            {
+            "id": "28e62e93-c26b-4c26-a25b-7aea2bbbfbad",
+            "amount": 10,
+            "tip": 0,
+            "currency": "MXN",
+            "reference": "Texto de referencia",
+            "description": "Descripción del pago",
+            "client": {
+            "name": "Javier Torres"
+        },
+        "date": "2018-03-28T06:24:49.167657+00:00",
+        "code": "XM5BOqZ6"
+        }
+        */
+        //Este es un ejemplo para mostrar algunos de los valores devuelto
+
+            console.log("Transaccion: " + transaction.id);
+            console.log("Monto: " + transaction.amount);
+        },
+        onFailure: function(error) {
+            /*
+            Si el pago no es exitoso este callback maneja la respuesta.
+            Se devuelve un objeto con la siguiente estructura:
+            {
+            rc: -10,
+            msg: "El usuario cerro la ventana antes de completar el pago"
+            }
+            */
+            //Este es un ejemplo para mostrar algunos de los valores devuelto
+            s
+            console.log(error.msg);
+        }
+    }).render();
+});
 
 

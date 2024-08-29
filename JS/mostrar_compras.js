@@ -1,13 +1,10 @@
 
 
 const params = new URLSearchParams(window.location.search)
-const idSesion = localStorage.getItem('sesion')
 
-console.log("mosrtrar_compras-idSesion:"+idSesion);
-
-async function obtieneCompra(idSesion) {
+async function obtieneCompra() {
     
-    console.log(idSesion);
+    const idSesion = localStorage.getItem('sesion')
 
     try {
         
@@ -20,14 +17,17 @@ async function obtieneCompra(idSesion) {
         }) 
 
         const data = await response.json()
-        ImprimirProductos(data.compraProducto)
+        
+        return data.compraProducto
 
     } catch (error) {
         console.log(error);
     }
 }
 
-function ImprimirProductos(compras) {
+async function ImprimirProductos() {
+
+    const compras = await obtieneCompra()
 
     const grupo = document.querySelector('.grupo_cartas')
 
@@ -143,7 +143,7 @@ async function consultaCompra(idSesion) {
 
 }
 
-obtieneCompra(idSesion)
+ImprimirProductos()
 
 document.querySelector('.atras').addEventListener('click', function () {
     

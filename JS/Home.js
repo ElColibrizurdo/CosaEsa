@@ -21,6 +21,8 @@ async function Clasificaciones(btn) {
 
 async function EjecutarScripts() {
     
+    console.log('ejecutando poner likes');
+    
     await Poner_Likes('../JS/Poner_Likes.js')
 }
 
@@ -110,7 +112,9 @@ function MostrarProductos(params, data) {
             //contenedor_recomendados.setAttribute('p', pRecomendados)
             break;
     }
+
     
+    EjecutarScripts()
 }
 
 function CrearCards(element, contenedor) {
@@ -188,7 +192,7 @@ function CrearCards(element, contenedor) {
     card_footer.appendChild(label_costo)
     card_footer.appendChild(lbl)
 
-    card_body.appendChild(label_name)
+    card_body.appendChild(contenedor_nombre)
     card_body.appendChild(card_footer)
 
     card.appendChild(div_estado)

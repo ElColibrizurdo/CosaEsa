@@ -405,10 +405,23 @@ body{
             background-repeat: no-repeat; 
             background-position: center;
         }
-        .logos{
+        .logos {
             grid-area: logos;
             background-image: url(../IMAGES/letras_fondo.png);
              background-size: auto 100%;
+        }
+        .logos_de_equipos{
+           
+             padding: 18px; 
+             display: flex; 
+            align-items: stretch; 
+            justify-content: space-around;
+            overflow: hidden; 
+
+            object-fit:contain  
+        }
+        .logos_de_equipos img{
+            width: auto; 
         }
         .linea{
             grid-area: linea;
@@ -493,7 +506,7 @@ body{
                         color:  #FFFFFF;
                         text-overflow: ellipsis;
                         display: -webkit-box;
-                        -webkit-line-clamp: 2;
+                        -webkit-line-clamp: 1;
                         -webkit-box-orient: vertical;
                     }
                         .txt_carta_1 a{

@@ -240,5 +240,12 @@ async function DarLike(boton) {
     }
 }
 
+function FiltrarDatos(boton) {
+    
+    console.log(boton.attributes[2].value);
+    
+    window.location.href = `/tienda?equipo=${boton.getAttribute('value')}`
+}
+
 const boton = document.querySelector('.radio-button')
 Clasificaciones(boton)

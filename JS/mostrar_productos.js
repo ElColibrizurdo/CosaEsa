@@ -1,4 +1,6 @@
+console.log(window.location.href);
 
+let cantiadCartas = 12
 
 let arrayPrincipal = []
 function obtener_productis(tipos, equipos, stock, ) {
@@ -30,6 +32,7 @@ function obtener_productis(tipos, equipos, stock, ) {
     })
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             
             CrearCard(data)
         })
@@ -132,7 +135,7 @@ function CrearCard(data) {
         card.setAttribute('tipo', element.idTipo)
         card.setAttribute('equipo', element.idEquipo)
 
-        if (contador == 12) {
+        if (contador == cantiadCartas) {
 
             arrauNuevo.push(card)
             arrayPrincipal.push(arrauNuevo)
@@ -321,12 +324,73 @@ function Buscar(params) {
     console.log(params.value);
 }
 
+function CambiarVistaCartas(params) {
+
+
+    obtener_productis([], [], [])
+    
+    const grupo = document.querySelector('.grupo_cartas')
+    const cartas = document.querySelectorAll('.carta')
+
+    let columnas
+    let filas 
+    let tamanioColumnas
+    let tamanioFilas
+    let imagen 
+    let texto
+
+    if (params == 3) {
+        
+        columnas = 3
+        filas = 3
+        tamanioColumnas = '400'
+        tamanioFilas = '525'
+        imagen = 424
+        texto = 96
+        cantiadCartas = 9
+
+    } else if (params == 4) {
+        
+        columnas = 4
+        filas = 4
+        tamanioColumnas = '300'
+        tamanioFilas = '420'
+        imagen = 324
+        texto = 96
+        cantiadCartas = 16
+    }
+
+    grupo.style.gridTemplateColumns = `repeat(${columnas}, ${tamanioColumnas}px)`
+    grupo.style.gridTemplateRows = `repeat(${filas}, ${tamanioFilas}px)`
+
+    cartas.forEach(element => {
+        
+        
+        element.style.gridTemplateRows = `${imagen}px ${texto}px`
+
+        console.log(element);
+    })
+
+}
+
 arrayTipo = []
 arrayEquipo = []
 arrayStock = []
 
 window.addEventListener('DOMContentLoaded', (event) => {
     sessionStorage.setItem('pag', '/tienda')
+
+    const url = new URLSearchParams(window.location.search)
+
+    console.log(url.get('equipo'));
+    
+
+    if (url.get('equipo')) {
+        
+        arrayEquipo.push(url.get('equipo'))
+        
+    }
+
     obtener_productis(arrayTipo, arrayEquipo, arrayStock)
 
 

@@ -253,6 +253,10 @@ function FiltrarDatos(buton) {
         if (chk.classList == 'equipos' && !existe) {
             
             arrayEquipos.push(chk.value)
+            const titulo = document.querySelector('.titulo')
+            console.log(chk.parentNode.previousSibling);
+            
+            titulo.textContent = chk.parentNode.previousSibling.textContent
 
         } else if (chk.classList == 'tipo') {
             
@@ -327,7 +331,7 @@ function Buscar(params) {
 function CambiarVistaCartas(params) {
 
 
-    obtener_productis([], [], [])
+    //obtener_productis([], [], [])
     
     const grupo = document.querySelector('.grupo_cartas')
     const cartas = document.querySelectorAll('.carta')
@@ -342,7 +346,7 @@ function CambiarVistaCartas(params) {
     if (params == 3) {
         
         columnas = 3
-        filas = 3
+        filas = 4
         tamanioColumnas = '400'
         tamanioFilas = '525'
         imagen = 424
@@ -352,13 +356,16 @@ function CambiarVistaCartas(params) {
     } else if (params == 4) {
         
         columnas = 4
-        filas = 4
+        filas = 3
         tamanioColumnas = '300'
         tamanioFilas = '420'
         imagen = 324
         texto = 96
         cantiadCartas = 16
     }
+
+    console.log(arrayPrincipal);
+    
 
     grupo.style.gridTemplateColumns = `repeat(${columnas}, ${tamanioColumnas}px)`
     grupo.style.gridTemplateRows = `repeat(${filas}, ${tamanioFilas}px)`

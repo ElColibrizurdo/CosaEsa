@@ -14,8 +14,6 @@ async function MostrarFiltros() {
     }
 
     MostrarLogosEquipos(data.equipos)
-
-    console.log(data);
     
 }
 
@@ -48,14 +46,12 @@ function MostrarFiltrosEquipos(equipos) {
 
 function MostrarLogosEquipos(equipos) {
 
-    console.log(equipos.length);
     
     const lugar = Math.floor(equipos.length / 2)
     
     equipos.forEach((element, indice) => {
 
         const apartado = document.querySelector('.logos_de_equipos')
-        console.log(apartado.offsetWidth);
         
         let logo
 

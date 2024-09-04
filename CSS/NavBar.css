@@ -165,7 +165,7 @@
                         background-color: white;
                         top: 76px;
                         right: 170px;
-                        display: grid;
+                        display: none;
                         grid-template-rows: 64px  auto;
                         color: #6F6D6D;
                         border-radius: 8px;

@@ -60,7 +60,7 @@ function MostrarLogosEquipos(equipos) {
             <img src="../IMAGES/logos/logo_19.jpeg" class="img-fluid equipos" value="19" alt="..." onclick="FiltrarDatos(this)"/>
             `
             const logo2 = `
-            <img src="../IMAGES/logos/logo_${element.id}.jpeg" class="img-fluid equipos" value="${element.id}" alt="..." onclick="FiltrarDatos(this)"/>
+            <img src="../IMAGES/logos/logo_${element.id}.jpeg" class="img-fluid equipos" equipo="${element.nombre}" value="${element.id}" alt="${element.nombre}" onclick="FiltrarDatos(this)"/>
             `
 
             apartado.innerHTML += logo
@@ -69,7 +69,7 @@ function MostrarLogosEquipos(equipos) {
         } else if (indice != 10) {
             
             logo = `
-            <img src="../IMAGES/logos/logo_${element.id}.jpeg" class="img-fluid equipos" value="${element.id}" alt="..." onclick="FiltrarDatos(this)"/>
+            <img src="../IMAGES/logos/logo_${element.id}.jpeg" class="img-fluid equipos" value="${element.id}" alt="${element.nombre}" onclick="FiltrarDatos(this)"/>
             `
 
             apartado.innerHTML += logo

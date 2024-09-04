@@ -239,11 +239,16 @@ function FiltrarDatos(buton) {
 
     const filtros = document.querySelectorAll('input[type="checkbox"]:checked')
 
-    console.log(buton.classList[1]);
+    const titulo = document.querySelector('.titulo')
+
+    console.log(buton);
 
     if (buton.classList[1] == 'equipos') {
         
         arrayEquipos.push(buton.getAttribute('value'))
+        console.log(buton.getAttribute('alt'));
+        
+        titulo.textContent = buton.getAttribute('alt')
     }
     
     filtros.forEach(chk => {
@@ -253,7 +258,8 @@ function FiltrarDatos(buton) {
         if (chk.classList == 'equipos' && !existe) {
             
             arrayEquipos.push(chk.value)
-            const titulo = document.querySelector('.titulo')
+            console.log(chk);
+            
             console.log(chk.parentNode.previousSibling);
             
             titulo.textContent = chk.parentNode.previousSibling.textContent

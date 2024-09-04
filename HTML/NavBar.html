@@ -181,6 +181,7 @@
                 perfil.addEventListener('click', () => {
                     clearTimeout(hideTimeout);  // Limpiar cualquier timeout anterior
                     modal_perfil.classList.remove("abrir_modal");
+                    modal_perfil.style.display = 'grid'
                     setHideTimeout();
                 });
                 

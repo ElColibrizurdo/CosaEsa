@@ -107,7 +107,7 @@ function CrearCard(data) {
         const card_footer = document.createElement('div')
         card_footer.classList.add('txt_carta_2')
 
-        const label_costo = document.createElement('a')
+        const label_costo = document.createElement('p')
         label_costo.innerText = element.precio
 
         //Like en forma  de corazon

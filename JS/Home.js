@@ -125,6 +125,13 @@ function CrearCards(element, contenedor) {
     card.href = '/canasta?id=' + element.id 
     card.classList.add('carta')
 
+    //Link
+    const link = document.createElement('a')
+    link.href = '/canasta?id=' + element.id
+    link.classList = 'link'
+
+    card.appendChild(link)
+
     //Contenedor estado del producto
     const div_estado = document.createElement('div')
     div_estado.classList.add('carta_estado')
@@ -135,7 +142,7 @@ function CrearCards(element, contenedor) {
          linea.innerText = 'Preventa'
     } else if (element.estado  == 1) {
         
-         linea.innerText = 'En Stock'
+         linea.innerText = 'Disponible'
     } else {
 
          linea.innerText = 'Agotado'
@@ -156,7 +163,7 @@ function CrearCards(element, contenedor) {
     const contenedor_nombre = document.createElement('div')
     contenedor_nombre.classList.add('txt_carta_1')
 
-    const label_name = document.createElement('a')
+    const label_name = document.createElement('p')
     label_name.href = '/canasta?id=' + element.id
     label_name.innerText = element.descripcion
 
@@ -166,7 +173,7 @@ function CrearCards(element, contenedor) {
     const card_footer = document.createElement('div')
     card_footer.classList.add('txt_carta_2')
 
-    const label_costo = document.createElement('a')
+    const label_costo = document.createElement('p')
     label_costo.innerText = element.precio
 
     //Like en forma  de corazon
@@ -195,9 +202,9 @@ function CrearCards(element, contenedor) {
     card_body.appendChild(contenedor_nombre)
     card_body.appendChild(card_footer)
 
-    card.appendChild(div_estado)
-    card.appendChild(img)
-    card.appendChild(card_body)
+    link.appendChild(div_estado)
+    link.appendChild(img)
+    link.appendChild(card_body)
     card.setAttribute('tipo', element.idTipo)
     card.setAttribute('equipo', element.idEquipo)
 

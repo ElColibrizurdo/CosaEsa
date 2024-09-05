@@ -47,16 +47,7 @@ async function BorrarProducto(boton) {
 
         if (boton.classList.value == 'btn_lista_carrito_2') {
             
-            const siNo = confirm('se va a borrar')
-
-            if (siNo) {
-                const buttons = document.querySelectorAll('.btn_eliminar')
             
-                buttons.forEach(element => {
-    
-                ids.push(element.getAttribute('elej'))
-                })
-             }
         } else {
             const buttons = document.querySelectorAll('.btn_eliminar')
             
@@ -162,7 +153,7 @@ async function RealizarCompra(boton) {
     
 
     if (document.querySelectorAll('.carta_carrito').length > 0 && localStorage.getItem('sesion')) {
-        if (confirm('Seguro que quieres realizar esta compra?')) {
+        
             try {
             
                 const response = await fetch('/auth/venta', {
@@ -197,7 +188,7 @@ async function RealizarCompra(boton) {
             } catch (error) {
                 
             }
-        } 
+        
     }   
 }
 

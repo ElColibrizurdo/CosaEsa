@@ -58,6 +58,13 @@ function CrearCard(data) {
         card.href = '/canasta?id=' + element.id 
         card.classList.add('carta')
 
+        //Link
+        const link = document.createElement('a')
+        link.href = '/canasta?id=' + element.id
+        link.classList = 'link'
+
+        card.appendChild(link)
+
         //Contenedor estado del producto
         const div_estado = document.createElement('div')
         div_estado.classList.add('carta_estado')
@@ -68,7 +75,7 @@ function CrearCard(data) {
              linea.innerText = 'Preventa'
         } else if (element.estado  == 1) {
             
-             linea.innerText = 'En Stock'
+             linea.innerText = 'Disponible'
         } else {
 
              linea.innerText = 'Agotado'
@@ -89,7 +96,7 @@ function CrearCard(data) {
         const contenedor_nombre = document.createElement('div')
         contenedor_nombre.classList.add('txt_carta_1')
 
-        const label_name = document.createElement('a')
+        const label_name = document.createElement('p')
         label_name.href = '/canasta?id=' + element.id
         label_name.innerText = element.descripcion
         label_name.title = element.descripcion
@@ -129,9 +136,9 @@ function CrearCard(data) {
         card_body.appendChild(contenedor_nombre)
         card_body.appendChild(card_footer)
 
-        card.appendChild(div_estado)
-        card.appendChild(img)
-        card.appendChild(card_body)
+        link.appendChild(div_estado)
+        link.appendChild(img)
+        link.appendChild(card_body)
         card.setAttribute('tipo', element.idTipo)
         card.setAttribute('equipo', element.idEquipo)
 
@@ -346,8 +353,7 @@ function CambiarVistaCartas(params) {
     let filas 
     let tamanioColumnas
     let tamanioFilas
-    let imagen 
-    let texto
+    let carta
 
     if (params == 3) {
         
@@ -355,9 +361,8 @@ function CambiarVistaCartas(params) {
         filas = 4
         tamanioColumnas = '400'
         tamanioFilas = '525'
-        imagen = 424
-        texto = 96
         cantiadCartas = 9
+        carta = 3
 
     } else if (params == 4) {
         
@@ -365,9 +370,8 @@ function CambiarVistaCartas(params) {
         filas = 3
         tamanioColumnas = '300'
         tamanioFilas = '420'
-        imagen = 324
-        texto = 96
         cantiadCartas = 16
+        carta = 4
     }
 
     console.log(arrayPrincipal);
@@ -376,14 +380,20 @@ function CambiarVistaCartas(params) {
     grupo.style.gridTemplateColumns = `repeat(${columnas}, ${tamanioColumnas}px)`
     grupo.style.gridTemplateRows = `repeat(${filas}, ${tamanioFilas}px)`
 
-    cartas.forEach(element => {
+    arrayPrincipal.forEach(element => {
         
-        
-        element.style.gridTemplateRows = `${imagen}px ${texto}px`
+        element.forEach(card => {
+
+            card.className = ""
+            card.className = `carta${carta}`
+            console.log(card);
+            
+        })
+
 
         console.log(element);
     })
-
+    
 }
 
 arrayTipo = []

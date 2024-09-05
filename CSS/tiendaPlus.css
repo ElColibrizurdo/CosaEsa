@@ -229,6 +229,27 @@
                         grid-template-areas:"img_carta"
                                             "txt_carta";
                     }   
+                    .carta3{
+                        border-radius: 10px;
+                        overflow: hidden;
+                        display: grid;
+                        position: relative;
+                        grid-template-rows: 424px 96px;
+                        grid-template-areas:"img_carta"
+                                            "txt_carta";
+                    }  
+                    .carta4{
+                        border-radius: 10px;
+                        overflow: hidden;
+                        display: grid;
+                        position: relative;
+                        grid-template-rows: 324px 96px;
+                        grid-template-areas:"img_carta"
+                                            "txt_carta";
+                    }  
+                    .link {
+                        text-decoration: none;
+                    }
                         .carta_estado{
                             border-radius: 4px;
                             background: #FFFFFF;

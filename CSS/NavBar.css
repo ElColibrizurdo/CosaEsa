@@ -7,24 +7,24 @@
     @font-face{
         font-family:Obviously;
         src:url(../IMAGES/fonnts.com-Obviously.otf);
-    }
-    body {
-        display: flex;
-        justify-content: flex-end;
-        overflow-x: hidden;
-    }
+    }   
+body{
+     display: flex;
+     justify-content: flex-end;
+     }
     ::-webkit-scrollbar {
-        display: none;
+    display: none; /* Chrome, Safari y Opera */
     }
+    
     body:before{
-        z-index:  var(--before-z-index, 0);
-        content: '';
-        opacity: var(--before-z-index, 0);
-        position: absolute;
-        background: rgba(43, 43, 43, 0.6);
-        width: 100%;
-        top: 0;
-        left: 0;
+    z-index:  var(--before-z-index, 0);
+    content: '';
+    opacity: var(--before-z-index, 0);
+    position: absolute;
+    background: rgba(43, 43, 43, 0.6);
+    width: 100%;
+    top: 0;
+    left: 0;
     }
     .nav_top{
         display:flex;
@@ -64,6 +64,8 @@
                 align-items: center;
                 display: flex;
                 gap: 24px ;
+                color: #004789;
+                cursor: pointer;
                
             }
                 .nav_top_2 a{
@@ -158,76 +160,123 @@
                       .btn_carrito:hover::before {
                         width: 100%;
                        }
-                       .modal_perfil{
-                        width: 270px;
-                        height: 320px;
-                        position: absolute;
-                        background-color: white;
-                        top: 76px;
-                        right: 170px;
-                        display: none;
-                        grid-template-rows: 64px  auto;
+                       /* modal-perfil   */
+                .modal_perfil{
+                    width: 270px;
+                    height: 320px;
+                    position: fixed;
+                    top: 76px;
+                    right: 170px;
+                    display: grid;
+                    grid-template-rows: 64px  auto;
+                    color: #6F6D6D;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    border: 2px solid #F15D2A;
+                    opacity: 1;
+                    z-index: 5;
+                    background-color: white;
+                    transition: .2s ease-in-out;
+                }
+                .modal_perfil.abrir_modal{
+                    opacity: 0;
+                    z-index: 0;
+                }
+                    .titulo_modal_perfil{
+                        color: #ffffff;
+                        font-size: 20px;
+                        font-weight: 900;
+                        background: #F15D2A;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    .cuerpo_modal_perfil{
+                        background-image: url("../IMAGES/img_fondo_perfil_modal.png");
+                        background-size: cover; 
+                        background-repeat: no-repeat; 
+                        padding-top: 24px;
+                        padding-left: 38px;
+                        padding-right: 38px;
+                    }
+                    .subcuerpo_modal_perfil{
+                        display:flex;
+                        flex-direction: column;
+                        align-items: start;
+                        gap: 24px;
+                        margin-bottom: 36px;
+                    }
+                    .modal_perfil a{
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                        text-decoration: none;
+                        text-align: center;
+                        display: flex;
+                        align-items: center;
+                        gap: 16px;
+                        cursor: pointer;
+                    }
+                    .modal_perfil svg{
+                        margin-top: 2px;
+                    }
+                    .cerrar_sesion{
+                        border-top: 2px solid #f9d4c7;
+                        padding: 17px 0px;
                         color: #6F6D6D;
-                        border-radius: 8px;
-                        overflow: hidden;
-                        border: 2px solid #F15D2A;
-                        opacity: 1;
-                        z-index: 5;
-                        transition: .2s ease-in-out;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
                     }
-                    .modal_perfil.abrir_modal{
-                        opacity: 0;
-                        z-index: 5;
-                    }
-                        .titulo_modal_perfil{
-                            color: #ffffff;
-                            font-size: 20px;
-                            font-weight: 900;
-                            background: #F15D2A;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                        }
-                        .cuerpo_modal_perfil{
-                            background-image: url("../img/img_fondo_perfil_modal.png");
-                            background-size: cover; 
-                            background-repeat: no-repeat; 
-                            padding-top: 24px;
-                            padding-left: 38px;
-                            padding-right: 38px;
-                        }
-                        .subcuerpo_modal_perfil{
-                            display:flex;
-                            flex-direction: column;
-                            align-items: start;
-                            gap: 24px;
-                            margin-bottom: 36px;
-                        }
-                        .modal_perfil a{
-                            font-size: 18px;
-                            font-style: normal;
-                            font-weight: 600;
-                            line-height: normal;
-                            text-decoration: none;
-                            text-align: center;
-                            display: flex;
-                            align-items: center;
-                            gap: 16px;
-                            cursor: pointer;
-                        }
-                        .modal_perfil svg{
-                            margin-top: 2px;
-                        }
-                        .cerrar_sesion{
-                            border-top: 2px solid #f9d4c7;
-                            padding: 17px 0px;
-                            color: #6F6D6D;
-                            font-size: 18px;
-                            font-style: normal;
-                            font-weight: 600;
-                            line-height: normal;
-                        }
-                       
+    .modal_iniciar_sesion{
+       background: #ffffff;
+       width: 560px;
+       height: 200px;
+       position: fixed;
+      top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       z-index: 5;
+       border: 3px solid #F15D2A;
+       border-radius: 18px;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       gap:12px;
+    }
+    .modal_iniciar_sesion.abrir_modal{
+        opacity: 0;
+        z-index: 0;
+    }
+    .modal_iniciar_sesion h1{
+        color: #004789;
+         font-size: 28px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+    .modal_iniciar_sesion h2{
+        color: #1c1c1c;
+         font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+    .modal_iniciar_sesion_btns{
+        display: flex;
+        gap:24px;
+    }
+        .modal_iniciar_sesion_btns button{
+            background: #ffffff;
+             border: 2px solid #F15D2A;
+             color: #F15D2A;
+             font-size: 18px;
+             font-weight: 900;
+             padding: 8px 40px;
+             border-radius: 12px;
+        }
     .lista_carrito {
         width: 500px;
         height: 100%;
@@ -244,7 +293,7 @@
     }
         .lista_carrito.active{
             width: 0px;
-            
+            right: -100px;
         }
             .lista_carrito_titulo{
                grid-area: lista_carrito_titulo;
@@ -400,59 +449,59 @@
                                     }
                             }
                         
-                        .btn_eliminar {
-                          width: 35px;
-                          height: 35px;
-                          border-radius: 50%;
-                          background-color: #f15d2a;
-                          border: none;
-                          font-weight: 600;
-                          display: flex;
-                          align-items: center;
-                          justify-content: center;
-                          box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
-                          cursor: pointer;
-                          transition-duration: .3s;
-                          overflow: hidden;
-                          position: relative;
-                        }
-                        
-                        .svgIcon_eliminar {
-                          width: 12px;
-                          transition-duration: .3s;
-                        }
-                        
-                        .svgIcon_eliminar path {
-                          fill: white;
-                        }
-                        
-                        .btn_eliminar:hover {
-                          width: 100px;
-                          border-radius: 50px;
-                          transition-duration: .3s;
-                          align-items: center;
-                        }
-                        
-                        .btn_eliminar:hover .svgIcon_eliminar {
-                          width: 40px;
-                          transition-duration: .3s;
-                          transform: translateY(50%);
-                        }
-                        
-                        .btn_eliminar::before {
-                          position: absolute;
-                          top: -31px;
-                          content: "Eliminar";
-                          color: white;
-                          transition-duration: .3s;
-                          font-size: .5px;
-                        }
-                        
-                        .btn_eliminar:hover::before {
-                          font-size: 13px;
-                          opacity: 1;
-                          transform: translateY(30px);
-                          transition-duration: .3s;
-                        }
+                            .btn_eliminar {
+                                width: 35px;
+                                height: 35px;
+                                border-radius: 50%;
+                                background-color: #f15d2a;
+                                border: none;
+                                font-weight: 600;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+                                cursor: pointer;
+                                transition-duration: .3s;
+                                overflow: hidden;
+                                position: relative;
+                              }
+                              
+                              .svgIcon_eliminar {
+                                width: 12px;
+                                transition-duration: .3s;
+                              }
+                              
+                              .svgIcon_eliminar path {
+                                fill: white;
+                              }
+                              
+                              .btn_eliminar:hover {
+                                width: 100px;
+                                border-radius: 50px;
+                                transition-duration: .3s;
+                                align-items: center;
+                              }
+                              
+                              .btn_eliminar:hover .svgIcon_eliminar {
+                                width: 40px;
+                                transition-duration: .3s;
+                                transform: translateY(50%);
+                              }
+                              
+                              .btn_eliminar::before {
+                                position: absolute;
+                                top: -31px;
+                                content: "Eliminar";
+                                color: white;
+                                transition-duration: .3s;
+                                font-size: .5px;
+                              }
+                              
+                              .btn_eliminar:hover::before {
+                                font-size: 13px;
+                                opacity: 1;
+                                transform: translateY(30px);
+                                transition-duration: .3s;
+                              }
 
                         

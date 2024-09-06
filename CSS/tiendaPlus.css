@@ -10,13 +10,13 @@
     }
  
     .contenedor{
-        top: 170px;
+        top: 94px;
         position: absolute;
         width: 100%;
         height: 2541px;
         display: grid;
         grid-template-columns:1fr ;
-        grid-template-rows:  243px 104px 60px auto 96px 545px;
+        grid-template-rows:  243px 104px 60px 1504px 96px 545px;
         grid-template-areas:"promocional"
                             "logos_de_equipos"
                             "recuadro_filtros"
@@ -118,11 +118,6 @@
             opacity: 0;
         }
             .flitros{
-                display: -webkit-box;
-                -webkit-line-clamp: 1;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
                 grid-area: flitros;
                 background-color: #FFFFFF;
                 text-align: right;
@@ -148,9 +143,6 @@
                         cursor: pointer;
                         color: #f15d2a;
                         border-bottom: 2px solid #f15d2a;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        
                     }
                     /*.flitros_extended.show + .flecha_flitro {
                              transform: rotate(270deg)  /* Cambiar el color del botón 
@@ -197,13 +189,6 @@
                           justify-content:  flex-end;
                           align-items:  center;
                       }
-                      .opciones{
-                        display: -webkit-box;
-                        -webkit-line-clamp: 1;
-                        -webkit-box-orient: vertical;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                      }
                     
             .contenedor_cartas{
                 grid-area: contenedor_cartas;
@@ -219,37 +204,19 @@
                     grid-template-columns:repeat(4, 262px);
                     grid-template-rows: repeat(3, 395px);
                     gap: 10px;
+                    transition: grid-template-columns 0.5s ease;
                 }
+                
                     .carta{
                         border-radius: 10px;
                         overflow: hidden;
                         display: grid;
                         position: relative;
+                        transition: transform 0.5s ease; 
                         grid-template-rows: 298px 96px;
                         grid-template-areas:"img_carta"
                                             "txt_carta";
                     }   
-                    .carta3{
-                        border-radius: 10px;
-                        overflow: hidden;
-                        display: grid;
-                        position: relative;
-                        grid-template-rows: 424px 96px;
-                        grid-template-areas:"img_carta"
-                                            "txt_carta";
-                    }  
-                    .carta4{
-                        border-radius: 10px;
-                        overflow: hidden;
-                        display: grid;
-                        position: relative;
-                        grid-template-rows: 324px 96px;
-                        grid-template-areas:"img_carta"
-                                            "txt_carta";
-                    }  
-                    .link {
-                        text-decoration: none;
-                    }
                         .carta_estado{
                             border-radius: 4px;
                             background: #FFFFFF;
@@ -275,22 +242,22 @@
                             grid-area: img_carta;
                              object-fit: cover;
                              width: 100%;
-                             height: 100%;
+                            
                              
                         }
                         .txt_carta{
                             grid-area: txt_carta;
                             background-color: #f15d2a;
                             padding: 10px 16px;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
+                            display: grid;
+                            grid-template-rows: 50px 30px;
                         }
                             .txt_carta_1{
                                 overflow: hidden;
                                 color:  #FFFFFF;
                                 text-overflow: ellipsis;
                                 display: -webkit-box;
-                                -webkit-line-clamp: 1;
+                                -webkit-line-clamp: 2;
                                 -webkit-box-orient: vertical;
                             }
                                 .txt_carta_1 a{
@@ -357,15 +324,59 @@
                 display: flex;
                 align-items: center;
             }
-            .paginacion_num{
-                margin-left: 16px;
-                margin-right:  16px;
-                display: grid;
-                gap: 10px;
-                height: 28px;
-                grid-template-columns:repeat(5, 28px);
-                
-            }
+        
+                .radio-tile-group {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                  }
+
+                  .radio-tile-group .input-container {
+                    position: relative;
+                    height: 28px;
+                    width: 28px;
+                    margin: 0px 6px;
+                  }
+
+                  .radio-tile-group .input-container .radio-button {
+                    opacity: 0;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    margin: 0;
+                    cursor: pointer;
+                  }
+
+                  .radio-tile-group .input-container .radio-tile {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 8px;
+                    transition: transform 300ms ease;
+                  }
+
+                  .radio-tile-group .input-container .radio-tile-label {
+                      text-align: center;
+                      font-size: 16px;
+                      font-style: normal;
+                      font-weight: 600;
+                      line-height: 0;
+                      color: #2D2C2C;
+                  }
+
+                  .radio-tile-group .input-container .radio-button:checked + .radio-tile {
+                    background: #f15d2a;
+                  }
+
+                  .radio-tile-group .input-container .radio-button:checked + .radio-tile .radio-tile-label {
+                    color: #ffffff;
+
+                  }
             .pag_num{
                color: #2D2C2C;
                 text-align: center;
@@ -420,42 +431,47 @@
         }
             .footer_contenedor{
                grid-area: footer_contenedor;
-               display: flex;
+               display: grid;
                justify-content: space-between;
                width: 100%;
                margin-top: 24px;
+               grid-template-columns:auto auto;
+               grid-template-rows:auto ;
+               grid-template-areas:"contenedor_terminos contenedor_noticias";
                
             }
                 .contenedor_terminos{
+                    grid-area: contenedor_terminos;
                     height: 352px;
                     width: 240px;
                     display: flex;
                     flex-direction: column;
                 }
-                .contenedor_terminos img{
-                    width: 93px;
-                    height:  124px;
-                     object-fit: cover;
-                     margin-bottom:  54px;
-                }
-                .contenedor_terminos_titulo{
-                    color: #FFFFFF;
-                    font-size: 17px;
-                    font-style: normal;
-                    font-weight: 900;
-                    line-height: normal;
-                    
-                }
-                .contenedor_terminos_txt{
-                    color: #FFFFFF;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: normal;
-                    text-decoration: none;
-                    line-height: 2.5;
-                }
+                    .contenedor_terminos img{
+                        width: 93px;
+                        height:  124px;
+                         object-fit: cover;
+                         margin-bottom:  54px;
+                    }
+                    .contenedor_terminos_titulo{
+                        color: #FFFFFF;
+                        font-size: 17px;
+                        font-style: normal;
+                        font-weight: 900;
+                        line-height: normal;
+
+                    }
+                    .contenedor_terminos_txt{
+                        color: #FFFFFF;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                        text-decoration: none;
+                        line-height: 2.5;
+                    }
                 .contenedor_noticias{
+                    grid-area: contenedor_noticias;
                     height: 408px;
                     width: 424px;
                     display: grid;
@@ -558,32 +574,121 @@
                     line-height: normal;
                 }
 
-                @media screen and (min-width:880px){
-                    .grupo_cartas{
-                            grid-template-columns:repeat(2, 262px);
-                            }
-                       
-                    }
-                    @media screen and (min-width:1160px){
-                    .grupo_cartas{
-                            grid-template-columns:repeat(3, 262px);
-                            }
-                    }
-                    @media screen and (min-width:1440px){
-                    .grupo_cartas{
-                            grid-template-columns:repeat(4, 262px);
-                            }
-                    }
-                    @media screen and (min-width:1720px){
-                    .grupo_cartas{
-                            grid-template-columns:repeat(5, 262px);
-                            }
-                    }
-                    @media screen and (min-width:2000px){
-                    .grupo_cartas{
-                            grid-template-columns:repeat(6, 262px);
-                            }
-                    }
- 
+@media screen and (max-width:425px){
+.grupo_cartas{
+grid-template-columns:repeat(2, 1fr);
+}
+.footer_contenedor{
+grid-template-columns:auto ;
+grid-template-rows:auto auto ;
+grid-template-areas:"contenedor_terminos "
+                "contenedor_noticias";
+}
+.contenedor {
+grid-template-rows: 243px 104px 60px 1504px 96px 905px;
+}
+.footer {
+grid-template-rows: 819px 85px;
+}
+.txt_footer_contendor_redes_sociales{
+display: none;
+}
+.nav_top_links {
+margin-left: 16px;
+margin-right: 16px;
+}
+.container-buscador {
+display: none;
+}
+.contedor_cartas {
+padding: 30px 10px;
+}
+.nav_top_1 a{
+display: none;
+}
+.nav_top_2 a{
+display: none;
+}
+}
 
-       
+@media screen and (min-width:880px){
+.grupo_cartas{
+grid-template-columns:repeat(2, 262px);
+}
+
+}
+@media screen and (min-width:1160px){
+.grupo_cartas{
+grid-template-columns:repeat(3, 262px);
+}
+}
+@media screen and (min-width:1440px){
+.grupo_cartas{
+grid-template-columns:repeat(4, 262px);
+}
+}
+@media screen and (min-width:1720px){
+.grupo_cartas{
+grid-template-columns:repeat(5, 262px);
+}
+}
+@media screen and (min-width:2000px){
+.grupo_cartas{
+grid-template-columns:repeat(6, 262px);
+}
+}
+
+.btn_eliminar {
+width: 35px;
+height: 35px;
+border-radius: 50%;
+background-color: #f15d2a;
+border: none;
+font-weight: 600;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+cursor: pointer;
+transition-duration: .3s;
+overflow: hidden;
+position: relative;
+}
+
+.svgIcon_eliminar {
+width: 12px;
+transition-duration: .3s;
+}
+
+.svgIcon_eliminar path {
+fill: white;
+}
+
+.btn_eliminar:hover {
+width: 100px;
+border-radius: 50px;
+transition-duration: .3s;
+align-items: center;
+}
+
+.btn_eliminar:hover .svgIcon_eliminar {
+width: 40px;
+transition-duration: .3s;
+transform: translateY(50%);
+}
+
+.btn_eliminar::before {
+position: absolute;
+top: -31px;
+content: "Eliminar";
+color: white;
+transition-duration: .3s;
+font-size: .5px;
+}
+
+.btn_eliminar:hover::before {
+font-size: 13px;
+opacity: 1;
+transform: translateY(30px);
+transition-duration: .3s;
+}

@@ -11,6 +11,7 @@
 body{
      display: flex;
      justify-content: flex-end;
+     overflow-x: hidden;
      }
     ::-webkit-scrollbar {
     display: none; /* Chrome, Safari y Opera */
@@ -175,7 +176,6 @@ body{
                     border: 2px solid #F15D2A;
                     opacity: 1;
                     z-index: 5;
-                    background-color: white;
                     transition: .2s ease-in-out;
                 }
                 .modal_perfil.abrir_modal{
@@ -241,7 +241,7 @@ body{
        z-index: 5;
        border: 3px solid #F15D2A;
        border-radius: 18px;
-       display: flex;
+       display: none;
        flex-direction: column;
        align-items: center;
        gap:12px;
@@ -277,8 +277,53 @@ body{
              padding: 8px 40px;
              border-radius: 12px;
         }
+     .panel_busquedas{
+        width: 100%;
+        max-width: 500px;
+        height: 100%;
+        z-index: 3;
+        position: fixed;
+        transition: all .3s ease;
+        background-color: #FFFFFF;
+        left: 0px;
+    }
+        .panel_busquedas.active{
+            width: 0px;
+            left: -200px;
+        }
+        .panel_busquedas_titulo{
+            padding-left: 40px;
+            padding-top: 50px;
+            height: 96px;
+            padding-right: 40px;
+            display: flex; 
+            justify-content: space-between;
+            box-shadow: 0px 5px 5px #efefef;
+        }
+        .panel_busquedas_busqueda{
+            padding-left: 40px;
+            height: 76px;
+            padding-right: 40px;
+            display: flex; 
+            box-shadow: 0px 5px 5px #efefef;
+            align-items: center;
+        }
+
+        .input_busqueda_panel{
+                font-size: 0.9rem;
+                background-color: transparent;
+                width: 100%;
+                box-sizing: border-box;
+                padding-inline: 0.5em;
+                padding-block: 0.7em;
+                border: none;
+        }
+        .input_busqueda_panel:focus {
+            outline: none;
+        }
     .lista_carrito {
-        width: 500px;
+        width: 100%;
+        max-width: 500px;
         height: 100%;
         background-color: #FFFFFF;
         position: fixed;
@@ -293,7 +338,8 @@ body{
     }
         .lista_carrito.active{
             width: 0px;
-            right: -100px;
+            right: -10px;
+            
         }
             .lista_carrito_titulo{
                grid-area: lista_carrito_titulo;
@@ -399,7 +445,12 @@ body{
                         display: flex;
                         justify-content: center;
                     }
-                        
+            .txt_contendor_compra_final_carrito{
+                display: flex;
+                justify-content: space-between;
+                margin-top: 8px;
+                margin-right: 4px;
+            }        
                     .num_productos{
                         display: flex;
                         border-radius: 8px;
@@ -408,6 +459,7 @@ body{
                         width: fit-content;
                         align-items: center;
                         gap: 7px;
+                        height: 50px;
                     }
                         .num_productos_input{
                             border: none;
@@ -421,34 +473,6 @@ body{
                         .num_productos_input:focus {
                                 outline: none;
                         }
-
-                        @media screen and (min-width:880px){
-                            .grupo_cartas{
-                                    grid-template-columns:repeat(2, 262px);
-                                    }
-                               
-                            }
-                            @media screen and (min-width:1160px){
-                            .grupo_cartas{
-                                    grid-template-columns:repeat(3, 262px);
-                                    }
-                            }
-                            @media screen and (min-width:1440px){
-                            .grupo_cartas{
-                                    grid-template-columns:repeat(4, 262px);
-                                    }
-                            }
-                            @media screen and (min-width:1720px){
-                            .grupo_cartas{
-                                    grid-template-columns:repeat(5, 262px);
-                                    }
-                            }
-                            @media screen and (min-width:2000px){
-                            .grupo_cartas{
-                                    grid-template-columns:repeat(6, 262px);
-                                    }
-                            }
-                        
                             .btn_eliminar {
                                 width: 35px;
                                 height: 35px;
@@ -465,29 +489,29 @@ body{
                                 overflow: hidden;
                                 position: relative;
                               }
-                              
+
                               .svgIcon_eliminar {
                                 width: 12px;
                                 transition-duration: .3s;
                               }
-                              
+
                               .svgIcon_eliminar path {
                                 fill: white;
                               }
-                              
+
                               .btn_eliminar:hover {
                                 width: 100px;
                                 border-radius: 50px;
                                 transition-duration: .3s;
                                 align-items: center;
                               }
-                              
+
                               .btn_eliminar:hover .svgIcon_eliminar {
                                 width: 40px;
                                 transition-duration: .3s;
                                 transform: translateY(50%);
                               }
-                              
+
                               .btn_eliminar::before {
                                 position: absolute;
                                 top: -31px;
@@ -496,12 +520,175 @@ body{
                                 transition-duration: .3s;
                                 font-size: .5px;
                               }
-                              
+
                               .btn_eliminar:hover::before {
                                 font-size: 13px;
                                 opacity: 1;
                                 transform: translateY(30px);
                                 transition-duration: .3s;
                               }
+                              .price-input{
+                                width: 100%;
+                                display: flex;
+                                margin-top:20px ;
+                              }
+                              .price-input .field{
+                                display: flex;
+                                width: 100%;
+                                height: 45px;
+                                align-items: center;
+                                flex-direction: column;
+                              }
+                              .field input{
+                                width: 100%;
+                                height: 100%;
+                                outline: none;
+                                font-size: 19px;
+                                border-radius: 5px;
+                                text-align: center;
+                                border: 1px solid #999;
+                                -moz-appearance: textfield;
+                              }
+                              input[type="number"]::-webkit-outer-spin-button,
+                              input[type="number"]::-webkit-inner-spin-button {
+                                -webkit-appearance: none;
+                              }
+                              .price-input .separator{
+                                width: 130px;
+                                display: flex;
+                                font-size: 19px;
+                                align-items: center;
+                                justify-content: center;
+                              }
+                              .slider{
+                                height: 5px;
+                                position: relative;
+                                background: #ddd;
+                                border-radius: 5px;
+                              }
+                              .slider .progress{
+                                height: 100%;
+                                left: 25%;
+                                right: 25%;
+                                position: absolute;
+                                border-radius: 5px;
+                                background: #F15D2A;
+                              }
+                              .range-input{
+                                position: relative;
+                              }
+                              .range-input input{
+                                position: absolute;
+                                width: 100%;
+                                height: 5px;
+                                top: -5px;
+                                background: none;
+                                pointer-events: none;
+                                -webkit-appearance: none;
+                                -moz-appearance: none;
+                              }
+                              input[type="range"]::-webkit-slider-thumb{
+                                height: 17px;
+                                width: 17px;
+                                border-radius: 50%;
+                                background: #F15D2A;
+                                pointer-events: auto;
+                                -webkit-appearance: none;
+                                box-shadow: 0 0 6px rgba(0,0,0,0.05);
+                              }
+                              input[type="range"]::-moz-range-thumb{
+                                height: 17px;
+                                width: 17px;
+                                border: none;
+                                border-radius: 50%;
+                                background: #F15D2A;
+                                pointer-events: auto;
+                                -moz-appearance: none;
+                                box-shadow: 0 0 6px rgba(0,0,0,0.05);
+                              }
+                              
+                              .range_slider_filtro{
+                                  text-align: justify;
+                                  width: 100%;
+                                  background: #fff;
+                                  border-radius: 10px;
+                                  padding: 20px ;
+                              }
+                              .flitros.active{
+                                transform: translate3d(-100%, 0, 0);
+                                opacity: 0;
+                            }
+                                .flitros{
+                                    grid-area: flitros;
+                                    background-color: #FFFFFF;
+                                    text-align: right;
+                                    border-radius: 15px;
+                                    height: fit-content;
+                                    padding: 10px;
+                                    opacity: 1;
+                                    transform: translateZ(0);
+                                    transition: opacity .2s cubic-bezier(.215,.61,.355,1), transform .2s cubic-bezier(.215,.61,.355,1); 
+                                }
+                                    .flitros_extended{
+                                     transition: all .3s ease;
+                                     display:flex;
+                                     flex-direction: column;
+                                    }
+                                 
+                                    .flecha_flitro{
+                                        width:24px;
+                                        height:24px;
+                                        fill:#f15d2a;
+                                    }
+                                        .titulos_filtos{
+                                            cursor: pointer;
+                                            color: #f15d2a;
+                                            border-bottom: 2px solid #f15d2a;
+                                        }
+                                        /*.flitros_extended.show + .flecha_flitro {
+                                                 transform: rotate(270deg)  /* Cambiar el color del botón 
+                                            }*/
+                                        .checkBox_filtro {
+                                            display: block;
+                                            cursor: pointer;
+                                            width: 15px;
+                                            height: 15px;
+                                            border: 3px solid rgba(255, 255, 255, 0);
+                                            border-radius: 4px;
+                                            position: relative;
+                                            overflow: hidden;
+                                            box-shadow: 0px 0px 0px 2px #f15d2a;
+                                          }
+        
+                                          .checkBox_filtro div {
+                                            width: 25px;
+                                            height: 25px;
+                                            background-color: #f15d2a;
+                                            top: -52px;
+                                            left: -52px;
+                                            position: absolute;
+                                            transform: rotateZ(45deg);
+                                            z-index: 100;
+                                          }
+        
+                                          .checkBox_filtro input[type=checkbox]:checked + div {
+                                            left: -10px;
+                                            top: -10px;
+                                          }
+        
+                                          .checkBox_filtro input[type=checkbox] {
+                                            position: absolute;
+                                            left: 50px;
+                                            visibility: hidden;
+                                          }
+        
+                                          .transition_checkbox {
+                                            transition: 300ms ease;
+                                          }       
+                                          .lista_checkbox{
+                                              display: flex;
+                                              justify-content:  flex-end;
+                                              align-items:  center;
+                                          }
 
                         

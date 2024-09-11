@@ -122,10 +122,9 @@ function CrearCard(data) {
         chkbox_deseo.setAttribute('onclick', 'validaSesion(this)')
 
         const svgContent = `
-            <svg id="Layer_1" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <path d="M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z"></path>
-            </svg>
-        `;
+            <svg id="Layer_1"  onclick="abrir_inicar_sesion()" version="1.0" viewBox="0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <path d="M16.4,4C14.6,4,13,4.9,12,6.3C11,4.9,9.4,4,7.6,4C4.5,4,2,6.5,2,9.6C2,14,12,22,12,22s10-8,10-12.4C22,6.5,19.5,4,16.4,4z"></path></svg>
+                                      `;
 
         lbl.appendChild(chkbox_deseo)
         lbl.innerHTML += svgContent
@@ -163,8 +162,8 @@ function ImprimirProductos(array, numero) {
 
 
 
-    const container = document.getElementById('grupo_cartas')
-    const pagination = document.getElementById('pag')
+    const container = document.querySelector('.grupo_cartas')
+    const pagination = document.querySelector('.radio-tile-group')
 
     container.innerHTML = ''
     pagination.innerHTML = ''

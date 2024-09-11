@@ -216,7 +216,7 @@ function Mostrar_Producto(data) {
 function MostrarColores(colores) {
     
     const contenedor_colores = document.querySelector('.contenedor_descripcion_producto_color')
-    const subcontenedor = contenedor_colores.querySelector('.radio-tile-group')
+    const subcontenedor = contenedor_colores.querySelector('.radio-tile-group_selector_color')
     console.log(contenedor_colores);
     
     colores.forEach(element => {
@@ -225,10 +225,10 @@ function MostrarColores(colores) {
         
 
         const talla = `
-        <div class="input-container">
-            <input id="${element.id}" class="radio-color" type="radio" name="radioColor${contador}" checked>
-            <div class="radio-tiles">
-               <div class="radio-tiles-color" style="background-color:${element.color}">
+        <div class="input-container_selector_color">
+            <input id="${element.id}" class="radio-button_selector_color" type="radio" name="radioColor${contador}" checked>
+            <div class="radio-button_selector_color">
+               <div class="circulo_interno" style="background-color:${element.color}">
                </div>
             </div>
         </div> `

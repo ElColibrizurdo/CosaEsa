@@ -3,7 +3,8 @@ async function MostrarFiltros() {
     const response = await fetch('/auth/mostrarFiltros')
     const data = await response.json()
 
-
+    console.log(data);
+    
     try {
         
         MostrarFiltrosOfficiales(data.tipos)

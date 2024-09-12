@@ -254,7 +254,7 @@ function FiltrarDatos(buton) {
         arrayEquipos.push(buton.getAttribute('value'))
         console.log(buton.getAttribute('alt'));
         
-        titulo.textContent = buton.getAttribute('alt')
+        //titulo.textContent = buton.getAttribute('alt')
     }
     
     filtros.forEach(chk => {
@@ -268,7 +268,7 @@ function FiltrarDatos(buton) {
             
             console.log(chk.parentNode.previousSibling);
             
-            titulo.textContent = chk.parentNode.previousSibling.textContent
+            //titulo.textContent = chk.parentNode.previousSibling.textContent
 
         } else if (chk.classList == 'tipo') {
             

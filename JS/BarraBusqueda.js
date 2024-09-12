@@ -39,7 +39,7 @@ function LlamarFuncion(params) {
     
     const frame = document.querySelector('iframe')
 
-    if (frame.src == 'http://localhost:3000/home') {
+    if (frame.src == '~/home') {
         
         const barra = document.querySelector('.buscador')
 

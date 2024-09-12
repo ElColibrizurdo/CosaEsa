@@ -1,4 +1,5 @@
-
+const https = require('https')
+const fs = require('fs')
 const login = require('./JS/auth/auth')
 const express = require('express');
 const path = require('path');
@@ -9,6 +10,12 @@ const authRoutes = require('./JS/auth/Routes')
 const protectedR = require('./JS/auth/proy');
 const adminRoutes = require('./Admministrador/JS/auth/Routes')
 const { log } = require('console');
+
+const options = {
+    key: fs.readFileSync(path.join(__dirname, 'server.key')),
+    cert: fs.readFileSync(path.join(__dirname, 'server.crt')),
+}
+
 
 app.use(bodyParser.json());
 
@@ -198,12 +205,18 @@ app.use((req, res, next) => {
 })
 
 
-const PORT = process.env.PORT || 3000;
+/*const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor web escuchando en el puerto ${PORT}`);
    
-});
+});*/
 
+const server = https.createServer(options, app);
+
+const PORT = process.env.PORT || 443
+server.listen(PORT, () => {
+    console.log(`Servidor HTTPS escuchando en el puerto ${PORT}`);
+})
 
 
 

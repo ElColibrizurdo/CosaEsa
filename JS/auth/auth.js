@@ -16,7 +16,7 @@ function GenerarVerificacion() {
 
 function MandarVerificacion(email, token) {
     
-    const verificationUrl = `http://localhost:3000/verify-email?token=${token}`;
+    const verificationUrl = `/verify-email?token=${token}`;
 
     let transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -493,7 +493,7 @@ const cantidad_cesta = async (req, res) => {
 
     try {
 
-        fetch('http://localhost:3000/protected', {
+        fetch('https://tienda.people.com//protected', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token 
@@ -530,7 +530,7 @@ const cliente_existe = async (req, res) => {
 
     try {
 
-        fetch('http://localhost:3000/protected', {
+        fetch('https://tienda.people.com//protected', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -574,7 +574,7 @@ const verificarContra = async (req, res) => {
 
     try {
 
-        fetch('http://localhost:3000/protected', {
+        fetch('https://tienda.people.com//protected', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -615,7 +615,7 @@ const RealizarVenta = async (req, res) => {
 
     try {
 
-        fetch('http://localhost:3000/protected', {
+        fetch('https://tienda.people.com//protected', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -657,7 +657,7 @@ const cerrar_sesion = async (req, res) => {
 
     try {
 
-        fetch('http://localhost:3000/protected', {
+        fetch('https://tienda.people.com//protected', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token

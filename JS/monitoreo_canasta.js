@@ -230,55 +230,37 @@ document.getElementById('dapp-btn').addEventListener('click', async function()
         
     }
 
-    DappPayButton({
-        production: false,
-        client: {
-            key: 'tiendapeople01' //apiKey
-        },
-        transaction: {
-            amount: {
-            total: total,// total a pagar en MXN
-            },
-            reference: email, // referencia del pago
-            description: folio, //descripcion del pago
-        },
-        onSuccess: function(transaction) {
-            /*
-            Si el pago es satisfactorio este callback maneja la respuesta.
-            Se devuelve un objeto con la siguiente estructura:
-            {
-            "id": "28e62e93-c26b-4c26-a25b-7aea2bbbfbad",
-            "amount": 10,
-            "tip": 0,
-            "currency": "MXN",
-            "reference": "Texto de referencia",
-            "description": "Descripción del pago",
-            "client": {
-            "name": "Javier Torres"
-        },
-        "date": "2018-03-28T06:24:49.167657+00:00",
-        "code": "XM5BOqZ6"
-        }
-        */
-        //Este es un ejemplo para mostrar algunos de los valores devuelto
+    // Credenciales de la API
+    const apiKey = '26743219-8b16-4eb7-98cb-34d3b6f1379d'; // Reemplaza con tu API key
+    const userAgent = 'MiIntegracion1.0'; // Reemplaza con tu nombre de integración
 
-            console.log("Transaccion: " + transaction.id);
-            console.log("Monto: " + transaction.amount);
-        },
-        onFailure: function(error) {
-            /*
-            Si el pago no es exitoso este callback maneja la respuesta.
-            Se devuelve un objeto con la siguiente estructura:
-            {
-            rc: -10,
-            msg: "El usuario cerro la ventana antes de completar el pago"
-            }
-            */
-            //Este es un ejemplo para mostrar algunos de los valores devuelto
-            s
-            console.log(error.msg);
-        }
-    }).render();
+    // Convertir la clave API para autenticación básica
+    const authHeader = `Basic OjI2NzQzMjE5LThiMTYtNGViNy05OGNiLTM0ZDNiNmYxMzc5ZA==`;
+
+    // Datos del cuerpo de la solicitud
+    const requestData = {
+    amount: "10.0", // Monto
+    description: "chocolates", // Descripción del cobro
+    qr_source: "8", // Identificador del medio de pago, ej. para Banco Azteca
+    reference: "miReferenciaInterna", // Referencia interna del comercio
+    expiration_minutes: 8640, // Expiración en minutos (6 días)
+    success_page: "https://miapp.com/success", // URL de éxito
+    error_page: "https://miapp.com/error" // URL de error
+    };
+
+    // Realizar la solicitud POST al endpoint
+    fetch('https://sandbox.dapp.mx/v2/dapp-codes/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': authHeader,
+        'User-Agent': userAgent
+    },
+    body: JSON.stringify(requestData)
+    })
+    .then(response => response.json())
+    .then(data => console.log('Respuesta de la API:', data))
+    .catch(error => console.error('Error al llamar a la API:', error));
 });
 
 

@@ -541,7 +541,10 @@ SELECT  c.d_asenta, e.Nombre, e.Clave, c.d_codigo, c.idPais FROM colonia c
 INNER JOIN estado e ON e.id = c.idEstado 
 WHERE c.d_codigo = 52985
 
-
+SELECT p.descripcion, p.precio, p.estado, p.id, COUNT(c.id) AS variantes
+FROM producto p 
+LEFT JOIN colores_producto c ON p.id = c.idProducto GROUP BY p.id
+SELECT * FROM colores_producto cp 
 SELECT * FROM estado e 
 SELECT * FROM pais p 
 SELECT * FROM colonia c 
@@ -552,7 +555,8 @@ SELECT * FROM productomedidas p ;
 SELECT * FROM producto p ;
 SELECT * FROM canasta_productos cp ;
 SELECT * FROM playera_personalizada pp ;
-SELECT * FROM usuario u ;
+SELECT * FROM usuario u 
+SELECT COUNT(*) AS total FROM sesion WHERE horaInicio >= NOW() -INTERVAL 2 DAY
 DELETE FROM usuario
 SELECT * FROM canasta c ;
 SELECT * FROM producto p ;

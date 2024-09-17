@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="display: flex; flex-direction: column">
+        <label for="">
+            Nombre del producto
+            <input type="text" name="" id="">productos
+        </label>
+        <label for="">
+            Precio del producto
+            <input type="number" name="" id="">
+        </label>
+        <label for="">
+            Descripcion
+            <input type="text" name="" id="">
+        </label>
+        <label for="">
+            Estatus
+            <select name="" id="">
+                <option value="">Mujer</option>
+                <option value="">Hombre</option>
+                <option value="">Niño</option>
+                <option value="">Todos</option>
+            </select>
+        </label>
+        <label for="">
+            SKU
+            <input type="text" name="" id="">
+        </label>
+        <div  style="display: flex; flex-direction: column">
+            <label for="">
+                Variantes
+                <input type="text" name="" id="" onkeypress="MostrarVariantes(event, this)">
+                <ul id="variantes">
+                </ul>
+            </label>
+        </div>
+        
+        <label for="">
+            Imagenes
+            <input type="file" name="image" id="" accept="image/*" onchange="SubirImagen(this)" oninput="'/upload'">
+            <ul>
+                
+            </ul>
+        </label>
+        <div>
+            <label for="">
+                Agregarr Color
+                <input type="color" name="" id="" oninput="MostrarColores(this)">
+                <ul>
+                    
+                </ul>
+            </label>
+        </div>
+
+        <script src="../NuevoProducto/AgregarProducto.js"></script>
+</body>
+</html>

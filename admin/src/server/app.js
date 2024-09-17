@@ -45,7 +45,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
         return res.status(400).send('No se ha subido ningún archivo.');
       }
       // Puedes enviar la ruta donde se guardó la imagen de vuelta al cliente
-      res.send(`Imagen subida exitosamente: ${req.file.filename}`);
+      res.send(req.file.filename);
 })
 
 app.listen(3000, () => {

@@ -6,56 +6,65 @@
     <title>Document</title>
 </head>
 <body style="display: flex; flex-direction: column">
-        <label for="">
+    <form id="form">
+        <label >
             Nombre del producto
-            <input type="text" name="" id="">productos
+            <input type="text" name="nombre" id="nombre">productos
         </label>
-        <label for="">
+        <label >
             Precio del producto
-            <input type="number" name="" id="">
+            <input type="number" name="precio" id="precio">
         </label>
-        <label for="">
-            Descripcion
-            <input type="text" name="" id="">
-        </label>
-        <label for="">
+        <label >
             Estatus
-            <select name="" id="">
+            <select name="estatus" id="estatus">
                 <option value="">Mujer</option>
                 <option value="">Hombre</option>
                 <option value="">Niño</option>
                 <option value="">Todos</option>
             </select>
         </label>
-        <label for="">
+        <label >
             SKU
-            <input type="text" name="" id="">
+            <input type="text" name="sku" id="sku">
         </label>
         <div  style="display: flex; flex-direction: column">
-            <label for="">
+            <label >
                 Variantes
-                <input type="text" name="" id="" onkeypress="MostrarVariantes(event, this)">
+                <select name="tipo" id="tipo" >
+                    <option value="1" >Camiseta Oficial (M)</option>
+                    <option value="3" >T-Shirt</option>
+                    <option value="6" >Taza</option>
+                </select>
                 <ul id="variantes">
                 </ul>
             </label>
         </div>
         
-        <label for="">
+        <label >
             Imagenes
-            <input type="file" name="image" id="" accept="image/*" onchange="SubirImagen(this)" oninput="'/upload'">
-            <ul>
+            <input type="file" name="image" id="image" accept="image/*" onchange="SubirImagen(this)" oninput="'/upload'">
+            <ul id="imagenes">
                 
             </ul>
         </label>
         <div>
-            <label for="">
+            <label >
                 Agregarr Color
-                <input type="color" name="" id="" oninput="MostrarColores(this)">
+                <select name="color" id="color" onclick="MostrarColores(this)">
+                    <option value="Beige" >Beige</option>
+                    <option value="ARENA">ARENA</option>
+                    <option value="SEPIA">SEPIA</option>
+                    <option value="AVELLANAS">AVELLANAS</option>
+                </select>
                 <ul>
                     
                 </ul>
             </label>
         </div>
+        <button type="button" onclick="AgregarProducto()"></button>
+    </form>
+        
 
         <script src="../NuevoProducto/AgregarProducto.js"></script>
 </body>

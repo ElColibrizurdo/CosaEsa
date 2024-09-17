@@ -1,5 +1,8 @@
 const { query } = require('express')
 const db = require('../Databases/Databases')
+const  appModule = require('../server/app')
+const fs =  require('fs')
+const path = require('path')
 
 const estadisticas = async (req, res) => {
 
@@ -39,8 +42,57 @@ const mostrar_productos = async (req, res) => {
     }
 }
 
+const agregar_producto = async (req, res) => {
+
+    const { nombre, precio, tipo, equipo, imagenes } = req.body
+    console.log(imagenes);
+    
+
+    try {
+        
+        const row = await db.query('INSERT INTO producto (idTipo, descripcion, idEquipo, precio, stock, estado) VALUES (?,?,?,?,?,?)', [parseInt(tipo), nombre, equipo, precio, 15, 0])
+        console.log(row[0].insertId);
+        
+
+        imagenes.forEach((element, indice) => {
+
+            const rutaOriginal = path.join(__dirname, '..', 'img', element)
+            
+            if (indice == 0) {
+                
+                const rutaDestino = path.join(__dirname, '..', '..','..','user','IMAGES','articulos', row[0].insertId + '.png')
+
+                fs.rename(rutaOriginal, rutaDestino, (err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('se movio');
+                    }
+                })
+            } else {
+
+                const rutaDestino = path.join(__dirname, '..', '..','..','user','IMAGES','articulos', row[0].insertId + '_' + indice + '.png') 
+
+                fs.rename(rutaOriginal, rutaDestino, (err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('se movio');
+                    }
+                })
+            }
+            
+        })
+
+        return res.status(400).json(row)
+
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 
 
-module.exports = { estadisticas, mostrar_productos }
+
+module.exports = { estadisticas, mostrar_productos, agregar_producto }

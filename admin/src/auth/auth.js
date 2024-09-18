@@ -91,8 +91,39 @@ const agregar_producto = async (req, res) => {
     }
 }
 
+const ObtenerTipos = async (req, res) => {
+
+    try {
+
+        const [row] = await db.query('SELECT t.nombre, t.activo, (SELECT COUNT(*) FROM producto p WHERE idTipo = t.id) AS cantidad FROM tipoproducto t')
+
+        console.log({row});
+
+        res.json(row)
+
+    } catch (error) {
+        
+        console.log(row);
+        
+    }
+    
+}
+
+const AgregarCategoria = async (req, res) => {
+
+    const { nombre } = req.body
+
+    try {
+        
+        const [row] = db.query('INSERT INTO tipoproducto (nombre, activo) VALUES (?,?)', [nombre, 1])
+
+    } catch (error) {
+        
+    }
+}
 
 
 
 
-module.exports = { estadisticas, mostrar_productos, agregar_producto }
+
+module.exports = { estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria }

@@ -23,6 +23,18 @@ app.get('/agregarProducto', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'NuevoProducto', 'NuevoPorducto.html'))
 })
 
+app.get('/MostrarCategorias', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'Categorias', 'Categorias.html'))
+})
+
+app.get('/AgregarCategoria', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'Categorias', 'AgregarCategori.html'))
+})
+
+app.get('/inventario', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'Inventario', 'Inventario.html'))
+})
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
 

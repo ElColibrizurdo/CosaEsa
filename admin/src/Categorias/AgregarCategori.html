@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <div>
+            <label for="">Nombre de la categoria</label>
+            <input type="text" name="nombre" id="nombre">
+        </div>
+        <div>
+            <label for="">Imagen de la portada</label>
+            <input type="file" name="image" id="image" accept="image/" onchange="AgregarPortada(this)" oninput="'/upload'">
+        </div>
+        <div>
+            <label for="">Agregar producto a categoria</label>
+            <button type="button">Agregar</button>
+            <ul id="productos">
+               
+            </ul>
+        </div>
+    </form>
+
+    <script src="../Categorias/AgregarCategori.js"></script>
+</body>
+</html>

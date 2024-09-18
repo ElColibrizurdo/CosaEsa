@@ -1,3 +1,5 @@
+
+
 async function mostrar_productos() {
     
     const lista = document.getElementById('lista')
@@ -12,8 +14,20 @@ async function mostrar_productos() {
         data.forEach(element => {
             
             const punto = document.createElement('li')
-            punto.textContent = element.descripcion + ', ' + element.precio + ', ' + element.estado + ', ' + element.id + ', ' + ', ' + element.variantes
+            punto.textContent = element.descripcion + ', ' + element.precio + ', ' + element.variantes + ', ' + element.estado
             lista.appendChild(punto)
+
+            const ulr = window.location.pathname
+            console.log(ulr.substring(1));
+
+            if (urlencoded.substring(1) == 'inventario') {
+
+                const estatus = document.createElement('select')
+                punto.textContent += estatus
+
+                
+            }
+            
         });
         
 

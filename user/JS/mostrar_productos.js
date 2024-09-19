@@ -1,6 +1,6 @@
 console.log(window.location.href);
 
-let cantiadCartas = 12
+let cantiadCartas = 15
 
 let arrayPrincipal = []
 function obtener_productis(tipos, equipos, stock, ) {

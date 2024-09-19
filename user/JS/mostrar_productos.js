@@ -248,6 +248,8 @@ function FiltrarDatos(buton) {
     const titulo = document.querySelector('.titulo')
 
     console.log(buton);
+    console.log(filtros);
+    
 
     if (buton.classList[1] == 'equipos') {
         

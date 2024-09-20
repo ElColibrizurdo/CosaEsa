@@ -15,6 +15,10 @@ app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname, '..', 'Bienvenido', 'Bienvenido.html'))
 })
 
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'Usuarios', 'IniciarSesion.html'))
+})
+
 app.get('/productos', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'Productos', 'Productos.html'))
 })

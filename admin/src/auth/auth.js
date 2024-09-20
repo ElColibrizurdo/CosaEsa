@@ -115,9 +115,53 @@ const AgregarCategoria = async (req, res) => {
 
     try {
         
-        const [row] = db.query('INSERT INTO tipoproducto (nombre, activo) VALUES (?,?)', [nombre, 1])
+        const [row] = await db.query('INSERT INTO tipoproducto (nombre, activo) VALUES (?,?)', [nombre, 1])
+
+        res.json(row)
 
     } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const CambiarEstado = async (req, res) => {
+
+    const { id, estado } = req.body
+    console.log(id);
+    console.log(estado);
+    
+
+    try {
+        
+        const row = await db.query('UPDATE producto SET estado = ? WHERE id = ?' , [estado, id])
+
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const login = async (req, res) => {
+
+    const correo = req.query.correo
+    const pass = req.query.pass
+
+    console.log(correo);
+    console.log(pass);
+    
+
+    try {
+        
+        const [row] = await db.query('SELECT EXISTS ( SELECT 1 FROM usuario WHERE email = ? AND password = ? ) AS resultado', [correo, pass])
+        console.log(row);
+        
+        res.json({row})
+
+    } catch (error) {
+        console.log(error);
         
     }
 }
@@ -126,4 +170,4 @@ const AgregarCategoria = async (req, res) => {
 
 
 
-module.exports = { estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria }
+module.exports = { estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login }

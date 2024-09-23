@@ -12,11 +12,11 @@ app.use('/auth', authRoutes)
 
 app.use(express.static(path.join(__dirname, '..')))
 app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, '..', 'Bienvenido', 'Bienvenido.html'))
+    res.sendFile(path.join(__dirname, '..', 'Usuarios', 'IniciarSesion.html'))
 })
 
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'Usuarios', 'IniciarSesion.html'))
+app.get('/bienvenida', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'Bienvenido', 'Bienvenido.html'))
 })
 
 app.get('/productos', (req, res) => {
@@ -37,6 +37,10 @@ app.get('/AgregarCategoria', (req, res) => {
 
 app.get('/inventario', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'Inventario', 'Inventario.html'))
+})
+
+app.get('/redireccionar', (req, res) => {
+    res.redirect
 })
 
 const storage = multer.diskStorage({

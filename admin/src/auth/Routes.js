@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login } = require('./auth')
+const {estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto } = require('./auth')
 
 router.get('/estadisticas', estadisticas)
 router.get('/mostrarProductos', mostrar_productos)
@@ -9,5 +9,6 @@ router.get('/categorias', ObtenerTipos)
 router.post('/agregarCategoria', AgregarCategoria)
 router.post('/cambiarEstado', CambiarEstado)
 router.get('/login', login)
+router.post('/eliminarProducto', EliminarProducto)
 
 module.exports = router

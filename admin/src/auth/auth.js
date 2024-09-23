@@ -166,8 +166,25 @@ const login = async (req, res) => {
     }
 }
 
+const EliminarProducto = async (req, res) => {
+
+    const { id } = req.body
+
+    try {
+
+        const [row] = await db.query('DELETE FROM producto WHERE id = ?', [id])
+        console.log(row);
+        
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 
 
 
 
-module.exports = { estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login }
+
+module.exports = { estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

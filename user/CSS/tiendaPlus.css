@@ -385,6 +385,7 @@
                 text-decoration: none;
                 border-radius: 8px;
                 
+                width: 20px;
             }
             .pag_num.selected{
                 color: #FFFFFF;

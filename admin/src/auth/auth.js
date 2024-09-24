@@ -183,8 +183,55 @@ const EliminarProducto = async (req, res) => {
     }
 }
 
+const MostrarUsuarios = async (req, res) => {
+
+    try {
+        
+        const [row] = await db.query('SELECT name, role, fechaAlta, id FROM usuario WHERE role = "admin"')
+
+        console.log(row);
+        
+        
+        res.json([row])
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const EliminarColaborador = async (req, res) => {
+
+    const id = req.query.id
+
+    try {
+        
+        const row = await db.query('DELETE FROM usuario WHERE id = ?', [id])
+
+        console.log(row);
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const CrearColaborador = async (req, res) => {
+
+    const { nombre, pass, ape, email } = req.body
+
+    try {
+        
+        const row = await db.query('INSERT INTO usuario (name, email, password, Nombres, ApellidoPrimero, ApellidoSegundo, role, verificado) VALUES (?,?,?,?,?,?,?,?)', [nombre, email, pass, nombre, ape, ape, 'admin', 1])
+
+        res.json([row])
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 
 
-
-
-module.exports = { estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+module.exports = { EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

@@ -39,6 +39,14 @@ app.get('/inventario', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'Inventario', 'Inventario.html'))
 })
 
+app.get('/admins', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'Admins', 'Admin.html'))
+})
+
+app.get('/crearColaboradores', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'Admins', 'CrearAdmin.html'))
+})
+
 app.get('/redireccionar', (req, res) => {
     res.redirect
 })

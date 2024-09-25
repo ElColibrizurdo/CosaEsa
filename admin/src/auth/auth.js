@@ -60,7 +60,7 @@ const agregar_producto = async (req, res) => {
             
             if (indice == 0) {
                 
-                const rutaDestino = path.join(__dirname, '..', '..','..','user','IMAGES','articulos', row[0].insertId + '.png')
+                const rutaDestino = path.join(__dirname, '..', '..','..','user','img','articulos', row[0].insertId + '.png')
 
                 fs.rename(rutaOriginal, rutaDestino, (err) => {
                     if (err) {
@@ -71,7 +71,7 @@ const agregar_producto = async (req, res) => {
                 })
             } else {
 
-                const rutaDestino = path.join(__dirname, '..', '..','..','user','IMAGES','articulos', row[0].insertId + '_' + indice + '.png') 
+                const rutaDestino = path.join(__dirname, '..', '..','..','user','img','articulos', row[0].insertId + '_' + indice + '.png') 
 
                 fs.rename(rutaOriginal, rutaDestino, (err) => {
                     if (err) {

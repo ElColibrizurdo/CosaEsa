@@ -50,7 +50,7 @@ async function ImprimirProductos() {
         const carta = `
         <div class="carta" >
                                 <div class="carta_img">
-                                    <img src="../IMAGES/articulos/${element.id}.png" alt="alt"/>
+                                    <img src="../img/articulos/${element.id}.png" alt="alt"/>
                                 </div>
                                 <div class="carta_txt">
                                     <div class="carta_txt_1 espaciado">
@@ -108,7 +108,7 @@ async function consultaCompra(idSesion) {
 
             content_cartas.innerHTML += `<div class="carta" >
                         <div class="carta_img">
-                            <img src="../IMAGES/prueba_cart.png" alt="alt"/>
+                            <img src="../img/prueba_cart.png" alt="alt"/>
                         </div>
                         <div class="carta_txt">
                             <div class="carta_txt_1 espaciado">

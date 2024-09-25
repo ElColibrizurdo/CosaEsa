@@ -3,15 +3,13 @@ const contador = 5
 
 
 async function Clasificaciones(btn) {
-
-   console.log(btn);
-   console.log(saltos);
+ 
    
 
     const response = await fetch(`/auth/filtros?producto=%camiseta%&saltos=${saltos}`)
     const data = await response.json()
 
-    console.log(data);
+  
     
     
     MostrarProductos(btn, data)
@@ -21,14 +19,12 @@ async function Clasificaciones(btn) {
 
 async function EjecutarScripts() {
     
-    console.log('ejecutando poner likes');
     
     await Poner_Likes('../JS/Poner_Likes.js')
 }
 
 function Salto(params) {
  
-    console.log(params);
     const botones = document.querySelectorAll('.radio-button')
 
     botones.forEach((element, indice) => {
@@ -36,7 +32,6 @@ function Salto(params) {
         if (element.checked) {
             
             if (params == '-') {
-                console.log('atras');
                 
                 if (saltos[indice] == 0) {
                     
@@ -66,17 +61,15 @@ function Salto(params) {
 
 function MostrarProductos(params, data) {
 
-    console.log(params);
+   
     
 
     const contenedor_recomendados = document.querySelector('.grupo_cartas_recomendaciones')
     contenedor_recomendados.innerHTML = ' '
-    console.log(params.classList[1]);
     
 
     switch (params.classList[1]) {
         case "0":
-            console.log('productos');
             
             data.productos.forEach(element => {
 
@@ -87,7 +80,6 @@ function MostrarProductos(params, data) {
             //contenedor_recomendados.setAttribute('p', pRecomendados)
             break;
         case "1":
-            console.log('mas vendidos');
             data.masVendidos.forEach(element => {
 
                 CrearCards(element, contenedor_recomendados)
@@ -95,7 +87,6 @@ function MostrarProductos(params, data) {
             //contenedor_recomendados.setAttribute('v', pRecomendados)
             break;
         case "2":
-            console.log('preventa');
             data.preventa.forEach(element => {
 
                 CrearCards(element, contenedor_recomendados)
@@ -104,7 +95,6 @@ function MostrarProductos(params, data) {
             break;
     
         default:
-            console.log('productos');
             data.productos.forEach(element => {
 
                 CrearCards(element, contenedor_recomendados)
@@ -153,7 +143,7 @@ function CrearCards(element, contenedor) {
     //Imagen del producto
     const img = document.createElement('img')
     img.classList.add('img_carta')
-    img.src = '../IMAGES/articulos/' + element.id + '.png'
+    img.src = '../img/articulos/' + element.id + '.png'
 
     //Parte texto de la carta
     const card_body = document.createElement('div')
@@ -208,7 +198,6 @@ function CrearCards(element, contenedor) {
     card.setAttribute('tipo', element.idTipo)
     card.setAttribute('equipo', element.idEquipo)
 
-    console.log(card);
     
     contenedor.appendChild(card)
 }
@@ -239,7 +228,6 @@ async function DarLike(boton) {
         const data = await response.json()
         
         if (data.ok) {
-            console.log('To salio bien');
         }
 
     } catch (error) {
@@ -249,7 +237,6 @@ async function DarLike(boton) {
 
 function FiltrarDatos(boton) {
     
-    console.log(boton.attributes[2].value);
     
     window.location.href = `/tienda?equipo=${boton.getAttribute('value')}`
 }

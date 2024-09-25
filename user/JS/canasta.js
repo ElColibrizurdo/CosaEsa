@@ -90,7 +90,7 @@ async function addProductoRelacionado(idProducto){
              //Imagen del producto
              const img = document.createElement('img')
              img.classList.add('img_carta')
-             img.src = '../IMAGES/articulos/' + element.id + '.png'
+             img.src = '../img/articulos/' + element.id + '.png'
 
              console.log(img.src)
 
@@ -181,10 +181,10 @@ function Mostrar_Producto(data) {
     const btn_agregar = document.querySelector('.btn_pedido')
     btn_agregar.innerText = 'Agregar al carrito - Total ' + producto.precio
 
-    const images = document.querySelectorAll('.img-principal')
+    const img = document.querySelectorAll('.img-principal')
 
-    images.forEach(element => {
-        element.src='../IMAGES/articulos/' + producto.id + '.png'
+    img.forEach(element => {
+        element.src='../img/articulos/' + producto.id + '.png'
     })
 
     /*const label_descripcion = document.getElementById('label-descripcion')

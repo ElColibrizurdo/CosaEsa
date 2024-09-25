@@ -1,3 +1,4 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const bcrypt = require('bcryptjs');
 const crypto =require('crypto')
@@ -367,7 +368,7 @@ const dar_like = async (req, res) => {
     const { number, sesion, estado } = req.body
     let [row] = ''
 
-    console.log('sesion ' + sesion);
+    console.log('sesion p' + sesion);
     
 
     try {
@@ -383,7 +384,8 @@ const dar_like = async (req, res) => {
              [row] = await db.query('DELETE FROM productousuario WHERE idUsuario = ? AND idProducto = ?', [idUsuario[0].idUsuario, number])
             
         }
-        res.status(500).json({row})
+        
+        res.json({row})
     } catch (error) {
     }
 
@@ -489,35 +491,62 @@ const cantidad_cesta = async (req, res) => {
 
     const token = req.query.token
     
+    console.log('token');
+    
+    console.log(token);
     
 
     try {
 
-        fetch('https://tienda.people.com//protected', {
+        fetch('https://tienda.people.com/protected/', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token 
             }
         })
-        .then(response => response.json())
-        .then(async data => {
-            console.log('cantidad');
-            console.log(data);
+        .then(response => {
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers.get('content-type'));
             
-            const [row] = await db.query('SELECT COUNT(*) AS cantidad FROM canasta_productos WHERE id_canasta = ?', [data.canasta])
-        
-        res.json(row)
+            // Verificar si la respuesta es exitosa (status 200)
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor: ' + response.statusText);
+            }
+            
+            const contentType = response.headers.get('content-type');
+            
+            // Si el tipo de contenido es JSON, lo procesamos como tal
+            if (contentType && contentType.includes('application/json')) {
+                return response.json();
+            } else {
+                // Si no es JSON, lo procesamos como texto (para inspeccionar posibles errores)
+                return response.text();
+            }
+        })
+        .then(async data => {
+          
+            if (typeof data === 'string' && data.startsWith('<')) {
+                console.log('Error del servidor (HTML):', data);
+                throw new Error('La respuesta no contiene JSON válido. HTML recibido.');
+            }
+    
+            console.log('Datos recibidos:', data);
+    
+            // Consulta a la base de datos usando `data.canasta`
+            const [row] = await db.query('SELECT COUNT(*) AS cantidad FROM canasta_productos WHERE id_canasta = ?', [data.canasta]);
+    
+            res.json(row);
             
         })
         .catch(error => {
-            console.log(error);
+            console.log(error + 'Error en la solicitud');
         })
         
         
         
 
     } catch (error) {
-        console.log(error);
+        console.log(error + 'Error en la operacion');
         
     }
 }
@@ -538,7 +567,8 @@ const cliente_existe = async (req, res) => {
         })
         .then(response => response.json())
         .then(async data => {
-
+            console.log('cliente existe');
+            
             console.log(data);
             
 
@@ -582,6 +612,7 @@ const verificarContra = async (req, res) => {
         })
         .then(response => response.json())
         .then(async data => {
+
             console.log(data);
             
             const [row] = await db.query('SELECT password FROM usuario WHERE id = ?', [data.id])
@@ -657,7 +688,7 @@ const cerrar_sesion = async (req, res) => {
 
     try {
 
-        fetch('https://tienda.people.com//protected', {
+        fetch('https://tienda.people.com/protected', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -666,7 +697,11 @@ const cerrar_sesion = async (req, res) => {
         .then(response => response.json())
         .then(async data => {
 
+            console.log('data');
+            
             console.log(data);
+            console.log('data id');
+            
             console.log(data.id);
             
 

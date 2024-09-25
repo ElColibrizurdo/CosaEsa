@@ -23,14 +23,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/auth', authRoutes);
 app.use('/protected', protectedR)
-app.use('/admin', adminRoutes)
 
 // Servir archivos estáticos desde la carpeta "public"
 app.use(express.static(path.join(__dirname)));
 
 // Servir el archivo index.html en la ruta raíz
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'HTML', 'NavBar.html'));
+    res.sendFile(path.join(__dirname, 'HTML', 'Home.html'));
 });
 
 app.get('/tienda', (req, res) => {

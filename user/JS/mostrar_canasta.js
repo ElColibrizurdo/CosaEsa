@@ -20,7 +20,7 @@ async function inicio() {
 
         console.log(btn);
 
-        const columna = document.getElementById('div_scroll')
+        const columna = document.querySelector('.div_scroll')
         columna.innerHTML = ''
         
         const id = localStorage.getItem('sesion')
@@ -98,7 +98,7 @@ function Crear_card(producto, total, cantidad, idCanasta, columna, etiqueta, num
     img_carrito_cart.classList.add('img_carrito_cart')
 
     const img = document.createElement('img')
-    img.src = '../IMAGES/articulos/' + producto[0][0].id + '.png'
+    img.src = '../img/articulos/' + producto[0][0].id + '.png'
 
     img_carrito_cart.appendChild(img)
 

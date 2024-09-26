@@ -59,7 +59,7 @@ const register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt);
         console.log(salt);
         console.log(hashedPassword);
-        await db.query('INSERT INTO usuario (name, email, password, Activo, Nombres, ApellidoPrimero, ApellidoSegundo, fechaNacimiento, token, verificado) VALUES (?,?,?,?,?,?,?,?,?)', [apodo, email, hashedPassword, 1, nombre, apellidoP, apellidoM, fechaNa, token, 1]);
+        await db.query('INSERT INTO usuario (name, email, password, Activo, Nombres, ApellidoPrimero, ApellidoSegundo, fechaNacimiento, token, verificado) VALUES (?,?,?,?,?,?,?,?,?,?)', [apodo, email, hashedPassword, 1, nombre, apellidoP, apellidoM, fechaNa, token, 1]);
         
         MandarVerificacion(email, token)
         res.status(201).json({ message: 'Usuario registrado'});

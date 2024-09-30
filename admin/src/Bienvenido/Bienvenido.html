@@ -3,41 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Bienvenido/Bienvenido.css">
     <title>Document</title>
 </head>
 <body>
-    <select name="" id="tiempo" onchange="Estadisticas()">
-        <option value="1">Hoy</option>
-        <option value="30">Ultimos 30 dias</option>
-        <option value="15">Ultimos 15 dias</option>
-        <option value="90">Ultimos 3 meses</option>
-        <option value="180">Ultimos 6 meses</option>
-        <option value="360">Ultimo año</option>
-    </select>
-
-    <h1>Sesiones del sitio</h1>
-    <h2 id="sesiones"></h2>
-    <h1>Ventas Totales</h1>
-    <h2 id="ventas"></h2>
-    <h1>Pedidos Totales</h1>
-    <h2 id="pedidos"></h2>
-
-    <select name="" id="tiempo2" onchange="Estadisticas()">
-        <option value="1">Hoy</option>
-        <option value="30">Ultimos 30 dias</option>
-        <option value="15">Ultimos 15 dias</option>
-        <option value="90">Ultimos 3 meses</option>
-        <option value="180">Ultimos 6 meses</option>
-        <option value="360">Ultimo año</option>
-    </select>
-
-    <h1>Usuarios Registrados</h1>
-    <h2 id="registrados"></h2>
-    <h1>Usuarios Invitados</h1>
-    <h2 id="invitados"></h2>
-    <h1>Newsletter</h1>
-    <h2 id="letter"></h2>
-    
+    <div class="header"></div>
+    <div class="modal_filtro_estadisticas"></div>
+    <div class="Contenedor">
+        <nav class="barra_lateral">
+            <a>inicio</a>
+            <a>ventas</a>
+            <a>tienda</a>
+        </nav>
+        <div class="Space">
+            <div class="titulo_space">
+                <h1>Bienvenido</h1>
+                <button>Descargar estadisticas</button>
+            </div>
+            <div class="contendedor_datos">
+                <h2>Estadisticas</h2>
+                <div class="linea"></div>
+                <h5>Tus Estadisticas de los ultimos </h5>
+                <select name="" id="tiempo" onchange="Estadisticas()">
+                    <option value="1">Hoy</option>
+                    <option value="30">Ultimos 30 dias</option>
+                    <option value="15">Ultimos 15 dias</option>
+                    <option value="90">Ultimos 3 meses</option>
+                    <option value="180">Ultimos 6 meses</option>
+                    <option value="360">Ultimo año</option>
+                </select>
+                <div class="grupo_cartas">
+                    <div class="carta">
+                        <h1>Sesiones del sitio</h1>
+                        <h2 id="sesiones"></h2>
+                    </div>
+                    <div class="carta">
+                        <h1>Ventas Totales</h1>
+                        <h2 id="ventas"></h2>
+                    </div>
+                    <div class="carta">
+                        <h1>Pedidos Totales</h1>
+                        <h2 id="pedidos"></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="contendedor_datos">
+                <h2>Estadisticas</h2>
+                <div class="linea"></div>
+                <h5>Tus Estadisticas de los ultimos </h5>
+                <select name="" id="tiempo2" onchange="Estadisticas()">
+                    <option value="1">Hoy</option>
+                    <option value="30">Ultimos 30 dias</option>
+                    <option value="15">Ultimos 15 dias</option>
+                    <option value="90">Ultimos 3 meses</option>
+                    <option value="180">Ultimos 6 meses</option>
+                    <option value="360">Ultimo año</option>
+                </select>
+            
+                <div class="grupo_cartas">
+                    <div class="carta">
+                        <h1>Usuarios Registrados</h1>
+                        <h2 id="registrados"></h2>
+                    </div>
+                    <div class="carta">
+                        <h1>Usuarios Invitados</h1>
+                        <h2 id="invitados"></h2>
+                    </div>
+                    <div class="carta">
+                        <h1>Newsletter</h1>
+                        <h2 id="letter"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="../Bienvenido/Bienvenido.js"></script>
 </body>
 </html>

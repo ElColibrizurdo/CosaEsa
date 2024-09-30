@@ -1,0 +1,127 @@
+
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:Obviously;
+    }
+    @font-face{
+        font-family:Obviously;
+        src:url(../../img/fonnts.com-Obviously.otf);
+    }
+    @font-face{
+         font-family: Obviously-Bold;
+        src:url(../../img/fonnts.com-Obviously_Bold.otf);
+    }
+    /* ---------- Body ----------------*/
+    body{
+        
+    }
+    /* ---------- Body ----------------*/
+    /* ---------- Header ----------------*/
+        .header{
+            height: 94px;
+            width: 100%
+        }
+        /* ---------- Header ----------------*/
+        /*------------modal_filtro_estadisticas -----------*/
+        .modal_filtro_estadisticas{
+            width: 232px;
+            height: 290px;
+            border: 2px solid #e9b6a5;
+            position: fixed;
+            z-index: 5;
+
+        }
+        /*------------modal_filtro_estadisticas -----------*/
+        /*----------contendor-----------*/
+        .Contenedor{
+            height: 100%;
+            display: grid;
+             grid-template-columns: 260px auto;
+             grid-template-areas: "barra_lateral Space"
+        }
+            /*----------- barra lateral-----------*/
+            .barra_lateral{
+                grid-area: barra_lateral;
+                background: #2d2c2c;
+            }
+            .barra_lateral a {
+                display: block;
+                color: #ffffff;
+                min-width: 20px;
+                font-family: 'Open Sans', sans-serif;
+            }
+            /*----------- barra lateral-----------*/
+            /*----------- Space-----------*/
+            .Space{
+                grid-area: Space;
+                background: #fcfcfc;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap:24px;
+                padding: 48px;
+            }
+                .titulo_space{
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                }
+                    .titulo_space h1{
+                        font-family: Obviously-Bold;
+                        color: #F15D2A;
+                        font-size: 28px;
+                        font-weight: 300;
+                    }
+                    .titulo_space button{
+                        background: #F15D2A;
+                        border-radius: 12px;
+                        color: #ffffff;
+                        border: none;
+                    }
+                /*--------- contendedor_datos ----------------*/
+                .contendedor_datos{
+                    width: 1082px;
+                    height: 313px;
+                    background: #ffffff;
+                    padding: 24px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    border-radius: 12px;
+                }
+                    .linea{
+                        height: 3px;
+                        width: 100%;
+                        background: #efeeee;
+                    }
+                    .grupo_cartas{
+                        display: grid;
+                        grid-template-columns:  1fr 1fr 1fr ;
+                        gap: 24px;
+                        height: 136px;
+                    }
+                        /*------ carta ---------------*/
+                        .carta{
+                            border-radius: 8px;
+                            border:2px solid #F15D2A;
+                            padding: 12px;
+                            
+                        }
+                            .carta h1{
+                                color: #6f6d6d;
+                                font-size: 16px;
+                                font-weight: 600;
+                            }
+                            .carta h2{
+                                color: #2d2c2c;
+                                font-size: 32px;
+                                font-weight: 900;
+                            }
+                        /*------ carta ---------------*/
+                /*--------- contendedor_datos ----------------*/
+            /*----------- Space -----------*/
+        /*----------contendor-----------*/
+    
+

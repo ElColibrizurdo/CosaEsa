@@ -11,125 +11,116 @@
 <body style="margin-top: 200px;">
 
     <div class="div_scroll" >
-        <div class=" contenedor " >
-          <div class="contenedor_regresar">
-            <a class="atras">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <mask id="mask0_1871_15981" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-                    <rect width="24" height="24" fill="#D9D9D9"/>
-                  </mask>
-                  <g mask="url(#mask0_1871_15981)">
-                    <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z" fill="#1C1C1C"/>
-                  </g>
-              </svg>
-            </a>
-          </div>
-            <div class="header">
-                <img src="../img/logos/prueva.png" width="100px" height="111px" alt="alt" class="logo"/>
-                <h5 class="titulo">Crear Cuentas</h5>
-            </div>
-            <form class="row g-3 needs-validation form" onsubmit="ObtenerDatos(event)" style="overflow-y: scroll;" novalidate>
-                <div>
-                  <label for="validationCustom01" class="form-label">Nombre</label>
-                  <input type="text" class="form-control input_naranja" id="validationCustom01" name="nombre" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                  <div class="invalid-feedback">
-                      Introduce tu nombre 
-                  </div>
-                </div>
-                <div>
-                  <label for="validationCustom01" class="form-label">Apellido Paterno</label>
-                  <input type="text" class="form-control input_naranja" id="validationCustom02" name="apePaterno" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                  <div class="invalid-feedback">
-                      Introduce tu apellido paterno
-                  </div>
-                </div>
-                <div>
-                  <label for="validationCustom01" class="form-label">Apellido Materno</label>
-                  <input type="text" class="form-control input_naranja" id="validationCustom03" name="apeMaterno" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                  <div class="invalid-feedback">
-                      Introduce tu apellido materno
-                  </div>
-                </div>
-                <div>
-                  <label for="validationCustom01" class="form-label">Pais</label>
-                  <select name="pais" id="paises" class="form-control input_naranja" oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()">
-                  
-                  </select>
-                </div>
-                <div>
-                  <label for="validationCustom01" class="form-label">Codigo postal</label>
-                  <input type="text" class="form-control input_naranja" id="cod" name="codigo" oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                  <div class="invalid-feedback">
-                      Introduce tu codigo postal
-                  </div>
-                </div>
-                <div>
-                  <label for="validationCustom01" class="form-label">entidad federativa</label>
-                  <select name="entidad" id="entidad" class="form-control input_naranja">
-                    
-                  </select>
-                </div>
-                <div>
-                  <label for="validationCustom01" class="form-label">Colonia</label>
-                  <select class="form-control input_naranja" id="colonias" name="colonia" required>
-                    
-                  </select>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                  <div class="invalid-feedback">
-                      Introduce tu colonia
-                  </div>
-                </div>
-                <div>
-                  <label for="validationCustom01" class="form-label">Calle</label>
-                  <input type="text" class="form-control input_naranja" id="validationCustom03" name="calle" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                  <div class="invalid-feedback">
-                      Introduce tu calle
-                  </div>
-                </div>
-                <div>
-                  <label for="validationCustom01" class="form-label">Numero exterior</label>
-                  <input type="text" class="form-control input_naranja" id="validationCustom03" name="numExterior" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                  <div class="invalid-feedback">
-                      Introduce tu numero exterior
-                  </div>
-                </div>
-                <div>
-                  <label for="validationCustom01" class="form-label">Numero interior</label>
-                  <input type="text" class="form-control input_naranja" id="validationCustom03" name="numInterior" >
-                  
-                </div>
-               
-                
-
-                <div class="col align-self-center btn_logIn">
-                  <button class="btn_inciarSesion" type="submit">Registrar</button>
-                </div>
-                <div id="div-solicitud">
-                    <label for="validationCustom01" class="form-label">Modificar Datos</label>
-                    <input type="checkbox" name="solicitud" id="solicitud" onchange="ActivarDesactivar(this)">
-                </div>
-              </form>
+      <div class="contenedor">
+        <div class="header">
+            <img src="../../img/logos/prueva.png" width="100px" height="111px" alt="alt" class="logo"/>
+            <h5 class="titulo">Crear Cuentas</h5>
         </div>
+        <form class="row g-3 needs-validation form" onsubmit="ObtenerDatos(event)" novalidate>
+            <div>
+              <label for="validationCustom01" class="form-label">Nombre</label>
+              <input type="text" class="form-control input_naranja" id="validationCustom01"  required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                  Introduce tu Nombre
+              </div>
+            </div>
+            <div>
+              <label for="validationCustom01" class="form-label">Apellido Paterno</label>
+              <input type="text" class="form-control input_naranja" id="validationCustom02"  required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                  Introduce tu Apellido Paterno
+              </div>
+            </div>
+            <div>
+              <label for="validationCustom01" class="form-label">Apellido Materno</label>
+              <input type="text" class="form-control input_naranja" id="validationCustom03"  required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                  Introduce tu Apellido Materno
+              </div>
+            </div>
+            <div>
+              <label for="validationCustom01" class="form-label">Calle</label>
+              <input type="text" class="form-control input_naranja" id="validationCustom03"  required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                  Introduce tu Calle
+              </div>
+            </div>
+            <div>
+              <label for="validationCustom01" class="form-label">Numero exterior</label>
+              <input type="text" class="form-control input_naranja" id="validationCustom03"  required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                  Introduce tu Numero exterior
+              </div>
+            </div>
+            <div>
+              <label for="validationCustom01" class="form-label">Numero exterior</label>
+              <input type="text" class="form-control input_naranja" id="validationCustom03"  required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                  Introduce tu Numero exterior
+              </div>
+            </div>
+            <div>
+              <label for="validationCustom01" class="form-label">Colonia</label>
+              <input type="text" class="form-control input_naranja" id="validationCustom03"  required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                  Introduce tu Colonia
+              </div>
+            </div>
+            <div>
+              <label for="validationCustom01" class="form-label">Codigo postal</label>
+              <input type="text" class="form-control input_naranja" id="validationCustom03" oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                  Introduce tu Codigo postal
+              </div>
+            </div>
+            <div>
+              <label for="validationCustom01" class="form-label">entidad federativa</label>
+              <select name="cars" id="cars" oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()">
+              </select>
+              
+           
+              <label for="validationCustom01" class="form-label">pais</label>
+              <select name="cars" id="cars" oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()">
+                
+              </select>
+              
+            </div>
+            
+
+            <div class="col align-self-center btn_logIn">
+              <button class="btn_inciarSesion" type="submit">Continuar</button>
+            </div>
+          </form>
+        <div>
+            <a>¿Ya tienes un cuenta?</a>
+            <a href="" class="link_registrarse">Inicia Sesión</a>
+        </div>
+      
+    </div>
     </div>
 
 

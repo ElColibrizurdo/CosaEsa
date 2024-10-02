@@ -195,7 +195,7 @@
              </svg>Mis Datos</a>
         </div>
 
-        <a class="cerrar_sesion"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <a class="cerrar_sesion" onclick="CerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
           <mask id="mask0_368_7679" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
             <rect width="24" height="24" fill="#D9D9D9"/>
           </mask>
@@ -685,7 +685,10 @@
     <script src="../JS/Poner_Likes.js" defer></script>
     <script src="../JS/mostrar_productos.js" defer></script>
     <script src="../JS/MostrarFiltros.js" defer></script>
-
+    <script src="../JS/escucha_logeo.js"></script>
+    <script src="../JS/mostrar_canasta.js"></script>
+    <script src="../JS/monitoreo_canasta.js"></script>
+    <script src="../JS/BarraBusqueda.js"></script>
     
 </body>
 <script>
@@ -694,9 +697,18 @@
          let hideTimeout;
          
          perfil.addEventListener('click', () => {
-             clearTimeout(hideTimeout);  // Limpiar cualquier timeout anterior
-             modal_perfil.classList.remove("abrir_modal");
-             setHideTimeout();
+             
+             
+             if (localStorage.getItem('sesion')) {
+                clearTimeout(hideTimeout);  // Limpiar cualquier timeout anterior
+                modal_perfil.classList.remove("abrir_modal");
+                setHideTimeout();
+             } else {
+
+                window.href.location = '/login'
+             }
+
+             
          });
          
          modal_perfil.addEventListener('click', () => {

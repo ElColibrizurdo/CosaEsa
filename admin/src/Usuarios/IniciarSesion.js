@@ -1,6 +1,6 @@
 async function IniciarSesion(params) {
 
-    //params.preventDefault()
+    
     
     
     const correo = document.getElementById('correo')
@@ -17,5 +17,7 @@ async function IniciarSesion(params) {
         
         window.location.href = '/bienvenida'
     }
+
+    params.preventDefault()
     
 }

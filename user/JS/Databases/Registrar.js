@@ -4,7 +4,7 @@ function RegistrarUsuarios(event) {
 
     console.log(event);
 
-    console.log(event.target[0].value);
+    //console.log(event.target[0].value);
     
     const nombreApellido = document.getElementById('validationCustom01').value
     const Apodo = document.getElementById('validationCustom02').value

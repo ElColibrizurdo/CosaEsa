@@ -1,6 +1,6 @@
 const { query } = require('express')
 const db = require('../Databases/Databases')
-const  appModule = require('../server/app')
+const  appModule = require('../app')
 const fs =  require('fs')
 const path = require('path')
 

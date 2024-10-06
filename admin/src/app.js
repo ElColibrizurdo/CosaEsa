@@ -75,9 +75,9 @@ app.post('/upload', upload.single('image'), (req, res) => {
       // Puedes enviar la ruta donde se guardó la imagen de vuelta al cliente
       res.send(req.file.filename);
 })
-//const IP = '192.168.1.69'
+const IP = '187.188.96.79'
 
-app.listen(3000, () => {
+app.listen(3000, IP, () => {
     console.log(`Server corriendo en 3000`);
     
 })

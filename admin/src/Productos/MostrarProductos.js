@@ -2,7 +2,7 @@
 
 async function mostrar_productos() {
     
-    const lista = document.getElementById('lista')
+    const lista = document.querySelector('.div_scroll')
 
     try {
         
@@ -11,69 +11,48 @@ async function mostrar_productos() {
 
 
         data.forEach(element => {
-            
-            const punto = document.createElement('li')
-            punto.setAttribute('lista', element.id)
-            
             console.log(element);
-            
-            lista.appendChild(punto)
 
-            const ulr = window.location.pathname
-            console.log(ulr.substring(1));
-            
+            let estado = 'pepe'
 
-            if (ulr.substring(1) == 'inventario') {
+            if (element.estado == 0) {
+                
+                estado = 'Agotado'
 
-                punto.textContent = element.descripcion + ', ' + element.variantes 
+            } else if (element.estado == 1) {
+                
+                estado = 'Disponible'
 
-                const estatus = document.createElement('select')
-                
-                
-                const opciones = `
-                    <option value="1">Disponible</option>
-                    <option value="11">Agotado </option>
-                    <option value="0">Preventa</option>
-                `
-
-                estatus.innerHTML = opciones
-                console.log(opciones.value);
-                
-                estatus.value = element.estado
-                
-                console.log(element.estado);
-                
-                
-                punto.appendChild(estatus)
-                estatus.setAttribute('onchange', 'CambiarEstado(this)')  
-
-                
             } else {
-             
-                const estado = {
-                    0: 'preventa',
-                    1: 'disponible',
-                    11: 'agotado'
-                }
-                
-                punto.textContent = element.descripcion + ', ' + element.precio + ', ' + element.variantes + ', ' + (estado[element.estado] || (() => console.log('ntp')));
 
-                const acciones = document.createElement('select')
-                acciones.setAttribute('onclick', 'Acciones(this)')
+                estado = 'Preventa'
 
-                const accOpciones = `
-                    <option value="editar">Editar Producto</option>
-                    <option value="eliminar" >Eliminar</option>
-                `
-
-                acciones.innerHTML += accOpciones
-                punto.appendChild(acciones)
-
-                
             }
             
+            const carta = `
+            <div id="${element.id}" class="cart">
+                <label class="checkBox_filtro"><input name="radio" type="checkbox"><div class="transition_checkbox"></div></label>
+                <img src="../img/articulos/${element.id}.png" alt="alt"/>
+                <div class="contendor_cart_nombre">
+                    <h2>${element.descripcion}</h2>
+                </div>
+                <h2>${element.variantes} variantes</h2>
+                <h2>${element.id}</h2>
+                <h2>$ ${element.precio} mxn</h2>
+                <h2>${estado}</h2>
+                       
+                <svg xmlns="http://www.w3.org/2000/svg" onclick="cambiarClase_eliminar(${element.id})" width="24" height="24" viewBox="0 0 24 24"   fill="#6F6D6D">
+                    <mask id="mask0_2039_18386" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                    <rect width="24" height="24" />
+                    </mask>
+                    <path d="M6.93398 21.2033C6.30432 21.2033 5.76773 20.9816 5.32423 20.5381C4.88073 20.0946 4.65898 19.558 4.65898 18.9283V6.06582H3.52148V3.79082H8.86223V2.65332H15.1252V3.79082H20.478V6.06582H19.3405V18.9283C19.3405 19.558 19.1187 20.0946 18.6752 20.5381C18.2317 20.9816 17.6952 21.2033 17.0655 21.2033H6.93398ZM17.0655 6.06582H6.93398V18.9283H17.0655V6.06582ZM8.89223 16.9941H11.0297V7.99407H8.89223V16.9941ZM12.9697 16.9941H15.1072V7.99407H12.9697V16.9941Z" />
+                </svg>
+            </div>
+            `
+            
+             lista.innerHTML += carta
         });
-        
+
 
     } catch (error) {
         console.log(error);
@@ -113,6 +92,18 @@ async function Acciones(params) {
     }
 }
 
+function Eliminar(id) {
+    
+    const carta = document.querySelectorAll('.cart')
 
+    carta.forEach(element => {
+
+        if (element.getAttribute('id') == id) {
+            
+            element.remove()
+        }
+        
+    })
+}
 
 mostrar_productos()

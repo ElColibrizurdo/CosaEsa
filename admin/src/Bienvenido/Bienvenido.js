@@ -1,28 +1,24 @@
-async function Estadisticas() {
+async function Estadisticas(paramas) {
     
-    console.log('HOla');
+    console.log(paramas);
     
-
-    const tiempo = document.getElementById('tiempo')
+    const tiempo = document.querySelectorAll('.selecion_a')
     const sesiones = document.getElementById('sesiones')
     const ventas = document.getElementById('ventas')
     const pedidos = document.getElementById('pedidos')
 
-    const tiempo2 = document.getElementById('tiempo2')
     const registrados = document.getElementById('registrados')
     const invitados = document.getElementById('invitados')
 
-    console.log(tiempo.value);
+    console.log(tiempo[0].getAttribute('value'));
+    console.log(tiempo[1].getAttribute('value'));
     
-
+    
     try {
      
         
-        const response = await fetch(`/auth/estadisticas?tiempo=${tiempo.value}&tiempo2=${tiempo2.value}`)
+        const response = await fetch(`/auth/estadisticas?tiempo=${tiempo[0].getAttribute('value')}&tiempo2=${tiempo[1].getAttribute('value')}`)
         const data = await response.json()
-        console.log(data);
-        
-        console.log(data.rows);
         
         sesiones.textContent = data.rows[0].total
         ventas.textContent = data.ventas[0].total
@@ -36,5 +32,7 @@ async function Estadisticas() {
         
     }
 }
+
+
 
 Estadisticas()

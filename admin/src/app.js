@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const authRoutes = require('./auth/Routes')
 const multer = require('multer')
 const app = express()
+const http = require('http')
 
 app.use(bodyParser.json())
 
@@ -75,11 +76,16 @@ app.post('/upload', upload.single('image'), (req, res) => {
       // Puedes enviar la ruta donde se guardó la imagen de vuelta al cliente
       res.send(req.file.filename);
 })
-const IP = '187.188.96.79'
 
-app.listen(3000, IP, () => {
+const server = http.createServer(app)
+
+server.listen(3000, () => {
+
+})
+
+/*app.listen(3000, () => {
     console.log(`Server corriendo en 3000`);
     
-})
+})*/
 
 module.exports = app

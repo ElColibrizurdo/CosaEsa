@@ -92,15 +92,31 @@ async function Acciones(params) {
     }
 }
 
-function Eliminar(id) {
+async function Eliminar(id) {
     
     const carta = document.querySelectorAll('.cart')
 
-    carta.forEach(element => {
+    carta.forEach(async element => {
 
         if (element.getAttribute('id') == id) {
             
-            element.remove()
+            const response = await fetch('/auth/eliminarProducto', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: element.getAttribute('id')
+                })
+            })
+    
+            const data = await response.json()
+            console.log(data.affectedRows);
+    
+            if (data.affectedRows == 1) {
+                
+                element.remove()
+            }
         }
         
     })

@@ -32,7 +32,7 @@ const mostrar_productos = async (req, res) => {
 
     try {
         
-        const [productos] = await db.query('SELECT p.descripcion, p.precio, p.estado, p.id, COUNT(c.id) AS variantes FROM producto p LEFT JOIN colores_producto c ON p.id = c.idProducto GROUP BY p.id ')
+        const [productos] = await db.query('SELECT p.descripcion, p.precio, p.estado, p.id, COUNT(c.id) AS variantes FROM producto p LEFT JOIN colores_producto c ON p.id = c.idProducto WHERE activo = 1 GROUP BY p.id ')
 
         res.json(productos)
         
@@ -172,7 +172,7 @@ const EliminarProducto = async (req, res) => {
 
     try {
 
-        const [row] = await db.query('DELETE FROM producto WHERE id = ?', [id])
+        const [row] = await db.query('UPDATE producto SET activo = 0 WHERE id = ?', [id])
         console.log(row);
         
         res.json(row)

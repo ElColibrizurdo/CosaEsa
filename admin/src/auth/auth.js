@@ -93,17 +93,30 @@ const agregar_producto = async (req, res) => {
 
 const ObtenerTipos = async (req, res) => {
 
+    const tipo = req.query.tipo
+
+    console.log(tipo);
+    
+
     try {
 
-        const [row] = await db.query('SELECT t.nombre, t.activo, (SELECT COUNT(*) FROM producto p WHERE idTipo = t.id) AS cantidad FROM tipoproducto t')
+        const [row] = await db.query('SELECT t.nombre, t.activo, (SELECT COUNT(*) FROM producto p WHERE idTipo = t.id) AS cantidad FROM tipoproducto t ' + tipo)
 
-        console.log({row});
+        row.forEach((element, indice) => {
 
+            console.log(element.activo[0]);
+            
+            
+        })
+
+        console.log(row);
+        
+        
         res.json(row)
 
     } catch (error) {
         
-        console.log(row);
+        console.log(error);
         
     }
     

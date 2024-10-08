@@ -72,10 +72,6 @@ console.log(new Date().getFullYear() + '-' + new Date().getUTCMonth() + '-' + ne
 if (localStorage.getItem('name')) {
 
 
-    
-
-    
-
     const btn = document.getElementById('perfil')
     const name = localStorage.getItem('name')
   

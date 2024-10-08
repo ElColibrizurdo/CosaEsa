@@ -688,7 +688,7 @@ const cerrar_sesion = async (req, res) => {
 
     try {
 
-        fetch('https://tienda.people.com/protected', {
+        fetch('http://localhost:8080/protected', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -696,14 +696,7 @@ const cerrar_sesion = async (req, res) => {
         })
         .then(response => response.json())
         .then(async data => {
-
-            console.log('data');
-            
-            console.log(data);
-            console.log('data id');
-            
-            console.log(data.id);
-            
+        
 
             const now = new Date();
             const year = now.getFullYear();

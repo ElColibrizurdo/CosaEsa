@@ -111,7 +111,7 @@ async function log(inputEmail, inputPassword) {
                 window.location.href = '/?like=' +  params.get('like')
             } 
 
-            fetch('https://tienda.people.com//protected', {
+            fetch(window.location.replace('login'), {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + data.token 

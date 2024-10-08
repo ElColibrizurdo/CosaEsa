@@ -154,6 +154,8 @@ async function RealizarCompra(boton) {
 
     if (document.querySelectorAll('.carta_carrito').length > 0 && localStorage.getItem('sesion')) {
         
+        console.log('Vamo a comprar');
+        
             try {
             
                 const response = await fetch('/auth/venta', {

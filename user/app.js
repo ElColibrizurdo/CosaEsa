@@ -11,6 +11,7 @@ const protectedR = require('./JS/auth/proy');
 const adminRoutes = require('./Admministrador/JS/auth/Routes')
 const { log } = require('console');
 
+
 const options = {
     key: fs.readFileSync(path.join(__dirname, 'server.key')),
     cert: fs.readFileSync(path.join(__dirname, 'server.crt')),
@@ -210,8 +211,9 @@ app.listen(PORT, () => {
 
 const server = https.createServer(options, app);
 
-const PORT = process.env.PORT || 443
-server.listen(PORT, () => {
+const PORT = process.env.PORT || 8080
+
+app.listen(PORT, () => {
     console.log(`Servidor HTTPS escuchando en el puerto ${PORT}`);
 })
 

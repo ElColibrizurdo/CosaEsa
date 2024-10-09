@@ -40,7 +40,7 @@ async function mostrar_productos() {
                     <label class="checkBox_filtro"><input name="radio" type="checkbox"><div class="transition_checkbox"></div></label>
                     <img src="../img/articulos/${element.id}.png" alt="alt"/>
                     <div class="contendor_cart_nombre">
-                        <h2>${element.descripcion}</h2>
+                        <a href="">${element.descripcion}</a>
                     </div>
                     <h2>${element.variantes} variantes</h2>
                     <h2>${element.id}000000000M</h2>

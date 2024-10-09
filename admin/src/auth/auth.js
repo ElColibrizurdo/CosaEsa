@@ -100,7 +100,7 @@ const ObtenerTipos = async (req, res) => {
 
     try {
 
-        const [row] = await db.query('SELECT t.nombre, t.activo, (SELECT COUNT(*) FROM producto p WHERE idTipo = t.id) AS cantidad FROM tipoproducto t ' + tipo)
+        const [row] = await db.query('SELECT t.nombre, t.activo, t.id, (SELECT COUNT(*) FROM producto p WHERE idTipo = t.id) AS cantidad FROM tipoproducto t ' + tipo)
 
         row.forEach((element, indice) => {
 
@@ -246,5 +246,18 @@ const CrearColaborador = async (req, res) => {
     }
 }
 
+const ExtraerColores = async (req, res) => {
 
-module.exports = { EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+    try {
+        
+        const [row] = await db.query('SELECT id, nombre, hexadecimal, clave FROM color WHERE activo = 1')
+
+        res.json(row)
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
+module.exports = { ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

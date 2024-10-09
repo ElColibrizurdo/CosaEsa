@@ -156,3 +156,48 @@ async function AgregarProducto() {
     
     
 }
+
+async function ExtraerCategoriasColores() {
+    
+    const tipos = ""
+
+    const response = await fetch('/auth/categorias?tipo= ' )
+    const data = await response.json()
+
+    data.forEach(element => {
+
+        const opcion = `
+            <option value="${element.id}" >${element.nombre}</option>
+        `
+
+        const selector = document.getElementById('tipo')
+        selector.innerHTML += opcion
+    })
+
+    const responseC = await fetch('/auth/colores')
+    const dataC = await responseC.json()
+
+    dataC.forEach(element => {
+
+        const color = `
+            <option value="${element.nombre}" >${element.nombre}</option>
+        `
+
+        const selectorC = document.getElementById('color')
+        selectorC.innerHTML += color
+    })
+}
+
+function ModificarDatos(id) {
+    
+    console.log(id);
+    
+    const response = await fetch('/auth/')
+}
+
+if (new URLSearchParams(window.location.search).get('idProducto')) {
+    
+    ModificarDatos(new URLSearchParams(window.location.search).get('idProducto'))
+}
+
+ExtraerCategoriasColores()

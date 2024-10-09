@@ -19,7 +19,7 @@
         <form class="row g-3 needs-validation form" onsubmit="ObtenerDatos(event)" novalidate>
             <div>
               <label for="validationCustom01" class="form-label">Nombre</label>
-              <input type="text" class="form-control input_naranja" id="validationCustom01"  required>
+              <input type="text" name="nombre" class="form-control input_naranja" id="validationCustom01"  required>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -29,7 +29,7 @@
             </div>
             <div>
               <label for="validationCustom01" class="form-label">Apellido Paterno</label>
-              <input type="text" class="form-control input_naranja" id="validationCustom02"  required>
+              <input type="text" name="apePaterno" class="form-control input_naranja" id="validationCustom02"  required>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -39,7 +39,7 @@
             </div>
             <div>
               <label for="validationCustom01" class="form-label">Apellido Materno</label>
-              <input type="text" class="form-control input_naranja" id="validationCustom03"  required>
+              <input type="text" name="apeMaterno" class="form-control input_naranja" id="validationCustom03"  required>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -49,7 +49,7 @@
             </div>
             <div>
               <label for="validationCustom01" class="form-label">Calle</label>
-              <input type="text" class="form-control input_naranja" id="validationCustom03"  required>
+              <input type="text" name="calle" class="form-control input_naranja" id="validationCustom03"  required>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -59,7 +59,7 @@
             </div>
             <div>
               <label for="validationCustom01" class="form-label">Numero exterior</label>
-              <input type="text" class="form-control input_naranja" id="validationCustom03"  required>
+              <input type="text" name="numExterior" class="form-control input_naranja" id="validationCustom03"  required>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -69,7 +69,7 @@
             </div>
             <div>
               <label for="validationCustom01" class="form-label">Numero exterior</label>
-              <input type="text" class="form-control input_naranja" id="validationCustom03"  required>
+              <input type="text" name="numInterior" class="form-control input_naranja" id="validationCustom03"  required>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -79,7 +79,7 @@
             </div>
             <div>
               <label for="validationCustom01" class="form-label">Colonia</label>
-              <input type="text" class="form-control input_naranja" id="validationCustom03"  required>
+              <input type="text" name="colonia" class="form-control input_naranja" id="colonias"  required>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -89,7 +89,7 @@
             </div>
             <div>
               <label for="validationCustom01" class="form-label">Codigo postal</label>
-              <input type="text" class="form-control input_naranja" id="validationCustom03" oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()" required>
+              <input type="text" name="codigo" class="form-control input_naranja" id="cod" oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()" required>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -98,16 +98,24 @@
               </div>
             </div>
             <div>
-              <label for="validationCustom01" class="form-label">entidad federativa</label>
-              <select name="cars" id="cars" oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()">
-              </select>
-              
-           
-              <label for="validationCustom01" class="form-label">pais</label>
-              <select name="cars" id="cars" oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()">
-                
-              </select>
-              
+              <label for="validationCustom01" class="form-label">Pais</label>
+              <select name="pais" class="form-control input_naranja" id="paises" oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()">
+              </select>  <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                  Introduce tu Codigo postal
+              </div>
+            </div>
+            <div>
+              <label for="validationCustom01" class="form-label">Entidad federativa</label>
+              <select name="entidad" id="entidad" class="form-control input_naranja oninput="DeterminarUbicacion()" onchange="DeterminarUbicacion()">
+              </select><div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                  Introduce tu Codigo postal
+              </div>
             </div>
             
 

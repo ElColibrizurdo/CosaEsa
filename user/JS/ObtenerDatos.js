@@ -195,9 +195,9 @@ const paramas = new URLSearchParams(window.location.search)
 console.log(paramas.get('comprar'));
 console.log(new URLSearchParams(window.location.search).get('comprar'));
 
-document.querySelector('.atras').addEventListener('click', function () {
+/*document.querySelector('.atras').addEventListener('click', function () {
     
     history.back()
-})
+})*/
 
 DeterminarExistenciaCliente()

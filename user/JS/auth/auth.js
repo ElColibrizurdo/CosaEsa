@@ -554,18 +554,23 @@ const cantidad_cesta = async (req, res) => {
 const cliente_existe = async (req, res) => {
 
     const token = req.query.token
-    console.log(token);
+    console.log(typeof(token));
     
 
     try {
 
-        fetch('https://tienda.people.com//protected', {
+        fetch('http://localhost:8080/protected', {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud: ' + response.statusText);
+            }
+            return response.json();
+        })
         .then(async data => {
             console.log('cliente existe');
             
@@ -587,6 +592,8 @@ const cliente_existe = async (req, res) => {
                 res.json(row)
             }
         })
+
+
     } catch (error) {
         console.log(error);
         

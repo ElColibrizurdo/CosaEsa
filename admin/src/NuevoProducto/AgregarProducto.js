@@ -1,3 +1,4 @@
+
 function MostrarVariantes(event, params) {
 
     
@@ -44,9 +45,27 @@ function MostrarVariantes(event, params) {
     }
 }
 
-function MostrarColores(params) {
+async function MostrarColores(params) {
 
     console.log(params);
+
+    const opcion = params.options[params.selectedIndex]
+
+    const response = await fetch('/auth/agregarColorProducto', {
+        
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            idProducto: new URLSearchParams(window.location.search).get('idProducto'),
+            idColor: opcion.getAttribute('color')
+        })
+    })
+
+    const data = await response.json()
+
+    console.log(data);
     
 
     const fila = document.createElement('li')

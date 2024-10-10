@@ -339,5 +339,24 @@ const ELiminarColorDeProducto = async (req, res) => {
     }
 }
 
+const AgregarColorProducto = async (req, res) => {
 
-module.exports = { ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+    const { idProducto, idColor } = req.body
+
+    console.log(idProducto);
+    console.log(idColor);
+    
+
+    try {
+        
+        const row = db.query('INSERT INTO productocolor (idProducto, idColor) VALUES (?,?)', [idProducto, idColor])
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
+module.exports = { AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

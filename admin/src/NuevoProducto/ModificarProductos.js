@@ -8,6 +8,9 @@ async function MostrarDatos(id) {
     const responseC = await fetch('/auth/colores?id=' + id)
     const dataC = await responseC.json()
 
+    console.log(dataC);
+    
+
     data.forEach(async element => {
 
         if (element.id == id) {
@@ -23,7 +26,11 @@ async function MostrarDatos(id) {
             tipo.value = element.idTipo
             estado.value = element.estado
 
+            
+
             dataC.row.forEach((elementC,indice) => {
+
+               try {
                 
                 if (elementC.id == dataC.rows[indice].idColor) {
                     
@@ -43,6 +50,11 @@ async function MostrarDatos(id) {
 
                     colores.appendChild(fila)
                 }
+
+               } catch (error) {
+                console.log(error);
+                
+               }
                 
             })
 
@@ -84,6 +96,43 @@ async function MostrarDatos(id) {
         }
         
     })
+}
+
+async function ModificarProducto() {
+    
+    try {
+
+        const nombre = document.getElementById('nombre')
+        const precio = document.getElementById('precio')
+        const tipo = document.getElementById('tipo')
+        const estado = document.getElementById('estatus')
+        const colores = document.getElementById('colores')
+        
+        const responde = await fetch('/auth/actualizarProducto', {
+
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: new URLSearchParams(window.location.search).get('idProducto'),
+                idTipo: tipo.value,
+                descripcion: nombre.value,
+                idEquipo: 1,
+                precio: precio.value,
+                estado: estado.value 
+            })
+        })
+
+        const data = await responde.json()
+
+        console.log(data);
+        
+
+    } catch (error) {
+        console.log(error);
+        
+    }
 }
 
 function EliminarColor(params) {

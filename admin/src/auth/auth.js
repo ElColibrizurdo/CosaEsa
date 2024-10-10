@@ -298,7 +298,31 @@ const BuscarImagenes = async (req, res) => {
     }
 }
 
-const ActualizarProducto
+const ActualizarProducto = async (req, res) => {
+
+    const { id, idTipo, descripcion, idEquipo, precio, estado } = req.body
+
+    console.log(precio);
+    console.log(id);
+    console.log(descripcion);
+    console.log(idEquipo);
+    console.log(estado);
+    console.log(idTipo);
+    
+
+    try {
+        
+        const row = await db.query('UPDATE producto SET idTipo = ?, descripcion = ?, idEquipo = ?, precio = ?, estado = ? WHERE id = ?', [idTipo, descripcion, idEquipo, precio, estado, id])
+        console.log(row);
+        
+        res.json(row)
+
+    } catch (error) {
+        
+        console.log(error);
+        
+    }
+}
 
 
-module.exports = { BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+module.exports = { ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

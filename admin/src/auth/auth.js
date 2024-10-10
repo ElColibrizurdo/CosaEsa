@@ -324,7 +324,20 @@ const ActualizarProducto = async (req, res) => {
     }
 }
 
-const ELiminarColor = async 
+const ELiminarColorDeProducto = async (req, res) => {
+
+    const { idProducto, idColor } = req.body
+
+    try {
+        
+        const row = db.query('DELETE FROM productocolor WHERE idProducto = ? AND idColor = ?', [idProducto, idColor])
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 
 
-module.exports = { ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+module.exports = { ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

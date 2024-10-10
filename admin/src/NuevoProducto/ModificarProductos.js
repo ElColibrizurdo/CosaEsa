@@ -28,28 +28,33 @@ async function MostrarDatos(id) {
 
             
 
-            dataC.row.forEach((elementC,indice) => {
+            dataC.rows.forEach((elementC,indice) => {
 
                try {
+                console.log(elementC.idColor);
+                console.log(dataC.row[indice].id);
                 
-                if (elementC.id == dataC.rows[indice].idColor) {
+                dataC.row.forEach(elementCC => {
+
+                    if (elementC.idColor == elementCC.id) {
                     
-                    const fila = document.createElement('li')
-
-                    const label = document.createElement('label')
-                    label.textContent = elementC.nombre
-                    label.classList.add('colores')
-                    label.setAttribute('color', elementC.id)
-
-                    const btn = document.createElement('button')
-                    btn.textContent = 'eliminar'
-                    label.appendChild(btn)
-
-                    fila.appendChild(label)
-                    btn.setAttribute('onclick', 'EliminarColor(this)')
-
-                    colores.appendChild(fila)
-                }
+                        const fila = document.createElement('li')
+    
+                        const label = document.createElement('label')
+                        label.textContent = elementCC.nombre
+                        label.classList.add('colores')
+                        label.setAttribute('color', elementCC.id)
+    
+                        const btn = document.createElement('button')
+                        btn.textContent = 'eliminar'
+                        label.appendChild(btn)
+    
+                        fila.appendChild(label)
+                        btn.setAttribute('onclick', 'EliminarColor(this)')
+    
+                        colores.appendChild(fila)
+                    }
+                }) 
 
                } catch (error) {
                 console.log(error);
@@ -135,14 +140,29 @@ async function ModificarProducto() {
     }
 }
 
-function EliminarColor(params) {
+async function EliminarColor(params) {
     
-
-    console.log(params);
-    
+    console.log(params.parentNode);
 
     params.parentNode.parentNode.remove()
 
+    try {
+        
+        const response = await fetch('/auth/quitarColorProducto', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                idProducto: new URLSearchParams(window.location.search).get('idProducto'),
+                idColor: params.parentNode.getAttribute('color')
+            })
+        })
+
+    } catch (error) {
+        console.log(error);
+        
+    }
 }
 
 if (new URLSearchParams(window.location.search).get('idProducto')) {

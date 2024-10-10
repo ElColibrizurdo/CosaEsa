@@ -324,5 +324,7 @@ const ActualizarProducto = async (req, res) => {
     }
 }
 
+const ELiminarColor = async 
+
 
 module.exports = { ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

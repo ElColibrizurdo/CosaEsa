@@ -191,6 +191,8 @@ async function NuevaImagen(params) {
         const result = await response.json();
         console.log("Imagen subida con éxito:", result);
 
+        location.href() = location.href()
+
     } catch (error) {
         console.log(error);
         

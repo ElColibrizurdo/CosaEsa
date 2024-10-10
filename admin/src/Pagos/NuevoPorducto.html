@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="display: flex; flex-direction: column">
+    <form id="form" style="display: flex; flex-direction: column">
+        <label >
+            Nombre del producto
+            <input type="text" name="nombre" id="nombre">productos
+        </label>
+        <label >
+            Precio del producto
+            <input type="text" name="precio" id="precio">
+        </label>
+        <label >
+            Estatus
+            <select name="estatus" id="estatus">
+                <option value="1">Disponible</option>
+                <option value="0">Proximamente</option>
+            </select>
+        </label>
+        <label >
+            Numero del equipo *opcional*
+            <input type="number" name="nombre" id="nombre">productos
+        </label>
+        <label >
+            SKU
+            <input type="text" name="sku" id="sku">
+        </label>
+        <div  style="display: flex; flex-direction: column">
+            <label >
+                Categorias
+                <select name="tipo" id="tipo" >
+                </select>
+                <ul id="variantes">
+                </ul>
+            </label>
+        </div>
+        <label >
+            Imagenes
+            <input type="file" name="image" id="image" accept="image/*" onchange="SubirImagen(this)" oninput="'/upload'">
+            <ul id="imagenes">
+                
+            </ul>
+        </label>
+        <div>
+            <label >
+                Agregar Color
+                <select name="color" id="color" onclick="MostrarColores(this)">
+                </select>
+                <ul id="colores">
+                    
+                </ul>
+            </label>
+        </div>
+        <button id="finalizar" type="button" onclick="AgregarProducto()">Agregar</button>
+    </form>
+        
+
+        <script src="../NuevoProducto/AgregarProducto.js"></script>
+        <script src="../NuevoProducto/ModificarProductos.js"></script>
+</body>
+</html>         

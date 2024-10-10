@@ -18,10 +18,8 @@
         <label >
             Estatus
             <select name="estatus" id="estatus">
-                <option value="">Mujer</option>
-                <option value="">Hombre</option>
-                <option value="">Niño</option>
-                <option value="">Todos</option>
+                <option value="1">Disponible</option>
+                <option value="0">Proximamente</option>
             </select>
         </label>
         <label >
@@ -30,7 +28,7 @@
         </label>
         <div  style="display: flex; flex-direction: column">
             <label >
-                Variantes
+                Categorias
                 <select name="tipo" id="tipo" >
                 </select>
                 <ul id="variantes">
@@ -47,18 +45,19 @@
         </label>
         <div>
             <label >
-                Agregarr Color
+                Agregar Color
                 <select name="color" id="color" onclick="MostrarColores(this)">
                 </select>
-                <ul>
+                <ul id="colores">
                     
                 </ul>
             </label>
         </div>
-        <button type="button" onclick="AgregarProducto()">Agregar</button>
+        <button id="finalizar" type="button" onclick="AgregarProducto()">Agregar</button>
     </form>
         
 
         <script src="../NuevoProducto/AgregarProducto.js"></script>
+        <script src="../NuevoProducto/ModificarProductos.js"></script>
 </body>
-</html>
+</html>         

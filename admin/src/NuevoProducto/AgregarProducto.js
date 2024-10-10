@@ -46,10 +46,15 @@ function MostrarVariantes(event, params) {
 
 function MostrarColores(params) {
 
+    console.log(params);
+    
+
     const fila = document.createElement('li')
 
     const label = document.createElement('label')
     label.textContent = params.value
+    label.classList.add('colores')
+    label.setAttribute('color', params.options[params.selectedIndex].getAttribute('color'))
 
     const btn = document.createElement('button')
     btn.textContent = 'eliminar'
@@ -128,6 +133,18 @@ async function AgregarProducto() {
 
         nombres.push(element.getAttribute('nombre'))
     })
+
+    const colores = document.querySelectorAll('.colores')
+    let coloresID = []
+
+    colores.forEach(element => {
+        
+        coloresID.push(element.getAttribute('color'))
+    })
+
+    console.log(coloresID);
+    
+
     try {
         
         const responde = await fetch('/auth/agregarProducto', {
@@ -140,6 +157,7 @@ async function AgregarProducto() {
                 nombre: formData.get('nombre'),
                 precio: formData.get('precio'),
                 tipo: formData.get('tipo'),
+                coloresID,
                 equipo: 1,
                 imagenes: nombres
             })
@@ -166,6 +184,9 @@ async function ExtraerCategoriasColores() {
 
     data.forEach(element => {
 
+        console.log(element);
+        
+
         const opcion = `
             <option value="${element.id}" >${element.nombre}</option>
         `
@@ -177,27 +198,22 @@ async function ExtraerCategoriasColores() {
     const responseC = await fetch('/auth/colores')
     const dataC = await responseC.json()
 
-    dataC.forEach(element => {
+    dataC.row.forEach(element => {
+
+        
 
         const color = `
-            <option value="${element.nombre}" >${element.nombre}</option>
+            <option color="${element.id}" value="${element.nombre}" >${element.nombre}</option>
         `
 
         const selectorC = document.getElementById('color')
+        
         selectorC.innerHTML += color
     })
 }
 
-function ModificarDatos(id) {
-    
-    console.log(id);
-    
-    const response = await fetch('/auth/')
-}
 
-if (new URLSearchParams(window.location.search).get('idProducto')) {
-    
-    ModificarDatos(new URLSearchParams(window.location.search).get('idProducto'))
-}
+
+
 
 ExtraerCategoriasColores()

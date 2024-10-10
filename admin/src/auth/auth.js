@@ -1,7 +1,7 @@
 const { query } = require('express')
 const db = require('../Databases/Databases')
 const  appModule = require('../app')
-const fs =  require('fs')
+const fs =  require('fs').promises
 const path = require('path')
 
 const estadisticas = async (req, res) => {
@@ -32,7 +32,7 @@ const mostrar_productos = async (req, res) => {
 
     try {
         
-        const [productos] = await db.query('SELECT p.descripcion, p.precio, p.estado, p.id, COUNT(c.id) AS variantes FROM producto p LEFT JOIN colores_producto c ON p.id = c.idProducto WHERE activo = 1 GROUP BY p.id ')
+        const [productos] = await db.query('SELECT p.descripcion, p.precio, p.estado, p.id, p.idTipo, COUNT(c.id) AS variantes FROM producto p LEFT JOIN colores_producto c ON p.id = c.idProducto WHERE activo = 1 GROUP BY p.id ')
 
         res.json(productos)
         
@@ -44,14 +44,23 @@ const mostrar_productos = async (req, res) => {
 
 const agregar_producto = async (req, res) => {
 
-    const { nombre, precio, tipo, equipo, imagenes } = req.body
-    console.log(imagenes);
+    const { nombre, precio, tipo, coloresID, equipo, imagenes } = req.body
+    console.log(coloresID);
     
 
     try {
         
         const row = await db.query('INSERT INTO producto (idTipo, descripcion, idEquipo, precio, stock, estado) VALUES (?,?,?,?,?,?)', [parseInt(tipo), nombre, equipo, precio, 15, 0])
         console.log(row[0].insertId);
+
+        if (row[0].insertId) {
+
+            coloresID.forEach(async element => {
+
+                const rowC = await db.query('INSERT INTO productocolor (idProducto, idColor) VALUES (?,?)', [row[0].insertId, element])
+                console.log(rowC);
+            })
+        }
         
 
         imagenes.forEach((element, indice) => {
@@ -248,16 +257,48 @@ const CrearColaborador = async (req, res) => {
 
 const ExtraerColores = async (req, res) => {
 
+    const id = req.query.id
+
+    console.log(id);
+    
+
     try {
         
         const [row] = await db.query('SELECT id, nombre, hexadecimal, clave FROM color WHERE activo = 1')
+        const [rows] = await db.query('SELECT idColor FROM productocolor WHERE idProducto = ?', [id])
 
-        res.json(row)
+        res.json({row, rows})
     } catch (error) {
         console.log(error);
         
     }
 }
 
+const BuscarImagenes = async (req, res) => {
 
-module.exports = { ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+    const id = req.query.id
+
+    try {
+        
+        const directorio = path.join(__dirname, '..', 'img', 'articulos')
+        const archivos = await fs.readdir(directorio)
+
+        const archivosFiltrado = archivos
+        .filter(archivo => archivo.startsWith(id + '_') || archivo.startsWith(id + '.'))
+        .map(archivo => ({
+            nombre:archivo,
+            rutaCompleta: path.join(directorio, archivo)
+        }))
+
+        res.json(archivosFiltrado)
+
+    } catch (error) {   
+        console.log(error);
+        
+    }
+}
+
+const ActualizarProducto
+
+
+module.exports = { BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

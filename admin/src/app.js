@@ -79,7 +79,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
 
 const server = http.createServer(app)
 
-server.listen(8080, () => {
+server.listen(3000, () => {
 
 })
 

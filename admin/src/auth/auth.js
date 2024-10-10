@@ -343,14 +343,23 @@ const AgregarColorProducto = async (req, res) => {
 
     const { idProducto, idColor } = req.body
 
-    console.log(idProducto);
-    console.log(idColor);
+   
     
 
     try {
+
+        const [existe] = await db.query('SELECT EXISTS (SELECT 1 FROM productocolor WHERE idProducto = ? AND idColor = ?) AS existe', [idProducto, idColor])
         
-        const row = db.query('INSERT INTO productocolor (idProducto, idColor) VALUES (?,?)', [idProducto, idColor])
-        res.json(row)
+        console.log(existe[0].existe);
+        
+
+        if (existe[0].existe != 1) {
+            
+            const row = await db.query('INSERT INTO productocolor (idProducto, idColor) VALUES (?,?)', [idProducto, idColor])
+            res.json(row)
+        }
+
+       
 
     } catch (error) {
         console.log(error);

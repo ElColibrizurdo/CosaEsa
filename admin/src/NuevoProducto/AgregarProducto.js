@@ -89,8 +89,10 @@ async function MostrarColores(params) {
 function SubirImagen(params) {
     
     console.log(params.files[0]);
+    console.log(new URLSearchParams(window.location.search).get('idProducto'));
     
     const formData = new FormData()
+    formData.append('id', new URLSearchParams(window.location.search).get('idProducto'))
     formData.append('image', params.files[0])
 
     const fila = document.createElement('li')

@@ -1,3 +1,5 @@
+
+
 async function MostrarDatos(id) {
     
     console.log(id);
@@ -165,6 +167,36 @@ async function EliminarColor(params) {
     }
 }
 
+async function NuevaImagen(params) {
+    
+    try {
+        console.log(params.files[0]);
+        
+
+        const formData = new FormData()
+        formData.append('image', params.files[0])
+        formData.append('id', new URLSearchParams(window.location.search).get('idProducto'))
+        
+        const response = await fetch('/auth/subirImagen', {
+            method: 'POST',
+            body: JSON.stringify({
+                formData
+            })
+        })
+
+        if (!response.ok) {
+            throw new Error(`Error en la solicitud: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("Imagen subida con éxito:", result);
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
 if (new URLSearchParams(window.location.search).get('idProducto')) {
     
     MostrarDatos(new URLSearchParams(window.location.search).get('idProducto'))
@@ -172,4 +204,9 @@ if (new URLSearchParams(window.location.search).get('idProducto')) {
     const btnFinalizar = document.getElementById('finalizar')
 
     btnFinalizar.setAttribute('onclick', 'ModificarProducto()')
+
+    const btnSubirImagen = document.getElementById('image')
+
+    //btnSubirImagen.setAttribute('enctype', 'NuevaImagen(this)')
+    //btnSubirImagen.removeAttribute('onchange')
 }

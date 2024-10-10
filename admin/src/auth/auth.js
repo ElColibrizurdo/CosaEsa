@@ -3,6 +3,7 @@ const db = require('../Databases/Databases')
 const  appModule = require('../app')
 const fs =  require('fs').promises
 const path = require('path')
+const multer = require('multer');
 
 const estadisticas = async (req, res) => {
 
@@ -343,9 +344,6 @@ const AgregarColorProducto = async (req, res) => {
 
     const { idProducto, idColor } = req.body
 
-   
-    
-
     try {
 
         const [existe] = await db.query('SELECT EXISTS (SELECT 1 FROM productocolor WHERE idProducto = ? AND idColor = ?) AS existe', [idProducto, idColor])
@@ -367,5 +365,67 @@ const AgregarColorProducto = async (req, res) => {
     }
 }
 
+// Configurar el almacenamiento con Multer
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        // Aquí se especifica el directorio donde se guardarán las imágenes
+        cb(null, path.join(__dirname));
+    },
+    filename: function (req, file, cb) {
 
-module.exports = { AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+        const { id } = req.body
+        // Verificar que el ID esté disponible
+        if (!id) {
+            return cb(new Error('ID no proporcionado en el body'), false);
+        }
+        
+
+        // Personaliza el nombre del archivo
+        cb(null, id + path.extname(file.originalname)); // Agrega la extensión original
+    }
+});
+
+// Inicializar el middleware de Multer
+const upload = multer({ storage: storage });
+
+const SubirImagenProducto = async (req, res) => {
+
+    try {
+        // Se utiliza `upload.single` para manejar la subida de la imagen
+        upload.single('image')(req, res, function (err) {
+            if (err) {
+                return res.status(400).send(err.message);
+            }
+
+            // Verifica si se ha subido un archivo
+            if (!req.file) {
+                return res.status(400).send('No se ha subido ningún archivo.');
+            }
+
+            const { id } = req.body
+            if (!id) {
+                return res.status(400).send('Faltan datos adicionales.');
+            }
+
+            console.log(id);
+            
+
+            res.send({
+                message: 'Imagen subida correctamente',
+                filename: req.file.filename,
+                data: {
+                    id
+                }
+            })
+
+            // Aquí puedes procesar más la imagen o guardarla en la base de datos
+            res.send(`Imagen subida exitosamente: ${req.file.filename}`);
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error al subir la imagen.');
+    }
+}
+
+
+module.exports = { SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

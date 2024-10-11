@@ -31,7 +31,7 @@ async function MostrarColores() {
             <div class="contendor_cart_nombre">
                 <label class="checkBox_filtro"><input name="radio" type="checkbox"><div class="transition_checkbox"></div></label>
                 <img src="../../img/sin_img.png" alt="alt"/>
-                <h2>${element.nombre}</h2>
+                <a href="/agregarColores?idColor=${element.id}">${element.nombre}</a>
             </div>
             <h2>${element.hexadecimal}</h2>
                        

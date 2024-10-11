@@ -27,16 +27,16 @@ async function MostrarCategorias() {
     data.forEach(element => {
 
         const carta = `
-        <div class="cart">
+        <div id="${element.id}" class="cart">
             <div class="contendor_cart_nombre">
                 <label class="checkBox_filtro"><input name="radio" type="checkbox"><div class="transition_checkbox"></div></label>
                 <img src="../../img/sin_img.png" alt="alt"/>
-                <h2>${element.nombre}</h2>
+                <a href="/agregarCategoria?idCategoria=${element.id}">${element.nombre}</a>
             </div>
             <h2>${element.cantidad} productos</h2>
             <h2>${(element.activo.data.toString() === '1' ? 'Activo' : 'Inactivo') }</h2>
                        
-            <svg xmlns="http://www.w3.org/2000/svg" onclick="cambiarClase_eliminar()" width="24" height="24" viewBox="0 0 24 24"   fill="#6F6D6D">
+            <svg xmlns="http://www.w3.org/2000/svg" id="${element.id}" onclick="cambiarClase_eliminar(this)" width="24" height="24" viewBox="0 0 24 24"   fill="#6F6D6D">
                 <mask id="mask0_2039_18386" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                 <rect width="24" height="24" />
                 </mask>
@@ -49,6 +49,39 @@ async function MostrarCategorias() {
 
     });
     
+}
+
+function EliminarCategoria(params) {
+    
+    const carta = document.querySelectorAll('.cart')
+
+    console.log(params);
+    
+
+    carta.forEach(async element => {
+
+        if (element.getAttribute('id') == params) {
+            
+            const response = await fetch('/auth/eliminarCategoria', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: params
+                })
+            })
+    
+            const data = await response.json()
+            console.log(data);
+    
+            if (data.affectedRows == 1) {
+                
+                element.remove()
+            }
+        }
+        
+    })
 }
 
 MostrarCategorias()

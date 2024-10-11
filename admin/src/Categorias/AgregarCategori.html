@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="">
+    <form id="form" action="">
         <div>
             <label for="">Nombre de la categoria</label>
             <input type="text" name="nombre" id="nombre">
@@ -17,7 +17,7 @@
         </div>
         <div>
             <label for="">Agregar producto a categoria</label>
-            <button type="button">Agregar</button>
+            <button id="finalizar" onclick="AgregarCategoria(this)" type="button">Agregar</button>
             <ul id="productos">
                
             </ul>
@@ -25,5 +25,6 @@
     </form>
 
     <script src="../Categorias/AgregarCategori.js"></script>
+    <script src="../Categorias/ModificarCategoria.js"></script>
 </body>
 </html>

@@ -502,4 +502,35 @@ const ModificarColor = async (req, res) => {
     }
 }
 
-module.exports = { ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+const ModificarCategoria = async (req, res) => {
+
+    const { id, nombre } = req.body
+
+    try {
+        
+        const [row] = await db.query('UPDATE tipoproducto SET nombre = ? WHERE id = ?', [nombre, id])
+
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const EliminarCategoria = async (req, res) => {
+
+    const { id } = req.body
+    try {
+        
+        const [row] = await db.query('UPDATE tipoproducto SET activo = 0 WHERE id = ?', [id])
+
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+module.exports = { EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

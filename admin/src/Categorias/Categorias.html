@@ -18,6 +18,7 @@
     }
         function cambiarClase_2() {
         var div = document.getElementById("subcontendor_2");
+        
         if (div.classList.contains("active")) {
             div.classList.remove("active");
     
@@ -26,8 +27,15 @@
     
         }
     }
-        function cambiarClase_eliminar() {
+        function cambiarClase_eliminar(params) {
         var div = document.getElementById("pantalla_gris");
+        var btn = document.getElementById("btnEliminar");
+
+        btn.addEventListener('click', function() {
+
+
+            EliminarCategoria(params.getAttribute('id'))
+        })
         if (div.classList.contains("active")) {
             div.classList.remove("active");
     
@@ -54,7 +62,7 @@
             <p>¿Esta seguro de eliminar este producto?</p>
             <div class="contenedor_btn_eliminar">
                 <button class="btn_rechasar_eliminar" onclick="cambiarClase_eliminar()">Rechazar</button>
-                <button class="btn_aceptar_eliminar" onclick="cambiarClase_eliminar()">Aceptar</button>
+                <button id="btnEliminar" class="btn_aceptar_eliminar" onclick="cambiarClase_eliminar()">Aceptar</button>
             </div>
         </div>
     </div>
@@ -170,7 +178,7 @@
                     <g mask="url(#mask0_2901_1963)">
                     <path d="M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z" fill="white"/>
                     </g>
-                    </svg>Nuevo Producto</button>
+                    </svg><a href="/agregarCategoria">Nuevo Producto</a></button>
             </div>
             <div class="contendedor_datos">
                 <div class="contendedor_titulo">

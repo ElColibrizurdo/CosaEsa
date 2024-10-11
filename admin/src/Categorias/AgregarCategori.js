@@ -1,19 +1,27 @@
-async function AgregarPortada(params) {
+async function AgregarCategoria(params) {
 
-    console.log(params.files[0]);
-    
+    const form = document.getElementById('form')
 
-    const formData = new FormData()
-    formData.append('image', params.files[0])
-    
-    fetch('/upload', {
+    const formData = new FormData(form)
+
+    const responde = await fetch('/auth/agregarCategoria', {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            nombre: formData.get('nombre')
+        })
     })
-    .then(response => response.text())
-    .then(result => {
+
+
+    const data = await responde.json()
+
+    console.log(data);
+
+    if (data.affectedRows) {
         
-        
-    })
+        alert('Se subio la categoria')
+    }
 
 }

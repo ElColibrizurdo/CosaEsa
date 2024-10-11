@@ -447,11 +447,36 @@ const AgregarColor = async (req, res) => {
 
     const { nombre, color } = req.body
 
-    const clave = nombre.slice(0,3)
+    let clave = nombre.slice(0,3).toUpperCase()
+
+    console.log(nombre);
+    console.log(color);
+    
+    
 
     try {
         
-        const [row] = await db.query('INSERT INTO color (clave, nombre, hexadecimal) VALUES (?,?,?)', [clave, nombre, color])
+        const [existe] = await db.query('SELECT EXISTS (SELECT 1 FROM color WHERE nombre = ? OR hexadecimal = ?) AS existe', [nombre, color])
+
+        console.log(existe);
+
+        if (existe[0].existe == 0) {
+            
+            const [existeClave] = await db.query('SELECT COUNT(*) AS cantidad FROM color WHERE clave LIKE ?', [clave + '%'])
+
+            console.log(existeClave);
+
+            if (existeClave[0].cantidad >= 1 ) {
+                
+                clave += existeClave[0].cantidad + 1
+            }
+
+            console.log(clave);
+            
+
+            const [row] = await db.query('INSERT INTO color (clave, nombre, hexadecimal) VALUES (?,?,?)', [clave, nombre.toUpperCase(), color])
+            res.json(row)
+        }
 
     } catch (error) {
         

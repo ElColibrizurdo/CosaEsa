@@ -265,7 +265,7 @@ const ExtraerColores = async (req, res) => {
 
     try {
         
-        const [row] = await db.query('SELECT id, nombre, hexadecimal, clave FROM color WHERE activo = 1')
+        const [row] = await db.query('SELECT id, nombre, hexadecimal, clave, activo FROM color WHERE activo = 1')
         const [rows] = await db.query('SELECT idColor FROM productocolor WHERE idProducto = ?', [id])
 
         res.json({row, rows})
@@ -427,5 +427,38 @@ const SubirImagenProducto = async (req, res) => {
     }
 }
 
+const EliminarColor = async (req, res) => {
 
-module.exports = { SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+    const id = req.body
+    
+    try {
+        
+        const [row] = await db.query('UPDATE color SET activo = 0 WHERE id = ?' , [id])
+        
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const AgregarColor = async (req, res) => {
+
+    const { nombre, color } = req.body
+
+    const clave = nombre.slice(0,3)
+
+    try {
+        
+        const [row] = await db.query('INSERT INTO color (clave, nombre, hexadecimal) VALUES (?,?,?)', [clave, nombre, color])
+
+    } catch (error) {
+        
+        console.log(error);
+        
+    }
+}
+
+
+module.exports = { AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

@@ -66,8 +66,12 @@ app.get('/crearColaboradores', (req, res) => {
     res.sendFile(path.join(__dirname, 'Admins', 'CrearAdmin.html'))
 })
 
-app.get('/redireccionar', (req, res) => {
-    res.redirect
+app.get('/catalogoColores', (req, res) => {
+    res.sendFile(path.join(__dirname, 'CatalogoColores' ,'Color.html'))
+})
+
+app.get('/agregarColores', (req, res) => {
+    res.sendFile(path.join(__dirname, 'CatalogoColores' ,'AgregarColor.html'))
 })
 
 const storage = multer.diskStorage({

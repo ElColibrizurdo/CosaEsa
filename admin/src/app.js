@@ -75,7 +75,7 @@ app.get('/agregarColores', (req, res) => {
 })
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: function (req, file, cb) { 
 
         console.log('El nombre original: ');
         
@@ -88,6 +88,7 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
 
         const { id } = req.body
+
         let baseName = id + path.extname(file.originalname)
 
         const filePath = path.join(__dirname, 'img', 'articulos', baseName)
@@ -98,7 +99,7 @@ const storage = multer.diskStorage({
 
         if (fs.existsSync(filePath)) {
             
-            baseName = `${id}_${Date.now()}${path.extname(file.originalname)}`
+            baseName = `${baseName}_${Date.now()}${path.extname(file.originalname)}`
         }
 
         cb(null, baseName)

@@ -11,7 +11,7 @@ async function MostrarCategorias(id) {
 
     console.log(data);
     nombre.value = data[0].nombre
-
+    RecuperarIMG(data[0].nombre)
     
 }
 
@@ -40,6 +40,40 @@ async function ModificarCategoria() {
         alert('Se modifico el color')
     }
     
+}
+
+async function RecuperarIMG(nombre) {
+    const responseIMG = await fetch('/auth/recuperarIMG?id=' + nombre)
+    const dataIMG = await responseIMG.json()
+
+    console.log(dataIMG);
+            
+    if (dataIMG) {
+                
+        dataIMG.forEach(element => {
+
+            const fila = document.createElement('li')
+            fila.setAttribute('nombre', element.nombre)
+                
+            const img = document.createElement('img')
+            img.src = '../img/articulos/' + element.nombre
+            img.style.maxWidth = '70px'
+
+            const label = document.createElement('label')
+            label.appendChild(img)
+
+            const btn = document.createElement('button')
+            btn.textContent = 'eliminar'
+            label.appendChild(btn)
+
+                    
+            fila.appendChild(label)
+            btn.setAttribute('onclick', 'RemoverVariante(this)')
+
+            const lista = document.getElementById('lista')
+            lista.appendChild(fila)
+        })
+    }
 }
 
 if (new URLSearchParams(window.location.search).get('idCategoria')) {

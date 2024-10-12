@@ -13,13 +13,15 @@
         </div>
         <div>
             <label for="">Imagen de la portada</label>
-            <input type="file" name="image" id="image" accept="image/" onchange="AgregarPortada(this)" oninput="'/upload'">
+            <input type="file" name="image" id="image" onchange="MostrarImagen(this)" accept="image/">
+            <ul id="lista">
+
+            </ul>
         </div>
         <div>
             <label for="">Agregar producto a categoria</label>
             <button id="finalizar" onclick="AgregarCategoria(this)" type="button">Agregar</button>
             <ul id="productos">
-               
             </ul>
         </div>
     </form>

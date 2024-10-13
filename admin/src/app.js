@@ -26,7 +26,11 @@ app.get('/productos', (req, res) => {
 })
 
 app.get('/pagos', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Pagos', 'Productos.html'))
+    res.sendFile(path.join(__dirname, 'Compras', 'Compras.html'))
+})
+
+app.get('/pedidos', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Pedidos', 'Pedidos.html'))
 })
 
 app.get('/ventas', (req, res) => {
@@ -125,7 +129,7 @@ app.post('/upload', upload.single('image'), async  (req, res) => {
 
 const server = http.createServer(app)
 
-server.listen(3000, () => {
+server.listen(8080, () => {
 
 })
 

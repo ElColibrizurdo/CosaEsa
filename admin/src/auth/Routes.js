@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto } = require('./auth')
+const { MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto } = require('./auth')
 
 router.get('/estadisticas', estadisticas)
 router.get('/mostrarProductos', mostrar_productos)
@@ -24,5 +24,7 @@ router.post('/agregarColor', AgregarColor)
 router.post('/actualizarColor', ModificarColor)
 router.post('/actualizarCategoria', ModificarCategoria)
 router.post('/eliminarCategoria', EliminarCategoria)
+router.get('/mostrarCompras', MostrarCompras)
+router.get('/mostrarPedidos', MostrarPedidos)
 
 module.exports = router

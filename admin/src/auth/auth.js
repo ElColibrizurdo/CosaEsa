@@ -533,4 +533,45 @@ const EliminarCategoria = async (req, res) => {
     }
 }
 
-module.exports = { EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+const MostrarCompras = async (req, res) => {
+
+    try {
+        
+        const [row] = await db.query('SELECT id, fechaPago, Total FROM venta')
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const MostrarPedidos = async (req, res) => {
+
+    try {
+        
+        const [row] = await db.query('SELECT id, idVenta, idProducto, estadoEnvio FROM ventadetalle')
+
+        let productos = []
+
+        for (const element of row) {
+            
+            console.log(element.id);
+            
+            const [producto] = await db.query('SELECT descripcion FROM producto WHERE id = ?', [element.idProducto])
+            
+            
+            productos.push(producto[0])
+        }
+
+        console.log(productos);
+        
+        res.json({row, productos})
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+module.exports = { MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

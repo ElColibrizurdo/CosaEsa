@@ -13,7 +13,7 @@ const { log } = require('console');
 
 
 const options = {
-    key: fs.readFileSync(path.join(__dirname, 'server.key')),
+    key: fs.readFileSync(path.join(__dirname, 'asf_2024.key')),
     cert: fs.readFileSync(path.join(__dirname, 'server.crt')),
 }
 
@@ -209,12 +209,17 @@ app.listen(PORT, () => {
    
 });*/
 
-const server = https.createServer(options, app);
+// const server = https.createServer(options, app);
 
-const PORT = process.env.PORT || 8080
+// const PORT = process.env.PORT || 8080
 
-app.listen(PORT, () => {
-    console.log(`Servidor HTTPS escuchando en el puerto ${PORT}`);
+// app.listen(PORT, () => {
+//     console.log(`Servidor HTTPS escuchando en el puerto ${PORT}`);
+// })
+
+https.createServer(options, app).listen(443, () => {
+    console.log('El servidor de usuario esta en nombre del sagrado dios emperador de la humidad, levantado');
+    
 })
 
 

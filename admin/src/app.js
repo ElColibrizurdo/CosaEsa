@@ -5,6 +5,7 @@ const authRoutes = require('../src/auth/Routes')
 const multer = require('multer')
 const app = express()
 const http = require('http')
+const https = require('https')
 const fs = require('fs');
 
 app.use(bodyParser.json())
@@ -129,9 +130,19 @@ app.post('/upload', upload.single('image'), async  (req, res) => {
 
 const server = http.createServer(app)
 
-server.listen(8080, () => {
+const sslOptions = {
+    key: fs.readFileSync(path.join(__dirname, 'asf_2024.key')),
+    cert: fs.readFileSync(path.join(__dirname, 'server.crt'))
+}
 
+https.createServer(sslOptions, app).listen(443, () => {
+    console.log('Servidor HTTPS en accion en el puerto 443 por el sagrado emperador de la humidad postrado en el trono dorado');
+    
 })
+
+// server.listen(8080, () => {
+
+// })
 
 /*app.listen(3000, () => {
     console.log(`Server corriendo en 3000`);

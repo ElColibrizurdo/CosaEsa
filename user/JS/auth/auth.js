@@ -354,8 +354,6 @@ const eliminar_producto_canasta = async (req, res) => {
     }
 }
 
-
-
 const obtener_nombre = async (req, res) => {
 
     const { id } = req.body
@@ -490,7 +488,8 @@ const guardar_metodos = async (req, res) => {
 const cantidad_cesta = async (req, res) => {
 
     const token = req.query.token
-    
+    const baseUrl = `${req.protocol}://${req.get('host')}//protected`;
+
     console.log('token');
     
     console.log(token);
@@ -498,7 +497,7 @@ const cantidad_cesta = async (req, res) => {
 
     try {
 
-        fetch('https://tienda.people.com/protected/', {
+        fetch(baseUrl, {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token 
@@ -611,7 +610,7 @@ const verificarContra = async (req, res) => {
 
     try {
 
-        fetch('https://tienda.people.com//protected', {
+        fetch(baseUrl, {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -649,11 +648,11 @@ const verificarContra = async (req, res) => {
 const RealizarVenta = async (req, res) => {
 
     const { idSesion, token } = req.body
-
+    const baseUrl = `${req.protocol}://${req.get('host')}//protected`;
 
     try {
 
-        fetch('https://tienda.people.com//protected', {
+        fetch(baseUrl, {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -760,8 +759,6 @@ const FiltrosHome = async (req, res) => {
         
     }
 }
-
-
 
 const barra_buscar = async (req, res) => {
 

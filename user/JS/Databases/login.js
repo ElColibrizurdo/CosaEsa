@@ -111,7 +111,7 @@ async function log(inputEmail, inputPassword) {
                 window.location.href = '/?like=' +  params.get('like')
             } 
 
-            fetch(window.location.replace('login'), {
+            fetch('/protected', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + data.token 

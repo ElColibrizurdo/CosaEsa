@@ -195,74 +195,74 @@ async function RealizarCompra(boton) {
 }
 
 // Escuchando el evento del click del botón de pago dapp
-document.getElementById('dapp-btn').addEventListener('click', async function()
-{
+// document.getElementById('dapp-btn').addEventListener('click', async function()
+// {
 
-    const total = ObtenerTotalPagar()
-    let email
-    let folio
+//     const total = ObtenerTotalPagar()
+//     let email
+//     let folio
     
-    try {
+//     try {
         
-        const response = await fetch('/auth/venta', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                idSesion: localStorage.getItem('sesion'),
-                token: localStorage.getItem('token')    
-            })
-        })
+//         const response = await fetch('/auth/venta', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//                 idSesion: localStorage.getItem('sesion'),
+//                 token: localStorage.getItem('token')    
+//             })
+//         })
 
-        const data = await response.json()
+//         const data = await response.json()
 
-        console.log(data.row[1][0]);
+//         console.log(data.row[1][0]);
 
-        const fecha = new Date()
-        console.log(fecha);
+//         const fecha = new Date()
+//         console.log(fecha);
         
-        
-
-        email = data.row[0][0]
-        folio = data.row[1][0].id
         
 
-    } catch (error) {
+//         email = data.row[0][0]
+//         folio = data.row[1][0].id
         
-    }
 
-    // Credenciales de la API
-    const apiKey = '26743219-8b16-4eb7-98cb-34d3b6f1379d'; // Reemplaza con tu API key
-    const userAgent = 'MiIntegracion1.0'; // Reemplaza con tu nombre de integración
+//     } catch (error) {
+        
+//     }
 
-    // Convertir la clave API para autenticación básica
-    const authHeader = `Basic OjI2NzQzMjE5LThiMTYtNGViNy05OGNiLTM0ZDNiNmYxMzc5ZA==`;
+//     // Credenciales de la API
+//     const apiKey = '26743219-8b16-4eb7-98cb-34d3b6f1379d'; // Reemplaza con tu API key
+//     const userAgent = 'MiIntegracion1.0'; // Reemplaza con tu nombre de integración
 
-    // Datos del cuerpo de la solicitud
-    const requestData = {
-    amount: "10.0", // Monto
-    description: "chocolates", // Descripción del cobro
-    qr_source: "8", // Identificador del medio de pago, ej. para Banco Azteca
-    reference: "miReferenciaInterna", // Referencia interna del comercio
-    expiration_minutes: 8640, // Expiración en minutos (6 días)
-    success_page: "https://miapp.com/success", // URL de éxito
-    error_page: "https://miapp.com/error" // URL de error
-    };
+//     // Convertir la clave API para autenticación básica
+//     const authHeader = `Basic OjI2NzQzMjE5LThiMTYtNGViNy05OGNiLTM0ZDNiNmYxMzc5ZA==`;
 
-    // Realizar la solicitud POST al endpoint
-    fetch('https://sandbox.dapp.mx/v2/dapp-codes/', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': authHeader,
-        'User-Agent': userAgent
-    },
-    body: JSON.stringify(requestData)
-    })
-    .then(response => response.json())
-    .then(data => console.log('Respuesta de la API:', data))
-    .catch(error => console.error('Error al llamar a la API:', error));
-});
+//     // Datos del cuerpo de la solicitud
+//     const requestData = {
+//     amount: "10.0", // Monto
+//     description: "chocolates", // Descripción del cobro
+//     qr_source: "8", // Identificador del medio de pago, ej. para Banco Azteca
+//     reference: "miReferenciaInterna", // Referencia interna del comercio
+//     expiration_minutes: 8640, // Expiración en minutos (6 días)
+//     success_page: "https://miapp.com/success", // URL de éxito
+//     error_page: "https://miapp.com/error" // URL de error
+//     };
+
+//     // Realizar la solicitud POST al endpoint
+//     fetch('https://sandbox.dapp.mx/v2/dapp-codes/', {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': authHeader,
+//         'User-Agent': userAgent
+//     },
+//     body: JSON.stringify(requestData)
+//     })
+//     .then(response => response.json())
+//     .then(data => console.log('Respuesta de la API:', data))
+//     .catch(error => console.error('Error al llamar a la API:', error));
+// });
 
 

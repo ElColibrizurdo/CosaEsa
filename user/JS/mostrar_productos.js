@@ -3,7 +3,7 @@ console.log(window.location.href);
 let cantiadCartas = 15
 
 let arrayPrincipal = []
-function obtener_productis(tipos, equipos, stock, ) {
+function obtener_productis(tipos, equipos, stock, min, max) {
 
     const barra = window.parent.document.querySelector('.buscador')
     let buscar
@@ -28,7 +28,14 @@ function obtener_productis(tipos, equipos, stock, ) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({tipos, equipos, stock, buscar})
+        body: JSON.stringify({
+            tipos, 
+            equipos, 
+            stock, 
+            buscar,
+            min,
+            max
+        })
     })
         .then(response => response.json())
         .then(data => {
@@ -247,6 +254,9 @@ function FiltrarDatos(buton) {
 
     const titulo = document.querySelector('.titulo')
 
+    const precioMin = document.querySelector('.input-min').value
+    const precioMax = document.querySelector('.input-max').value
+
     console.log(buton);
     console.log(filtros);
     
@@ -288,7 +298,7 @@ function FiltrarDatos(buton) {
 
     
 
-    obtener_productis(arrayTipos, arrayEquipos, arrayStocks)
+    obtener_productis(arrayTipos, arrayEquipos, arrayStocks, precioMin, precioMax)
 
 }
 
@@ -415,8 +425,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         
     }
 
-    obtener_productis(arrayTipo, arrayEquipo, arrayStock)
-
+    obtener_productis(arrayTipo, arrayEquipo, arrayStock, 0, 9999999999999999)
+    cambiarGridCartas_svg_4_puntos()
 
 })
 

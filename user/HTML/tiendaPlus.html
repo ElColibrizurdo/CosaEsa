@@ -38,7 +38,7 @@
       
        function abrir_inicar_sesion() {
           var div = document.getElementById("modal_iniciar_sesion");
-          if (div.classList.contains("abrir_modal")) {
+          if (div.classList.contains("abrir_modal") && !localStorage.getItem('sesion')) {
               div.classList.remove("abrir_modal");
               document.body.style.setProperty('--before-z-index', '3');
                document.body.style.overflowY = 'hidden';
@@ -127,14 +127,14 @@
       </div>
         <div class="nav_top_2">
           <div class="container-buscador">
-            <input type="text"  placeholder="BUSCAR" name="text"  class="buscador">
+            <input type="text"  placeholder="BUSCAR" name="text" oninput="Buscar(this)" onchange="Buscar(this)" onblur="Buscar(this)" class="buscador">
             <svg xmlns="http://www.w3.org/2000/svg" width="23" fill="#235583" height="24"  viewBox="0 0 23 24" >
             <path d="M21.0068 23.5L13.0644 15.5573C12.4432 16.0384 11.7268 16.4201 10.9153 16.7023C10.1037 16.9845 9.23624 17.1256 8.3128 17.1256C5.99252 17.1256 4.02699 16.3202 2.41619 14.7094C0.805397 13.0984 0 11.1329 0 8.8128C0 6.49273 0.805397 4.52719 2.41619 2.91619C4.02699 1.3054 5.99252 0.5 8.3128 0.5C10.6329 0.5 12.5983 1.3054 14.2091 2.91619C15.8201 4.52719 16.6256 6.49273 16.6256 8.8128C16.6256 9.74125 16.4845 10.6087 16.2023 11.4153C15.9199 
                   12.2218 15.5382 12.9332 15.0573 13.5494L23.0072 21.5068L21.0068 23.5ZM8.3128 14.2764C9.83321 14.2764 11.1239 13.7459 12.1849 12.6849C13.2459 11.6241 13.7764 10.3334 13.7764 8.8128C13.7764 7.29218 13.2459 6.00148 12.1849 4.94069C11.1239 3.8797 9.83321 3.34921 8.3128 3.34921C6.79218 3.34921 5.50137 3.8797 4.44038 4.94069C3.3796 6.00148 2.84921 7.29218 2.84921 8.8128C2.84921 10.3334 3.3796 11.6241 4.44038 12.6849C5.50137 13.7459 6.79218 14.2764 8.3128 14.2764Z" />
             </svg>
           </div>
 
-            <a id="perfil" >
+            <a href="/login" id="perfil" >
             <svg xmlns="http://www.w3.org/2000/svg" fill="#235583" width="22" height="24" viewBox="0 0 22 24" >
                 <path d="M11.0075 11.8644C9.46105 11.8644 8.14038 11.3169 7.04549 10.222C5.9506 9.12714 5.40316 7.80647 5.40316 6.26003C5.40316 4.71381 5.9506 3.39447 7.04549 2.30203C8.14038 1.20981 
                       9.46105 0.663696 11.0075 0.663696C12.5539 0.663696 13.8746 1.20981 14.9695 2.30203C16.0644 3.39447 16.6118 4.71381 16.6118 6.26003C16.6118 7.80647 16.0644 9.12714 14.9695 10.222C13.8746 
@@ -159,7 +159,7 @@
                           12.5166 16.6554 12.7099C16.3332 12.9032 15.9807 12.9999 15.5977 12.9999H8.20166L7.15541 14.9102H19.0897V17.0897H6.9999C6.20607 17.0897 5.60949 16.7445 
                           5.21016 16.0542C4.81099 15.364 4.79632 14.68 5.16616 14.0022L6.49816 11.5999L2.94616 4.08966H0.910156V1.91016H4.30366L5.25366 3.91016Z" />
                 </svg>
-            1233</button>
+            _</button>
         </div>
     </div>
   </div>
@@ -175,19 +175,19 @@
     </div>
     <div class="cuerpo_modal_perfil">
         <div class="subcuerpo_modal_perfil">
-            <a href="Compras.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <a href="/compras"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                <mask id="mask0_368_7666" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                <rect width="24" height="24" fill="#D9D9D9"/>
                </mask>
                <path d="M5.07175 22.2032C4.44209 22.2032 3.9055 21.9815 3.462 21.538C3.0185 21.0945 2.79675 20.5579 2.79675 19.9282V8.12549C2.79675 7.49583 3.0185 6.95924 3.462 6.51574C3.9055 6.07224 4.44209 5.85049 5.07175 5.85049H6.91025C6.91025 4.43933 7.40575 3.23824 8.39675 2.24724C9.38775 1.25624 10.5888 0.760742 12 0.760742C13.4112 0.760742 14.6123 1.25624 15.6033 2.24724C16.5943 3.23824 17.0898 4.43933 17.0898 5.85049H18.9283C19.5579 5.85049 20.0945 6.07224 20.538 6.51574C20.9815 6.95924 21.2033 7.49583 21.2033 8.12549V19.9282C21.2033 20.5579 20.9815 21.0945 20.538 21.538C20.0945 21.9815 19.5579 22.2032 18.9283 22.2032H5.07175ZM5.07175 19.9282H18.9283V8.12549H5.07175V19.9282ZM12 14.2152C13.4112 14.2152 14.6123 13.7197 15.6033 12.7287C16.5943 11.7379 17.0898 10.5368 17.0898 9.12549H14.8148C14.8148 9.91099 14.542 10.5765 13.9965 11.122C13.451 11.6675 12.7855 11.9402 12 11.9402C11.2145 11.9402 10.549 11.6675 10.0035 11.122C9.458 10.5765 9.18525 9.91099 9.18525 9.12549H6.91025C6.91025 10.5368 7.40575 11.7379 8.39675 12.7287C9.38775 13.7197 10.5888 14.2152 12 14.2152ZM9.18525 5.85049H14.8148C14.8148 5.06499 14.542 4.39949 13.9965 3.85399C13.451 3.30849 12.7855 3.03574 12 3.03574C11.2145 3.03574 10.549 3.30849 10.0035 3.85399C9.458 4.39949 9.18525 5.06499 9.18525 5.85049Z" fill="#6F6D6D"/>
                </svg>Mis compras</a>
-            <a href="Favoritos.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <a href="/favoritos"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                <mask id="mask0_414_2557" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                  <rect width="24" height="24" fill="#1C1C1C"/>
                </mask>
                  <path d="M11.994 21.2747L10.4065 19.8492C8.70719 18.3205 7.30261 17.0002 6.19277 15.8882C5.08277 14.7763 4.20177 13.7779 3.54977 12.8929C2.89777 12.0079 2.4416 11.1928 2.18127 10.4474C1.92094 9.70226 1.79077 8.93635 1.79077 8.14968C1.79077 6.52335 2.33519 5.16526 3.42402 4.07543C4.51286 2.98543 5.86952 2.44043 7.49402 2.44043C8.35652 2.44043 9.17744 2.61576 9.95677 2.96643C10.7363 3.31726 11.4154 3.81601 11.994 4.46268C12.5727 3.81601 13.2518 3.31726 14.0313 2.96643C14.8108 2.61576 15.6317 2.44043 16.494 2.44043C18.122 2.44043 19.4815 2.98543 20.5725 4.07543C21.6637 5.16526 22.2093 6.52335 22.2093 8.14968C22.2093 8.93235 22.0801 9.69626 21.8218 10.4414C21.5634 11.1868 21.1073 12.0009 20.4533 12.8839C19.7993 13.7669 18.9163 14.7653 17.8043 15.8792C16.6924 16.9932 15.2849 18.3165 13.5815 19.8492L11.994 21.2747ZM11.994 18.2099C13.586 16.7766 14.8957 15.5524 15.923 14.5374C16.9505 13.5224 17.7613 12.6388 18.3553 11.8864C18.9493 11.1341 19.3609 10.4668 19.5903 9.88443C19.8196 9.3021 19.9343 8.72393 19.9343 8.14993C19.9343 7.16576 19.6069 6.34726 18.9523 5.69443C18.2974 5.04176 17.479 4.71543 16.497 4.71543C15.7277 4.71543 15.0137 4.93626 14.355 5.37793C13.6962 5.8196 13.2418 6.3821 12.9918 7.06543H11.0023C10.7541 6.3821 10.2992 5.8196 9.63752 5.37793C8.97586 4.93626 8.26194 4.71543 7.49577 4.71543C6.51744 4.71543 5.70219 5.04176 5.05002 5.69443C4.39785 6.34726 4.07177 7.16568 4.07177 8.14968C4.07177 8.72801 4.18736 9.31051 4.41852 9.89718C4.64952 10.4838 5.06219 11.1531 5.65652 11.9049C6.25069 12.6569 7.05952 13.5394 8.08302 14.5524C9.10636 15.5654 10.41 16.7846 11.994 18.2099Z" fill="#6F6D6D"/>
              </svg>Mis favoritos</a>
-            <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <a href="/datos"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                <mask id="mask0_414_2549" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                  <rect width="24" height="24" fill="#D9D9D9"/>
                </mask>
@@ -339,30 +339,14 @@
                         <ul >
                             <li class="lista_checkbox">En Stock &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
                             <li class="lista_checkbox">Preventa &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">Agotado &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                        </ul>
+                             </ul>
                     <p class="titulos_filtos" >Articulos Officiales</p>
-                        <ul >
-                            <li class="lista_checkbox">Camiseta Oficial 24 &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li  class="lista_checkbox">T-Shirt &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">Sweater &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">Termos &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">Tazas &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">Gorras &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            
+                        <ul id="Articulos2">
+                              
                         </ul>
                     <p class="titulos_filtos" >Equipos</p>
-                        <ul >
-                            <li class="lista_checkbox">Calvos FC &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">Cachorros &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label</li>
-                            <li class="lista_checkbox">Callejeros FC &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">Ziza FC &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">Tanos FC &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">Gambeta &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">Amor &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">Reta FC &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">La Gloria FC &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
-                            <li class="lista_checkbox">Emperors FC &nbsp<label class="checkBox_filtro"><input id="ch1" type="checkbox"><div class="transition_checkbox"></div></label></li>
+                        <ul id="Equipos2">
+                        
                         </ul>
                     <p class="titulos_filtos" >Precio</p>
                      <div class="range_slider_filtro">
@@ -370,18 +354,18 @@
                             <div class="progress"></div>
                           </div>
                           <div class="range-input">
-                            <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
-                            <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+                            <input type="range" class="range-min" min="0" onchange="FiltrarDatos(this)" max="10000" value="0" step="100">
+                            <input type="range" class="range-max" min="0" onchange="FiltrarDatos(this)" max="10000" value="10000" step="100">
                           </div>
                         <div class="price-input">
                             <div class="field">
                               <span>Min</span>
-                              <input type="number" class="input-min" value="2500">
+                              <input type="number" class="input-min" onchange="FiltrarDatos(this)" value="0">
                             </div>
                             <div class="separator">-</div>
                             <div class="field">
                               <span>Max</span>
-                              <input type="number" class="input-max" value="7500">
+                              <input type="number" class="input-max" onchange="FiltrarDatos(this)" value="10000">
                             </div>
                           </div>
                     </div>
@@ -489,8 +473,7 @@
                     <ul class="collapse show " id="Mostrar_Todo">
                         <li class="lista_checkbox">Disponible &nbsp<label class="checkBox_filtro"><input id="ch1" class="stock" type="checkbox" value="1" onchange="FiltrarDatos(this)"><div class="transition_checkbox"></div></label>&nbsp</li>
                         <li class="lista_checkbox">Preventa &nbsp<label class="checkBox_filtro"><input id="ch1" class="stock" type="checkbox" value="0" onchange="FiltrarDatos(this)"><div class="transition_checkbox"></div></label>&nbsp</li>
-                        <li class="lista_checkbox">Agotado &nbsp<label class="checkBox_filtro"><input id="ch1" class="stock" type="checkbox" value="11" onchange="FiltrarDatos(this)"><div class="transition_checkbox"></div></label>&nbsp</li>
-                    </ul>
+                      </ul>
                 <p class="titulos_filtos" data-bs-toggle="collapse"  data-bs-target="#Articulos">Articulos Officiales(flechita)</p>
                     <ul class="collapse show" id="Articulos">
                     
@@ -499,27 +482,7 @@
                     <ul class="collapse show" id="Equipos">
                          
                     </ul>
-                <div class="range_slider_filtro">
-                    <div class="slider">
-                        <div class="progress"></div>
-                      </div>
-                      <div class="range-input">
-                        <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
-                        <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
-                      </div>
-                    <div class="price-input">
-                        <div class="field">
-                          <span>Min</span>
-                          <input type="number" class="input-min" value="2500">
-                        </div>
-                        <div class="separator">-</div>
-                        <div class="field">
-                          <span>Max</span>
-                          <input type="number" class="input-max" value="7500">
-                        </div>
-                      </div>
-                      
-                </div>     
+                   
         </div>
         
         <div class="contenedor_cartas">

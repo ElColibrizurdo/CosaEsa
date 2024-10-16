@@ -82,7 +82,7 @@ app.get('/datos', (req, res) => {
 
 app.post('/data', async (req, res) => {
 
-    const { tipos, equipos, stock, buscar } = req.body;
+    const { tipos, equipos, stock, buscar, min, max } = req.body;
 
     if (!Array.isArray(tipos) || !Array.isArray(equipos)) {
         return res.status(400).json({ error: 'Tipos y equipos deben ser arrays' });
@@ -100,7 +100,7 @@ app.post('/data', async (req, res) => {
         let queryEquipo = ''
             let queryTipo = ''
         let query = "SELECT p.id, p.idTipo, p.descripcion, p.idEquipo, p.precio, p.numeroLikes, p.estado FROM producto p ";
-        queryWhere +=  ` WHERE p.descripcion LIKE "${buscar}"`
+        queryWhere +=  ` WHERE p.descripcion LIKE "${buscar}" AND p.precio BETWEEN ${min} AND ${max}`
 
         if (equipos.length > 0 || tipos.length > 0 || stock.length > 0) {
 

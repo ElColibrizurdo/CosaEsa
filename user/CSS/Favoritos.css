@@ -521,12 +521,13 @@ body{
         grid-template-columns: repeat(4,291px);
     }
     
-     .carta{
+    .carta{
         border-radius: 10px;
         overflow: hidden;
         display: grid;
         position: relative;
-        grid-template-rows: auto 146px;
+        transition: transform 0.5s ease; 
+        grid-template-rows: auto 96px;
         grid-template-areas:"img_carta"
                             "txt_carta";
     }   
@@ -543,7 +544,7 @@ body{
             align-items: center;
             color:  #004789;
             opacity: 1;/*para ocultar el estado en cundo no sea deseado poner en 0 */
-
+            
         }
         .carta_estado a{
             font-size: 14px;
@@ -555,17 +556,19 @@ body{
             grid-area: img_carta;
              object-fit: cover;
              width: 100%;
-
-
+            height: 100%;
+             
         }
         .txt_carta{
             grid-area: txt_carta;
-            background-color: #FCFCFC;
+            background-color: #f15d2a;
             padding: 10px 16px;
+            display: grid;
+            grid-template-rows: 50px 30px;
         }
             .txt_carta_1{
                 overflow: hidden;
-                color:  #004789;
+                color:  #FFFFFF;
                 text-overflow: ellipsis;
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
@@ -580,10 +583,10 @@ body{
             .txt_carta_2{
                 display: flex;
                 justify-content: space-between;
-                color: #1C1C1C;
+                color: #FFFFFF;
             }
                 .txt_carta_2 a{
-
+                    
                     text-align: center;
                     font-size: 16px;
                     font-style: normal;
@@ -614,7 +617,7 @@ body{
                     height: 30px;
                     width: 30px;
                     transition: all 0.3s;
-                    fill: #f5865f;
+                    fill: #ffffff;
                   }
 
                   .container_corazon svg:hover {
@@ -622,22 +625,8 @@ body{
                   }
 
                   .container_corazon input:checked ~ svg {
-                    fill: #ffffff;
+                    fill: #f5865f;
                   }
-            /*corazon*/
-            .contendror_btn_carta{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .btn_carta{
-                padding:  4px 12px;
-                background: #f15d2a;
-                color: #FFFFFF;
-                border-radius: 10px;
-                 border: 1px solid #f15d2a;
-            }
-
             
 @media screen and (max-width:425px){
 .grupo_cartas{

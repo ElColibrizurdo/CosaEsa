@@ -58,7 +58,7 @@ async function CerrarSesion() {
         localStorage.removeItem('name')
         localStorage.removeItem('sesion')
         localStorage.removeItem('token')
-        window.parent.location.reload()
+        window.location.href = '/tienda'
     } catch (error) {
         console.log(error);
         
@@ -66,8 +66,6 @@ async function CerrarSesion() {
 
     
 }
-
-console.log(new Date().getFullYear() + '-' + new Date().getUTCMonth() + '-' + new Date().getDay());
 
 if (localStorage.getItem('name')) {
 
@@ -84,8 +82,10 @@ if (localStorage.getItem('name')) {
 
 if (localStorage.getItem('sesion')) {
 
-    console.log('sesion');
+    const perfil = document.getElementById('perfil')
     
+    perfil.removeAttribute('href')
+
     DarLikePrevio()
 }
 
@@ -122,10 +122,13 @@ async function ObtenerCantidadCanasta() {
     const sesion = localStorage.getItem('sesion')
     const token = localStorage.getItem('token')
     console.log(sesion);
+    console.log(token);
     
     const response = await fetch(`/auth/cantidad?sesion=${sesion}&token=${token}`)
     
     const data = await response.json()
+    console.log(data);
+    
     
     const carrit0 = document.querySelector('.btn_carrito')
 console.log('epep');

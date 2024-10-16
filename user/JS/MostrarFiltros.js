@@ -23,11 +23,13 @@ function MostrarFiltrosOfficiales(tipos) {
     tipos.forEach(element => {
 
         const lista = document.getElementById('Articulos')
+        const lista2 = document.getElementById('Articulos2')
 
         const filtro = ` 
         <li class="lista_checkbox"><div class="opciones">${element.nombre}&nbsp</div>&nbsp<label class="checkBox_filtro"><input id="ch1" value="${element.id}" name="" class="tipo" type="checkbox" onchange="FiltrarDatos(this)"><div class="transition_checkbox" ></div></label>&nbsp</li>
                          `
         lista.innerHTML += filtro
+        lista2.innerHTML += filtro
     })
 }
 
@@ -36,12 +38,14 @@ function MostrarFiltrosEquipos(equipos) {
     equipos.forEach(element => {
 
         const lista = document.getElementById('Equipos')
+        const lista2 = document.getElementById('Equipos2')
 
         const filtro = `
         <li class="lista_checkbox"><div class="opciones">${element.nombre}&nbsp</div><label class="checkBox_filtro"><input id="ch1" type="checkbox" value="${element.id}" class="equipos"  onchange="FiltrarDatos(this)"><div class="transition_checkbox"></div></label>&nbsp</li>
                      `
 
         lista.innerHTML += filtro
+        lista2.innerHTML += filtro
     })
 }
 

@@ -19,7 +19,7 @@ async function ObtenerFavoritos() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({tipos, equipos, stock, buscar: '%'})
+            body: JSON.stringify({tipos, equipos, stock, buscar: '%', min:0, max:10000000000})
         })
 
         const data = await response.json()

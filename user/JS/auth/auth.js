@@ -1,4 +1,4 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const bcrypt = require('bcryptjs');
 const crypto =require('crypto')
@@ -488,11 +488,10 @@ const guardar_metodos = async (req, res) => {
 const cantidad_cesta = async (req, res) => {
 
     const token = req.query.token
-    const baseUrl = `${req.protocol}://${req.get('host')}//protected`;
+    const baseUrl = `${req.protocol}://${req.get('host')}/protected`;
 
-    console.log('token');
-    
-    console.log(token);
+    console.log('Vamos a obtener la cantidad en la cesta');
+    console.log(baseUrl);
     
 
     try {
@@ -504,8 +503,8 @@ const cantidad_cesta = async (req, res) => {
             }
         })
         .then(response => {
-            console.log('Response status:', response.status);
-            console.log('Response headers:', response.headers.get('content-type'));
+            console.log('Response status cantidad canasta:', response.status);
+            console.log('Response headers cantidad canasta:', response.headers.get('content-type'));
             
             // Verificar si la respuesta es exitosa (status 200)
             if (!response.ok) {
@@ -523,9 +522,14 @@ const cantidad_cesta = async (req, res) => {
             }
         })
         .then(async data => {
+
+            console.log('la data es ');
+            
+            console.log(data);
+            
           
             if (typeof data === 'string' && data.startsWith('<')) {
-                console.log('Error del servidor (HTML):', data);
+                console.log('Error del servidor (HTML) cantidad canasta:', data);
                 throw new Error('La respuesta no contiene JSON válido. HTML recibido.');
             }
     
@@ -538,7 +542,7 @@ const cantidad_cesta = async (req, res) => {
             
         })
         .catch(error => {
-            console.log(error + 'Error en la solicitud');
+            console.log(error + 'Error en la solicitud de cantidad canasta');
         })
         
         
@@ -554,11 +558,11 @@ const cliente_existe = async (req, res) => {
 
     const token = req.query.token
     console.log(typeof(token));
-    
+    const baseUrl = `${req.protocol}://${req.get('host')}/protected`;
 
     try {
 
-        fetch('http://localhost:8080/protected', {
+        fetch(baseUrl, {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -605,8 +609,7 @@ const verificarContra = async (req, res) => {
     const contra = req.query.pass
     const token = req.query.sesion
 
-    console.log(token);
-    
+    const baseUrl = `${req.protocol}://${req.get('host')}/protected`;    
 
     try {
 
@@ -648,7 +651,7 @@ const verificarContra = async (req, res) => {
 const RealizarVenta = async (req, res) => {
 
     const { idSesion, token } = req.body
-    const baseUrl = `${req.protocol}://${req.get('host')}//protected`;
+    const baseUrl = `${req.protocol}://${req.get('host')}/protected`;
 
     try {
 
@@ -690,11 +693,11 @@ const cerrar_sesion = async (req, res) => {
     const { token } = req.body
 
     console.log(token);
-    
+    const baseUrl = `${req.protocol}://${req.get('host')}/protected`;
 
     try {
 
-        fetch('http://localhost:8080/protected', {
+        fetch(baseUrl, {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token

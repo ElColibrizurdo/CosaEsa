@@ -121,7 +121,7 @@ async function log(inputEmail, inputPassword) {
             .then(data => {
                 console.log(data);
                 console.log('Hola');
-                window.parent.location.href = '/'
+                window.location.href = '/tienda'
                 
             })
             .catch(error => {

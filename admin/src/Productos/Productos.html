@@ -45,7 +45,9 @@
 
         
     }
-    
+    function nuevo_producto(){
+        window.location.href = "/agregarproducto";
+     }
     </script>
 </head>
 <body>
@@ -100,8 +102,8 @@
             </svg></a>
                 <div class="subcontendor" id="subcontendor_1">
                     <div class="subcontendor_ocultar">
-                        <a href="Pagos.html">Pagos</a>
-                        <a href="Pedidos.html">Pedidos</a>
+                        <a href="/pagos">Pagos</a>
+                        <a href="/pedidos">Pedidos</a>
                     </div>
                 </div>
             <a onclick="cambiarClase_2()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -171,7 +173,7 @@
         <div class="Space">
             <div class="titulo_space">
                 <h1>Productos <a class="cantidad"> (32)</a></h1>
-                <button href="/agregarProducto">
+                <button class="btn" onclick="nuevo_producto()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <mask id="mask0_2901_1963" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                     <rect width="24" height="24" fill="#D9D9D9"/>

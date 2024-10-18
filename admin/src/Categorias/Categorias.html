@@ -44,6 +44,10 @@
     
         }
     }
+
+    function agregar_categoria() {
+        window.location.href = '/AgregarCategoria'
+    }
     
     </script>
 </head>
@@ -99,8 +103,8 @@
             </svg></a>
                 <div class="subcontendor" id="subcontendor_1">
                     <div class="subcontendor_ocultar">
-                        <a href="Pagos.html">Pagos</a>
-                        <a href="Pedidos.html">Pedidos</a>
+                        <a href="/pagos">Pagos</a>
+                        <a href="/pedidos">Pedidos</a>
                     </div>
                 </div>
             <a onclick="cambiarClase_2()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -129,6 +133,8 @@
                         <a  href="/productos">Productos</a>
                         <a href="/inventario">Inventario</a>
                         <a class="selecionado" href="/MostrarCategorias">Categorias</a>
+                        <a href="/catalogoTallas">Tallaz</a>
+                        <a href="/catalogoColores">Colores</a>
                     </div>
                 </div>
 
@@ -170,7 +176,7 @@
         <div class="Space">
             <div class="titulo_space">
                 <h1>Categorías <a class="cantidad"> (32)</a></h1>
-                <button>
+                <button class="btn" onclick="">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <mask id="mask0_2901_1963" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                     <rect width="24" height="24" fill="#D9D9D9"/>
@@ -178,7 +184,7 @@
                     <g mask="url(#mask0_2901_1963)">
                     <path d="M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z" fill="white"/>
                     </g>
-                    </svg><a href="/agregarCategoria">Nuevo Producto</a></button>
+                    </svg>< href="/agregarCategoria">Nuevo Producto</button>
             </div>
             <div class="contendedor_datos">
                 <div class="contendedor_titulo">

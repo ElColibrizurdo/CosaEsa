@@ -38,14 +38,9 @@ app.get('/ventas', (req, res) => {
     res.sendFile(path.join(__dirname, 'Pedidos', 'Productos.html'))
 })
 
-app.get('/catalogoColor', (req, res) => {
-    res.sendFile(path.join(__dirname, 'CatalogoColores', 'Productos.html'))
-})
-
 app.get('/catalogoTallas', (req, res) => {
-    res.sendFile(path.join(__dirname, 'CatalogoTalla', 'Productos.html'))
+    res.sendFile(path.join(__dirname, 'CatalogoTallas', 'Categorias.html'))
 })
-
 
 app.get('/agregarProducto', (req, res) => {
     res.sendFile(path.join(__dirname, 'NuevoProducto', 'NuevoPorducto.html'))

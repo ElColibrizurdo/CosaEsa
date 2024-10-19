@@ -20,6 +20,11 @@ async function MostrarCompras() {
                 </div>
                 <h2>${element.fechaPago}</h2>
                 <h2>${element.Total}</h2>
+                <select id="estatus-${element.id}" onchange="ModificarEstatus(this)">
+                        <option value="11">Entregado</option>
+                        <option value="1">En reparto</option>
+                        <option value="0">Por Enviar</option>
+                    </select>
                     
                 <svg xmlns="http://www.w3.org/2000/svg" onclick="cambiarClase_eliminar(${element.id})" width="24" height="24" viewBox="0 0 24 24"   fill="#6F6D6D">
                     <mask id="mask0_2039_18386" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
@@ -33,6 +38,13 @@ async function MostrarCompras() {
              lista.innerHTML += carta
         });
 
+        data.forEach(element => {
+
+            let selector = document.getElementById(`estatus-${element.id}`)
+            
+            selector.value = String(element.estadoEnvio)
+        })
+
 
     } catch (error) {
         console.log(error);
@@ -40,66 +52,17 @@ async function MostrarCompras() {
     }
 }
 
-async function Acciones(params) {
-    
-    if (params.value === 'editar') {
-        
-        
+async function ModificarEstatus(params) {
 
-    } else if (params.value === 'eliminar') {
-
-        console.log(params.parentNode.getAttribute('lista'));
+    try {
         
-        
-        const response = await fetch('/auth/eliminarProducto', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                id: params.parentNode.getAttribute('lista')
-            })
-        })
-
+        const response = await fetch(`/auth/modificarEE?id=${params.id.slice(8)}&estatus=${params.value}`)
         const data = await response.json()
-        console.log(data.affectedRows);
 
-        if (data.affectedRows == 1) {
-            
-            params.parentNode.remove()
-        }
+    } catch (error) {
         
     }
-}
-
-async function Eliminar(id) {
     
-    const carta = document.querySelectorAll('.cart')
-
-    carta.forEach(async element => {
-
-        if (element.getAttribute('id') == id) {
-            
-            const response = await fetch('/auth/eliminarProducto', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    id: element.getAttribute('id')
-                })
-            })
-    
-            const data = await response.json()
-            console.log(data.affectedRows);
-    
-            if (data.affectedRows == 1) {
-                
-                element.remove()
-            }
-        }
-        
-    })
 }
 
 MostrarCompras()

@@ -537,7 +537,7 @@ const MostrarCompras = async (req, res) => {
 
     try {
         
-        const [row] = await db.query('SELECT id, fechaPago, Total FROM venta')
+        const [row] = await db.query('SELECT v.id, v.fechaPago, v.Total, d.estadoEnvio FROM venta v JOIN ventadetalle d ON v.id = d.idVenta ')
         res.json(row)
 
     } catch (error) {

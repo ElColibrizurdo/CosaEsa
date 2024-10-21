@@ -27,13 +27,6 @@ async function Obtener_producto() {
         const data = await response.json();
 
         console.log(data);
-        
-
-        if (data.color) {
-            
-            console.log(data);
-            console.log(data.medidas);
-        }
 
         Mostrar_Producto(data)
         document.dispatchEvent(new Event('codigoTerminado'));
@@ -192,16 +185,12 @@ function Mostrar_Producto(data) {
 
     if (data.medidas) {
         
-        console.log(data);
-        
         Mostrar_Medidas(data.medidas)
     }
 
     if (data.color) {
         
-        console.log(data.color);
-        MostrarColores(data.color[0])
-        
+        MostrarColores(data.color[0])   
     }
 
     if (producto.idTipo != 9) {
@@ -219,19 +208,16 @@ function MostrarColores(colores) {
     const subcontenedor = contenedor_colores.querySelector('.radio-tile-group_selector_color')
     console.log(contenedor_colores);
     
-    colores.forEach(element => {
-
-        console.log(element);
-        
+    colores.forEach(element => {        
 
         const talla = `
+
         <div class="input-container_selector_color">
-            <input id="${element.id}" class="radio-button_selector_color" type="radio" name="radioColor${contador}" checked>
-            <div class="radio-button_selector_color">
-               <div class="circulo_interno" style="background-color:${element.color}">
-               </div>
+            <input id="${element.id}"  class="radio-button_selector_color" type="radio" name="radio">
+            <div class="radio-tile_selector_color">
+                <div class="circulo_interno" style="background-color:${element.color}"></div>
             </div>
-        </div> `
+        </div>  `
         
         subcontenedor.innerHTML += talla
     })
@@ -282,11 +268,11 @@ function Mostrar_Medidas(medidas) {
 
         const talla = `
         <div class="input-container">
-            <input id="${element.id}" class="radio-button" type="radio" name="radio${contador}" checked>
+            <input id="${element.id}" class="radio-button" type="radio" name="radio${contador}">
             <div class="radio-tile">
-                <label for="btnradio${element.id}" class="radio-tile-label">${element.nombre}</label>
+                <label or="btnradio${element.id}" class="radio-tile-label">${element.nombre}</label>
             </div>
-        </div> `
+        </div>`
         
         contenedor_tallas.innerHTML += talla
     })

@@ -211,7 +211,10 @@ const ingresar_producto_canasta = async (req, res) => {
             console.log('id canasta: ' + canasta[0].id);
             
             const id_canasta = canasta[0].id
-            const [row] = await db.query('INSERT INTO canasta_productos (cantidad, id_producto, id_canasta, precio, total, iva, id_medida, numero, etiqueta, color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+
+            try {
+                
+                const [row] = await db.query('INSERT INTO canasta_productos (cantidad, id_producto, id_canasta, precio, total, iva, id_medida, numero, etiqueta, color) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
                 [cantidad / numero.length, id_producto, id_canasta, precio[indice] / 1.16, precio[indice] ,  total, talla[indice], element, nombre[indice], color[indice]] )
             
                 if (row.affectedRows == 1) {
@@ -223,12 +226,16 @@ const ingresar_producto_canasta = async (req, res) => {
                 
                     res.status(200).json({message: message})
                 }
-        })
 
-        res.status(20).json({message: message})
-        console.log('Siguiente');
-        
-        
+                res.status(20).json({message: message})
+                console.log('Siguiente');
+            
+            } catch (error) {
+                console.log(error);
+            }
+            
+                
+        })
     } catch (error) {
     }
 }

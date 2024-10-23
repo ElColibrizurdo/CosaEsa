@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto } = require('./auth')
+const { EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto } = require('./auth')
 
 router.get('/estadisticas', estadisticas)
 router.get('/mostrarProductos', mostrar_productos)
@@ -27,5 +27,8 @@ router.post('/eliminarCategoria', EliminarCategoria)
 router.get('/mostrarCompras', MostrarCompras)
 router.get('/mostrarPedidos', MostrarPedidos)
 router.get('/modificarEE', ModificrEstatusEntrega)
+router.get('/mostrarEquipos', MostrarEquipos)
+router.post('/agregarEquipo', AgregarEquipo)
+router.get('/eliminarEquipo', EliminarEquipo)
 
 module.exports = router

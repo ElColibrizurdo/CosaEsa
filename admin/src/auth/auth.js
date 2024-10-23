@@ -4,6 +4,7 @@ const  appModule = require('../app')
 const fs =  require('fs').promises
 const path = require('path')
 const multer = require('multer');
+const { log } = require('console')
 
 const estadisticas = async (req, res) => {
 
@@ -586,4 +587,57 @@ const ModificrEstatusEntrega = async (req, res) => {
     }
 }
 
-module.exports = { ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+const MostrarEquipos = async (req ,res) => {
+
+    try {
+        
+        const [row] = await db.query('SELECT * FROM equipo WHERE activo = 1')
+
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const AgregarEquipo = async (req, res) => {
+
+    const { nombre } = req.body
+
+    try {
+
+        const [mayor] = await db.query('SELECT MAX(orden) AS maximo FROM equipo')
+        console.log(mayor);
+        
+        const [row] = await db.query('INSERT INTO equipo (nombre, orden) VALUES (?,?)', [nombre, mayor[0].maximo + 1])
+
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const EliminarEquipo = async (req, res) => {
+
+    const id = req.query.id
+
+
+    console.log(id);
+    
+
+    try {
+        
+        const [row] = await db.query('UPDATE equipo SET activo = 0 WHERE id = ?', [id])
+
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+module.exports = { EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

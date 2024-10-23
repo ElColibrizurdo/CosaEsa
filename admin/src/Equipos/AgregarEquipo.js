@@ -1,10 +1,10 @@
-async function AgregarCategoria(params) {
+async function AgregarEquipo() {
 
     const form = document.getElementById('form')
 
     const formData = new FormData(form)
 
-    const responde = await fetch('/auth/agregarCategoria', {
+    const responde = await fetch('/auth/agregarEquipo', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -18,30 +18,33 @@ async function AgregarCategoria(params) {
     const data = await responde.json()
 
     console.log(data);
-
+    
     if (data.affectedRows == 1) {
         
-        alert('Se subio la categoria')
-        SubirImagen(formData.get('nombre'))
+        SubirImagen(data.insertId)
     }
 
 }
 
-function SubirImagen(nombre) {
+let inpuImage
 
+function SubirImagen(nombre) {
+    
     console.log(nombre);
     
 
-    const image = document.getElementById('image')
+    const image = document.getElementById('image').files
+
+    console.log(image);
+    
     
     const formData = new FormData()
     formData.append('id', nombre)
-    formData.append('image', image.files[0])
+    formData.append('image', inpuImage)
 
-    console.log(image.files);
     
 
-    fetch('/upload', {
+    fetch('/upload?equipo', {
         method: 'POST',
         body: formData
     })
@@ -54,8 +57,6 @@ function SubirImagen(nombre) {
     .catch(error => {
         console.error('Error al subir la imagen:', error);
     });
-
-    
 }
 
 function MostrarImagen(params) {
@@ -65,7 +66,7 @@ function MostrarImagen(params) {
     fila.setAttribute('nombre', params.files[0])
         document.body.innerHTML += params.files[0]
 
-    
+    localStorage.setItem('img', params.files[0])
 
     const label = document.createElement('label')
     label.innerText = params.files[0].name
@@ -80,7 +81,9 @@ function MostrarImagen(params) {
     const lista = document.getElementById('lista')
     console.log(fila);
     
-    lista.appendChild(fila)
+    //lista.appendChild(fila)
+    console.log(params.files);
+    inpuImage = params.files[0]
 }
 
 function RemoverImage(params) {

@@ -50,6 +50,14 @@ app.get('/MostrarCategorias', (req, res) => {
     res.sendFile(path.join(__dirname, 'Categorias', 'Categorias.html'))
 })
 
+app.get('/catalogoEquipos', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Equipos', 'Equipos.html'))
+})
+
+app.get('/AgregarEquipo', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Equipos', 'AgregarEquipo.html'))
+})
+
 app.get('/AgregarCategoria', (req, res) => {
     res.sendFile(path.join(__dirname, 'Categorias', 'AgregarCategori.html'))
 })
@@ -77,38 +85,76 @@ app.get('/agregarColores', (req, res) => {
 const storage = multer.diskStorage({
     destination: function (req, file, cb) { 
 
-        console.log('El nombre original: ');
-        
-        console.log(file.originalname);
-        
-        const uploadPath = path.join(__dirname, 'img', 'articulos')
+        let uploadPath
 
-        cb(null, uploadPath)
+        try {
+            const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl 
+
+            const parts = fullUrl.split('?')
+           
+            console.log(parts)
+
+            if (parts[1] == 'equipo') {
+                uploadPath = path.join(__dirname, 'img', 'logos')
+            } else {
+                uploadPath = path.join(__dirname, 'img', 'articulos')
+            }
+
+
+            cb(null, uploadPath)
+        } catch (error) {
+            console.log(error);
+            
+        }      
     },
     filename: function (req, file, cb) {
 
         const { id } = req.body
 
-        let baseName = id + path.extname(file.originalname)
+        let filePath
+        let baseName = id + path.extname(file.originalname)  
 
-        const filePath = path.join(__dirname, 'img', 'articulos', baseName)
+        
 
-        if (!id) {
-            return cb(new Error('ID no proporcionado'), false);
-        }
-
-        if (fs.existsSync(filePath)) {
+        try {
+            const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl 
+            console.log(fullUrl);
             
-            baseName = `${baseName}_${Date.now()}${path.extname(file.originalname)}`
-        }
+            const parts = fullUrl.split('?')
 
-        cb(null, baseName)
+            if (parts[1] == 'equipo') {
+                
+                baseName = 'logo_' + id + '.png'
+                filePath = path.join(__dirname, 'img', 'logos')
+            } else {
+                baseName = id + path.extname(file.originalname)
+                filePath = path.join(__dirname, 'img', 'articulos')
+            }
+
+            if (!id) {
+                return cb(new Error('ID no proporcionado'), false);
+            }
+    
+            /*if (fs.existsSync(filePath)) {
+                
+                baseName = `${baseName}_${Date.now()}${path.extname(file.originalname)}`
+            }*/
+            console.log(baseName);
+            
+            cb(null, baseName)
+        } catch (error) {
+            console.log(error);
+        }      
     }
 })
 
 const upload = multer({storage: storage})
 
 app.post('/upload', upload.single('image'), async  (req, res) => {
+
+    console.log(req.id);
+    
+
     if (!req.file) {
         return res.status(400).send('No se ha subido ningún archivo.');
       }

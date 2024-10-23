@@ -158,7 +158,7 @@ async function addProductoRelacionado(idProducto){
     }
 }
 
-function Mostrar_Producto(data) {
+async function Mostrar_Producto(data) {
 
     const producto = data.producto[0][0]
     console.log(data);
@@ -174,11 +174,24 @@ function Mostrar_Producto(data) {
     const btn_agregar = document.querySelector('.btn_pedido')
     btn_agregar.innerText = 'Agregar al carrito - Total ' + producto.precio
 
-    const img = document.querySelectorAll('.img-principal')
+    const response = await fetch('/auth/recuperarImagenes?id=' + producto.id)
+    const images = await response.json()
 
-    img.forEach(element => {
-        element.src='../img/articulos/' + producto.id + '.png'
+    console.log(images);
+    const imagesS = document.querySelector('.img_secundarias')
+
+    let img = `<img src="../img/articulos/${producto.id}.png" class="img-principal img-secundaria selecta" alt="alt"/>`
+    imagesS.innerHTML += img
+    
+    images.forEach((element, indice) => {
+        
+        const img = `<img src="../img/articulos/${element}" class="img-principal img-secundaria" alt="alt"/>`
+
+        imagesS.innerHTML += img
     })
+
+    const imgP = document.querySelector('.img-principal')
+    imgP.src = '../img/articulos/' + producto.id + '.png'
 
     /*const label_descripcion = document.getElementById('label-descripcion')
     label_descripcion.innerHTML = producto.descripcion*/
@@ -402,3 +415,59 @@ document.querySelector('.atras').addEventListener('click', function () {
     
     history.back()
 })
+
+function Derecha() {
+    
+
+    console.log(document.querySelectorAll('.img-secundaria'));
+ 
+    const imagenes = document.querySelectorAll('.img-secundaria')
+ 
+    for (let i = 0; i < imagenes.length; i++) {
+     const element = imagenes[i]
+     if (element.classList.contains('selecta')) {
+         
+         const img = document.querySelector('.img-principal')
+ 
+         if (i == 3) {
+             img.src = imagenes[0].src
+             imagenes[0].classList.add('selecta')
+         } else {
+             img.src = imagenes[i+1].src
+             imagenes[i + 1].classList.add('selecta')
+         }
+ 
+         
+         element.classList.remove('selecta')
+         break;
+     }
+    }  
+     
+ }
+ 
+ function izquierda() {
+     
+     console.log(document.querySelectorAll('.img-secundaria'));
+ 
+    const imagenes = document.querySelectorAll('.img-secundaria')
+ 
+    for (let i = 0; i < imagenes.length; i++) {
+     const element = imagenes[i]
+     if (element.classList.contains('selecta')) {
+         
+         const img = document.querySelector('.img-principal')
+ 
+         if (i == 0) {
+             img.src = imagenes[imagenes.length-1].src
+             imagenes[imagenes.length-1].classList.add('selecta')
+         } else {
+             img.src = imagenes[i-1].src
+             imagenes[i - 1].classList.add('selecta')
+         }
+ 
+         
+         element.classList.remove('selecta')
+         break;
+     }
+    }  
+ }

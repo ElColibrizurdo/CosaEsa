@@ -8,6 +8,7 @@ const { response } = require('express');
 const nodemailer = require('nodemailer');
 const { text, json } = require('body-parser');
 const { log } = require('console');
+const fs = require('fs')
 require('dotenv').config()
 
 function GenerarVerificacion() {
@@ -857,4 +858,23 @@ const mostrar_paises = async (req, res) => {
     }
 }
 
-module.exports = { determinar_ubicacion, mostrar_paises, mostrar_filtros, recuperar_contra, recuperar_colores_producto, barra_buscar, FiltrosHome, RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };
+const recuperar_imagenes = async (req, res) => {
+
+    const id = req.query.id
+
+    try {
+
+        const files = fs.readdirSync('./img/articulos/')
+        
+        const archivos = files.filter(file => file.startsWith(`${id}_`))
+        
+        res.json(archivos)
+        
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+module.exports = { recuperar_imagenes, determinar_ubicacion, mostrar_paises, mostrar_filtros, recuperar_contra, recuperar_colores_producto, barra_buscar, FiltrosHome, RealizarVenta, verificarContra, cliente_existe, cantidad_cesta, guardar_metodos, registrar_cliente, obtener_tipoProducto, obtener_Compras, demostrar_like, dar_like, cerrar_sesion, eliminar_producto_canasta, modificar_cantidad, register, login, ingresar_producto_canasta, mostrar_canasta, obtener_producto };

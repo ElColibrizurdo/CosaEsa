@@ -3,53 +3,59 @@ async function inicio() {
     const btn = document.getElementById('btn_carrito')
     var div = document.getElementById("lista_carrito");
     
+    try {
+        btn.addEventListener('mousedown', async function() {
 
-    btn.addEventListener('mousedown', async function() {
-
-        if (div.classList.contains("active")) {
-            div.classList.remove("active");
-             document.body.style.setProperty('--before-z-index', '3');
-             document.body.style.overflowY = 'hidden';
+            if (div.classList.contains("active")) {
+                div.classList.remove("active");
+                 document.body.style.setProperty('--before-z-index', '3');
+                 document.body.style.overflowY = 'hidden';
+                
+            } else {
+                div.classList.add("active");
+                 document.body.style.setProperty('--before-z-index', '0');
+                  document.body.style.overflowY = 'auto';
+                 
+            }
+    
+            console.log(btn);
+    
+            const columna = document.querySelector('.div_scroll')
+            columna.innerHTML = ''
             
-        } else {
-            div.classList.add("active");
-             document.body.style.setProperty('--before-z-index', '0');
-              document.body.style.overflowY = 'auto';
-             
-        }
-
-        console.log(btn);
-
-        const columna = document.querySelector('.div_scroll')
-        columna.innerHTML = ''
+            const id = localStorage.getItem('sesion')
+    
+            try {
+                
+                const response = await fetch('/auth/mostrar', {
+    
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({id})
+                })
+                const data = await response.json()
+                data.rows.forEach(element => {
+                    console.log(element);
+                    
+                    Obtener_datos(element.id_producto, element.total, element.cantidad, element.id, columna, element.etiqueta, element.numero)
+                    
+                });
+                console.log(data.rows);
+                //Obtener_datos(data.rows[0].id_producto ,data.rows[0].cantidad)
+    
+    
+            } catch (error) {
+                console.log(error);
+            }
+        })
+    } catch (error) {
+        console.log(error);
         
-        const id = localStorage.getItem('sesion')
+    }
 
-        try {
-            
-            const response = await fetch('/auth/mostrar', {
-
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({id})
-            })
-            const data = await response.json()
-            data.rows.forEach(element => {
-                console.log(element);
-                
-                Obtener_datos(element.id_producto, element.total, element.cantidad, element.id, columna, element.etiqueta, element.numero)
-                
-            });
-            console.log(data.rows);
-            //Obtener_datos(data.rows[0].id_producto ,data.rows[0].cantidad)
-
-
-        } catch (error) {
-            console.log(error);
-        }
-    })
+   
 
     
 }

@@ -7,7 +7,111 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../CSS/mostrar_producto.css">
     <script>
+        // funcion para activar el menu y desactivrlo
+        function cambiarClase() {
+            var div = document.getElementById("lista_carrito");
+            if (div.classList.contains("active")) {
+                div.classList.remove("active");
+                 document.body.style.setProperty('--before-z-index', '3');
+                 document.body.style.overflowY = 'hidden';
+                
+            } else {
+                div.classList.add("active");
+                 document.body.style.setProperty('--before-z-index', '0');
+                  document.body.style.overflowY = 'auto';
+                 
+            }
+        }
+        function cambiarClase_panel_busqueda() {
+            var div = document.getElementById("panel_busquedas");
+            if (div.classList.contains("active")) {
+                div.classList.remove("active");
+                 document.body.style.setProperty('--before-z-index', '3');
+                 document.body.style.overflowY = 'hidden';
+                
+            } else {
+                div.classList.add("active");
+                 document.body.style.setProperty('--before-z-index', '0');
+                  document.body.style.overflowY = 'auto';
+                 
+            }
+        }
         
+         function abrir_inicar_sesion() {
+            var div = document.getElementById("modal_iniciar_sesion");
+            if (div.classList.contains("abrir_modal") && !localStorage.getItem('sesion')) {
+                div.classList.remove("abrir_modal");
+                document.body.style.setProperty('--before-z-index', '3');
+                 document.body.style.overflowY = 'hidden';
+            } else {
+                div.classList.add("abrir_modal");
+                 document.body.style.setProperty('--before-z-index', '0');
+                  document.body.style.overflowY = 'auto';
+            }
+        }
+        function cambiarClaseFlitro() {
+            var div = document.getElementById("carcasa");
+            var filtro = document.getElementById("flitros");
+            
+           
+            
+            if (div.classList.contains("active")) {
+                div.classList.remove("active");
+                setTimeout(() => {
+                    filtro.classList.remove("active");
+                }, 200);
+                
+                
+            } else {
+                    filtro.classList.add("active"); 
+                setTimeout(() => {
+                    div.classList.add("active");
+                }, 100);
+            }
+        }
+        function validaNumericos(event) {
+            if(event.charCode >= 48 && event.charCode <= 57){
+              return true;
+             }
+             return false;        
+        }
+        function abrir_producto(){
+            window.location.href = "Producto.html";
+        }
+          function cambiar_iniciar_sesion(){
+            window.location.href = "formularios/Inciar_Sesion.html";
+        }
+         function cambiarGridCartas_svg_1_puntos(){
+             var div = document.getElementById("gridContainer");
+            div.classList.remove("dos_puntos");
+            div.classList.remove("tres_puntos");
+            div.classList.remove("cuatro_puntos");
+             div.classList.add("un_punto");
+         }
+         function cambiarGridCartas_svg_2_puntos(){
+             var div = document.getElementById("gridContainer");
+              div.classList.remove("un_punto");
+            div.classList.remove("tres_puntos");
+            div.classList.remove("cuatro_puntos");
+             div.classList.add("dos_puntos");
+         }
+       
+         function cambiarGridCartas_svg_3_puntos(){
+             var div = document.getElementById("gridContainer");
+              div.classList.remove("dos_puntos");
+            div.classList.remove("un_punto");
+            div.classList.remove("cuatro_puntos");
+             div.classList.add("tres_puntos");
+         }
+       
+         function cambiarGridCartas_svg_4_puntos(){
+             var div = document.getElementById("gridContainer");
+              div.classList.remove("dos_puntos");
+            div.classList.remove("tres_puntos");
+            div.classList.remove("un_punto");
+             div.classList.add("cuatro_puntos");
+         }
+       
     </script>
 </head>
 <body id="body">
@@ -15,7 +119,7 @@
         <img src="../img/prueba_header_2.png" class="union_header" alt="alt"/>
         <div class="nav_top_links">
            <div class="nav_top_1">
-               <a href="#">TIENDA</a>
+               <a href="/tienda">TIENDA</a>
            </div>
            <div class="nav_top_2">
             <div class="container-buscador">
@@ -184,7 +288,7 @@
                     
                       <div class="img_principal">
                           <a>
-                              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                              <svg class="btn-derecha" onclick="izquierda()" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                                   <g opacity="0.9">
                                     <mask id="mask0_1437_18729" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
                                       <rect width="40" height="40" fill="#D9D9D9"/>
@@ -197,7 +301,7 @@
                           </a>
                           <img src="../img/prueba_cart.png" class="img-principal" alt="alt"/>
                           <a>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <svg class="btn-derecha" onclick="Derecha()" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                               <g opacity="0.9">
                                 <mask id="mask0_1437_18730" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40">
                                   <rect width="40" height="40" fill="#D9D9D9"/>
@@ -210,7 +314,7 @@
                           </a>
                       </div>
                       <div class="img_secundarias">
-                          <img src="../img/prueba_cart.png" class="img-principal" alt="alt"/>
+                          
                       </div>
                   </div>
                   <div class="contendor_descripcion_producto">
@@ -425,12 +529,95 @@
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
       
-      <script src="/JS/Poner_Likes.js" defer></script>
-      <script src="/JS/canasta.js"defer></script>
-      <script src="/JS/agregar_canasta.js" ></script>
-      <script src="../JS/escucha_logeo.js"></script>
+    <script src="../JS/Poner_Likes.js" defer></script>
+    <script src="../JS/canasta.js"defer></script>
+    <script src="../JS/agregar_canasta.js" ></script>
+    <script src="../JS/escucha_logeo.js"></script>
     <script src="../JS/mostrar_canasta.js"></script>
     <script src="../JS/monitoreo_canasta.js"></script>
     <script src="../JS/BarraBusqueda.js"></script>
 </body>
+<script>
+    const perfil = document.getElementById('perfil');
+           const modal_perfil = document.getElementById('modal_perfil');
+           let hideTimeout;
+           
+           perfil.addEventListener('click', () => {
+               
+               
+               if (localStorage.getItem('sesion')) {
+                  clearTimeout(hideTimeout);  // Limpiar cualquier timeout anterior
+                  modal_perfil.classList.remove("abrir_modal");
+                  setHideTimeout();
+               } else {
+  
+                  window.href.location = '/login'
+               }
+  
+               
+           });
+           
+           modal_perfil.addEventListener('click', () => {
+               clearTimeout(hideTimeout);  // Limpiar cualquier timeout anterior
+               setHideTimeout();
+           });
+            modal_perfil.addEventListener('mouseover', () => {
+               clearTimeout(hideTimeout);  // Limpiar cualquier timeout anterior
+           });
+  
+           modal_perfil.addEventListener('mouseleave', () => {
+               setHideTimeout();
+           });
+           document.addEventListener('click', (event) => {
+               if (!modal_perfil.contains(event.target) && event.target !== perfil) {
+                   setHideTimeout();
+               }
+           });
+  
+           function setHideTimeout() {
+               clearTimeout(hideTimeout);  // Limpiar cualquier timeout anterior
+               hideTimeout = setTimeout(() => {
+                   modal_perfil.classList.add("abrir_modal");
+               }, 1000);  // El div se ocultará después de 3 segundos
+           }
+   
+    const rangeInput = document.querySelectorAll(".range-input input"),
+  priceInput = document.querySelectorAll(".price-input input"),
+  range = document.querySelector(".slider .progress");
+  let priceGap = 1000;
+  priceInput.forEach(input =>{
+  input.addEventListener("input", e =>{
+   let minPrice = parseInt(priceInput[0].value),
+   maxPrice = parseInt(priceInput[1].value);
+   
+   if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
+       if(e.target.className === "input-min"){
+           rangeInput[0].value = minPrice;
+           range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
+       }else{
+           rangeInput[1].value = maxPrice;
+           range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+       }
+   }
+  });
+  });
+  rangeInput.forEach(input =>{
+  input.addEventListener("input", e =>{
+   let minVal = parseInt(rangeInput[0].value),
+   maxVal = parseInt(rangeInput[1].value);
+   if((maxVal - minVal) < priceGap){
+       if(e.target.className === "range-min"){
+           rangeInput[0].value = maxVal - priceGap;
+       }else{
+           rangeInput[1].value = minVal + priceGap;
+       }
+   }else{
+       priceInput[0].value = minVal;
+       priceInput[1].value = maxVal;
+       range.style.left = ((minVal / rangeInput[0].max) * 100) + "%";
+       range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+   }
+  });
+  });
+  </script>
 </html>

@@ -145,7 +145,4 @@ async function consultaCompra(idSesion) {
 
 ImprimirProductos()
 
-document.querySelector('.atras').addEventListener('click', function () {
-    
-    history.back()
-})
+// c

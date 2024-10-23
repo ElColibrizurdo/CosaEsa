@@ -17,7 +17,9 @@
     ::-webkit-scrollbar {
     display: none; /* Chrome, Safari y Opera */
     }
-    
+    a {
+        text-decoration: auto; 
+    }
     body:before{
     z-index:  var(--before-z-index, 0);
     content: '';
@@ -254,9 +256,9 @@
                     }
                     .modal_iniciar_sesion h1{
                         color: #004789;
-                         font-size: 28px;
+                         font-size: 18px;
                         font-style: normal;
-                        font-weight: 600;
+                        font-weight: 500;
                         line-height: normal;
                     }
                     .modal_iniciar_sesion h2{
@@ -558,7 +560,7 @@
                     width: 644px;
                     height: 100%;
                     display: grid;
-                    grid-template-rows: 166px 555px 150px;
+                    grid-template-rows: 180px 575px 130px;
                     grid-template-areas: "contendor_descripcion_producto_nombre"
                                          "contendor_descripcion_producto_pedido"
                                          "contendor_descripcion_producto_pago";
@@ -571,7 +573,7 @@
                     padding-right: 24px;
                     box-shadow: 0px 5px 5px #f1f1f1;
                     z-index: 1;
-                    grid-template-rows: 110px 56px;
+                    grid-template-rows: 130px 56px;
                     grid-template-areas: "contendor_descripcion_producto_titulo"
                                           "contendor_descripcion_producto_precio";
     
@@ -584,7 +586,6 @@
                         -webkit-box-orient: vertical;
                         overflow: hidden;
                         text-overflow: ellipsis;
-    
                     }
                     .contendor_descripcion_producto_titulo h2{
                         color:  #004789;
@@ -601,7 +602,7 @@
                     }
                     .contendor_descripcion_producto_precio h3{
                         color:  #F15D2A;
-                        font-size: 24px;
+                        font-size: 16px;
                         font-style: normal;
                         font-weight: 600;
                         line-height: normal;
@@ -611,7 +612,6 @@
                     background: #FFFFFF;
                     padding: 20px 34px;
                     border-bottom: 5px solid #f1f1f1;
-                    overflow-y: scroll;
                 }
                     .contendor_descripcion_producto_pedido_cantidad{
                         color: #1C1C1C;
@@ -622,6 +622,17 @@
                             font-weight: 600;
                             line-height: normal;
                         }   
+                        .contenedor_descripcion_producto_color{
+                            color: #1C1C1C;
+                            position: relative;
+                        }
+                        .contenedor_descripcion_producto_color h2{
+                            font-size: 18px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: normal;
+                        }
+    
                         .contendor_descripcion_producto_pedido_talla{
                             color: #1C1C1C;
                             position: relative;
@@ -650,12 +661,68 @@
                     .contendor_descripcion_producto_pedido_color{
                         color: #1C1C1C;
                     }
-                        .contendor_descripcion_producto_pedido_color h2{
-                             font-size: 18px;
+                        .contendor_descripcion_producto_pedido_color h1{
+                             font-size: 12px;
                             font-style: normal;
-                            font-weight: 600;
+                            font-weight: 400;
                             line-height: normal;
                         }
+    
+                        .contenedor_descripcion_producto_pedido_personalizacion{
+                            color: #1C1C1C;
+                        }
+                            .btn_personalizacion{
+                                background: #FFFFFF;
+                                color:  #F15D2A;
+                                font-size: 18px;
+                                font-style: normal;
+                                font-weight: 600;
+                                line-height: normal; 
+                                border: 2px solid #F15D2A;
+                                border-radius: 8px;
+                                padding: 6px 16px;
+                            }
+                            .contenedor_personalizacion{
+                                
+                            }
+                                .contenedor_input_personalizacion{
+                                    
+                                }
+                                    .subcontenedor_input_personalizacion{
+                                        display: flex;
+                                        justify-content: space-between;
+                                        color: #1C1C1C;
+                                    }
+                                        .subcontenedor_input_personalizacion h1{
+                                            font-size: 18px;
+                                            font-style: normal;
+                                            font-weight: 400;
+                                            line-height: normal;
+                                        }
+                                        .subcontenedor_input_personalizacion a{
+                                            font-size: 14px;
+                                            font-style: normal;
+                                            font-weight: 400;
+                                            line-height: normal;
+                                        }
+                                            .input_personalizacion{
+                                                height: 48px;
+                                                border-radius: 8px;
+                                                border: 2px solid #F15D2A;
+                                                width: 100%;
+                                            }
+                                .contenedor_txt_personalizacion{
+                                    color: var(--Neutral-Gray-Medium, #2D2C2C);
+                                    font-style: normal;
+                                    font-weight: 400;
+                                    line-height: normal;
+                                }
+                                    .contenedor_txt_personalizacion h1{
+                                        font-size: 18px;
+                                    }
+                                    .contenedor_txt_personalizacion h2{
+                                        font-size: 14px;
+                                    }
                 .contendor_descripcion_producto_pago{
                     grid-area: contendor_descripcion_producto_pago;
                     background: #FFFFFF;
@@ -702,10 +769,16 @@
                 margin-top:104px;
                 margin-bottom: 56px;
             }
+    
+            
             .contenedor_recomendados{
                 height: 391px;
+                display: grid;
+                gap: 16px;
                 margin-left: 29px;
                 margin-right: 29px;
+                grid-template-columns:repeat(5, 260px) ;
+                grid-template-rows: 1fr;
             }
                 .grupo_cartas_recomendados{
                     display: grid;
@@ -764,6 +837,7 @@
                                 -webkit-box-orient: vertical;
                             }
                                 .txt_carta_1 a{
+                                    color:  #FFFFFF;
                                     font-size: 16px;
                                     font-style: normal;
                                     font-weight: 600;
@@ -1167,6 +1241,29 @@
                             width: 100%;
                             padding: 0px 25px;
                         }
+    
+    
+                        .contenedor_regresar{
+                            background-color:green;
+                            text-align: center;
+                            padding: 2px 4px 4px 4px;
+                            color: #1C1C1C;
+                            border-radius: 4px;
+                            right: -94%;
+                            top: -150px;
+                            position:relative;         
+                            cursor: pointer;
+                            width: 24px;
+                        }
+                        .contenedor_regresar a{
+                          font-size: 16px;
+                          font-style: normal;
+                          font-weight: 600;
+                          line-height: normal;
+                          background-color:green;
+                        }
+    
+                      
                .contendor_descripcion_producto{
                     width: 100%;
                }

@@ -13,7 +13,10 @@ async function obtieneCompra() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({idSesion})
+            body: JSON.stringify({
+                idSesion,
+                token: localStorage.getItem('token')
+            })
         }) 
 
         const data = await response.json()
@@ -45,7 +48,12 @@ async function ImprimirProductos() {
         const cortados = element.total.split(/(?<=\.00)/)
         console.log(cortados);
         
-        
+        const estado = {
+            0:'Por enviar',
+            1:'En reparto',
+            11:'Entergado',
+            default:'Difuso'
+        }
 
         const carta = `
         <div class="carta" >
@@ -66,7 +74,7 @@ async function ImprimirProductos() {
 
                                 </div>
                                 <div class="carta_btn">
-                                    <button class="btn_estado">${element.estadoEnvio}</button>
+                                    <button class="btn_estado">${estado[element.estadoEnvio]}</button>
                                     <a class="carta_btn_a">Detalles<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <mask id="mask0_1985_14822" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                                         <rect y="24" width="24" height="24" transform="rotate(-90 0 24)" fill="#D9D9D9"/>

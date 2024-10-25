@@ -417,20 +417,45 @@ const demostrar_like = async (req, res) => {
 }
 
 const obtener_Compras = async(req, res)=>{
-    const { idSesion } = req.body;
+    const { idSesion, token } = req.body;
     console.log("auth.js-obtener_Compras-idSesion:" + idSesion);
 
-    try{
-        const [compraProducto] = await db.query(`SELECT p.id, v2.noPedido, v.fechaAlta, p.descripcion, v.total, v.estadoEnvio FROM ventadetalle v 
-            JOIN producto p ON p.id = v.idProducto 
-            JOIN venta v2 ON v.idVenta = v2.id 
-            JOIN cliente c ON c.id = v2.idCliente 
-            JOIN usuario u ON u.id = c.idUsuario 
-            JOIN sesion s ON s.idUsuario = u.id
-            WHERE  s.id = ?`, [idSesion] )
 
-            console.log(compraProducto);
-        res.status(200).json({compraProducto})
+    const baseUrl = `${req.protocol}://${req.get('host')}/protected`;
+
+    try{
+
+        fetch(baseUrl, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token 
+            }
+        })
+        .then(response => response.json())
+        .then(async data => {
+
+            console.log('Los datos son: ');
+            
+            console.log(data);
+            
+            const [compraProducto] = await db.query(`SELECT v.id AS clienteid , p.id, v2.noPedido, v.fechaAlta, p.descripcion, v.total, v.estadoEnvio, s.idUsuario, v2.idCliente FROM ventadetalle v 
+                JOIN producto p ON p.id = v.idProducto 
+                JOIN venta v2 ON v.idVenta = v2.id 
+                JOIN cliente c ON c.id = v2.idCliente 
+                JOIN usuario u ON u.id = c.idUsuario 
+                JOIN sesion s ON s.idUsuario = u.id
+                WHERE  s.id = ?`, [idSesion] )
+    
+                
+                
+                console.log('La id es: ' + idSesion);
+                
+                console.log(compraProducto);
+            res.status(200).json({compraProducto})
+        })
+        
+
+        
 
     } catch (error) {
         console.log(error);        

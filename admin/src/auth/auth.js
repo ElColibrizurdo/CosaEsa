@@ -537,7 +537,7 @@ const MostrarCompras = async (req, res) => {
 
     try {
         
-        const [row] = await db.query('SELECT v.id, v.fechaPago, v.Total, d.estadoEnvio FROM venta v JOIN ventadetalle d ON v.id = d.idVenta ')
+        const [row] = await db.query('SELECT v.id, v.fechaPago, v.Total, d.estadoEnvio, noGuia, noPedido FROM venta v JOIN ventadetalle d ON v.id = d.idVenta ')
         res.json(row)
 
     } catch (error) {
@@ -550,7 +550,7 @@ const MostrarPedidos = async (req, res) => {
 
     try {
         
-        const [row] = await db.query('SELECT id, idVenta, idProducto, estadoEnvio FROM ventadetalle')
+        const [row] = await db.query('SELECT v.id, v.idVenta, v.idProducto, v.estadoEnvio, v2.noGuia, v2.noPedido FROM ventadetalle v JOIN venta v2 on v.idVenta = v2.id')
 
         let productos = []
         
@@ -565,6 +565,22 @@ const MostrarPedidos = async (req, res) => {
 
     } catch (error) {
         console.log(error);
+        
+    }
+}
+
+const ModificarNoGuia = async (req, res) => {
+
+    const id = req.query.id
+    const No = req.query.numero
+
+    try {
+        
+        const [row] = await db.query('UPDATE venta SET noGuia = ? WHERE id = ?', [No, id])
+        res.json(row)
+
+    } catch (error) {
+        res.json({message: "algo salio mal"})
         
     }
 }
@@ -643,4 +659,4 @@ const EliminarEquipo = async (req, res) => {
 }
 
 
-module.exports = { EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+module.exports = { ModificarNoGuia, EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

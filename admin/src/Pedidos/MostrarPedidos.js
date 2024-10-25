@@ -30,18 +30,15 @@ async function MostrarPedidos() {
                         <h2>${data.productos[indice].descripcion}</h2>
                     </div>
                     <h2>Detalles: ${element.id}</h2>
-                    <h2>Pedido: ${element.idVenta}</h2>
+                    <h2>Pedido: ${element.noPedido}</h2>
                     <select id="estatus-${element.id}" onchange="ModificarEstatus(this)">
                         <option value="11">Entregado</option>
                         <option value="1">En reparto</option>
                         <option value="0">Por Enviar</option>
                     </select>
-                        
-                    <svg xmlns="http://www.w3.org/2000/svg" onclick="cambiarClase_eliminar(${element.id})" width="24" height="24" viewBox="0 0 24 24" fill="#6F6D6D">
-                        <circle cx="6" cy="12" r="2" />
-                        <circle cx="12" cy="12" r="2" />
-                        <circle cx="18" cy="12" r="2" />
-                    </svg>
+                    <input id="${element.id}" type="text" value="${element.noGuia}" onblur="ModificarGuia(this)">
+                  
+                    
                 </div>
                 `
                 
@@ -84,6 +81,33 @@ async function ModificarEstatus(params) {
         
     }
     
+}
+
+async function ModificarGuia(params) {
+    
+    try {
+
+        console.log(params.value);
+        
+        
+        const response = await fetch(`/auth/modificarGuia?id=${params.getAttribute('id')}&numero=${params.value}`)
+        const data = await response.json()
+
+        console.log(data);
+        
+        if (data.affectedRows == 1) {
+            
+            alert("Se a modificado correcrtamente el numero guia")
+        }
+
+        if (data.message) {
+            alert(data.message)
+        }
+
+    } catch (error) {
+        console.log(error);
+        
+    }
 }
 
 MostrarPedidos()

@@ -277,9 +277,10 @@
                             </div>
                             <div>
                                 <label for="image" class="form-label">Imagenes
-                                    <ul id="imagenes"> </ul>
+                                    
                                 </label>
-                                <input type="file" name="image" id="image" accept="image/png" onchange="SubirImagen(this)" oninput="'/upload'" class="form-control input_naranja" required>
+                                <input type="file" name="image" id="image" accept="image/png" onchange="ImagenesTemporales(event)" oninput="'/upload'" class="form-control input_naranja" required>
+                                <ul id="imagenes"> </ul>
                                 <div class="valid-feedback">
                                     Exitoso!
                                 </div>
@@ -289,9 +290,10 @@
                             </div>
                             <div>
                                 <label for="color" class="form-label"> Agregar Color
-                                    <ul id="colores"></ul>
+                                    
                                 </label>
                                 <select name="color" id="color" onclick="MostrarColores(this)" class="form-control input_naranja" required></select>
+                                <ul id="listaColores"></ul>
                                 <div class="valid-feedback">
                                     Exitoso!
                                 </div>
@@ -300,7 +302,7 @@
                                 </div>
                             </div>
                             <div class="col align-self-center btn_logIn">
-                                <button class="btn_inciarSesion" id="finalizar" type="button" onclick="AgregarProducto(); cerrarPage();">Agregar</button>
+                                <button class="btn_inciarSesion" id="finalizar" type="button" onclick="AgregarProducto(); ">Agregar</button>
                             </div>
 
                         </form>

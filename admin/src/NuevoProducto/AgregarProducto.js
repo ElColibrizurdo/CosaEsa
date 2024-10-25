@@ -48,8 +48,6 @@ function MostrarVariantes(event, params) {
 
 async function MostrarColores(params) {
 
-    console.log(params);
-
     const opcion = params.options[params.selectedIndex]
 
     const response = await fetch('/auth/agregarColorProducto', {
@@ -64,10 +62,7 @@ async function MostrarColores(params) {
         })
     })
 
-    const data = await response.json()
-
-    console.log(data);
-    
+    const data = await response.json()    
 
     const fila = document.createElement('li')
 
@@ -83,20 +78,50 @@ async function MostrarColores(params) {
     fila.appendChild(label)
     btn.setAttribute('onclick', 'RemoverVariante(this)')
 
-    params.nextElementSibling.appendChild(fila)
+
+    const lista = document.getElementById('listaColores')
+    lista.appendChild(fila)
     
 }
 
-function SubirImagen(params) {
+tempFile = []
+
+function ImagenesTemporales(event) {
     
-    console.log(params.files[0]);
-    console.log(new URLSearchParams(window.location.search).get('idProducto'));
-    
-    const formData = new FormData()
-    formData.append('id', new URLSearchParams(window.location.search).get('idProducto'))
-    formData.append('image', params.files[0])
+    tempFile.push(event.target.files[0])
 
     const fila = document.createElement('li')
+    
+    const img = document.createElement('img')
+    img.src = URL.createObjectURL(event.target.files[0])
+    img.style.maxWidth = '70px'
+
+    const label = document.createElement('label')
+    label.appendChild(img)
+
+    const btn = document.createElement('button')
+    btn.textContent = 'eliminar'
+    label.appendChild(btn)
+
+    
+    fila.appendChild(label)
+    btn.setAttribute('onclick', 'RemoverVariante(this)')
+
+    const lista = document.getElementById('imagenes')
+    lista.appendChild(fila)
+}
+
+function SubirImagen(id) {
+    
+    console.log(id)
+    
+    const formData = new FormData()
+    formData.append('id', id)
+
+    tempFile.forEach((element,index) => {
+        formData.append(`images`, element)
+    })
+    
 
     fetch('/upload', {
         method: 'POST',
@@ -113,22 +138,7 @@ function SubirImagen(params) {
         console.error('Error al subir la imagen:', error);
     });
 
-    const img = document.createElement('img')
-    img.src = URL.createObjectURL(params.files[0])
-    img.style.maxWidth = '70px'
-
-    const label = document.createElement('label')
-    label.appendChild(img)
-
-    const btn = document.createElement('button')
-    btn.textContent = 'eliminar'
-    label.appendChild(btn)
-
     
-    fila.appendChild(label)
-    btn.setAttribute('onclick', 'RemoverVariante(this)')
-
-    params.nextElementSibling.appendChild(fila)
 }
 
 function RemoverVariante(params) {
@@ -181,12 +191,13 @@ async function AgregarProducto() {
                 tipo: formData.get('tipo'),
                 coloresID,
                 equipo: 1,
-                imagenes: nombres
+                imagenes: nombres,
+                equipoP: formData.get('equipos')
             })
         })
     
         const data = await responde.json()
-        console.log(data);
+        SubirImagen(data[0].insertId)
 
     } catch (error) {
         console.log(error);
@@ -242,7 +253,7 @@ async function ExtraerEquipos() {
 
     data.forEach(element => {
 
-        const equipo = `<option orden="${element.orden}">${element.nombre}</option>`
+        const equipo = `<option orden="${element.orden}" value="${element.id}">${element.nombre}</option>`
         
         const selector = document.getElementById('equipos')
         selector.innerHTML += equipo

@@ -46,13 +46,11 @@ const mostrar_productos = async (req, res) => {
 
 const agregar_producto = async (req, res) => {
 
-    const { nombre, precio, tipo, coloresID, equipo, imagenes } = req.body
-    console.log(coloresID);
+    const { nombre, precio, tipo, coloresID, equipo, imagenes, equipoP } = req.body
     
-
     try {
         
-        const row = await db.query('INSERT INTO producto (idTipo, descripcion, idEquipo, precio, stock, estado) VALUES (?,?,?,?,?,?)', [parseInt(tipo), nombre, equipo, precio, 15, 0])
+        const row = await db.query('INSERT INTO producto (idTipo, descripcion, idEquipo, precio, stock, estado) VALUES (?,?,?,?,?,?)', [parseInt(tipo), nombre, equipoP, precio, 15, 0])
         console.log(row[0].insertId);
 
         if (row[0].insertId) {
@@ -95,6 +93,7 @@ const agregar_producto = async (req, res) => {
             
         })
 
+        
         return res.status(400).json(row)
 
     } catch (error) {

@@ -85,14 +85,15 @@ app.get('/agregarColores', (req, res) => {
 const storage = multer.diskStorage({
     destination: function (req, file, cb) { 
 
+        console.log('vamos a sacar la ruta');
+        
+
         let uploadPath
 
         try {
             const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl 
 
             const parts = fullUrl.split('?')
-           
-            console.log(parts)
 
             if (parts[1] == 'equipo') {
                 uploadPath = path.join(__dirname, 'img', 'logos')
@@ -111,14 +112,19 @@ const storage = multer.diskStorage({
 
         const { id } = req.body
 
-        let filePath
+        console.log('vamos a sacar los nombres de ruta');
+        
+        console.log(file);
+        
+
+        let filePath 
         let baseName = id + path.extname(file.originalname)  
 
         
 
         try {
             const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl 
-            console.log(fullUrl);
+            
             
             const parts = fullUrl.split('?')
 
@@ -127,8 +133,20 @@ const storage = multer.diskStorage({
                 baseName = 'logo_' + id + '.png'
                 filePath = path.join(__dirname, 'img', 'logos')
             } else {
-                baseName = id + path.extname(file.originalname)
-                filePath = path.join(__dirname, 'img', 'articulos')
+
+                const files = req.files || [];
+                filePath = path.join(__dirname, 'img', 'articulos', baseName)
+
+                if (fs.existsSync(filePath)) {
+                    if (files.length === 0) {
+                        // Primer archivo: usa el ID como nombre
+                        baseName = `${id}${path.extname(file.originalname)}`; // Usar la extensión original
+                    } else {
+                        // Archivos subsiguientes: usa id_n
+                        const index = files.length; // La longitud de files es igual al número de archivos subidos
+                        baseName = `${id}_${index}${path.extname(file.originalname)}`; // Usar la extensión original
+                    }
+                }
             }
 
             if (!id) {
@@ -150,23 +168,28 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage})
 
-app.post('/upload', upload.single('image'), async  (req, res) => {
+app.post('/upload', upload.array('images'), async  (req, res) => {
 
-    console.log(req.id);
     
 
-    if (!req.file) {
+    if (!req.file || req.files.length == 0) {
         return res.status(400).send('No se ha subido ningún archivo.');
       }
 
       const {id} = req.body
-      // Puedes enviar la ruta donde se guardó la imagen de vuelta al cliente
-      res.send({
-        filename: req.file.filename,
-        data: {
-            id
-        }
-    });
+      const uploadedFiles = req.files.map(file => ({
+        filename: file.filename,
+        path: file.path,
+        url: `${req.protocol}://${req.get('host')}/img/${file.filename}`
+        }));
+
+        res.json({
+            message: 'Archivos subidos exitosamente',
+            data: {
+                id,
+                files: uploadedFiles
+            }
+        });
 })
 
 const server = http.createServer(app)

@@ -1,4 +1,5 @@
 
+
 function MostrarVariantes(event, params) {
 
     
@@ -233,8 +234,25 @@ async function ExtraerCategoriasColores() {
     })
 }
 
+async function ExtraerEquipos() {
+    
+    const response = await fetch('/auth/mostrarEquipos')
+    const data = await response.json()
+    
 
+    data.forEach(element => {
+
+        const equipo = `<option orden="${element.orden}">${element.nombre}</option>`
+        
+        const selector = document.getElementById('equipos')
+        selector.innerHTML += equipo
+
+        console.log(selector);
+        
+    })
+}
 
 
 
 ExtraerCategoriasColores()
+ExtraerEquipos()

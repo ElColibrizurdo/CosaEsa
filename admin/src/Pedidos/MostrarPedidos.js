@@ -14,7 +14,13 @@ async function MostrarPedidos() {
         const cantidad = document.querySelector('.cantidad')
         cantidad.textContent = `(${data.length})`
 
+        console.log(data);
+        
+
         data.row.forEach((element, indice) => {
+
+            console.log(element);
+            
 
             try {
                 let carta = `
@@ -41,17 +47,23 @@ async function MostrarPedidos() {
                 
 
                 lista.innerHTML += carta
+
+                let selector = document.getElementById(`estatus-${element.id}`)
+                console.log(selector);
+                
+                console.log(element.id);
+                
+                selector.value = String(element.estadoEnvio)
                                 
             } catch (error) {
+                console.log(error);
                 
             } 
         });
 
         data.row.forEach((element, indice) => {
 
-            let selector = document.getElementById(`estatus-${element.id}`)
             
-            selector.value = String(element.estadoEnvio)
         })
 
     } catch (error) {
@@ -65,8 +77,10 @@ async function ModificarEstatus(params) {
         
         const response = await fetch(`/auth/modificarEE?id=${params.id.slice(8)}&estatus=${params.value}`)
         const data = await response.json()
-
+        console.log(data);
+        
     } catch (error) {
+        console.log(error);
         
     }
     

@@ -19,15 +19,15 @@ async function mostrar_productos() {
 
             if (element.estado == 0) {
                 
-                estado = 'Agotado'
+                estado = 'Preventa'
 
             } else if (element.estado == 1) {
                 
                 estado = 'Disponible'
 
-            } else {
-
-                estado = 'Preventa'
+            } else if (element.estado == 11) {
+                
+                estado = 'Agotado'
 
             }
 

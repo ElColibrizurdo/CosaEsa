@@ -576,9 +576,12 @@ const ModificrEstatusEntrega = async (req, res) => {
     const estatus = req.query.estatus
 
     try {
+        console.log(id);
+        console.log(estatus);
         
         const [row] = await db.query('UPDATE ventadetalle SET estadoEnvio = ? WHERE id = ?', [estatus, id])
-
+        console.log(row);
+        
         res.json(row)
 
     } catch (error) {   
@@ -639,5 +642,6 @@ const EliminarEquipo = async (req, res) => {
         
     }
 }
+
 
 module.exports = { EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

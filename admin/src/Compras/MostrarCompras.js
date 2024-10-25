@@ -21,6 +21,7 @@ async function MostrarCompras() {
                 <h2>${element.fechaPago}</h2>
                 <h2>${element.Total}</h2>
                 <select id="estatus-${element.id}" onchange="ModificarEstatus(this)">
+                        
                         <option value="11">Entregado</option>
                         <option value="1">En reparto</option>
                         <option value="0">Por Enviar</option>
@@ -58,8 +59,10 @@ async function ModificarEstatus(params) {
         
         const response = await fetch(`/auth/modificarEE?id=${params.id.slice(8)}&estatus=${params.value}`)
         const data = await response.json()
-
+        console.log(data);
+        
     } catch (error) {
+        console.log(error);
         
     }
     

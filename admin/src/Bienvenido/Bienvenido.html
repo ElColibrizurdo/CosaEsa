@@ -3,10 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Administrador</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Bienvenido/Bienvenido.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="../css/lapeople.css">
     <script>
         function cambiarClase() {
         var div = document.getElementById("subcontendor_1");
@@ -49,7 +50,7 @@
     <div class="Contenedor">
         <nav class="barra_lateral">
             <div>
-                <a class="selecionado" href="Inicio.html"><svg xmlns="http://www.w3.org/2000/svg"  width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <a class="selecionado" href="/bienvenida"><svg xmlns="http://www.w3.org/2000/svg"  width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <mask id="mask0_2870_2493" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
                     <rect width="32" height="32" fill="#D9D9D9"/>
                     </mask>
@@ -78,8 +79,8 @@
             </svg></a>
                 <div class="subcontendor" id="subcontendor_1">
                     <div class="subcontendor_ocultar">
-                        <a href="/pagos">Pagos</a>
-                        <a href="/pedidos">Pedidos</a>
+                        <a href="/pagos">Compras</a>
+                        <a href="/pedidos">Envios</a>
                     </div>
                 </div>
             <a onclick="cambiarClase_2()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -105,16 +106,16 @@
             </a>
                 <div class="subcontendor" id="subcontendor_2">
                     <div class="subcontendor_ocultar">
-                        <a  href="/productos">Productos</a>
+                        <a href="/catalogoequipos">Catálogos Equipos</a>
+                        <a  href="/catalogotallas">Catálogos Tallas</a>
+                        <a  href="/catalogocolores">Catálogos Colores</a>
+                        <a href="/productos">Productos</a>
                         <a href="/inventario">Inventario</a>
                         <a href="/MostrarCategorias">Categorias</a>
-                        <a href="/catalogoTallas">Tallaz</a>
-                        <a href="/catalogoEquipos">Equipos</a>
-                        <a href="/catalogoColores">Colores</a>
                     </div>
                 </div>
 
-                <a href="Roles.html"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <a href="/admins"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                 <mask id="mask0_2870_2506" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
                 <rect width="32" height="32" fill="#D9D9D9"/>
                 </mask>
@@ -124,7 +125,7 @@
                 </svg>Roles</a>
             </div>
             <div>
-                <a href="Perfil.html" class="perfil_usuario ">
+                <a href="/perfil" class="perfil_usuario ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                         <mask id="mask0_2870_2513" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
                         <rect width="32" height="32" fill="#D9D9D9"/>
@@ -138,7 +139,7 @@
                 </a>
                 
                 <div class="linea_configuracion"></div>
-                <a><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <a href="/configuracion" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <mask id="mask0_2870_2490" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
                     <rect width="32" height="32" fill="#D9D9D9"/>
                     </mask>

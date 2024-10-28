@@ -299,6 +299,33 @@ const BuscarImagenes = async (req, res) => {
     }
 }
 
+const BuscarImagenEquipo = async (req, res) => {
+
+    const id = req.query.id
+
+    try {
+        
+        const directorio = path.join(__dirname, '..', 'img', 'logos')
+        const archivo = await fs.readdir(directorio)
+
+        const archivoFiltrado = archivo
+        .filter(arch => arch.startsWith(`logo_${id}.`))
+        .map(arch => ({
+            name:arch,
+            rutaCompleta: path.join(directorio, arch)
+        }))
+
+        console.log(archivoFiltrado);
+        
+
+        res.json(archivoFiltrado)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
 const ActualizarProducto = async (req, res) => {
 
     const { id, idTipo, descripcion, idEquipo, precio, estado } = req.body
@@ -658,5 +685,25 @@ const EliminarEquipo = async (req, res) => {
     }
 }
 
+const ModificarEquipo = async (req, res) => {
 
-module.exports = { ModificarNoGuia, EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+    const nombre = req.query.name 
+    const orden = req.query.order 
+    const id = req.query.id
+
+    try {
+        
+        const [row] = await db.query('UPDATE equipo SET nombre,= ?, orden = ? WHERE id = ?' , [nombre, orden, id])
+
+        console.log(row);
+    
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    } 
+}
+
+
+module.exports = { BuscarImagenEquipo, ModificarEquipo, ModificarNoGuia, EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

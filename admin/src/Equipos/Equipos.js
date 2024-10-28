@@ -31,7 +31,7 @@ async function MostrarEquipos() {
             <div class="contendor_cart_nombre">
                 <label class="checkBox_filtro"><input name="radio" type="checkbox"><div class="transition_checkbox"></div></label>
                 <img src="../../img/logos/logo_${element.id}.jpeg" alt="alt"/>
-                <a href="/agregarColores?idColor=${element.id}">${element.nombre}</a>
+                <a href="/AgregarEquipo?idEquipo=${element.id}">${element.nombre}</a>
             </div>
             <h2>${element.orden}</h2>
             <h2>${element.fechaAlta}</h2>

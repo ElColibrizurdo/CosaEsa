@@ -213,9 +213,10 @@
                             </div>
                            <div>
                                 <label for="image" class="form-label">Imagenes
-                                    <ul id="imagenes"> </ul>
+                                    
                                 </label>
                                 <input type="file" name="image" id="image" accept="image/png" onchange="MostrarImagen(this)" class="form-control input_naranja" required>
+                                <ul id="imagenes"> </ul>
                                 <div class="valid-feedback">
                                     Exitoso!
                                 </div>
@@ -225,13 +226,14 @@
                             </div>
                             
                             <div class="col align-self-center btn_logIn">
-                                <button class="btn_inciarSesion" id="finalizar" type="button" onclick="AgregarProducto(); cerrarPage();">Agregar</button>
+                                <button class="btn_inciarSesion" id="finalizar" type="button" onclick="AgregarEquipo(); cerrarPage();">Agregar</button>
                             </div>
 
                         </form>
             
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="../Equipos/AgregarEquipo.js"></script>
+    <script src="../Equipos/ModificarEquipo.js"></script>
 
                     </div>
                 </div>

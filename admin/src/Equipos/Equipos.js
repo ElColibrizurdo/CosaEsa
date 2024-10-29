@@ -30,7 +30,7 @@ async function MostrarEquipos() {
         <div id="${element.id}" class="cart">
             <div class="contendor_cart_nombre">
                 <label class="checkBox_filtro"><input name="radio" type="checkbox"><div class="transition_checkbox"></div></label>
-                <img src="../../img/logos/logo_${element.id}.jpeg" alt="alt"/>
+                <img src="../../img/logos/logo_${element.id}.jpeg " alt="alt"/>
                 <a href="/AgregarEquipo?idEquipo=${element.id}">${element.nombre}</a>
             </div>
             <h2>${element.orden}</h2>

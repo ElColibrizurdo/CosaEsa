@@ -31,18 +31,11 @@ let inpuImage
 function SubirImagen(nombre) {
     
     console.log(nombre);
-    
-
-    const image = document.getElementById('image').files
-
-    console.log(image);
-    
+    console.log(inpuImage);
     
     const formData = new FormData()
     formData.append('id', nombre)
-    formData.append('image', inpuImage)
-
-    
+    formData.append('images', inpuImage)
 
     fetch('/upload?equipo', {
         method: 'POST',
@@ -53,6 +46,7 @@ function SubirImagen(nombre) {
         console.log('Resultado:', result);  // Imprimir el resultado del servidor
         // Aquí puedes manejar la respuesta, por ejemplo mostrar la imagen subida:
          // Mostrar la URL de la imagen
+         cerrarPage()
     })
     .catch(error => {
         console.error('Error al subir la imagen:', error);
@@ -61,28 +55,51 @@ function SubirImagen(nombre) {
 
 function MostrarImagen(params) {
     
-    const fila = document.createElement('li')
+    const existente = document.getElementById('logo')
 
-    fila.setAttribute('nombre', params.files[0])
-        document.body.innerHTML += params.files[0]
-
-    localStorage.setItem('img', params.files[0])
-
-    const label = document.createElement('label')
-    label.innerText = params.files[0].name
-    const btn = document.createElement('button')
-    btn.textContent = 'eliminar'
-    label.appendChild(btn)
-
+    if (existente) {
     
-    fila.appendChild(label)
-    btn.setAttribute('onclick', 'RemoverImage(this)')
+        console.log(existente);
+        
 
-    const lista = document.getElementById('lista')
-    console.log(fila);
-    
-    //lista.appendChild(fila)
-    console.log(params.files);
+        existente.setAttribute('nombre', params.files[0])
+        
+        const img = existente.querySelector('img')
+        console.log(img);
+        
+        img.src = '../img/logos/' + params.files[0].name
+
+    } else {
+
+        console.log('holo');
+        
+
+        const fila = document.createElement('li')
+        fila.id = 'logo'
+
+        fila.setAttribute('nombre', params.files[0])
+
+        const label = document.createElement('label')
+
+        const img = document.createElement('img')
+        img.src = '../img/logos/' + params.files[0].name
+
+        const btn = document.createElement('button')
+        btn.textContent = 'eliminar'
+
+        label.appendChild(img)
+        label.appendChild(btn)
+
+        
+        fila.appendChild(label)
+        btn.setAttribute('onclick', 'BorrarImagen(this)')
+
+        const lista = document.getElementById('imagenes')
+        lista.appendChild(fila)
+        
+        
+    }
+
     inpuImage = params.files[0]
 }
 

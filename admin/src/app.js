@@ -105,12 +105,16 @@ const storage = multer.diskStorage({
             cb(null, uploadPath)
         } catch (error) {
             console.log(error);
-            
+            cb(error)
         }      
     },
     filename: function (req, file, cb) {
 
         const { id } = req.body
+
+        if (!id) {
+            return cb(new Error('ID no proporcionado'), false);
+        }
 
         console.log('vamos a sacar los nombres de ruta');
         

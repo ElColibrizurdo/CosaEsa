@@ -312,13 +312,29 @@ const BuscarImagenEquipo = async (req, res) => {
         .filter(arch => arch.startsWith(`logo_${id}.`))
         .map(arch => ({
             name:arch,
-            rutaCompleta: path.join(directorio, arch)
+            rutaCompleta: path.join(directorio, arch),
+            nombre: path.extname(arch)
         }))
 
         console.log(archivoFiltrado);
         
 
         res.json(archivoFiltrado)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const EliminarImagen = async (req, res) => {
+
+    const id = req.query.directorio
+    try {
+        console.log(id);
+        
+        await fs.unlink(id)
+        res.json('se elimino la imagen')
 
     } catch (error) {
         console.log(error);
@@ -392,28 +408,7 @@ const AgregarColorProducto = async (req, res) => {
     }
 }
 
-// Configurar el almacenamiento con Multer
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        // Aquí se especifica el directorio donde se guardarán las imágenes
-        cb(null, path.join(__dirname));
-    },
-    filename: function (req, file, cb) {
 
-        const { id } = req.body
-        // Verificar que el ID esté disponible
-        if (!id) {
-            return cb(new Error('ID no proporcionado en el body'), false);
-        }
-        
-
-        // Personaliza el nombre del archivo
-        cb(null, id + path.extname(file.originalname)); // Agrega la extensión original
-    }
-});
-
-// Inicializar el middleware de Multer
-const upload = multer({ storage: storage });
 
 const SubirImagenProducto = async (req, res) => {
 
@@ -688,13 +683,19 @@ const EliminarEquipo = async (req, res) => {
 const ModificarEquipo = async (req, res) => {
 
     const nombre = req.query.name 
-    const orden = req.query.order 
     const id = req.query.id
+
+    console.log(nombre);
+    console.log(id);
+    
+    
 
     try {
         
-        const [row] = await db.query('UPDATE equipo SET nombre,= ?, orden = ? WHERE id = ?' , [nombre, orden, id])
+        const [row] = await db.query('UPDATE equipo SET nombre = ? WHERE id = ?' , [nombre, id])
 
+        console.log('EL equipo se ');
+        
         console.log(row);
     
         res.json(row)
@@ -706,4 +707,4 @@ const ModificarEquipo = async (req, res) => {
 }
 
 
-module.exports = { BuscarImagenEquipo, ModificarEquipo, ModificarNoGuia, EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+module.exports = { EliminarImagen, BuscarImagenEquipo, ModificarEquipo, ModificarNoGuia, EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

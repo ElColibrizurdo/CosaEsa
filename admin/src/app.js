@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const authRoutes = require('../src/auth/Routes')
+const protectedRoutes = require('../src/proteccion/proy')
 const multer = require('multer')
 const app = express()
 const http = require('http')
@@ -12,6 +13,8 @@ app.use(bodyParser.json())
 
 app.use(bodyParser.urlencoded({extended:true}))
 app.use('/auth', authRoutes)
+
+app.use('/protected', protectedRoutes)
 
 app.use(express.static(path.join(__dirname, '/')))
 app.get('/', (req,res) => {

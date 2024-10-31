@@ -27,6 +27,8 @@ async function Estadisticas(paramas) {
         registrados.textContent = data.clientes[0].total
         invitados.textContent = data.registrados[0].total
 
+        
+
     } catch (error) {
         console.log(error);
         

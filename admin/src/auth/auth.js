@@ -2,6 +2,7 @@ const { query } = require('express')
 const db = require('../Databases/Databases')
 const  appModule = require('../app')
 const fs =  require('fs').promises
+const jwt = require('jsonwebtoken');
 const path = require('path')
 const multer = require('multer');
 const { log } = require('console')
@@ -171,17 +172,29 @@ const login = async (req, res) => {
 
     const correo = req.query.correo
     const pass = req.query.pass
-
-    console.log(correo);
-    console.log(pass);
-    
+    const userAgent = req.query.agent
 
     try {
         
         const [row] = await db.query('SELECT EXISTS ( SELECT 1 FROM usuario WHERE email = ? AND password = ? ) AS resultado', [correo, pass])
-        console.log(row);
+        console.log(row[0].resultado);
         
-        res.json({row})
+        if (row[0].resultado == 1) {
+            
+            const [datos] = await db.query('SELECT id, name, email, Nombres, ApellidoPrimero, ApellidoSegundo FROM usuario WHERE email = ?', [correo])
+            console.log(datos);
+            
+            const token = jwt.sign(datos[0], 'adpabasta', {expiresIn: '7d'})
+
+            console.log(token);
+            
+
+            await db.query('INSERT INTO sesion (idUsuario, navegador) VALUES (?,?)', [datos[0].id, userAgent])
+        
+            
+            res.json({token, row})
+        }
+        
 
     } catch (error) {
         console.log(error);

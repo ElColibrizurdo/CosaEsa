@@ -15,9 +15,10 @@ async function IniciarSesion(params) {
 
     if (data.row[0].resultado === 1) {
         
-        window.location.href = '/bienvenida'
+        localStorage.setItem('token', data.token)
+        //window.location.href = 'https://localhost/bienvenida'
     }
 
-    params.preventDefault()
+    //params.preventDefault()
     
 }

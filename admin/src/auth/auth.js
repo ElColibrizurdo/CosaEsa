@@ -47,11 +47,11 @@ const mostrar_productos = async (req, res) => {
 
 const agregar_producto = async (req, res) => {
 
-    const { nombre, precio, tipo, coloresID, equipo, imagenes, equipoP } = req.body
+    const { nombre, precio, tipo, coloresID, equipo, imagenes, equipoP, jugador, stock, estatus } = req.body
     
     try {
         
-        const row = await db.query('INSERT INTO producto (idTipo, descripcion, idEquipo, precio, stock, estado) VALUES (?,?,?,?,?,?)', [parseInt(tipo), nombre, equipoP, precio, 15, 0])
+        const row = await db.query('INSERT INTO producto (idTipo, descripcion, idEquipo, precio, stock, estado, idJugador) VALUES (?,?,?,?,?,?,?)', [parseInt(tipo), nombre, equipoP, precio, stock, estatus, jugador])
         console.log(row[0].insertId);
 
         if (row[0].insertId) {
@@ -719,5 +719,19 @@ const ModificarEquipo = async (req, res) => {
     } 
 }
 
+const ObtenerJugadores = async (req, res) => {
 
-module.exports = { EliminarImagen, BuscarImagenEquipo, ModificarEquipo, ModificarNoGuia, EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+    try {
+        
+        const [row] = await db.query('SELECT id, apodo, nombre, numero FROM jugador')
+
+        res.json(row)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
+module.exports = { ObtenerJugadores, EliminarImagen, BuscarImagenEquipo, ModificarEquipo, ModificarNoGuia, EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

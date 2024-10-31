@@ -192,7 +192,10 @@ async function AgregarProducto() {
                 coloresID,
                 equipo: 1,
                 imagenes: nombres,
-                equipoP: formData.get('equipos')
+                equipoP: formData.get('equipos'),
+                jugador: parseInt(formData.get('jugadores')),
+                stock: parseInt(formData.get('stock')),
+                estatus: parseInt(formData.get('estatus'))
             })
         })
     
@@ -215,6 +218,11 @@ async function ExtraerCategoriasColores() {
     const response = await fetch('/auth/categorias?tipo= ' )
     const data = await response.json()
 
+    const seleccion = `<option value="5">---Seleccion---</option>`
+    const selector = document.getElementById('tipo')
+
+    selector.innerHTML += seleccion
+
     data.forEach(element => {
 
         console.log(element);
@@ -224,12 +232,15 @@ async function ExtraerCategoriasColores() {
             <option value="${element.id}" >${element.nombre}</option>
         `
 
-        const selector = document.getElementById('tipo')
         selector.innerHTML += opcion
     })
 
     const responseC = await fetch('/auth/colores')
     const dataC = await responseC.json()
+
+    const selectorC = document.getElementById('color')
+
+    selectorC.innerHTML += seleccion
 
     dataC.row.forEach(element => {
 
@@ -239,31 +250,75 @@ async function ExtraerCategoriasColores() {
             <option color="${element.id}" value="${element.nombre}" >${element.nombre}</option>
         `
 
-        const selectorC = document.getElementById('color')
+        
         
         selectorC.innerHTML += color
     })
 }
 
 async function ExtraerEquipos() {
-    
-    const response = await fetch('/auth/mostrarEquipos')
-    const data = await response.json()
-    
 
-    data.forEach(element => {
-
-        const equipo = `<option orden="${element.orden}" value="${element.id}">${element.nombre}</option>`
+    try {
         
+        const response = await fetch('/auth/mostrarEquipos')
+        const data = await response.json()
+
         const selector = document.getElementById('equipos')
-        selector.innerHTML += equipo
+            
+        const seleccion = `<option value="0">---Seleccion---</option>`
 
-        console.log(selector);
+        selector.innerHTML += seleccion
+
+        data.forEach(element => {
+
+            const equipo = `<option orden="${element.orden}" value="${element.id}">${element.nombre}</option>`
+            
+            selector.innerHTML += equipo
+
+            console.log(selector);
+            
+        })
+
+    } catch (error) {
         
-    })
+    }
+    
+    
+}
+
+async function ObtenerJugadores() {
+    
+    try {
+        
+        const response = await fetch('/auth/obtenerJugadores')
+        const data = await response.json()
+
+        console.log(data);
+
+
+        const selector = document.getElementById('jugadores')
+        const seleccion = `<option value="">---Seleccion---</option>`
+          
+        selector.innerHTML += seleccion
+
+        data.forEach(element => {
+
+
+            const jugador = `<option value="${element.id}">${element.nombre} ${element.numero} "${element.apodo}"</option>`
+            
+            selector.innerHTML += jugador
+        })
+        
+        
+
+    } catch (error) {
+        console.log(error);
+        
+    }
 }
 
 
 
 ExtraerCategoriasColores()
 ExtraerEquipos()
+ObtenerJugadores()

@@ -201,7 +201,7 @@
 
                         <form id="form" class="row g-3 needs-validation form" onsubmit="ObtenerDatos(event)" novalidate>
                             <div>
-                                <label for="nombre" class="form-label">Nombre del producto</label>
+                                <label for="nombre" class="form-label">Nombre del producto *</label>
                                 <input type="text" name="nombre" id="nombre" class="form-control input_naranja" required>
                                 <div class="valid-feedback">
                                     Exitoso!
@@ -211,7 +211,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label for="precio" class="form-label">Precio del producto</label>
+                                <label for="precio" class="form-label">Precio del producto *</label>
                                 <input type="text" name="precio" id="precio" class="form-control input_naranja" required>
                                 <div class="valid-feedback">
                                     Exitoso!
@@ -221,31 +221,22 @@
                                 </div>
                             </div>
                             <div>
-                                <label for="estatus" class="form-label">Estatus</label>
+                                <label for="precio" class="form-label">Stock del producto *opcional*</label>
+                                <input type="text" name="stock" id="stock" class="form-control input_naranja" required>
+                                <div class="valid-feedback">
+                                    Exitoso!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Introduce esta información
+                                </div>
+                            </div>
+                            <div>
+                                <label for="estatus" class="form-label">Estatus *opcional*</label>
                                 <select name="estatus" id="estatus" class="form-control input_naranja" required>
+                                    <option value="">---Seleccion---</option>
                                     <option value="1">Disponible</option>
                                     <option value="0">Proximamente</option>
                                 </select>
-                                <div class="valid-feedback">
-                                    Exitoso!
-                                </div>
-                                <div class="invalid-feedback">
-                                    Introduce esta información
-                                </div>
-                            </div>
-                            <div>
-                                <label for="equipo" class="form-label">Numero del equipo *opcional*</label>
-                                <input type="number" name="equipo" id="equipo" class="form-control input_naranja" required>
-                                <div class="valid-feedback">
-                                    Exitoso!
-                                </div>
-                                <div class="invalid-feedback">
-                                    Introduce esta información
-                                </div>
-                            </div>
-                            <div>
-                                <label for="sku" class="form-label">SKU</label>
-                                <input type="text" name="sku" id="sku" class="form-control input_naranja" required>
                                 <div class="valid-feedback">
                                     Exitoso!
                                 </div>
@@ -265,8 +256,19 @@
                                 </div>
                             </div>
                             <div  style="display: flex; flex-direction: column">
-                                <label for="tipo" class="form-label"> Equipo </label>
+                                <label for="tipo" class="form-label"> Equipo *opcional*</label>
                                 <select name="equipos" id="equipos" class="form-control input_naranja" required>
+                                </select>
+                                <div class="valid-feedback">
+                                    Exitoso!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Introduce esta información
+                                </div>
+                            </div>
+                            <div  style="display: flex; flex-direction: column">
+                                <label for="tipo" class="form-label"> Jugador *opcional*</label>
+                                <select name="jugadores" id="jugadores" class="form-control input_naranja" required>
                                 </select>
                                 <div class="valid-feedback">
                                     Exitoso!
@@ -289,7 +291,7 @@
                                 </div>
                             </div>
                             <div>
-                                <label for="color" class="form-label"> Agregar Color
+                                <label for="color" class="form-label"> Agregar Color *opcional*
                                     
                                 </label>
                                 <select name="color" id="color" onclick="MostrarColores(this)" class="form-control input_naranja" required></select>

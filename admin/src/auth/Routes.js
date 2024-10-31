@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {  EliminarImagen,BuscarImagenEquipo, ModificarEquipo, ModificarNoGuia, EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto } = require('./auth')
+const {  ObtenerJugadores, EliminarImagen,BuscarImagenEquipo, ModificarEquipo, ModificarNoGuia, EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto } = require('./auth')
 
 router.get('/estadisticas', estadisticas)
 router.get('/mostrarProductos', mostrar_productos)
@@ -34,5 +34,6 @@ router.get('/modificarGuia', ModificarNoGuia)
 router.get('/modificarEquipo', ModificarEquipo)
 router.get('/obtenerLogo', BuscarImagenEquipo)
 router.get('/eliminarIMG', EliminarImagen)
+router.get('/obtenerJugadores', ObtenerJugadores)
 
 module.exports = router

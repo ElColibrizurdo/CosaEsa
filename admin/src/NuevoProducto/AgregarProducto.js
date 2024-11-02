@@ -105,7 +105,7 @@ function ImagenesTemporales(event) {
 
     
     fila.appendChild(label)
-    btn.setAttribute('onclick', 'RemoverVariante(this)')
+    btn.setAttribute('onclick', 'SubirImagen(this)')
 
     const lista = document.getElementById('imagenes')
     lista.appendChild(fila)
@@ -141,10 +141,28 @@ function SubirImagen(id) {
     
 }
 
-function RemoverVariante(params) {
+function EliminarImagen(params) {
+    
+console.log(params);
+
+
+    // const img = params.previousElementSibling
+    // console.log(img.src);
+    
+}
+
+async function RemoverVariante(params) {
+    
+    console.log(params);
     
     params.parentNode.parentNode.remove()
+    const img = new URL(params.previousElementSibling.src)
+    console.log(img.pathname);
+
+    const response = await fetch('/auth/eliminarIMG?directorio=' + img.pathname)
+    const data = response.json()
     
+    console.log(data);
     
 }
 

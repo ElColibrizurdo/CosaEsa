@@ -5,6 +5,9 @@ async function CrearColaborador() {
     const apellido = document.getElementById('apellido')
     const contra = document.getElementById('contra')
 
+    console.log(email);
+    
+
     try {
         
         const response = await fetch('/auth/agregarColaborador', {

@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="contenedor">
+    <div class="contenedor z-2 position-absolute">
         <div class="contenedor_regresar">
           <a class="atras">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -23,7 +23,7 @@
           <img src="../img/fijos/logos/prueva.png" width="100px" height="111px" alt="alt"/>
           <h5 class="titulo">Iniciar Sesión</h5>
       
-      <form class="row g-3 needs-validation form" onsubmit="seleccion(event)" novalidate>
+      <form class="row g-3 needs-validation form" novalidate>
           <div>
             <label for="validationCustom01" class="form-label">Correo Electrónico</label>
             <input type="text" class="form-control input_naranja" id="correo" value="administrador"  required>
@@ -63,7 +63,7 @@
             </div>
           </div>
           <div class="col align-self-center btn_logIn">
-            <button class="btn_inciarSesion" onclick="IniciarSesion(this)">Continuar</button>
+            <button type="button" class="btn_inciarSesion" onclick="IniciarSesion()">Continuar</button>
           </div>
         </form>
       <a href="/recuperar" class="link_olvidastePassword" >¿Olvidalste la contraseña?</a>
@@ -95,6 +95,14 @@
                       </defs>
                       </svg>Ingresar con Apple</button>
       </div>
+
+  </div>
+
+
+  <div id="carga" class="w-100 d-none p-3 opacity-25  d-flex align-items-center bg-warning h-100 z-1 justify-content-center">
+    <div class=" align-middle spinner-border text-primary " style="width: 120px; height: 120px; border-width: 0.5rem;" role="status">
+      <span class=" align-middle visually-hidden">Loading...</span>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -105,24 +113,24 @@
     <script src="../Usuarios/IniciarSesion.js"></script>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (() => {
-          'use strict'
+        //(() => {
+          //'use strict'
 
           // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          const forms = document.querySelectorAll('.needs-validation')
+          //const forms = document.querySelectorAll('.needs-validation')
 
           // Loop over them and prevent submission
-          Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-              if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-              }
+          //Array.from(forms).forEach(form => {
+            //form.addEventListener('submit', event => {
+              //if (!form.checkValidity()) {
+                //event.preventDefault()
+                //event.stopPropagation()
+              //}
 
-              form.classList.add('was-validated')
-            }, false)
-          })
-        })()
+              //form.classList.add('was-validated')
+            //}, false)
+          //})
+        //})()
     </script>
 </body>
 </html>

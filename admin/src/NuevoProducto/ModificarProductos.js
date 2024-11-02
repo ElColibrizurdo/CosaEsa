@@ -1,4 +1,12 @@
 
+const nombre = document.getElementById('nombre')
+const precio = document.getElementById('precio')
+const stock = document.getElementById('stock')
+const tipo = document.getElementById('tipo')
+const estado = document.getElementById('estatus')
+const equipo = document.getElementById('equipos')
+const jugador = document.getElementById('jugadores')
+const colores = document.getElementById('listaColores')
 
 async function MostrarDatos(id) {
     
@@ -12,22 +20,29 @@ async function MostrarDatos(id) {
 
     console.log(dataC);
     
+    
 
     data.forEach(async element => {
 
+        
+
         if (element.id == id) {
+
+
+            console.log(element);
             
-            const nombre = document.getElementById('nombre')
-            const precio = document.getElementById('precio')
-            const tipo = document.getElementById('tipo')
-            const estado = document.getElementById('estatus')
-            const colores = document.getElementById('colores')
 
             nombre.value = element.descripcion
             precio.value = element.precio
             tipo.value = element.idTipo
             estado.value = element.estado
-
+            stock.value = element.stock
+            console.log(equipo);
+            console.log(typeof(equipo.value));
+            console.log(typeof(element.equipo));
+            equipo.value = element.idEquipo
+            
+            jugador.value = element.idJugador
             
 
             dataC.rows.forEach((elementC,indice) => {
@@ -109,11 +124,6 @@ async function ModificarProducto() {
     
     try {
 
-        const nombre = document.getElementById('nombre')
-        const precio = document.getElementById('precio')
-        const tipo = document.getElementById('tipo')
-        const estado = document.getElementById('estatus')
-        const colores = document.getElementById('colores')
         
         const responde = await fetch('/auth/actualizarProducto', {
 
@@ -125,7 +135,9 @@ async function ModificarProducto() {
                 id: new URLSearchParams(window.location.search).get('idProducto'),
                 idTipo: tipo.value,
                 descripcion: nombre.value,
-                idEquipo: 1,
+                idEquipo: equipo.value,
+                idJugador: jugador.value,
+                stock: stock.value,
                 precio: precio.value,
                 estado: estado.value 
             })
@@ -134,6 +146,8 @@ async function ModificarProducto() {
         const data = await responde.json()
 
         console.log(data);
+
+        SubirImagen(new URLSearchParams(window.location.search).get('idProducto'))
         
 
     } catch (error) {

@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const path = require('path')
 const multer = require('multer');
 const { log } = require('console')
+const bcrypt = require('bcrypt')
 
 const estadisticas = async (req, res) => {
 
@@ -35,7 +36,7 @@ const mostrar_productos = async (req, res) => {
 
     try {
         
-        const [productos] = await db.query('SELECT p.descripcion, p.precio, p.estado, p.id, p.idTipo, COUNT(c.id) AS variantes FROM producto p LEFT JOIN colores_producto c ON p.id = c.idProducto WHERE activo = 1 GROUP BY p.id ')
+        const [productos] = await db.query('SELECT p.descripcion, p.precio, p.estado, p.id, p.idTipo, COUNT(c.id) AS variantes, p.stock, p.idEquipo, p.idJugador FROM producto p LEFT JOIN colores_producto c ON p.id = c.idProducto WHERE activo = 1 GROUP BY p.id ')
 
         res.json(productos)
         
@@ -176,23 +177,26 @@ const login = async (req, res) => {
 
     try {
         
-        const [row] = await db.query('SELECT EXISTS ( SELECT 1 FROM usuario WHERE email = ? AND password = ? ) AS resultado', [correo, pass])
-        console.log(row[0].resultado);
-        
+        const [row] = await db.query('SELECT EXISTS ( SELECT 1, password FROM usuario WHERE email = ?) AS resultado', [correo])
+           
         if (row[0].resultado == 1) {
-            
-            const [datos] = await db.query('SELECT id, name, email, Nombres, ApellidoPrimero, ApellidoSegundo FROM usuario WHERE email = ?', [correo])
-            console.log(datos);
-            
-            const token = jwt.sign(datos[0], 'adpabasta', {expiresIn: '7d'})
 
-            console.log(token);
-            
+            const [hash] = await db.query('SELECT password FROM usuario WHERE email = ?', [correo])
+           
+            const esValido = await bcrypt.compare(pass, hash[0].password)
+            if (esValido) {
 
-            await db.query('INSERT INTO sesion (idUsuario, navegador) VALUES (?,?)', [datos[0].id, userAgent])
-        
+                const [datos] = await db.query('SELECT id, name,  email, Nombres, ApellidoPrimero, ApellidoSegundo FROM usuario WHERE email = ?', [correo])
             
-            res.json({token, row})
+                const token = jwt.sign(datos[0], 'adpabasta', {expiresIn: '7d'})
+
+                await db.query('INSERT INTO sesion (idUsuario, navegador) VALUES (?,?)', [datos[0].id, userAgent])
+                
+                res.json({token, esValido})
+            } else {
+                res.json({esValido})
+            }
+            
         }
         
 
@@ -255,11 +259,15 @@ const EliminarColaborador = async (req, res) => {
 
 const CrearColaborador = async (req, res) => {
 
-    const { nombre, pass, ape, email } = req.body
+    const { nombre, pass, ape, email } = req.body    
 
     try {
         
-        const row = await db.query('INSERT INTO usuario (name, email, password, Nombres, ApellidoPrimero, ApellidoSegundo, role, verificado) VALUES (?,?,?,?,?,?,?,?)', [nombre, email, pass, nombre, ape, ape, 'admin', 1])
+        const saltrounds = 19
+
+        const hash = await bcrypt.hash(pass, saltrounds)
+
+        const row = await db.query('INSERT INTO usuario (name, email, password, Nombres, ApellidoPrimero, ApellidoSegundo, role, verificado) VALUES (?,?,?,?,?,?,?,?)', [nombre, email, hash, nombre, ape, ape, 'admin', 1])
 
         res.json([row])
 
@@ -343,10 +351,14 @@ const BuscarImagenEquipo = async (req, res) => {
 const EliminarImagen = async (req, res) => {
 
     const id = req.query.directorio
+
+    
+    const filePath = path.join(__dirname, '..', id)
+
     try {
         console.log(id);
         
-        await fs.unlink(id)
+        await fs.unlink(filePath)
         res.json('se elimino la imagen')
 
     } catch (error) {
@@ -357,19 +369,14 @@ const EliminarImagen = async (req, res) => {
 
 const ActualizarProducto = async (req, res) => {
 
-    const { id, idTipo, descripcion, idEquipo, precio, estado } = req.body
+    const { id, idTipo, descripcion, idEquipo, idJugador, stock, precio, estado } = req.body
 
-    console.log(precio);
-    console.log(id);
-    console.log(descripcion);
-    console.log(idEquipo);
-    console.log(estado);
-    console.log(idTipo);
+    console.log("La id del jugador es: " + idJugador);
     
 
     try {
         
-        const row = await db.query('UPDATE producto SET idTipo = ?, descripcion = ?, idEquipo = ?, precio = ?, estado = ? WHERE id = ?', [idTipo, descripcion, idEquipo, precio, estado, id])
+        const row = await db.query('UPDATE producto SET idTipo = ?, descripcion = ?, idEquipo = ?, precio = ?, estado = ?, stock = ?, idJugador = ? WHERE id = ?', [idTipo, descripcion, idEquipo, precio, estado, stock, idJugador, id])
         console.log(row);
         
         res.json(row)

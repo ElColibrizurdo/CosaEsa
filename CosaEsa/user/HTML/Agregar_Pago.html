@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" onsubmit="">
+        <label for="">Numero de tarjeta</label>
+        <input type="number" name="card" id="card" minlength="16" maxlength="16" oninput="Luhn(this)">
+        <label for="">Fecha de expiracion</label>
+        <input type="number" name="card" id="fecha" minlength="4" maxlength="4" oninput="ComprobarExpiracion(this)">
+        <select name="" id="mes">
+            <option value="01">Enero (01)</option>
+            <option value="02">Febrero (02)</option>
+            <option value="03">Marzo (03)</option>
+            <option value="04">Abril (04)</option>
+            <option value="05">Mayo (05)</option>
+            <option value="06">Junio (06)</option>
+            <option value="07">Julio (07)</option>
+            <option value="08">Agosto (08)</option>
+            <option value="09">Septiembre (09)</option>
+            <option value="10">Octubre (10)</option>
+            <option value="11">Noviembre (11)</option>
+            <option value="12">Diciembre (12)</option>
+        </select>
+        <label for="" >CVV</label>
+        <input type="number" name="card" id="code" maxlength="3">
+        <label for="">Nombre y Apellido</label>
+        <input type="text" name="card" id="nombre">
+        <button onclick="ValidarDatos('this')">Continuar</button>
+    </form>
+
+    <script src="../JS/Agregar_Pago.js"></script>
+</body>
+</html>

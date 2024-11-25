@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Error 503</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <style>
+             *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:Obviously;
+            }
+            @font-face{
+                font-family:Obviously;
+                src:url(../img/fonnts.com-Obviously.otf);
+            }   
+        body{
+
+             display: flex;
+             justify-content: flex-end;
+             overflow-x: hidden;
+             }
+            ::-webkit-scrollbar {
+            display: none; /* Chrome, Safari y Opera */
+            }
+
+        
+            .nav_top{
+                display:flex;
+                justify-content: center;
+                background-color: #FFFFFF;
+                width: 100%;
+                height: 94px;
+                z-index: 2;
+                position: fixed;
+                box-shadow: 0px 5px 10px #f4f4f4;
+            }   
+                .union_header{
+                     height: 180%;
+                     position: absolute;
+                }
+                .nav_top_links{
+                    margin-top: 30px;
+                    margin-left: 36px;
+                    margin-right:36px;
+                    width: 100%;
+                    display: flex; 
+                    position: relative;
+                    justify-content: space-between;
+                    height: 43.8%;
+                }
+                    .nav_top_1{
+                        display: flex;
+                    }
+                    .nav_top_1 a{
+                        color: #004789;
+                        font-size: 22px;
+                        font-style: normal;
+                        font-weight: 900;
+                        line-height: normal;
+                    }
+                    .nav_top_2{
+                        display:inline-flex;
+                        align-items: center;
+                        display: flex;
+                        gap: 24px ;
+
+                    }
+                        .nav_top_2 a{
+                            text-decoration: none;
+                            color: #004789;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 600;
+                        }
+
+                            .buscador{
+                                cursor: pointer;
+                                width: 135px;
+                                padding: 10px 0px 10px 40px;
+                                border-radius: 9999px;
+                                border: solid rgba(0, 0, 0, 0);
+                                transition: all .2s ease-in-out;
+                                outline: none;
+                                opacity: 1;
+                                font-size: 17px;
+                                font-style: normal;
+                                font-weight: 900;
+                                line-height: normal;
+                                color: #004789;
+                                background-color: rgba(0, 0, 0, 0); 
+                              }
+                              .buscador::placeholder {
+                                color: #004789; /* Cambia este color por el que desees */
+                                opacity: 1; /* Para asegurar que el color no se vea transparente */
+                              }
+                               .container-buscador {
+                                position: relative;
+                              }
+                              .container-buscador svg {
+                                position: absolute;
+                                top: 50%;
+                                left: 10px;
+                                transform: translate(0, -50%);
+                              }
+
+                              .buscador:focus {
+                               border: solid 3px #f15d2a;
+                               opacity: 1;
+                                width: 450px;
+                                 color: #1C1C1C;
+                              }
+
+
+                            .btn_carrito {
+                                display: inline-flex; 
+                                align-items: center; 
+                                justify-content: center;
+                                padding: 10px 18px;
+                                border: solid #f15d2a;
+                                border-radius: 10px;
+                                color: #f15d2a; 
+                                z-index: 1;
+                                gap: 8px;
+                                background: #FFFFFF;
+                                position: relative;
+                                transition: all 200ms;
+                                overflow: hidden;
+                               }
+
+                               .btn_carrito::before {
+                                content: "";
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                height: 100%;
+                                width: 0;
+                                border-radius: 0 ;
+                                background-color: #f15d2a;
+                                z-index: -1;
+                                transition: all 250ms;
+                               }
+
+                               .btn_carrito:hover {
+                                color: #FFFFFF;
+                               }
+
+                               .svg_carrito{
+                                   width:24px; 
+                                   height:24px;
+                                   fill:#f15d2a;
+
+                               }
+                               .btn_carrito:hover .svg_carrito{
+                                     fill:#FFFFFF;
+                               }
+
+                              .btn_carrito:hover::before {
+                                width: 100%;
+                               }
+        .contendor{
+            top: 94px;
+            position: absolute;
+            width: 100% ;
+            height: calc(100% - 94px);
+            display: flex;
+            background: #fcfcfc;
+            justify-content: center;
+            align-items:  center;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="nav_top">
+             <img src="../img/prueba_header_2.png" class="union_header" alt="alt"/>
+             <div class="nav_top_links">
+                <div class="nav_top_1">
+                    <a href="#">TIENDA</a>
+                </div>
+                <div class="nav_top_2">
+                 <div class="container-buscador">
+                    <input type="text"  placeholder="BUSCAR" name="text"  class="buscador">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23" fill="#235583" height="24"  viewBox="0 0 23 24" >
+                    <path d="M21.0068 23.5L13.0644 15.5573C12.4432 16.0384 11.7268 16.4201 10.9153 16.7023C10.1037 16.9845 9.23624 17.1256 8.3128 17.1256C5.99252 17.1256 4.02699 16.3202 2.41619 14.7094C0.805397 13.0984 0 11.1329 0 8.8128C0 6.49273 0.805397 4.52719 2.41619 2.91619C4.02699 1.3054 5.99252 0.5 8.3128 0.5C10.6329 0.5 12.5983 1.3054 14.2091 2.91619C15.8201 4.52719 16.6256 6.49273 16.6256 8.8128C16.6256 9.74125 16.4845 10.6087 16.2023 11.4153C15.9199 
+                          12.2218 15.5382 12.9332 15.0573 13.5494L23.0072 21.5068L21.0068 23.5ZM8.3128 14.2764C9.83321 14.2764 11.1239 13.7459 12.1849 12.6849C13.2459 11.6241 13.7764 10.3334 13.7764 8.8128C13.7764 7.29218 13.2459 6.00148 12.1849 4.94069C11.1239 3.8797 9.83321 3.34921 8.3128 3.34921C6.79218 3.34921 5.50137 3.8797 4.44038 4.94069C3.3796 6.00148 2.84921 7.29218 2.84921 8.8128C2.84921 10.3334 3.3796 11.6241 4.44038 12.6849C5.50137 13.7459 6.79218 14.2764 8.3128 14.2764Z" />
+                    </svg>
+                  </div>
+
+                 <a  href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#235583" width="22" height="24" viewBox="0 0 22 24" >
+                        <path d="M11.0075 11.8644C9.46105 11.8644 8.14038 11.3169 7.04549 10.222C5.9506 9.12714 5.40316 7.80647 5.40316 6.26003C5.40316 4.71381 5.9506 3.39447 7.04549 2.30203C8.14038 1.20981 
+                              9.46105 0.663696 11.0075 0.663696C12.5539 0.663696 13.8746 1.20981 14.9695 2.30203C16.0644 3.39447 16.6118 4.71381 16.6118 6.26003C16.6118 7.80647 16.0644 9.12714 14.9695 10.222C13.8746 
+                              11.3169 12.5539 11.8644 11.0075 11.8644ZM0.0698242 23.0734V19.053C0.0698242 18.2479 0.278047 17.508 0.694491 16.8334C1.11094 16.1585 1.66427 15.6435 2.35449 15.2884C3.74827 14.5941 5.16682 14.0721 
+                              6.61016 13.7224C8.05327 13.3726 9.51904 13.1977 11.0075 13.1977C12.5059 13.1977 13.9769 13.3713 15.4205 13.7184C16.864 14.0655 18.2774 14.5861 19.6605 15.2804C20.3507 15.6348 20.904 16.1487 21.3205 
+                              16.822C21.7369 17.4954 21.9452 18.2388 21.9452 19.0524V23.0734H0.0698242ZM3.10316 20.04H18.9118V19.0927C18.9118 18.8534 18.8507 18.6358 18.7285 18.44C18.6063 18.2443 18.4452 18.092 18.2452 17.9834C17.0772 17.4047 15.8899 
+                              16.968 14.6835 16.6734C13.4773 16.3785 12.2519 16.231 11.0075 16.231C9.77371 16.231 8.54838 16.3785 7.33149 16.6734C6.1146 16.968 4.92738 17.4047 3.76982 17.9834C3.56982 18.092 3.40871 18.2443 3.28649 18.44C3.16427 18.6358 
+                              3.10316 18.8534 3.10316 19.0927V20.04ZM11.0072 8.83103C11.714 8.83103 12.3194 8.57936 12.8232 8.07603C13.3267 7.5727 13.5785 6.96748 13.5785 6.26036C13.5785 5.55347 13.3268 4.94959 12.8235 4.4487C12.3199 3.94759 11.7147 3.69703 
+                              11.0078 3.69703C10.3009 3.69703 9.6956 3.94803 9.19182 4.45003C8.68827 4.95203 8.43649 5.55536 8.43649 6.26003C8.43649 6.96714 8.68816 7.57248 9.19149 8.07603C9.69504 8.57936 10.3003 8.83103 11.0072 8.83103Z" />
+                    </svg>
+                    INGRESAR
+                 </a>
+                    <button class="btn_carrito"  onclick="cambiarClase()">
+                        <svg class="svg_carrito" xmlns="http://www.w3.org/2000/svg" fill="#f15d2a" viewBox="0 0 24 24" >
+                            <path d="M6.9999 22.0897C6.44991 22.0897 5.97907 21.8938 5.58741 21.5022C5.19574 21.1105 4.99991 20.6397 4.99991 20.0897C4.99991 19.5397 5.19574 19.0688 
+                                  5.58741 18.6772C5.97907 18.2855 6.44991 18.0897 6.9999 18.0897C7.5499 18.0897 8.02074 18.2855 8.41241 18.6772C8.80407 19.0688 8.99991 19.5397 8.99991 
+                                  20.0897C8.99991 20.6397 8.80407 21.1105 8.41241 21.5022C8.02074 21.8938 7.5499 22.0897 6.9999 22.0897ZM16.9999 22.0897C16.4499 22.0897 15.9791 21.8938 
+                                  15.5874 21.5022C15.1957 21.1105 14.9999 20.6397 14.9999 20.0897C14.9999 19.5397 15.1957 19.0688 15.5874 18.6772C15.9791 18.2855 16.4499 18.0897 16.9999 
+                                  18.0897C17.5499 18.0897 18.0207 18.2855 18.4124 18.6772C18.8041 19.0688 18.9999 19.5397 18.9999 20.0897C18.9999 20.6397 18.8041 21.1105 18.4124
+                                  21.5022C18.0207 21.8938 17.5499 22.0897 16.9999 22.0897ZM6.29941 6.08966L8.5619 10.8147H15.5379L18.1324 6.08966H6.29941ZM5.25366 
+                                  3.91016H19.7767C20.2302 3.91016 20.5752 4.11091 20.8119 4.51241C21.0484 4.91391 21.0571 5.32149 20.8379 5.73516L17.4254 11.9022C17.2341 12.2473 16.9774 
+                                  12.5166 16.6554 12.7099C16.3332 12.9032 15.9807 12.9999 15.5977 12.9999H8.20166L7.15541 14.9102H19.0897V17.0897H6.9999C6.20607 17.0897 5.60949 16.7445 
+                                  5.21016 16.0542C4.81099 15.364 4.79632 14.68 5.16616 14.0022L6.49816 11.5999L2.94616 4.08966H0.910156V1.91016H4.30366L5.25366 3.91016Z" />
+                        </svg>
+                    0</button>
+                </div>
+            </div>
+        </div>
+        <div class="contendor">
+            <img src="../img/error503.png" alt="alt"/>
+        </div>
+    </body>
+</html>

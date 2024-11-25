@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Productos/Productos.css">
+    <title>Document</title>
+    <script>
+        function cambiarClase() {
+        var div = document.getElementById("subcontendor_1");
+        if (div.classList.contains("active")) {
+            div.classList.remove("active");
+    
+        } else {
+            div.classList.add("active");
+    
+        }
+    }
+        function cambiarClase_2() {
+        var div = document.getElementById("subcontendor_2");
+        if (div.classList.contains("active")) {
+            div.classList.remove("active");
+    
+        } else {
+            div.classList.add("active");
+    
+        }
+    }
+        function cambiarClase_eliminar(id) {
+        var div = document.getElementById("pantalla_gris");
+        var btn = document.getElementById("btnEliminar");
+        
+        btn.addEventListener('click', function() {
+
+            Eliminar(id)
+        })
+
+        if (div.classList.contains("active")) {
+            div.classList.remove("active");
+    
+        } else {
+            div.classList.add("active");
+    
+        }
+
+        
+    }
+    
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="headear_img">
+            <img src="../../img/prueba_header_2.png" alt="alt"/>
+        </div>
+        <div class="contenedor-buscador">
+            
+        </div>
+    </div>
+    <div class="pantalla_gris active" id="pantalla_gris">
+        <div class="modal_advertecia_eliminacion">
+            <h2>Eliminar Producto</h2>
+            <p>¿Esta seguro de eliminar este producto?</p>
+            <div class="contenedor_btn_eliminar">
+                <button class="btn_rechasar_eliminar" onclick="cambiarClase_eliminar()">Rechazar</button>
+                <button id="btnEliminar" class="btn_aceptar_eliminar" onclick="cambiarClase_eliminar()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="Contenedor">
+        <nav class="barra_lateral">
+            <div>
+                <a href="/bienvenida"><svg xmlns="http://www.w3.org/2000/svg"  width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <mask id="mask0_2870_2493" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+                    <rect width="32" height="32" fill="#D9D9D9"/>
+                    </mask>
+                    <g mask="url(#mask0_2870_2493)">
+                    <path d="M8.09583 25.2376H11.8168V17.1499H20.1835V25.2376H23.9045V13.3809L16.0002 7.4529L8.09583 13.3809V25.2376ZM5.0625 28.2709V11.8642L16.0002 3.65723L26.9378 11.8616V28.2709H17.2698V20.0636H14.7305V28.2709H5.0625Z" fill="white"/>
+                    </g>
+                </svg>inicio</a>
+                <a onclick="cambiarClase()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <mask id="mask0_2870_2487" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+                    <rect width="32" height="32" fill="#D9D9D9"/>
+                    </mask>
+                    <g mask="url(#mask0_2870_2487)">
+                    <path d="M14.7367 25.3332H17.1973V23.7142C18.2978 23.5142 19.2507 23.0808 20.056 22.4142C20.8613 21.7475 21.264 20.7427 21.264 19.3998C21.264 18.4505 20.9947 17.5803 20.456 16.7892C19.9173 15.9983 18.8401 15.314 17.2243 14.7362C15.8963 14.2917 14.982 13.9028 14.4813 13.5695C13.9809 13.2362 13.7307 12.7885 13.7307 12.2265C13.7307 11.6807 13.9297 11.2505 14.3277 10.9358C14.7254 10.621 15.2893 10.4635 16.0193 10.4635C16.7198 10.4635 17.274 10.6357 17.682 10.9802C18.0898 11.3246 18.3826 11.7604 18.5603 12.2875L20.8053 11.3732C20.5502 10.5527 20.0989 9.85228 19.4513 9.27184C18.8038 8.6914 18.0747 8.36262 17.264 8.28551V6.66651H14.8033V8.28551C13.6709 8.5404 12.7989 9.03984 12.1873 9.78384C11.5758 10.5278 11.27 11.3554 11.27 12.2665C11.27 13.3323 11.5848 14.1953 12.2143 14.8555C12.8441 15.516 13.8491 16.0902 15.2293 16.5782C16.5602 17.0573 17.4886 17.4915 18.0143 17.8808C18.5403 18.2704 18.8033 18.7767 18.8033 19.3998C18.8033 20.1118 18.5554 20.6348 18.0597 20.9688C17.5641 21.3026 16.9443 21.4695 16.2003 21.4695C15.467 21.4695 14.8223 21.2431 14.2663 20.7902C13.7103 20.3373 13.3017 19.6446 13.0403 18.7122L10.7287 19.6265C11.0291 20.7305 11.5178 21.6183 12.1947 22.2898C12.8713 22.9612 13.7187 23.4137 14.7367 23.6475V25.3332ZM16.0003 29.6042C14.1134 29.6042 12.3429 29.2475 10.6887 28.5342C9.03466 27.8208 7.59566 26.8523 6.37166 25.6285C5.14788 24.4045 4.17933 22.9655 3.466 21.3115C2.75266 19.6573 2.396 17.8867 2.396 15.9998C2.396 14.113 2.75266 12.3424 3.466 10.6882C4.17933 9.03418 5.14788 7.59517 6.37166 6.37117C7.59566 5.1474 9.03466 4.17884 10.6887 3.46551C12.3429 2.75217 14.1134 2.39551 16.0003 2.39551C17.8872 2.39551 19.6578 2.75217 21.312 3.46551C22.966 4.17884 24.405 5.1474 25.629 6.37117C26.8528 7.59517 27.8213 9.03418 28.5347 10.6882C29.248 12.3424 29.6047 14.113 29.6047 15.9998C29.6047 17.8867 29.248 19.6573 28.5347 21.3115C27.8213 22.9655 26.8528 24.4045 25.629 25.6285C24.405 26.8523 22.966 27.8208 21.312 28.5342C19.6578 29.2475 17.8872 29.6042 16.0003 29.6042ZM16.0003 26.5708C18.9568 26.5708 21.4578 25.5482 23.5033 23.5028C25.5487 21.4573 26.5713 18.9563 26.5713 15.9998C26.5713 13.0434 25.5487 10.5424 23.5033 8.49684C21.4578 6.45151 18.9568 5.42884 16.0003 5.42884C13.0439 5.42884 10.5429 6.45151 8.49733 8.49684C6.452 10.5424 5.42933 13.0434 5.42933 15.9998C5.42933 18.9563 6.452 21.4573 8.49733 23.5028C10.5429 25.5482 13.0439 26.5708 16.0003 26.5708Z" fill="white"/>
+                    </g>
+                    </svg>
+                ventas
+                <svg xmlns="http://www.w3.org/2000/svg" class="flecha" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <g opacity="0.7">
+                    <mask id="mask0_2886_1880" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+                    <rect width="32" height="32" fill="#D9D9D9"/>
+                    </mask>
+                    <g mask="url(#mask0_2886_1880)">
+                    <path d="M16 20.0718L8.46167 12.5334L9.86667 11.1284L16 17.2618L22.1333 11.1284L23.5383 12.5334L16 20.0718Z" fill="white"/>
+                    </g>
+                    </g>
+            </svg></a>
+                <div class="subcontendor active" id="subcontendor_1">
+                    <div class="subcontendor_ocultar">
+                        <a href="/pagos">Compras</a>
+                        <a href="/pedidos" class="selecionado" >Envios</a>
+                    </div>
+                </div>
+            <a onclick="cambiarClase_2()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <mask id="mask0_2870_2501" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+                <rect width="32" height="32" fill="#D9D9D9"/>
+                </mask>
+                <g mask="url(#mask0_2870_2501)">
+                <path d="M5.15019 8.00013V4.9668H26.8502V8.00013H5.15019ZM5.14719 27.0335V19.0335H3.77686V16.0001L5.15019 9.33346H26.8502L28.2235 16.0001V19.0335H26.8502V27.0335H23.8169V19.0335H18.8502V27.0335H5.14719ZM8.18352 24.0001H15.8169V19.0335H8.18352V24.0001ZM6.89286 16.0001H25.1075L24.3712 12.3668H7.62919L6.89286 16.0001Z" fill="white"/>
+                </g>
+                </svg>
+                tienda 
+                <svg xmlns="http://www.w3.org/2000/svg" class="flecha" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <g opacity="0.7">
+                    <mask id="mask0_2886_1880" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+                    <rect width="32" height="32" fill="#D9D9D9"/>
+                    </mask>
+                    <g mask="url(#mask0_2886_1880)">
+                    <path d="M16 20.0718L8.46167 12.5334L9.86667 11.1284L16 17.2618L22.1333 11.1284L23.5383 12.5334L16 20.0718Z" fill="white"/>
+                    </g>
+                    </g>
+                </svg>
+                <input type="checkbox" class="dropdown">
+            </a>
+                <div class="subcontendor " id="subcontendor_2">
+                    <div class="subcontendor_ocultar">
+                        <a href="/catalogoequipos">Catálogos Equipos</a>
+                        <a href="/catalogotallas">Catálogos Tallas</a>
+                        <a href="/catalogocolores">Catálogos Colores</a>
+                        <a href="/MostrarCategorias">Categorias</a>
+                        <a href="/productos">Productos</a>
+                        <a href="/inventario">Inventario</a>
+                    </div>
+                </div>
+
+                <a href="/admins"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <mask id="mask0_2870_2506" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+                <rect width="32" height="32" fill="#D9D9D9"/>
+                </mask>
+                <g mask="url(#mask0_2870_2506)">
+                <path d="M22.9137 20.1595C21.9325 20.1595 21.1012 19.8187 20.4197 19.1372C19.7379 18.4554 19.397 17.6239 19.397 16.6428C19.397 15.6617 19.7379 14.8304 20.4197 14.1488C21.1012 13.467 21.9325 13.1262 22.9137 13.1262C23.895 13.1262 24.7264 13.467 25.408 14.1488C26.0896 14.8304 26.4303 15.6617 26.4303 16.6428C26.4303 17.6239 26.0896 18.4554 25.408 19.1372C24.7264 19.8187 23.895 20.1595 22.9137 20.1595ZM16.0637 27.0735V25.0235C16.0637 24.4548 16.2119 23.9276 16.5083 23.4418C16.8048 22.956 17.2244 22.6025 17.7673 22.3812C18.578 22.0374 19.4183 21.7835 20.2883 21.6195C21.1586 21.4555 22.0343 21.3735 22.9157 21.3735C23.797 21.3735 24.6708 21.4555 25.537 21.6195C26.4032 21.7835 27.2417 22.0374 28.0523 22.3812C28.5952 22.6025 29.0162 22.956 29.3153 23.4418C29.6142 23.9276 29.7637 24.4548 29.7637 25.0235V27.0735H16.0637ZM13.174 15.8645C11.6276 15.8645 10.3069 15.317 9.21199 14.2222C8.11711 13.1273 7.56966 11.8066 7.56966 10.2602C7.56966 8.71393 8.11711 7.3946 9.21199 6.30215C10.3069 5.20993 11.6276 4.66382 13.174 4.66382C14.7202 4.66382 16.0409 5.20993 17.136 6.30215C18.2309 7.3946 18.7783 8.71393 18.7783 10.2602C18.7783 11.8066 18.2309 13.1273 17.136 14.2222C16.0409 15.317 14.7202 15.8645 13.174 15.8645ZM2.23633 27.0735V23.0532C2.23633 22.2478 2.43977 21.5077 2.84666 20.8328C3.25377 20.1579 3.81188 19.6432 4.52099 19.2885C5.87566 18.6112 7.27922 18.0934 8.73166 17.7352C10.1843 17.3769 11.6651 17.1978 13.174 17.1978C13.9836 17.1978 14.7905 17.2658 15.595 17.4018C16.3992 17.5378 17.2009 17.7 18 17.8885C17.5744 18.314 17.1462 18.7437 16.7153 19.1775C16.2844 19.611 15.8561 20.0406 15.4303 20.4662C15.0517 20.371 14.6757 20.3082 14.3023 20.2775C13.9288 20.2466 13.5527 20.2312 13.174 20.2312C11.9062 20.2312 10.6637 20.3828 9.44633 20.6862C8.229 20.9893 7.05899 21.4217 5.93633 21.9835C5.71944 22.0946 5.55411 22.2477 5.44033 22.4428C5.32655 22.6377 5.26966 22.8544 5.26966 23.0928V24.0402H13.397V27.0735H2.23633ZM13.1737 12.8312C13.8805 12.8312 14.4858 12.5795 14.9893 12.0762C15.4931 11.5728 15.745 10.9676 15.745 10.2605C15.745 9.5536 15.4932 8.94971 14.9897 8.44882C14.4863 7.94771 13.8812 7.69715 13.1743 7.69715C12.4672 7.69715 11.8619 7.94815 11.3583 8.45015C10.8548 8.95215 10.603 9.55549 10.603 10.2602C10.603 10.9673 10.8547 11.5726 11.358 12.0762C11.8615 12.5795 12.4668 12.8312 13.1737 12.8312Z" fill="white"/>
+                </g>
+                </svg>Roles</a>
+            </div>
+            <div class="div_perfil">
+                <a href="Perfil.html" class="perfil_usuario ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <mask id="mask0_2870_2513" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+                        <rect width="32" height="32" fill="#D9D9D9"/>
+                        </mask>
+                        <path d="M7.84033 22.6804C8.97366 21.8244 10.235 21.1518 11.6243 20.6624C13.0137 20.1731 14.4729 19.9284 16.002 19.9284C17.5311 19.9284 18.9938 20.1771 20.39 20.6744C21.7862 21.1718 23.043 21.8431 24.1603 22.6884C24.9223 21.772 25.5147 20.7506 25.9373 19.6244C26.36 18.498 26.5713 17.2899 26.5713 16.0001C26.5713 13.0763 25.5404 10.5835 23.4787 8.52175C21.4169 6.45998 18.9241 5.42909 16.0003 5.42909C13.0766 5.42909 10.5838 6.45998 8.522 8.52175C6.46022 10.5835 5.42933 13.0763 5.42933 16.0001C5.42933 17.2845 5.63933 18.49 6.05933 19.6164C6.47933 20.7426 7.073 21.764 7.84033 22.6804ZM16.0003 17.4051C14.6679 17.4051 13.5464 16.9511 12.636 16.0431C11.7253 15.1351 11.27 14.015 11.27 12.6828C11.27 11.3503 11.7253 10.2288 12.636 9.31808C13.5464 8.40764 14.6679 7.95242 16.0003 7.95242C17.3328 7.95242 18.4542 8.40764 19.3647 9.31808C20.2753 10.2288 20.7307 11.3503 20.7307 12.6828C20.7307 14.015 20.2753 15.1351 19.3647 16.0431C18.4542 16.9511 17.3328 17.4051 16.0003 17.4051ZM15.9997 29.6044C14.1186 29.6044 12.3509 29.2478 10.6967 28.5344C9.04266 27.8211 7.60233 26.8512 6.37566 25.6248C5.14922 24.3981 4.17933 22.9575 3.466 21.3031C2.75266 19.6484 2.396 17.8805 2.396 15.9994C2.396 14.1183 2.75266 12.3506 3.466 10.6964C4.17933 9.04242 5.14922 7.60209 6.37566 6.37542C7.60233 5.14897 9.04288 4.17908 10.6973 3.46575C12.352 2.75242 14.1199 2.39575 16.001 2.39575C17.8821 2.39575 19.6498 2.75242 21.304 3.46575C22.958 4.17908 24.3983 5.14897 25.625 6.37542C26.8514 7.60209 27.8213 9.04264 28.5347 10.6971C29.248 12.3518 29.6047 14.1196 29.6047 16.0008C29.6047 17.8819 29.248 19.6495 28.5347 21.3038C27.8213 22.9578 26.8514 24.3981 25.625 25.6248C24.3983 26.8512 22.9578 27.8211 21.3033 28.5344C19.6487 29.2478 17.8808 29.6044 15.9997 29.6044ZM16.0003 26.5711C17.1514 26.5711 18.2333 26.4055 19.246 26.0744C20.2584 25.7433 21.198 25.2661 22.0647 24.6428C21.1876 24.0143 20.2493 23.5359 19.25 23.2074C18.2507 22.8787 17.1674 22.7144 16.0003 22.7144C14.8332 22.7144 13.7513 22.8787 12.7547 23.2074C11.758 23.5359 10.821 24.0143 9.94366 24.6428C10.8103 25.2661 11.7487 25.7433 12.7587 26.0744C13.7687 26.4055 14.8492 26.5711 16.0003 26.5711ZM16.0003 14.6191C16.5568 14.6191 17.0187 14.4354 17.386 14.0681C17.7531 13.701 17.9367 13.2392 17.9367 12.6828C17.9367 12.1261 17.7531 11.6629 17.386 11.2931C17.0187 10.9233 16.5568 10.7384 16.0003 10.7384C15.4439 10.7384 14.982 10.9233 14.6147 11.2931C14.2476 11.6629 14.064 12.1261 14.064 12.6828C14.064 13.2392 14.2476 13.701 14.6147 14.0681C14.982 14.4354 15.4439 14.6191 16.0003 14.6191Z" fill="white"/>
+                    </svg>
+                    <div class="div_perfil">
+                        <h6>karencita Valdecitta</h6>
+                        <span>Propietario</span>
+                    </div>
+                </a>
+                <div class="linea_configuracion"></div>
+                <a><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <mask id="mask0_2870_2490" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
+                    <rect width="32" height="32" fill="#D9D9D9"/>
+                    </mask>
+                    <g mask="url(#mask0_2870_2490)">
+                    <path d="M12.1025 29.6042L11.5532 25.2498C11.3067 25.1547 11.073 25.04 10.8518 24.9055C10.631 24.7713 10.4142 24.6286 10.2015 24.4775L6.15518 26.1838L2.24951 19.4202L5.74651 16.7722C5.72962 16.638 5.72118 16.5093 5.72118 16.3862V15.6135C5.72118 15.4904 5.72962 15.3617 5.74651 15.2275L2.24951 12.5795L6.15518 5.83184L10.2175 7.53017C10.4302 7.37906 10.6485 7.23762 10.8725 7.10584C11.0967 6.97429 11.3236 6.86095 11.5532 6.76584L12.1025 2.39551H19.8978L20.4472 6.76584C20.6936 6.86095 20.9274 6.97429 21.1485 7.10584C21.3694 7.23762 21.5862 7.37906 21.7988 7.53017L25.8452 5.83184L29.7508 12.5795L26.2458 15.2275C26.2627 15.3617 26.2712 15.4904 26.2712 15.6135V15.9998C26.2712 16.1341 26.2698 16.2628 26.2672 16.3862C26.2645 16.5093 26.2463 16.638 26.2125 16.7722L29.7175 19.4202L25.8038 26.1838L21.7828 24.4775C21.5702 24.6286 21.3518 24.7713 21.1278 24.9055C20.9036 25.04 20.6767 25.1547 20.4472 25.2498L19.8978 29.6042H12.1025ZM14.7545 26.5708H17.2045L17.6792 23.0535C18.3734 22.8757 19.0216 22.6133 19.6238 22.2662C20.2258 21.9191 20.7713 21.4904 21.2602 20.9802L24.5525 22.3468L25.7568 20.2238L22.9138 18.0732C23.025 17.7514 23.1054 17.4156 23.1552 17.0658C23.205 16.7161 23.2298 16.3607 23.2298 15.9998C23.2298 15.639 23.205 15.2836 23.1552 14.9338C23.1054 14.5841 23.025 14.2483 22.9138 13.9265L25.7725 11.7758L24.5525 9.65284L21.2682 11.0528C20.7793 10.5257 20.2338 10.086 19.6318 9.73351C19.0296 9.38106 18.3787 9.11862 17.6792 8.94618L17.2458 5.42884H14.7798L14.3292 8.93818C13.6243 9.11062 12.9694 9.37306 12.3645 9.72551C11.7598 10.078 11.2104 10.5093 10.7162 11.0195L7.44018 9.65284L6.22785 11.7758L9.06251 13.8855C8.9514 14.2293 8.87096 14.5718 8.82118 14.9132C8.7714 15.2545 8.74651 15.6167 8.74651 15.9998C8.74651 16.3607 8.7714 16.7132 8.82118 17.0572C8.87096 17.4012 8.9514 17.7451 9.06251 18.0888L6.22785 20.2238L7.44018 22.3468L10.7162 20.9548C11.2104 21.4766 11.7612 21.9137 12.3685 22.2662C12.9761 22.6186 13.6296 22.8837 14.3292 23.0615L14.7545 26.5708ZM16.0428 20.6665C17.3317 20.6665 18.4317 20.211 19.3428 19.2998C20.254 18.3887 20.7095 17.2887 20.7095 15.9998C20.7095 14.711 20.254 13.611 19.3428 12.6998C18.4317 11.7887 17.3317 11.3332 16.0428 11.3332C14.7371 11.3332 13.6328 11.7887 12.7302 12.6998C11.8275 13.611 11.3762 14.711 11.3762 15.9998C11.3762 17.2887 11.8275 18.3887 12.7302 19.2998C13.6328 20.211 14.7371 20.6665 16.0428 20.6665Z" fill="white"/>
+                    </g>
+                    </svg>Configuracion</a>
+            </div>
+           
+           
+        </nav>
+        <div class="Space">
+            <div class="titulo_space">
+                <h1>Envios <a class="cantidad"> (32)</a></h1>
+            </div>
+            <div class="contendedor_datos">
+                <div class="contendedor_titulo">
+                    <h1>Filtrar por: 
+                        <a class="abrir_modal"> Todo </a>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <mask id="mask0_2168_19732" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                            <rect width="24" height="24" fill="#D9D9D9"/>
+                            </mask>
+                            <g mask="url(#mask0_2168_19732)">
+                            <path d="M11.9999 15.0538L6.34619 9.4L7.39994 8.34625L11.9999 12.9463L16.5999 8.34625L17.6537 9.4L11.9999 15.0538Z" fill="#3462D9"/>
+                            </g>
+                            </svg>
+                        <div class="modal_filtro_estadisticas active" id="modal_filtro_estadisticas_1" >
+                            <a class="selecion_a">Todo</a>
+                            <a>Disponible</a>
+                            <a>Preventa</a>
+                            <a>Agotado</a>
+                        </div>
+                    </h1>
+                    <div class="container-buscador">
+                        <input type="text"  placeholder="BUSCAR" name="text"  class="buscador">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" fill="#6F6D6D" height="22"  viewBox="0 0 23 24" >
+                        <path d="M21.0068 23.5L13.0644 15.5573C12.4432 16.0384 11.7268 16.4201 10.9153 16.7023C10.1037 16.9845 9.23624 17.1256 8.3128 17.1256C5.99252 17.1256 4.02699 16.3202 2.41619 14.7094C0.805397 13.0984 0 11.1329 0 8.8128C0 6.49273 0.805397 4.52719 2.41619 2.91619C4.02699 1.3054 5.99252 0.5 8.3128 0.5C10.6329 0.5 12.5983 1.3054 14.2091 2.91619C15.8201 4.52719 16.6256 6.49273 16.6256 8.8128C16.6256 9.74125 16.4845 10.6087 16.2023 11.4153C15.9199 
+                              12.2218 15.5382 12.9332 15.0573 13.5494L23.0072 21.5068L21.0068 23.5ZM8.3128 14.2764C9.83321 14.2764 11.1239 13.7459 12.1849 12.6849C13.2459 11.6241 13.7764 10.3334 13.7764 8.8128C13.7764 7.29218 13.2459 6.00148 12.1849 4.94069C11.1239 3.8797 9.83321 3.34921 8.3128 3.34921C6.79218 3.34921 5.50137 3.8797 4.44038 4.94069C3.3796 6.00148 2.84921 7.29218 2.84921 8.8128C2.84921 10.3334 3.3796 11.6241 4.44038 12.6849C5.50137 13.7459 6.79218 14.2764 8.3128 14.2764Z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="contendedor_titulo_filtros">
+                    <label class="checkBox_filtro"><input name="radio" type="checkbox"><div class="transition_checkbox"></div></label>
+                    <div class="contendor_cart_nombre"><h3>Producto</h3></div>
+                    <h3>Pedido</h3>
+                    <h3>Detalle</h3>
+                    <h3>Estatus</h3>                    
+                </div>
+                <div class="div_scroll">
+                    
+               
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+    <script src="../Pedidos/MostrarPedidos.js"></script>
+</body>
+ <script>
+    const perfilItems = document.querySelectorAll('.abrir_modal');
+const modalItems = document.querySelectorAll('.modal_filtro_estadisticas');
+
+perfilItems.forEach((perfilItem, index) => {
+const modalItem = modalItems[index];
+let hideTimeout;
+
+const clearAndSetHideTimeout = () => {
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+        modalItem.classList.add("active");
+    }, 400);
+};
+
+perfilItem.addEventListener('click', () => {
+    clearTimeout(hideTimeout);
+    modalItem.classList.toggle("active");
+    clearAndSetHideTimeout();
+});
+
+modalItem.addEventListener('click', (event) => {
+    clearTimeout(hideTimeout);
+    clearAndSetHideTimeout();
+});
+
+modalItem.addEventListener('mouseover', () => {
+    clearTimeout(hideTimeout);
+});
+
+modalItem.addEventListener('mouseleave', clearAndSetHideTimeout);
+
+document.addEventListener('click', (event) => {
+    if (!modalItem.contains(event.target) && event.target !== perfilItem) {
+        clearAndSetHideTimeout();
+    }
+});
+});
+
+// Seleccionar los enlaces dentro de cada modal y sus respectivos títulos (relacionados por el índice)
+modalItems.forEach((modalItem, index) => {
+const enlaces = modalItem.querySelectorAll('a');
+const titulo = perfilItems[index]; // El perfil asociado con el modal actual
+
+enlaces.forEach(enlace => {
+    enlace.addEventListener('click', function(event) {
+        event.preventDefault();
+        
+        // Remover la clase 'selecion_a' de todos los enlaces del mismo modal
+        enlaces.forEach(link => link.classList.remove('selecion_a'));
+        this.classList.add('selecion_a');
+        
+        // Actualizar el texto del perfil correspondiente al modal
+        titulo.textContent = this.textContent;
+        
+        // Asegurar que el modal esté activo (si es necesario)
+        modalItem.classList.add("active");
+    });
+});
+});
+
+
+ </script>
+</html>

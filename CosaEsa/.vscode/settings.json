@@ -1,0 +1,22 @@
+{
+    "editor.tokenColorCustomizations": {
+        "comments": "#4fff3f"       
+    },
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "sangrael",
+            "database": "plasheras",
+            "username": "sangrael",
+            "askForPassword": true
+        }
+    ],
+    "livePreview.defaultPreviewPath": "/HTML/index.html"
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Usuarios/IniciarSesion.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="contenedor z-2 position-absolute">
+        <div class="contenedor_regresar">
+          <a class="atras">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <mask id="mask0_1871_15981" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                    <rect width="24" height="24" fill="#D9D9D9"/>
+                  </mask>
+                  <g mask="url(#mask0_1871_15981)">
+                    <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z" fill="#1C1C1C"/>
+                  </g>
+              </svg>
+            </a>
+      </div>
+          <img src="../img/fijos/logos/prueva.png" width="100px" height="111px" alt="alt"/>
+          <h5 class="titulo">Iniciar Sesión</h5>
+      
+      <form class="row g-3 needs-validation form" novalidate>
+          <div>
+            <label for="validationCustom01" class="form-label">Correo Electrónico</label>
+            <input type="text" class="form-control input_naranja" id="correo" value="administrador"  required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Introduce tu correo electrónico
+            </div>
+          </div>
+          <div>
+            <label for="validationCustom02" class="form-label">Contraseña</label>
+          <div class="input-group">
+            <input type="password" class="form-control input_naranja" id="pass" value="4dm1n1st4d0r" required>
+            <span class="input-group-text cuadro_ojo"><label class="container">
+              <input type="checkbox" checked="checked" onclick="CambiarPass()">
+              <svg class="eye" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 576 512"><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"></path></svg>
+              <svg class="eye-slash" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 640 512"><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c8.4-19.3 10.6-41.4 4.8-63.3c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zM373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5L373 389.9z"></path></svg>
+            </label></span>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback ">
+                Introduce tu correo tu contraseña
+            </div>
+          </div>
+          </div>  
+  
+          <div class="col-12">
+            <div >
+              <label>
+                  Al continuar, aceptas las <a href="" class="link_terms">condicones de uso</a> y el <a href="" class="link_terms">aviso de privacidad</a> de la People's League
+              </label>
+              <div class="invalid-feedback">
+                You must agree before submitting.
+              </div>
+            </div>
+          </div>
+          <div class="col align-self-center btn_logIn">
+            <button type="button" class="btn_inciarSesion" onclick="IniciarSesion()">Continuar</button>
+          </div>
+        </form>
+      <a href="/recuperar" class="link_olvidastePassword" >¿Olvidalste la contraseña?</a>
+      <div>
+          <a>¿Eres nuevo?</a>
+          <a href="/registro" class="link_registrarse">Registrate</a>
+      </div>
+      <div class="linea_o">
+          <div class="linea"></div>
+          <a class="letra_o">O</a>
+          <div class="linea"></div>
+      </div>
+      <div class="btn_grupo">
+          <button class="btn_google"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M17.64 9.20454C17.64 8.56636 17.5827 7.95272 17.4764 7.36363H9V10.845H13.8436C13.635 11.97 13.0009 12.9232 12.0477 13.5614V15.8195H14.9564C16.6582 14.2527 17.64 11.9454 17.64 9.20454Z" fill="#4285F4"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M8.99976 18C11.4298 18 13.467 17.1941 14.9561 15.8196L12.0475 13.5614C11.2416 14.1014 10.2107 14.4205 8.99976 14.4205C6.65567 14.4205 4.67158 12.8373 3.96385 10.71H0.957031V13.0418C2.43794 15.9832 5.48158 18 8.99976 18Z" fill="#34A853"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M3.96409 10.71C3.78409 10.17 3.68182 9.59318 3.68182 8.99999C3.68182 8.40681 3.78409 7.82999 3.96409 7.28999V4.95818H0.957273C0.347727 6.17318 0 7.54772 0 8.99999C0 10.4523 0.347727 11.8268 0.957273 13.0418L3.96409 10.71Z" fill="#FBBC05"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M8.99976 3.57955C10.3211 3.57955 11.5075 4.03364 12.4402 4.92545L15.0216 2.34409C13.4629 0.891818 11.4257 0 8.99976 0C5.48158 0 2.43794 2.01682 0.957031 4.95818L3.96385 7.29C4.67158 5.16273 6.65567 3.57955 8.99976 3.57955Z" fill="#EA4335"/>
+              </svg>Ingresar con Google</button>
+          
+          <button class="btn_apple"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
+                      <g clip-path="url(#clip0_1542_7500)">
+                      <path d="M5.80576 3.06923C6.38818 3.06923 7.11826 2.66338 7.55303 2.12225C7.94678 1.63185 8.23389 0.94698 8.23389 0.26211C8.23389 0.169103 8.22568 0.0760966 8.20928 0C7.56123 0.0253655 6.78193 0.448124 6.31436 1.01462C5.94521 1.44584 5.60889 2.12225 5.60889 2.81558C5.60889 2.91704 5.62529 3.0185 5.6335 3.05232C5.67451 3.06078 5.74014 3.06923 5.80576 3.06923ZM3.75498 13.3C4.55068 13.3 4.90342 12.7504 5.896 12.7504C6.90498 12.7504 7.12646 13.2831 8.0124 13.2831C8.88193 13.2831 9.46436 12.4545 10.014 11.6428C10.6292 10.7127 10.8835 9.79955 10.8999 9.75728C10.8425 9.74037 9.17725 9.03859 9.17725 7.06853C9.17725 5.36058 10.4897 4.59116 10.5636 4.53198C9.69404 3.24679 8.37334 3.21297 8.0124 3.21297C7.03623 3.21297 6.24053 3.82174 5.74014 3.82174C5.19873 3.82174 4.48506 3.24679 3.64014 3.24679C2.03232 3.24679 0.399902 4.61653 0.399902 7.20381C0.399902 8.8103 1.00693 10.5098 1.75342 11.609C2.39326 12.539 2.95107 13.3 3.75498 13.3Z" fill="white"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_1542_7500">
+                      <rect width="11.2" height="14" fill="white" transform="translate(0.399902)"/>
+                      </clipPath>
+                      </defs>
+                      </svg>Ingresar con Apple</button>
+      </div>
+
+  </div>
+
+
+  <div id="carga" class="w-100 d-none p-3 opacity-25  d-flex align-items-center bg-warning h-100 z-1 justify-content-center">
+    <div class=" align-middle spinner-border text-primary " style="width: 120px; height: 120px; border-width: 0.5rem;" role="status">
+      <span class=" align-middle visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="../Usuarios/IniciarSesion.js"></script>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        //(() => {
+          //'use strict'
+
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          //const forms = document.querySelectorAll('.needs-validation')
+
+          // Loop over them and prevent submission
+          //Array.from(forms).forEach(form => {
+            //form.addEventListener('submit', event => {
+              //if (!form.checkValidity()) {
+                //event.preventDefault()
+                //event.stopPropagation()
+              //}
+
+              //form.classList.add('was-validated')
+            //}, false)
+          //})
+        //})()
+    </script>
+</body>
+</html>

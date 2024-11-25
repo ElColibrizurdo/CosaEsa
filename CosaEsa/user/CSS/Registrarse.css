@@ -1,0 +1,202 @@
+
+            body{
+                margin: 0; 
+                height: 100vh; 
+                background-color:black; 
+                background-image:url("../../img/fondo_singup.png");
+                background-size: cover; 
+                background-repeat: no-repeat; 
+                background-position: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+             @font-face{
+                    font-family:Obviously;
+                    src:url(../../img/fonnts.com-Obviously.otf);
+                }   
+                .contenedor{
+                     border-radius: 12px;
+                    height: 800px;
+                    width: 600px;
+                    background-color: #FFFFFF ;
+                    display: flex;
+                    justify-content:center;
+                    align-items: center;
+                    flex-direction: column;
+                    padding:30px;
+                }
+                .linea_o{
+                    display: flex;
+                    align-items: center;
+                }
+                .linea{
+                    height: 1px;
+                    width: 206px;
+                    background-color: #f15d2a;
+                }
+                .letra_o{
+                    margin: 5px;
+                    font-family: Roboto;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 20px;
+                    text-decoration: none;
+                    color: #131313;
+                }
+                .btn_grupo{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+                    
+                }
+                .btn_logIn{
+                    display: flex;
+                    justify-content:center;
+                }
+                .form{
+                    margin: 10px;
+                }
+
+/*------ Settings ------*/
+.container {
+  --color: #a5a5b0;
+  --size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  font-size: var(--size);
+  user-select: none;
+  fill: var(--color);
+}
+
+.container .eye {
+  position: absolute;
+  animation: keyframes-fill .5s;
+}
+
+.container .eye-slash {
+  position: absolute;
+  animation: keyframes-fill .5s;
+  display: none;
+}
+
+/* ------ On check event ------ */
+.container input:checked ~ .eye {
+  display: none;
+}
+
+.container input:checked ~ .eye-slash {
+  display: block;
+}
+
+/* ------ Hide the default checkbox ------ */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* ------ Animation ------ */
+@keyframes keyframes-fill {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+            .btn_inciarSesion{
+                background-color: #f15d2a;
+                color: #FFFFFF;
+                width: 224px;
+                height: 42px;
+                padding: 8px 16px;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                flex-shrink: 0;
+                border-radius: 8px;
+                border: 1.5px solid #f15d2a;
+            }
+            .btn_google{
+                display: inline-flex;
+                height: 40px;
+                padding: 0px 12px;
+                align-items: center;
+                gap: 10px;
+                flex-shrink: 0;
+                border-radius: 8px;
+                border: 1px solid #747775;
+                background: #FFF;
+            }
+            .btn_apple{
+                display: flex;
+                width: 225px;
+                height: 44px;
+                padding: 12px 16px;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+                flex-shrink: 0;
+                border-radius: 8px;
+                background: #050708;
+                color: #FFFFFF;
+            }
+            .link_terms{
+                text-decoration: none;
+                color: #f15d2a;
+            }
+            .link_olvidastePassword{
+                text-decoration: none;
+                color:  #526E87;
+                text-align: center;
+                font-family: Obviously;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+            .link_registrarse{
+                color: #004789;
+                text-decoration: none;
+                font-family: Obviously;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+            }
+            .header{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap:90px;
+            }
+           
+            .titulo{
+                font-family: Obviously;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                z-index: 2;
+            }
+            .logo{
+               
+                
+            }
+            .input_naranja{
+                border: 2px solid #f15d2a;
+            }
+            .cuadro_ojo{
+                 border: 2px solid #f15d2a;
+                 padding: 5px;
+            }

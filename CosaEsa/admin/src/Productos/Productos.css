@@ -1,0 +1,442 @@
+
+
+    /* ---------- Header ----------------*/
+
+    .contenedor-buscador{
+        height: 94px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 30px;
+    }
+        .container-buscador {
+            position: relative;
+          }
+         .buscador{
+            cursor: pointer;
+            width: 235px;
+            padding: 6px 8px 6px 40px;
+            border-radius: 9999px;
+            transition: all .2s ease-in-out;
+            outline: none;
+            opacity: 1;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 900;
+            line-height: normal;
+            color: #A4A3A3;
+            background-color: rgba(0, 0, 0, 0); 
+            border: solid 2px #f15d2a;
+            text-overflow: ellipsis;
+          }
+          .buscador::placeholder {
+            color: #A4A3A3; /* Cambia este color por el que desees */
+            opacity: 1; /* Para asegurar que el color no se vea transparente */
+          }
+
+          .container-buscador svg {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translate(0, -50%);
+          }
+
+          .buscador:focus {
+           opacity: 1;
+            width: 450px;
+            color: #1C1C1C;
+          }
+
+/* ---------- Header ----------------*/
+/*------------modal_filtro_estadisticas -----------*/
+.modal_filtro_estadisticas{
+    width: 160px;
+    height: auto;
+    border: 2px solid #F15D2A;
+    position: absolute;
+    top: 24px;
+    left: 124px;
+    z-index: 1;
+    background: #FCFCFC;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0px;
+    color: #6F6D6D;
+}   
+    .modal_filtro_estadisticas a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 39px;
+        font-size: 16px;
+        font-weight: 900;
+        cursor: pointer;
+        
+    }
+    .modal_filtro_estadisticas a:hover{
+      background: #2d6da9;
+        color: #FFFFFF;
+    }
+    .selecion_a{
+        background: #235583;
+        color: #FFFFFF;
+    }
+    .modal_filtro_estadisticas.active{
+        z-index: -1;
+    }
+    
+/*------------modal_filtro_estadisticas -----------*/
+/*----------- modal_advertecia_eliminacion ---------*/
+.pantalla_gris{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+     z-index: 2;
+     background: rgba(43, 43, 43, 0.6);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+.pantalla_gris.active{
+    z-index: -1;
+}
+    .modal_advertecia_eliminacion{
+        width: 405px;
+        height: auto;
+        border: 2px solid #F15D2A;
+        background: #FCFCFC;
+        display: flex;
+        border-radius: 16px;
+        flex-direction: column;
+        padding: 16px 24px;
+    }
+    .modal_advertecia_eliminacion h2{
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        color: #004789;
+        margin-top: 8px;
+    }
+    .modal_advertecia_eliminacion p{
+        font-size: 15px;
+        font-weight: 400;
+        text-align: center;
+        margin-bottom: 16px;
+        margin-top: 8px;
+    }
+    .contenedor_btn_eliminar{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+        .btn_aceptar_eliminar{
+            background: #F15D2A;
+            border: 2px solid #F15D2A;
+            border-radius: 8px;
+            padding: 6px 20px;
+            color: #ffffff;
+            font-weight: 900;
+             width: 45%;
+        }
+        .btn_rechasar_eliminar{
+            background: #FCFCFC;
+            border: 2px solid #F15D2A;
+            border-radius: 8px;
+            padding: 6px 20px;
+            color: #F15D2A;
+            font-weight: 900;
+             width: 45%;
+        }
+/*----------- modal_advertecia_eliminacion ---------*/
+/*----------contendor-----------*/
+.Contenedor{
+    grid-area: Contenedor;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 280px auto;
+    grid-template-areas: "barra_lateral Space"
+}
+    /*----------- barra lateral-----------*/
+    .barra_lateral{
+        grid-area: barra_lateral;
+        background: #2d2c2c;
+        padding-top: 80px;
+        padding-bottom:  20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .barra_lateral a {
+        display: flex;
+        color: #ffffff;
+        min-width: 20px;
+        height: 74px;
+        gap: 16px;
+        align-items: center;
+        padding-left: 32px;
+        font-size: 16px;
+        position: relative;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .barra_lateral a:hover {
+        color: #ffffff;
+        background: #383838;
+    }
+   
+        .flecha{
+           position: absolute;
+           right: 16px;
+        }
+        .dropdown{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .subcontendor{
+            display: grid;
+            
+            grid-template-rows: 0fr;
+            transition: all .3s ease;
+        }
+            .subcontendor_ocultar{
+                overflow: hidden;
+            }
+            .subcontendor.active{
+                grid-template-rows: 1fr;
+                
+            }
+            .subcontendor a{
+                padding-left: 56px;
+                height: 46px;
+                
+            }
+    .linea_configuracion{
+        width: 236px;
+        height: 2px;
+        margin-left: 12px;
+        opacity: 0.1;
+        background: #FFF;
+    }
+    .selecionado{
+        background: #424141;
+    }
+    .div_perfil{
+      display: flex;
+      flex-direction: column;
+   }
+    
+    .perfil_usuario{
+        display: flex;
+        margin-left: -10px;
+        margin-bottom: 12px;
+    }
+    .perfil_usuario span{
+        font-size: 14px;
+        font-weight: 400;
+        padding-left: 4px;
+    }
+    .perfil_usuario h6{
+        font-size: 15px;
+        font-weight: 900;
+    }
+    /*----------- barra lateral-----------*/
+    /*----------- Space-----------*/
+    .Space{
+        grid-area: Space;
+        background: #f9f9f9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap:24px;
+        padding: 48px;
+    }
+        .titulo_space{
+            display: flex;
+            width: 90%;
+            justify-content: space-between;
+        }
+            .titulo_space h1{
+                font-family: Obviously-Bold;
+                color: #F15D2A;
+                font-size: 30px;
+                font-weight: 300;
+            }
+            .titulo_space a{
+                color: #6F6D6D;
+                 font-size: 24px;
+            }
+            .titulo_space button{
+                background: #F15D2A;
+                border-radius: 12px;
+                color: #ffffff;
+                border: none;
+                height: 42px;
+                width: 224px;
+                font-size: 16px;
+                display: flex;
+                align-items: center;
+                gap:8px;
+                padding: 0px 16px;
+            }
+        /*--------- contendedor_datos ----------------*/
+        .contendedor_datos{
+            width: 100%;
+            overflow: hidden;
+            background: #ffffff;
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            border-radius: 12px;
+            
+        }
+        .contendedor_titulo{
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+            .contendedor_titulo h1{
+                font-size: 14px;
+                color: #6F6D6D;
+                font-weight: 600;
+                gap: 2px;
+                display: flex;
+            }
+            .abrir_modal{
+                margin-left: 16px;
+                color: #3462D9;
+                font-weight: 900;
+                 gap: 2px;
+                display: flex;
+                cursor: pointer;
+            }
+        .contendedor_titulo_filtros{
+            padding: 12px 32px;
+            background: #fcfcfc;
+            /*display: grid;
+            grid-template-columns:80px 100px 100px 100px 100px 100px 100px 100px 100px;*/
+            border-top: 1px solid rgba(164, 163, 163, 0.30);
+            border-bottom: 1px solid rgba(164, 163, 163, 0.30);
+        }
+        .contendedor_titulo_filtros h3{
+            color: #6F6D6D;
+            font-size: 14px;
+            
+        }
+
+
+        .contendedor_renglon{
+            display: grid;
+            padding: 12px 32px;
+            background: #fcfcfc;
+            /*grid-template-columns:80px 100px 100px 100px 100px 100px 100px 100px 100px;*/
+            border-top: 1px solid rgba(164, 163, 163, 0.30);
+            border-bottom: 1px solid rgba(164, 163, 163, 0.30);
+        }
+        .contendedor_renglon h2{
+            
+        }
+
+        .div_scroll{
+            padding: 60px 40px 40px 40px ;
+            overflow-y: auto;
+        }
+            .linea{
+                height: 3px;
+                width: 100%;
+                background: #efeeee;
+            }
+                
+            /* ----------- checkbox button ----------------*/
+                    .checkBox_filtro {
+                    display: block;
+                    cursor: pointer;
+                    width: 15px;
+                    height: 15px;
+                    border: 3px solid rgba(255, 255, 255, 0);
+                    border-radius: 1px;
+                    position: relative;
+                    overflow: hidden;
+                    box-shadow: 0px 0px 0px 2px #f15d2a;
+                    margin-right: 16px;
+                    margin-top: 8px;
+                  }
+
+                  .checkBox_filtro div {
+                    width: 25px;
+                    height: 25px;
+                    background-color: #f15d2a;
+                    top: -52px;
+                    left: -52px;
+                    position: absolute;
+                    transform: rotateZ(45deg);
+                    z-index: 100;
+                  }
+
+                  .checkBox_filtro input[type=checkbox]:checked + div {
+                    left: -10px;
+                    top: -10px;
+                  } 
+
+                  .checkBox_filtro input[type=checkbox] {
+                    position: absolute;
+                    left: 50px;
+                    visibility: hidden;
+                  }
+
+                  .transition_checkbox {
+                    transition: 300ms ease;
+                    }     
+                /* ----------- checkbox button ----------------*/
+                
+                /*----------------- cart -----------------*/
+                .cart{
+                    padding: 12px 32px;
+                    display: flex;
+                    border-bottom: 1px solid rgba(164, 163, 163, 0.30);
+                    gap: 24px;
+                    align-items: center;
+                }
+                    .cart img{
+                        width: 62px;
+                        height: 80px;
+                        border-radius: 4px;
+                    }
+                    .cart h2{
+                        color: #1C1C1C;
+                        font-size: 16px;
+                        font-weight: 400;
+                    }
+                    /*.cart h2:nth-of-type(1){
+                        color: #3462D9;
+                        font-size: 16px;
+                        font-weight: 400;
+                    }*/
+                .contendor_cart_nombre{
+                    width: 280px;
+                }
+                
+                
+                .cart svg{
+                    transition: transform 0.3s ease;
+                    }
+                /*----------------- cart -----------------*/
+                .cart svg:hover{
+                    fill: #F15D2A;
+                    transform: scale(1.15);
+                    }
+                /*----------------- cart -----------------*/
+           
+        /*--------- contendedor_datos ----------------*/
+    /*----------- Space -----------*/
+/*----------contendor-----------*/
+
+.fila img {
+
+    width: 200px;
+}

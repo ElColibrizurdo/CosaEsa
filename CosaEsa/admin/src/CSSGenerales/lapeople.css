@@ -1,0 +1,50 @@
+    
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:Obviously;
+    }
+    @font-face{
+        font-family:Obviously;
+        src:url(../img/fonnts.com-Obviously.otf);
+    }
+    @font-face{
+         font-family: Obviously-Bold;
+        src:url(../img/fonnts.com-Obviously_Bold.otf);
+    }
+    
+    /* ---------- Body ----------------*/
+    body{
+        display: grid;
+        grid-template-rows: 94px auto;
+        grid-template-areas: "header"
+                            "Contenedor";
+    }
+    /* ---------- Body ----------------*/
+
+.header{
+    grid-area: header;
+    width: 100%;
+    z-index: 2;
+    display: grid;
+    background: #ffffff;
+    grid-template-columns: 280px auto;
+    box-shadow: 0px 4px 8px 0px rgba(184, 184, 184, 0.25);
+}
+    .headear_img{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .header img {
+        width: 80%;
+    }
+
+
+
+.btn{
+    
+    cursor: pointer;
+}
+

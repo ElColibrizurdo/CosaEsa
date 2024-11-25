@@ -1,0 +1,306 @@
+
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:Obviously;
+    }
+    @font-face{
+        font-family:Obviously;
+        src:url(../../img/fonnts.com-Obviously.otf);
+    }
+    @font-face{
+         font-family: Obviously-Bold;
+        src:url(../../img/fonnts.com-Obviously_Bold.otf);
+    }
+    /* ---------- Body ----------------*/
+    body{
+        display: grid;
+        grid-template-rows: 94px auto;
+        grid-template-areas: "header"
+                            "Contenedor";
+    }
+    /* ---------- Body ----------------*/
+    /* ---------- Header ----------------*/
+        .header{
+            grid-area: header;
+            width: 100%;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 280px auto;
+            box-shadow: 0px 4px 8px 0px rgba(184, 184, 184, 0.25);
+        }
+            .headear_img{
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+            .header img {
+                width: 80%;
+            }
+            .contenedor-buscador{
+                height: 94px;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                padding-right: 30px;
+            }
+                .container-buscador {
+                    position: relative;
+                  }
+                 .buscador{
+                    cursor: pointer;
+                    width: 235px;
+                    padding: 10px 8px 10px 40px;
+                    border-radius: 9999px;
+                    border: solid rgba(0, 0, 0, 0);
+                    transition: all .2s ease-in-out;
+                    outline: none;
+                    opacity: 1;
+                    font-size: 17px;
+                    font-style: normal;
+                    font-weight: 900;
+                    line-height: normal;
+                    color: #004789;
+                    background-color: rgba(0, 0, 0, 0); 
+                     border: solid 3px #f15d2a;
+                         text-overflow: ellipsis;
+                  }
+                  .buscador::placeholder {
+                    color: #004789; /* Cambia este color por el que desees */
+                    opacity: 1; /* Para asegurar que el color no se vea transparente */
+                  }
+
+                  .container-buscador svg {
+                    position: absolute;
+                    top: 50%;
+                    left: 10px;
+                    transform: translate(0, -50%);
+                  }
+
+                  .buscador:focus {
+                  
+                   opacity: 1;
+                    width: 450px;
+                    color: #1C1C1C;
+                  }
+
+        /* ---------- Header ----------------*/
+        /*------------modal_filtro_estadisticas -----------*/
+        .modal_filtro_estadisticas{
+            width: 232px;
+            height: auto;
+            border: 2px solid #F15D2A;
+            position: absolute;
+            top: 107px;
+            left: 204px;
+            z-index: 1;
+            background: #FCFCFC;
+            display: flex;
+            flex-direction: column;
+            padding: 12px 0px;
+            color: #6F6D6D;
+        }   
+            .modal_filtro_estadisticas a{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 39px;
+                font-size: 16px;
+                font-weight: 900;
+                cursor: pointer;
+            }
+            .modal_filtro_estadisticas a:hover{
+              background: #2d6da9;
+                color: #FFFFFF;
+            }
+            .selecion_a{
+                background: #235583;
+                color: #FFFFFF;
+            }
+            .modal_filtro_estadisticas.active{
+                z-index: -1;
+            }
+            .modal_filtro_estadisticas .active_segundo{
+                z-index: 0;
+            }
+        /*------------modal_filtro_estadisticas -----------*/
+        /*----------contendor-----------*/
+        .Contenedor{
+            grid-area: Contenedor;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 280px auto;
+            grid-template-areas: "barra_lateral Space"
+        }
+            /*----------- barra lateral-----------*/
+            .barra_lateral{
+                grid-area: barra_lateral;
+                background: #2d2c2c;
+                padding-top: 80px;
+                padding-bottom:  20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            
+            .barra_lateral a {
+                display: flex;
+                color: #ffffff;
+                min-width: 20px;
+                height: 74px;
+                gap: 16px;
+                font-weight: 500;
+                align-items: center;
+                padding-left: 32px;
+                font-size: 16px;
+                position: relative;
+                cursor: pointer;
+                text-decoration: none;
+            }
+            .barra_lateral a:hover {
+                color: #ffffff;
+                background: #383838;
+            }
+           
+                .flecha{
+                   position: absolute;
+                   right: 16px;
+                }
+                .dropdown{
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                    cursor: pointer;
+                }
+                .subcontendor{
+                    display: grid;
+                    
+                    grid-template-rows: 0fr;
+                    transition: all .3s ease;
+                }
+                    .subcontendor_ocultar{
+                        overflow: hidden;
+                    }
+                    .subcontendor.active{
+                        grid-template-rows: 1fr;
+                        
+                    }
+                    .subcontendor a{
+                        padding-left: 56px;
+                        height: 46px;
+                        
+                    }
+            .linea_configuracion{
+                width: 236px;
+                height: 2px;
+                margin-left: 12px;
+                opacity: 0.1;
+                background: #FFF;
+            }
+            .selecionado{
+                background: #424141;
+            }
+            .div_perfil{
+              display: flex;
+              flex-direction: column;
+           }
+            
+            .perfil_usuario{
+                display: flex;
+                margin-left: -10px;
+                margin-bottom: 12px;
+            }
+            .perfil_usuario span{
+                font-size: 14px;
+                font-weight: 400;
+                padding-left: 4px;
+            }
+            .perfil_usuario h6{
+                font-size: 15px;
+                font-weight: 900;
+            }
+            /*----------- barra lateral-----------*/
+            /*----------- Space-----------*/
+            .Space{
+                grid-area: Space;
+                background: #f9f9f9;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap:24px;
+                padding: 48px;
+            }
+                .titulo_space{
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                }
+                    .titulo_space h1{
+                        font-family: Obviously-Bold;
+                        color: #F15D2A;
+                        font-size: 28px;
+                        font-weight: 300;
+                    }
+                    .titulo_space button{
+                        background: #F15D2A;
+                        border-radius: 12px;
+                        color: #ffffff;
+                        border: none;
+                        height: 56px;
+                        width: 224px;
+                        font-size: 18px;
+                        padding: 0px 16px;
+                        font-weight: 600;
+                    }
+                /*--------- contendedor_datos ----------------*/
+                .contendedor_datos{
+                    width: 1082px;
+                    height: 313px;
+                    background: #ffffff;
+                    padding: 24px;
+                    display: flex;
+                    position: relative;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    border-radius: 12px;
+                }
+                    .linea{
+                        height: 3px;
+                        width: 100%;
+                        background: #efeeee;
+                    }
+                    .abrir_modal{
+                        cursor: pointer;
+                        color: #3462D9;
+                    }
+                    .grupo_cartas{
+                        display: grid;
+                        grid-template-columns:  1fr 1fr 1fr ;
+                        gap: 24px;
+                        height: 136px;
+                    }
+                        /*------ carta ---------------*/
+                        .carta{
+                            border-radius: 8px;
+                            border:2px solid #F15D2A;
+                            padding: 12px;
+                            
+                        }
+                            .carta h1{
+                                color: #6f6d6d;
+                                font-size: 16px;
+                                font-weight: 600;
+                            }
+                            .carta h2{
+                                color: #2d2c2c;
+                                font-size: 32px;
+                                font-weight: 900;
+                            }
+                        /*------ carta ---------------*/
+                /*--------- contendedor_datos ----------------*/
+            /*----------- Space -----------*/
+        /*----------contendor-----------*/
+    
+

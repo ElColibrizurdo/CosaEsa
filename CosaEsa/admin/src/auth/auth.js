@@ -363,10 +363,9 @@ const EliminarImagen = async (req, res) => {
     try {
         
 
+        await fs.unlink(filePath)
         
-        console.log(row);
-        
-        res.json(row)
+        res.json('1')
 
     } catch (error) {
         console.log(error);
@@ -378,12 +377,26 @@ const ActualizarProducto = async (req, res) => {
 
     const { id, idTipo, descripcion, idEquipo, idJugador, stock, precio, estado } = req.body
 
+    console.log(parseInt(idJugador, 10));
+
+    if (isNaN(parseInt(idJugador, 10))) {
+        
+        jugadorID = null
+    } else {
+
+        jugadorID = parseInt(idJugador, 10)
+    }
+    
+    console.log(typeof(idJugador));
+
+    
+
     console.log("La id del jugador es: " + idJugador);
     
 
     try {
         
-        const row = await db.query('UPDATE producto SET idTipo = ?, descripcion = ?, idEquipo = ?, precio = ?, estado = ?, stock = ?, idJugador = ? WHERE id = ?', [idTipo, descripcion, idEquipo, precio, estado, stock, idJugador, id])
+        const row = await db.query('UPDATE producto SET idTipo = ?, descripcion = ?, idEquipo = ?, precio = ?, estado = ?, stock = ?, idJugador = ? WHERE id = ?', [idTipo, descripcion, idEquipo, precio, estado, stock, jugadorID,id])
         console.log(row);
         
         res.json(row)
@@ -747,5 +760,38 @@ const ObtenerJugadores = async (req, res) => {
     }
 }
 
+const ObtenerBanners = async (req, res) => {
 
-module.exports = { ObtenerJugadores, EliminarImagen, BuscarImagenEquipo, ModificarEquipo, ModificarNoGuia, EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }
+    try {
+        
+        const directoruPath = path.join(__dirname, '../img/banners/')
+
+        const files = await fs.readdir(directoruPath)
+
+        /*const content = []
+
+        for (let file of files) {
+            
+            const filePath = path.join(directoruPath, file)
+            content.push(await fs.readFile(filePath, 'utf8'))
+        }*/
+
+        
+        
+
+        
+        res.json(files)
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const AgregarBanner = async (req, res) => {
+
+    
+}
+
+
+module.exports = { ObtenerBanners, ObtenerJugadores, EliminarImagen, BuscarImagenEquipo, ModificarEquipo, ModificarNoGuia, EliminarEquipo, AgregarEquipo, MostrarEquipos, ModificrEstatusEntrega, MostrarPedidos, MostrarCompras, EliminarCategoria, ModificarCategoria, ModificarColor, AgregarColor, EliminarColor, SubirImagenProducto, AgregarColorProducto, ELiminarColorDeProducto, ActualizarProducto, BuscarImagenes, ExtraerColores, EliminarColaborador, CrearColaborador, MostrarUsuarios, estadisticas, mostrar_productos, agregar_producto, ObtenerTipos, AgregarCategoria, CambiarEstado, login, EliminarProducto }

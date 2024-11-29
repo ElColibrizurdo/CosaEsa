@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <title>Categorías</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Categorias/Categorias.css">
-    <link rel="stylesheet" href="../css/lapeople.css">
+    <title>Document</title>
     <script>
         function cambiarClase() {
         var div = document.getElementById("subcontendor_1");
@@ -19,7 +18,6 @@
     }
         function cambiarClase_2() {
         var div = document.getElementById("subcontendor_2");
-        
         if (div.classList.contains("active")) {
             div.classList.remove("active");
     
@@ -34,9 +32,9 @@
 
         btn.addEventListener('click', function() {
 
-
-            EliminarCategoria(params.getAttribute('id'))
+            EliminarEquipo(params.getAttribute('id'))
         })
+
         if (div.classList.contains("active")) {
             div.classList.remove("active");
     
@@ -45,10 +43,9 @@
     
         }
     }
-    function nuevo_registro(){
-        window.location.href="/agregarCategoria";
+    function agregar_color() {
+        window.location.href = '/AgregarEquipo'
     }
-    
     </script>
 </head>
 <body>
@@ -74,7 +71,7 @@
     <div class="Contenedor">
         <nav class="barra_lateral">
             <div>
-                <a href="/bienvenida"><svg xmlns="http://www.w3.org/2000/svg"  width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <a href="/bienvenido"><svg xmlns="http://www.w3.org/2000/svg"  width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <mask id="mask0_2870_2493" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
                     <rect width="32" height="32" fill="#D9D9D9"/>
                     </mask>
@@ -90,7 +87,7 @@
                     <path d="M14.7367 25.3332H17.1973V23.7142C18.2978 23.5142 19.2507 23.0808 20.056 22.4142C20.8613 21.7475 21.264 20.7427 21.264 19.3998C21.264 18.4505 20.9947 17.5803 20.456 16.7892C19.9173 15.9983 18.8401 15.314 17.2243 14.7362C15.8963 14.2917 14.982 13.9028 14.4813 13.5695C13.9809 13.2362 13.7307 12.7885 13.7307 12.2265C13.7307 11.6807 13.9297 11.2505 14.3277 10.9358C14.7254 10.621 15.2893 10.4635 16.0193 10.4635C16.7198 10.4635 17.274 10.6357 17.682 10.9802C18.0898 11.3246 18.3826 11.7604 18.5603 12.2875L20.8053 11.3732C20.5502 10.5527 20.0989 9.85228 19.4513 9.27184C18.8038 8.6914 18.0747 8.36262 17.264 8.28551V6.66651H14.8033V8.28551C13.6709 8.5404 12.7989 9.03984 12.1873 9.78384C11.5758 10.5278 11.27 11.3554 11.27 12.2665C11.27 13.3323 11.5848 14.1953 12.2143 14.8555C12.8441 15.516 13.8491 16.0902 15.2293 16.5782C16.5602 17.0573 17.4886 17.4915 18.0143 17.8808C18.5403 18.2704 18.8033 18.7767 18.8033 19.3998C18.8033 20.1118 18.5554 20.6348 18.0597 20.9688C17.5641 21.3026 16.9443 21.4695 16.2003 21.4695C15.467 21.4695 14.8223 21.2431 14.2663 20.7902C13.7103 20.3373 13.3017 19.6446 13.0403 18.7122L10.7287 19.6265C11.0291 20.7305 11.5178 21.6183 12.1947 22.2898C12.8713 22.9612 13.7187 23.4137 14.7367 23.6475V25.3332ZM16.0003 29.6042C14.1134 29.6042 12.3429 29.2475 10.6887 28.5342C9.03466 27.8208 7.59566 26.8523 6.37166 25.6285C5.14788 24.4045 4.17933 22.9655 3.466 21.3115C2.75266 19.6573 2.396 17.8867 2.396 15.9998C2.396 14.113 2.75266 12.3424 3.466 10.6882C4.17933 9.03418 5.14788 7.59517 6.37166 6.37117C7.59566 5.1474 9.03466 4.17884 10.6887 3.46551C12.3429 2.75217 14.1134 2.39551 16.0003 2.39551C17.8872 2.39551 19.6578 2.75217 21.312 3.46551C22.966 4.17884 24.405 5.1474 25.629 6.37117C26.8528 7.59517 27.8213 9.03418 28.5347 10.6882C29.248 12.3424 29.6047 14.113 29.6047 15.9998C29.6047 17.8867 29.248 19.6573 28.5347 21.3115C27.8213 22.9655 26.8528 24.4045 25.629 25.6285C24.405 26.8523 22.966 27.8208 21.312 28.5342C19.6578 29.2475 17.8872 29.6042 16.0003 29.6042ZM16.0003 26.5708C18.9568 26.5708 21.4578 25.5482 23.5033 23.5028C25.5487 21.4573 26.5713 18.9563 26.5713 15.9998C26.5713 13.0434 25.5487 10.5424 23.5033 8.49684C21.4578 6.45151 18.9568 5.42884 16.0003 5.42884C13.0439 5.42884 10.5429 6.45151 8.49733 8.49684C6.452 10.5424 5.42933 13.0434 5.42933 15.9998C5.42933 18.9563 6.452 21.4573 8.49733 23.5028C10.5429 25.5482 13.0439 26.5708 16.0003 26.5708Z" fill="white"/>
                     </g>
                     </svg>
-                ventas
+                Equipos
                 <svg xmlns="http://www.w3.org/2000/svg" class="flecha" width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <g opacity="0.7">
                     <mask id="mask0_2886_1880" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32">
@@ -103,8 +100,8 @@
             </svg></a>
                 <div class="subcontendor" id="subcontendor_1">
                     <div class="subcontendor_ocultar">
-                        <a href="/compras">Compras</a>
-                        <a href="/envios">Envios</a>
+                        <a href="/pagos">Pagos</a>
+                        <a href="/pedidos">Pedidos</a>
                     </div>
                 </div>
             <a onclick="cambiarClase_2()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -130,12 +127,12 @@
             </a>
                 <div class="subcontendor active" id="subcontendor_2">
                     <div class="subcontendor_ocultar">
-                        <a href="/catalogoequipos">Catálogos Equipos</a>
-                        <a href="/catalogotallas">Catálogos Tallas</a>
-                        <a href="/catalogocolores">Catálogos Colores</a>
-                        <a class="selecionado" href="/MostrarCategorias">Categorias</a>
-                        <a href="/productos">Productos</a>
+                        <a  href="/productos">Productos</a>
                         <a href="/inventario">Inventario</a>
+                        <a href="/MostrarCategorias">Categorias</a>
+                        <a href="/catalogoTallas">Tallaz</a>
+                        <a href="/catalogoEquipos">Equipos</a>
+                        <a class="selecionado" href="/catalogoColores">Colores</a>
                     </div>
                 </div>
 
@@ -176,8 +173,10 @@
         </nav>
         <div class="Space">
             <div class="titulo_space">
-                <h1>Categorías <a class="cantidad"> (32)</a></h1>
-                <button class="btn" onclick="nuevo_registro()" >
+                <h1>Banners <a class="cantidad"> (32)</a></h1>
+
+                <input type="file" name="file" id="image" accept="image/*" oninput="AgregarBanner(event, this)" >
+                <button class="btn"> 
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <mask id="mask0_2901_1963" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
                     <rect width="24" height="24" fill="#D9D9D9"/>
@@ -185,7 +184,7 @@
                     <g mask="url(#mask0_2901_1963)">
                     <path d="M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z" fill="white"/>
                     </g>
-                    </svg> Nueva Categoría </button>
+                    </svg>Nuevo Banner</button>
             </div>
             <div class="contendedor_datos">
                 <div class="contendedor_titulo">
@@ -215,29 +214,14 @@
                 </div>
                 <div class="contendedor_titulo_filtros">
                     <label class="checkBox_filtro"><input name="radio" type="checkbox"><div class="transition_checkbox"></div></label>
-                    <h3>Nombre de la categoría</h3>
-                    <h3>N° Productos</h3>
-                    <h3>Estatus</h3>
+                    <h3>Nombre del equipo</h3>
+                    <h3>Orden</h3>
+                    <h3>Fecha Alta</h3>
                     
                 </div>
                 <div class="div_scroll">
                     
-                    <div class="cart">
-                        <div class="contendor_cart_nombre">
-                            <label class="checkBox_filtro"><input name="radio" type="checkbox"><div class="transition_checkbox"></div></label>
-                            <img src="../../img/sin_img.png" alt="alt"/>
-                            <h2>Playera oficial Cachorros FA 2024...</h2>
-                        </div>
-                        <h2>33 productos</h2>
-                        <h2>Inactivo</h2>
-                       
-                        <svg xmlns="http://www.w3.org/2000/svg" onclick="cambiarClase_eliminar()" width="24" height="24" viewBox="0 0 24 24"   fill="#6F6D6D">
-                            <mask id="mask0_2039_18386" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-                            <rect width="24" height="24" />
-                            </mask>
-                            <path d="M6.93398 21.2033C6.30432 21.2033 5.76773 20.9816 5.32423 20.5381C4.88073 20.0946 4.65898 19.558 4.65898 18.9283V6.06582H3.52148V3.79082H8.86223V2.65332H15.1252V3.79082H20.478V6.06582H19.3405V18.9283C19.3405 19.558 19.1187 20.0946 18.6752 20.5381C18.2317 20.9816 17.6952 21.2033 17.0655 21.2033H6.93398ZM17.0655 6.06582H6.93398V18.9283H17.0655V6.06582ZM8.89223 16.9941H11.0297V7.99407H8.89223V16.9941ZM12.9697 16.9941H15.1072V7.99407H12.9697V16.9941Z" />
-                        </svg>
-                    </div>
+                  
                     
                     
                 </div>
@@ -246,7 +230,8 @@
             </div>
         </div>
     </div>
-    <script src="../Categorias/Categorias.js"></script>
+    <script src="../Banners/Banners.js"></script>
+    <script src="../JS/ManejoImagenes.js"></script>
 </body>
 <script>
     const perfilItems = document.querySelectorAll('.abrir_modal');

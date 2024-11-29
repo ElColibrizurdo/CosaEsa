@@ -29,15 +29,14 @@ async function MostrarEquipo(params) {
     const respuestaLogo = await fetch('/auth/obtenerLogo?id=' + params)
     const rutaLogo = await respuestaLogo.json()
 
-    console.log(rutaLogo);
-    
+    console.log(nombre);
 
-    console.log(rutaLogo);
     const archivo = { files: rutaLogo }
+
+    nombre.value = equipo.nombre
     
     MostrarImagenExistente(archivo)
 
-    nombre.setAttribute('value', equipo.nombre)
 }
 
 
@@ -90,6 +89,9 @@ function MostrarImagenExistente(params) {
     
     const existente = document.getElementById('logo')
 
+    console.log(params);
+    
+
     if (existente) {
         
         existente.setAttribute('nombre', params.files[0])
@@ -97,13 +99,14 @@ function MostrarImagenExistente(params) {
         const img = document.querySelector('img')
         img.src = '../img/logos/' + params.files[0].name
 
-    } else {
+    } else if(params.files.length > 0) {
 
         console.log('holo');
         
 
         const fila = document.createElement('li')
         fila.id = 'logo'
+        fila.classList.add('fila')
 
         fila.setAttribute('nombre', params.files[0])
 
@@ -125,7 +128,6 @@ function MostrarImagenExistente(params) {
         const lista = document.getElementById('imagenes')
         lista.appendChild(fila)
         
-        //lista.appendChild(fila)
     }
 
     inpuImage = params.files[0]

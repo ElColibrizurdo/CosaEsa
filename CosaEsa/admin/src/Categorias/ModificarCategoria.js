@@ -54,6 +54,8 @@ async function RecuperarIMG(nombre) {
 
             const fila = document.createElement('li')
             fila.setAttribute('nombre', element.nombre)
+            fila.id = 'logo'
+            fila.classList.add('fila')
                 
             const img = document.createElement('img')
             img.src = '../img/articulos/' + element.nombre
@@ -68,7 +70,7 @@ async function RecuperarIMG(nombre) {
 
                     
             fila.appendChild(label)
-            btn.setAttribute('onclick', 'RemoverVariante(this)')
+            btn.setAttribute('onclick', 'BorrarImagen(event, this)')
 
             const lista = document.getElementById('lista')
             lista.appendChild(fila)
@@ -89,4 +91,4 @@ if (new URLSearchParams(window.location.search).get('idCategoria')) {
 
     //btnSubirImagen.setAttribute('enctype', 'NuevaImagen(this)')
     //btnSubirImagen.removeAttribute('onchange')
-}
+} 

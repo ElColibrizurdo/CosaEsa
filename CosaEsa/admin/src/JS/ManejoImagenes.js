@@ -4,6 +4,18 @@ async function BorrarImagen(event, params) {
 
     const img = new URL(params.previousElementSibling.src)
     console.log(img.pathname);
+
+    const fila = document.querySelector('.fila')
+    if (fila) {
+        
+        fila.remove()
+    } else {
+
+        const carta = params.parentNode
+        carta.remove()
+    }
+
+    const carta = document.querySelector
     
 
     try {
@@ -12,7 +24,6 @@ async function BorrarImagen(event, params) {
         const data = await respoinse.json()
 
         console.log(data);
-        
 
     } catch (error) {
         console.log(error);

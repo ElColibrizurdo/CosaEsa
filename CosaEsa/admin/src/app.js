@@ -85,6 +85,11 @@ app.get('/agregarColores', (req, res) => {
     res.sendFile(path.join(__dirname, 'CatalogoColores' ,'AgregarColor.html'))
 })
 
+app.get('/catalogoBanners', (req, res) => {
+
+    res.sendFile(path.join(__dirname, 'Banners', 'Banners.html'))
+})
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) { 
 
@@ -100,6 +105,8 @@ const storage = multer.diskStorage({
 
             if (parts[1] == 'equipo') {
                 uploadPath = path.join(__dirname, 'img', 'logos')
+            } else if (parts[1] == 'banners') {
+                uploadPath = path.join(__dirname, 'img', 'banners')
             } else {
                 uploadPath = path.join(__dirname, 'img', 'articulos')
             }
@@ -139,6 +146,11 @@ const storage = multer.diskStorage({
                 
                 baseName = 'logo_' + id + '.png'
                 filePath = path.join(__dirname, 'img', 'logos')
+            } else if (parts[1] == 'banners') {
+                
+                baseName = id
+                filePath = path.join(__dirname, 'img', 'banners')
+
             } else {
 
                 const files = req.files || [];

@@ -59,28 +59,47 @@ function SubirImagen(nombre) {
 }
 
 function MostrarImagen(params) {
-    
-    const fila = document.createElement('li')
 
-    fila.setAttribute('nombre', params.files[0])
+    const existe = document.getElementById('logo')
+
+    if (existe) {
+        
+        existe.setAttribute('nombre', params.files[0])
+
+        const img = document.querySelector('img')
+        img.src = '../img/tallas/' + params.files[0].name
+
+    } else {
+
+        const fila = document.createElement('li')
+
+        fila.setAttribute('nombre', params.files[0])
         document.body.innerHTML += params.files[0]
+        fila.id = 'logo'
+        fila.classList.add('fila')
+        
+        const label = document.createElement('label')
 
+        const img = document.createElement('img')
+        img.src = '../img/tallas/' + params.files[0].name
+
+        const btn = document.createElement('button')
+        btn.textContent = 'eliminar'
+
+        label.appendChild(img)
+        label.appendChild(btn)
+
+        
+        fila.appendChild(label)
+        btn.setAttribute('onclick', 'RemoverImage(this)')
+
+        const lista = document.getElementById('lista')
+        console.log(fila);
+        
+        lista.appendChild(fila)
+    }
     
-
-    const label = document.createElement('label')
-    label.innerText = params.files[0].name
-    const btn = document.createElement('button')
-    btn.textContent = 'eliminar'
-    label.appendChild(btn)
-
     
-    fila.appendChild(label)
-    btn.setAttribute('onclick', 'RemoverImage(this)')
-
-    const lista = document.getElementById('lista')
-    console.log(fila);
-    
-    lista.appendChild(fila)
 }
 
 function RemoverImage(params) {
